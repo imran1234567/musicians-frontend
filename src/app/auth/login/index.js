@@ -4,6 +4,7 @@ import { GetUserLogin } from '../../components/services';
 import './login.css';
 import logo from '../../../assets/logo.png';
 import Register from '../register/register';
+import { NotificationManager } from 'react-notifications';
 
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/
@@ -65,6 +66,7 @@ export default class Login extends Component {
             let user = await GetUserLogin.getUserLogin(data);
             if (user) {
                 await GetUserLogin.authenticate(user.token, email);
+                NotificationManager.success("Successfully Logedin!");
             } else {
                 console.log("Please check you login, Input Error")
             }

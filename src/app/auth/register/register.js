@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NotificationManager } from 'react-notifications';
 import { GetUserLogin } from '../../components/services';
 
 const emailRegex = RegExp(
@@ -68,11 +69,11 @@ export default class Register extends Component {
         if (formValid(this.state)) {
             let list = await GetUserLogin.getUserRegister(data);
             if (list) {
-                // NotificationManager.success("Successfully Added New User");
-                // window.location.href="/";
+                NotificationManager.success("Successfully Added New User");
+                window.location.href="/";
             }
         } else {
-            // NotificationManager.error("Please check your Register", "Input Error");
+            NotificationManager.error("Please check your Register", "Input Error");
         }
 
     }
