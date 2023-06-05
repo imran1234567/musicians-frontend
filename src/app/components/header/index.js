@@ -108,9 +108,9 @@ class Navigation extends Component {
                                                     placeholder="Search for a Product here..."
                                                 />
                                             </div>
-                                            <button type="button" class="btn">
-                                                <Link to="/person">
-                                                    <FontAwesomeIcon icon={faSearch} />
+                                            <button type="button" className="btn " >
+                                                <Link to="/person" style={{display:'flex',justifyContent:'end'}}>
+                                                    <FontAwesomeIcon icon={faSearch} style={{marginTop:'2px', color:'white'}}/>
                                                 </Link>
                                             </button>
                                         </div>

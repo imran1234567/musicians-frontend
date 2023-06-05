@@ -103,6 +103,9 @@ a:hover{
 	font-weight: 400;
 	color: var(--secondary-color);
 }
+.btn-search:hover{
+	background-color: transparent !important;
+}
 
 .upper-header-content h5{
 	font-size: 0.813rem;
@@ -110,6 +113,7 @@ a:hover{
 	color: var(--secondary-color);
 	text-transform: uppercase;
 	margin-bottom: 0;
+	margin-top: 0;
 }
 .upper-header-content h5 span{ 
 	color: var(--primary-color);
