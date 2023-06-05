@@ -1,0 +1,30 @@
+.login-footer-tab .nav-link{
+    background-color: #ececec repeat scroll 0 0;
+    border: medium none;
+    border-radius: 2px;
+    margin: 10px 3px 0 2px;
+    padding: 7px 20px;
+}
+
+.login-footer-tab .nav{
+    border: medium none;
+    display: inline-flex;
+}
+
+.create-btn{
+    background: #000;
+}
+
+.modal-body{
+    margin: 0;
+    padding: 0;
+}
+
+.center{
+    margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
