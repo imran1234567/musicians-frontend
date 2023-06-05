@@ -4,7 +4,10 @@ import Footer from '../footer';
 import Header from '../header';
 // import Footer from '../footer';
 import Home from '../web/views/home';
+import About from './views/about';
 import Cart from './views/cart';
+import Contact from './views/contact';
+
 // import Productview from '../web/views/product';
 // import Singleproduct from './views/single-product';
 // import PrivateRoute from '../PrivateRoute';
@@ -25,6 +28,10 @@ export default class rootRoutes extends Component {
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route exact path='/cart' component={Cart}/>
+                    <Route exact path='/about' component={About}/>
+                    <Route exact path='/contact' component={Contact}/>
+
+
                     {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />
                     <PrivateRoute path='/checkout' component={Checkout} /> 
