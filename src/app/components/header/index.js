@@ -123,9 +123,9 @@ class Navigation extends Component {
                                             </a>
                                         </li>
                                         <li class="user">
-                                            {token ? <a href="#">
+                                            {token ? <Link to="/account/view">
                                                 <i class='bx bx-user'></i>
-                                            </a> : <a data-target="#bd-example-modal" data-toggle="modal">
+                                            </Link> : <a data-target="#bd-example-modal" data-toggle="modal">
                                                 <i class='bx bx-user'></i>
                                             </a>}
                                         </li>

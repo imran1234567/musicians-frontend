@@ -7,9 +7,10 @@ import Home from '../web/views/home';
 import About from './views/about';
 import Cart from './views/cart';
 import Contact from './views/contact';
+import PrivateRoute from '../PrivateRoute';
 
 // import Productview from '../web/views/product';
-// import Singleproduct from './views/single-product';
+import Singleproduct from './views/single-product';
 // import PrivateRoute from '../PrivateRoute';
 // import Checkout from './views/checkout';
 // import Shopdetails from './views/shop-details';
@@ -17,7 +18,7 @@ import Contact from './views/contact';
 // import Register from './views/checkout/register';
 // import NotFound from '../../NotFound';
 // import Complete from './views/checkout/complete';
-// import Account from './views/account';
+import Account from './views/account';
 // import Failed from './views/checkout/failed';
 
 export default class rootRoutes extends Component {
@@ -30,6 +31,8 @@ export default class rootRoutes extends Component {
                     <Route exact path='/cart' component={Cart}/>
                     <Route exact path='/about' component={About}/>
                     <Route exact path='/contact' component={Contact}/>
+                    <Route exact path='/p/:slug/:id' component={Singleproduct} />
+                    <PrivateRoute path='/account' component={Account} />
 
 
                     {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
