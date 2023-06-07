@@ -3,7 +3,7 @@
 /* --- Product Grid Page --- */
 
 .gambo-Breadcrumb {
-    background: #fff;
+    background: #1d1a1a;
     border-top: 1px solid #efefef;
     padding: 5px 0;
 }
@@ -13,11 +13,11 @@
     border-radius: 0;
     font-size: 14px;
     font-weight: 500;
-    color: #8f91ac;
+    color: rgb(240, 233, 233);
 }
 
 .gambo-Breadcrumb .breadcrumb .breadcrumb-item a {
-    color: #8f91ac !important;
+    color: rgb(241, 234, 234) !important;
 }
 
 .gambo-Breadcrumb .breadcrumb .breadcrumb-item a:hover {
@@ -26,6 +26,10 @@
 
 .gambo-Breadcrumb .breadcrumb .breadcrumb-item.active {
     color: #2b2f4c;
+}
+.breadcrumb-item-active{
+    color: #f3f3f3;
+    margin-left: 10px;
 }
 
 .all-product-grid {
@@ -525,11 +529,11 @@ span.save-icon {
     width: 20px;
 }
 
-.pdpt-bg {
+/* .pdpt-bg {
     margin-top: 30px;
     background: #fff;
     border-radius: 10px;
-}
+} */
 
 .pdpt-bg {
     margin-top: 30px;
@@ -3957,3 +3961,43 @@ textarea {
     font-weight: 500;
     display: inline-block;
 }
+
+.btn-save{
+    width: 200px;
+    
+}
+.user-form{
+    width: 300px;
+    background-color: white;
+    height: 400px;
+}
+.user-div .card{
+    width: 100%;
+}
+.user-div .user-form{
+    width: 100%;
+    margin-left: 0;
+}
+
+
+.dashboard-group{
+    background-image:  url("https://img.freepik.com/premium-photo/top-view-online-shopping-concept-with-credit-card-smart-phone-computer-isolated-office-yellow-table-background_315337-5991.jpg");
+}
+.cancel-btn{
+	width: 200px;
+	margin-left: 10px;
+	color: #eff2f3;
+	background: red;
+	
+ }
+  
+ 
+  
+
+  .form-group{
+    margin: 8px;
+  }
+
+
+
+
