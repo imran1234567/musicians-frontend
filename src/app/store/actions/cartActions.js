@@ -1,4 +1,16 @@
+import { NotificationManager } from "react-notifications";
 import { ADD_TO_CART, REMOVE_FROM_CART, INCREASE_QUANTITY, DECREASE_QUANTITY } from "./types";
+
+
+export const checkCart = (productId) => {
+  const cartData = JSON.parse(localStorage.getItem('cartItems'));
+  const productExistsInCart = cartData.some((product) => product.id === productId);
+  if (productExistsInCart) {
+    NotificationManager.success("This product is already in your cart")
+  } else {
+    return false;
+  }
+}
 
 export const addToCart = (product) => (dispatch, getState) => {
   const cartItems = getState().cart.cartItems.slice();
@@ -13,8 +25,9 @@ export const addToCart = (product) => (dispatch, getState) => {
   }
   dispatch({
     type: ADD_TO_CART,
-    payload: { cartItems },
+    payload: { cartItems, alreadyExists },
   });
+  checkCart(product.id);
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 };
 
