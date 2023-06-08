@@ -255,7 +255,20 @@ export default class Register extends Component {
                 {formErrors.password}
               </span>
             )}
+            <br />
+            <div className="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id="customCheck2"
+                required
+              />
+              <label className="custom-control-label" htmlFor="customCheck2">
+                I Agree with <a href="#">Terms and Conditions</a>
+              </label>
+            </div>
           </fieldset>
+
           <fieldset className="form-group">
             <button
               type="submit"
@@ -265,18 +278,24 @@ export default class Register extends Component {
               Create Your Account
             </button>
           </fieldset>
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck2"
-              required
-            />
-            <label className="custom-control-label" htmlFor="customCheck2">
-              I Agree with <a href="#">Terms and Conditions</a>
-            </label>
-          </div>
         </form>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <span style={{ marginRight: "5px" }}>Already have an account?</span>
+          <a
+            data-toggle="tab"
+            href="#login"
+            role="tab"
+            style={{ marginLeft: "2px" }}
+          >
+            Login
+          </a>
+        </div>
       </div>
     );
   }

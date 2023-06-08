@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { GetCategoryDetails } from '../../../services';
-import List from '../catgoryItem';
-import cat1 from '../../../../../assets/cat-1.jpeg';
-import { connect } from 'react-redux';
-import {addToCart} from '../../../../store/actions/cartActions';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { GetCategoryDetails } from "../../../services";
+import List from "../catgoryItem";
+import cat1 from "../../../../../assets/cat-1.jpeg";
+import { connect } from "react-redux";
+import { addToCart } from "../../../../store/actions/cartActions";
+import category from "../categoryList/category.css";
 class CategoryList extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +38,7 @@ class CategoryList extends Component {
       );
       this.setState({ products: productList.data });
     } catch (error) {
-      console.error('Error getting product list:', error);
+      console.error("Error getting product list:", error);
     }
   };
 
@@ -55,10 +56,7 @@ class CategoryList extends Component {
               <div className="container-fluid">
                 <div className="featured-product-list row">
                   {products.map((row, index) => (
-                    <div
-                      className="col-lg-4 col-md-4 col-12"
-                      key={index}
-                    >
+                    <div className="col-lg-4 col-md-4 col-12" key={index}>
                       <div className="product-box">
                         <div className="product-image">
                           <img src={cat1} alt="Product" />
@@ -70,7 +68,9 @@ class CategoryList extends Component {
                               state: row,
                             }}
                           >
-                            <h6>{row.name}</h6>
+                            <h6>
+                              <b>{row.name}</b>
+                            </h6>
                           </Link>
                           <h5>${row.price}</h5>
                           <div className="add-cart">
@@ -96,4 +96,4 @@ class CategoryList extends Component {
   }
 }
 
-export default connect(null, {addToCart})(CategoryList);
+export default connect(null, { addToCart })(CategoryList);

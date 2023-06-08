@@ -24,7 +24,8 @@ class Navigation extends Component {
       token: "",
       userName: "",
       searchtxt: "",
-      headerData: [], headerItems: []
+      headerData: [],
+      headerItems: [],
     };
   }
   handleChange(e) {
@@ -35,28 +36,30 @@ class Navigation extends Component {
     let navCatgory = await GetCategoryDetails.getCategoryList();
     this.setState({ token: cookies, headerData: navCatgory.data }, () => {
       this.setState({
-        headerItems: Object.values(this.state.headerData.reduce((result, item) => {
-          const existingCategory = result[item.categoryId];
-          if (existingCategory) {
-            existingCategory.subCategory.push({
-              id: item.id,
-              sub_name: item.sub_name
-            });
-          } else {
-            result[item.categoryId] = {
-              name: item.category.name,
-              categoryId: item.categoryId,
-              subCategory: [
-                {
-                  id: item.id,
-                  sub_name: item.sub_name
-                }
-              ]
-            };
-          }
-          return result;
-        }, {}))
-      })
+        headerItems: Object.values(
+          this.state.headerData.reduce((result, item) => {
+            const existingCategory = result[item.categoryId];
+            if (existingCategory) {
+              existingCategory.subCategory.push({
+                id: item.id,
+                sub_name: item.sub_name,
+              });
+            } else {
+              result[item.categoryId] = {
+                name: item.category.name,
+                categoryId: item.categoryId,
+                subCategory: [
+                  {
+                    id: item.id,
+                    sub_name: item.sub_name,
+                  },
+                ],
+              };
+            }
+            return result;
+          }, {})
+        ),
+      });
     });
     let email = sessionStorage.getItem("email");
     if (email) {
@@ -224,24 +227,28 @@ class Navigation extends Component {
               <Container className="container-fluid">
                 <Nav className="me-auto1" style={{ color: "white" }}>
                   {headerItems.map((item) => {
-                    return <NavDropdown
-                      title={item.name.toUpperCase()}
-                      id="guitar-bass-dropdown"
-                      className=".nav-dropdown-title"
-                      color="white"
-                    >
-                      {item.subCategory.map((data) => {
-                        return <div className="submenu">
-                          <NavDropdown.Item
-                            as={Link}
-                            to={`/cat/`+ item.categoryId + "/" + data.id}
-                            activeClassName="active"
-                          >
-                            {data.sub_name.toUpperCase()}
-                          </NavDropdown.Item>
-                        </div>
-                      })}
-                    </NavDropdown>
+                    return (
+                      <NavDropdown
+                        title={item.name.toUpperCase()}
+                        id="guitar-bass-dropdown"
+                        className=".nav-dropdown-title"
+                        color="white"
+                      >
+                        {item.subCategory.map((data) => {
+                          return (
+                            <div className="submenu">
+                              <NavDropdown.Item
+                                as={Link}
+                                to={`/cat/` + item.categoryId + "/" + data.id}
+                                activeClassName="active"
+                              >
+                                {data.sub_name.toUpperCase()}
+                              </NavDropdown.Item>
+                            </div>
+                          );
+                        })}
+                      </NavDropdown>
+                    );
                   })}
                 </Nav>
               </Container>

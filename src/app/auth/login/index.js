@@ -95,7 +95,7 @@ export default class Login extends Component {
                       }}
                     >
                       <div className="login-modal-left center">
-                        <img src={logo} />
+                        <img src={logo} alt="logo" />
                       </div>
                     </div>
                     <div
@@ -182,6 +182,27 @@ export default class Login extends Component {
                                   Remember me
                                 </label>
                               </div>
+
+                              {/* updated register form in login form                     */}
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <span style={{ marginRight: "5px" }}>
+                                  Don't have an account?
+                                </span>
+                                <a
+                                  data-toggle="tab"
+                                  href="#register"
+                                  role="tab"
+                                  style={{ marginLeft: "2px" }}
+                                >
+                                  Sign up now
+                                </a>
+                              </div>
                             </div>
                             <div
                               className="tab-pane"
@@ -191,34 +212,6 @@ export default class Login extends Component {
                               <Register />
                             </div>
                           </div>
-                          <div className="clearfix" />
-                          <div className="text-center login-footer-tab">
-                            <ul className="nav nav-tabs" role="tablist">
-                              <li className="nav-item">
-                                <a
-                                  className="nav-link active"
-                                  data-toggle="tab"
-                                  href="#login"
-                                  role="tab"
-                                >
-                                  <i className="mdi mdi-lock" />
-                                </a>
-                              </li>
-                              <li className="nav-item">
-                                IF You Haven't Register Yet,
-                                <a
-                                  className="nav-link"
-                                  data-toggle="tab"
-                                  href="#register"
-                                  role="tab"
-                                >
-                                  <i className="mdi mdi-pencil" /> CLICK HERE
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-
-                          <div className="clearfix" />
                         </div>
                       </form>
                     </div>
