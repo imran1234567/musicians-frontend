@@ -1,257 +1,322 @@
 import React, { Component } from "react";
 import logo from "../../../assets/logo.png";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  faFacebook,
+  faTwitter,
+  faLinkedin,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faSearch,
+  faHeart,
+  faUser,
+  faShoppingCart,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faMapMarker,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
+import c6 from "../../../images/c6.jpg";
+import c3 from "../../../images/c3.jpg";
+import c2 from "../../../images/c2.jpg";
+import c4 from "../../../images/c4.jpg";
+import c5 from "../../../images/c5.jpg";
+import c8 from "../../../images/c8.jpg";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 class Footer extends Component {
   render() {
     return (
-      <footer>
-        <div class="upper-footer">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-xl-4 col-lg-6 col-md-6 col-12">
-                <div class="logo-text">
-                  <div class="iamge">
-                    <img src={logo} />
-                  </div>
-                  <p>
-                    Musicians Avenue! Established in 1996, has evolved to cater
-                    for all aspects of the music industry ranging from P.A
-                    Systems, Studio Products and DJ Gear to Guitars, Keyboards,
-                    Amplifiers, Drums and Percussion. Musicians Avenue remains a
-                    family owned store and continues to provide good old
-                    fashioned customer service.
-                  </p>
-                  <h5>
-                    We also do repairs and maintenance on all musical
-                    instruments.
-                  </h5>
-                </div>
-              </div>
-
-              <div class="col-xl-2 col-lg-6 col-md-6 col-sm-5 col-12">
-                <div class="block">
-                  <h4>Shop Now</h4>
-                  <ul>
-                    <li>
-                      <a href="#">Guitar/Bass</a>
-                    </li>
-                    <li>
-                      <a href="#">Keyboards/Pianos</a>
-                    </li>
-                    <li>
-                      <a href="#">Amps/Effects</a>
-                    </li>
-                    <li>
-                      <a href="#">Live Sound</a>
-                    </li>
-                    <li>
-                      <a href="#">Recording Studio</a>
-                    </li>
-                    <li>
-                      <a href="#">Dj/Lighting</a>
-                    </li>
-                    <li>
-                      <a href="#">Drums/Percussion </a>
-                    </li>
-                    <li>
-                      <a href="#">Orchestral</a>
-                    </li>
-                    <li>
-                      <a href="#">Accessories</a>
-                    </li>
-                    <li>
-                      <a href="#">Shop By Brand</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-7 col-12">
-                <div class="block time">
-                  <h4>Store Hours</h4>
-                  <ul>
-                    <li>
-                      Monday <span>9:30am-5:30pm</span>
-                    </li>
-                    <li>
-                      Tuesday<span>9:30am-5:30pm</span>
-                    </li>
-                    <li>
-                      Wednesday <span>9:30am-5:30pm</span>
-                    </li>
-                    <li>
-                      Thursday <span>9:30am-5:30pm</span>
-                    </li>
-                    <li>
-                      Friday <span>9:30am-5:30pm</span>
-                    </li>
-                    <li>
-                      Saturday <span>9:30am-5:30pm</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-lg-6 col-md-6 col-12">
-                <div class="block address">
-                  <h4>Contact Us</h4>
-                  <ul>
-                    <li>
-                      <div class="icon">
-                        <i class="bx bx-map"></i>
-                      </div>
-                      63 Ware St, Fairfield NSW 2165
-                    </li>
-                    <li class="phone">
-                      <div class="icon">
-                        <i class="bx bx-phone"></i>
-                      </div>
-                      <a href="tel:(02) 9755 9999">(02) 9755 9999</a>
-                    </li>
-                    <li>
-                      <div class="icon">
-                        <i class="bx bx-envelope"></i>
-                      </div>
-                      <a href="mailto:musiciansavenue@bigpond.com">
-                        musiciansavenue@bigpond.com
-                      </a>
-                    </li>
-                  </ul>
-                  <ul class="social-icon">
-                    <li class="facebook">
-                      <a href="#">
-                        <i class="bx bxl-facebook"></i>
-                      </a>
-                    </li>
-                    <li class="twitter">
-                      <a href="#">
-                        <i class="bx bxl-twitter"></i>
-                      </a>
-                    </li>
-                    <li class="linkedin">
-                      <a href="#">
-                        <i class="bx bxl-linkedin"></i>
-                      </a>
-                    </li>
-                    <li class="youtube">
-                      <a href="#">
-                        <i class="bx bxl-youtube"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-mid">
-          <div class="container-fluid">
-            <div class="footer-mid-content">
+      <>
+        <footer className="footer-section">
+          <div class="upper-footer">
+            <div class="container-fluid">
               <div class="row">
-                <div class="col">
+                <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                  <div class="logo-text">
+                    <div class="image">
+                      <img src={logo} alt="logo" />
+                    </div>
+                    <p>
+                      Musicians Avenue! Established in 1996, has evolved to
+                      cater for all aspects of the music industry ranging from
+                      P.A Systems, Studio Products and DJ Gear to Guitars,
+                      Keyboards, Amplifiers, Drums and Percussion. Musicians
+                      Avenue remains a family owned store and continues to
+                      provide good old fashioned customer service.
+                    </p>
+                    <h5>
+                      We also do repairs and maintenance on all musical
+                      instruments.
+                    </h5>
+                  </div>
+                </div>
+
+                <div class="col-xl-2 col-lg-6 col-md-6 col-sm-5 col-12">
                   <div class="block">
-                    <h4>Information</h4>
+                    <h4>Shop Now</h4>
                     <ul>
                       <li>
-                        <a href="#">Zip - Own it now,pay later</a>
+                        <Link to="/guitar">Guitar/Bass</Link>
                       </li>
                       <li>
-                        <a href="#">About Us</a>
+                        <Link to="/keyboards">Keyboards/Pianos</Link>
                       </li>
                       <li>
-                        <a href="#">Delivery Information</a>
+                        <Link to="/amps">Amps/Effects</Link>
                       </li>
                       <li>
-                        <a href="#">Privacy Policy</a>
+                        <Link to="/live-sound">Live Sound</Link>
                       </li>
                       <li>
-                        <a href="#">Terms & Conditions</a>
+                        <Link to="/recording-studio">Recording Studio</Link>
+                      </li>
+                      <li>
+                        <Link to="/dj-lighting">Dj/Lighting</Link>
+                      </li>
+                      <li>
+                        <Link to="/drums-percussion">Drums/Percussion </Link>
+                      </li>
+                      <li>
+                        <Link to="/orchestral">Orchestral</Link>
+                      </li>
+                      <li>
+                        <Link to="/accessories">Accessories</Link>
+                      </li>
+                      <li>
+                        <Link to="/shop-by-brand">Shop By Brand</Link>
                       </li>
                     </ul>
                   </div>
                 </div>
 
-                <div class="col">
-                  <div class="block">
-                    <h4>Customer Services</h4>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-7 col-12">
+                  <div class="block time">
+                    <h4>Store Hours</h4>
                     <ul>
                       <li>
-                        <a href="#">Contact Us</a>
+                        Monday <span>9:30am-5:30pm</span>
                       </li>
                       <li>
-                        <a href="#">Returns</a>
+                        Tuesday<span>9:30am-5:30pm</span>
                       </li>
                       <li>
-                        <a href="#">Site Map</a>
+                        Wednesday <span>9:30am-5:30pm</span>
+                      </li>
+                      <li>
+                        Thursday <span>9:30am-5:30pm</span>
+                      </li>
+                      <li>
+                        Friday <span>9:30am-5:30pm</span>
+                      </li>
+                      <li>
+                        Saturday <span>9:30am-5:30pm</span>
                       </li>
                     </ul>
                   </div>
                 </div>
 
-                <div class="col">
-                  <div class="block">
-                    <h4>Extras</h4>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+                  <div class="block address">
+                    <h4>Contact Us</h4>
                     <ul>
-                      <li>
-                        <a href="#">Brands</a>
+                      <li class="map">
+                        <Link to="/map">
+                          <FontAwesomeIcon icon={faMapMarker} />
+                        </Link>
+                        63 Ware St, Fairfield NSW 2165
+                      </li>
+                      <li class="phone">
+                        <Link to="/phone">
+                          <FontAwesomeIcon icon={faPhone} />
+                        </Link>
+                        <Link to="tel:(02) 9755 9999">(02) 9755 9999</Link>
                       </li>
                       <li>
-                        <a href="#">Gift Vouchers</a>
+                        <div class="icon">
+                          <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
+                        </div>
+                        <a href="mailto:musiciansavenue@bigpond.com">
+                          musiciansavenue@bigpond.com
+                        </a>
                       </li>
-                      <li>
-                        <a href="#">Affiliates</a>
+                    </ul>
+                    <ul class="social-icon">
+                      <li class="facebook">
+                        <Link to="/facebook">
+                          <FontAwesomeIcon icon={faFacebook} />
+                        </Link>
                       </li>
-                      <li>
-                        <a href="#">Specials</a>
+                      <li class="twitter">
+                        <Link to="/twitter">
+                          <FontAwesomeIcon icon={faTwitter} />
+                        </Link>
+                      </li>
+                      <li class="linkedin">
+                        <Link to="/linkedin">
+                          <FontAwesomeIcon icon={faLinkedin} />
+                        </Link>
+                      </li>
+                      <li class="youtube">
+                        <Link to="/youtube">
+                          <FontAwesomeIcon icon={faYoutube} />
+                        </Link>
                       </li>
                     </ul>
                   </div>
                 </div>
 
-                <div class="col">
-                  <div class="block">
-                    <h4>My Account</h4>
-                    <ul>
-                      <li>
-                        <a href="#">My Account</a>
-                      </li>
-                      <li>
-                        <a href="#">Gift Vouchers</a>
-                      </li>
-                      <li>
-                        <a href="#">Affiliates</a>
-                      </li>
-                      <li>
-                        <a href="#">Specials</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                <div class="footer-mid">
+                  <div class="container-fluid">
+                    <div class="footer-mid-content">
+                      <div class="row">
+                        <div class="col">
+                          <div class="block">
+                            <h4>Information</h4>
+                            <ul>
+                              <li>
+                                <Link to="/zip">
+                                  "Zip - Own it now,pay later
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to="/about">About Us</Link>
+                              </li>
+                              <li>
+                                <Link to="/delivery">Delivery Information</Link>
+                              </li>
+                              <li>
+                                <Link to="/policy">Privacy Policy</Link>
+                              </li>
+                              <li>
+                                <Link to="/terms">Terms & Conditions</Link>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
 
-                <div class="col-lg-4 col-md-4 col-12">
-                  <div class="block">
-                    <h4>Sign up to our monthly newsletter</h4>
-                    <form>
-                      <div class="form-group">
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter Your Email ID here..."
-                        />
+                        <div class="col">
+                          <div class="block">
+                            <h4>Customer Services</h4>
+                            <ul>
+                              <li>
+                                <Link to="/contact">Contact Us</Link>
+                              </li>
+                              <li>
+                                <Link to="/person">Returns</Link>
+                              </li>
+                              <li>
+                                <Link to="/map">Site Map</Link>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="col">
+                          <div class="block">
+                            <h4>Extras</h4>
+                            <ul>
+                              <li>
+                                <Link to="/brands">Brands</Link>
+                              </li>
+                              <li>
+                                <Link to="/gift">Gift Vouchers</Link>
+                              </li>
+                              <li>
+                                <Link to="/affiliate">Affiliates</Link>
+                              </li>
+                              <li>
+                                <Link to="/special">Specials</Link>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="col">
+                          <div class="block">
+                            <h4>My Account</h4>
+                            <ul>
+                              <li>
+                                <Link to="/login">My Account</Link>
+                              </li>
+                              <li>
+                                <Link to="/order">Order History </Link>
+                              </li>
+                              <li>
+                                <Link to="/wishlist">Wish List</Link>
+                              </li>
+                              <li>
+                                <Link to="/new">News Letter</Link>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-12">
+                          <div class="block">
+                            <h4>Sign up to our monthly newsletter</h4>
+                            <form>
+                              <div class="form-group">
+                                <input
+                                  type="email"
+                                  class="form-control"
+                                  id="exampleInputEmail1"
+                                  aria-describedby="emailHelp"
+                                  placeholder="Enter Your Email ID here..."
+                                />
+                              </div>
+                              <button type="submit" class="btn btn-primary">
+                                Submit
+                              </button>
+                            </form>
+                          </div>
+                        </div>
                       </div>
-                      <button type="submit" class="btn btn-primary">
-                        Submit
-                      </button>
-                    </form>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bottom-footer">
+                  <div class="container-fluid">
+                    <div class="row align-items-center">
+                      <div class="col-lg-6 col-md-6 col-12">
+                        <p>Musicians Avenue @ 2023. All Rights Reserved.</p>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-12">
+                        <ul>
+                          <li>
+                            <img src={c2} alt="c2" />
+                          </li>
+                          <li>
+                            <img src={c3} alt="c3" />
+                          </li>
+                          <li>
+                            <img src={c4} alt="c4" />
+                          </li>
+                          <li>
+                            <img src={c5} alt="c5" />
+                          </li>
+                          <li>
+                            <img src={c6} alt="c6" />
+                          </li>
+                          <li>
+                            <img src={c8} alt="c8" />
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </>
     );
   }
 }

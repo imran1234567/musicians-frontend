@@ -3,6 +3,7 @@ import { GetUserLogin } from "../../../../services";
 import { NotificationManager } from "react-notifications";
 // import "../css/index.css";
 import profile from "../../../../../../images/profile.jpg";
+
 import "./style.css";
 
 export default class Profile extends Component {

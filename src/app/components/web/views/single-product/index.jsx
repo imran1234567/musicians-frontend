@@ -7,6 +7,7 @@ import { GetProductDetails } from "../../../services";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
 import "./index.css";
+import guitar from "../../../../../images/guitar.jpg";
 class Singleproduct extends Component {
   constructor(props) {
     super(props);

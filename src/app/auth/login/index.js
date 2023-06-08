@@ -201,21 +201,23 @@ export default class Login extends Component {
                                   href="#login"
                                   role="tab"
                                 >
-                                  <i className="mdi mdi-lock" /> LOGIN
+                                  <i className="mdi mdi-lock" />
                                 </a>
                               </li>
                               <li className="nav-item">
+                                IF You Haven't Register Yet,
                                 <a
                                   className="nav-link"
                                   data-toggle="tab"
                                   href="#register"
                                   role="tab"
                                 >
-                                  <i className="mdi mdi-pencil" /> REGISTER
+                                  <i className="mdi mdi-pencil" /> CLICK HERE
                                 </a>
                               </li>
                             </ul>
                           </div>
+
                           <div className="clearfix" />
                         </div>
                       </form>
