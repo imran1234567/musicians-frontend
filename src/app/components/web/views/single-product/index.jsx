@@ -7,7 +7,8 @@ import { GetProductDetails } from "../../../services";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
 import "./index.css";
-import guitar from "../../../../../images/guitar.jpg";
+import cat1 from '../../../../../assets/cat-1.jpeg';
+
 class Singleproduct extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +52,12 @@ class Singleproduct extends Component {
                   <div className="shop-detail-left">
                     <Paper className="shop-detail-slider">
                       <Slider {...settings}>
-                        {product.productphotos
+                        <img
+                          alt
+                          src={cat1}
+                          className="img-fluid img-center"
+                        />
+                        {/* {product.productphotos
                           ? product.productphotos.map((r, index) => {
                               return (
                                 <div key={index}>
@@ -63,14 +69,14 @@ class Singleproduct extends Component {
                                 </div>
                               );
                             })
-                          : "Please Upload Image"}
+                          : "Please Upload Image"} */}
                       </Slider>
                     </Paper>
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="shop-detail-right">
-                    <span className="badge badge-success">
+                    <span className="badge badge-success" style={{backgroundColor:'#750000'}}>
                       {product.discountPer}% OFF
                     </span>
                     <h2>{product.name}</h2>
@@ -103,10 +109,11 @@ class Singleproduct extends Component {
                       type="button"
                       className="btn btn-secondary btn-lg"
                       onClick={() => this.props.addToCart(product)}
+                      style={{backgroundColor:'#750000'}}
                     >
                       <i className="mdi mdi-cart-outline" /> Add To Cart
                     </button>
-                    <h6 className="mb-3 mt-4">Why shop from Groci?</h6>
+                    <h6 className="mb-3 mt-4">Why shop from Musicians?</h6>
                     <div className="row">
                       <div className="col-md-12">
                         <div className="feature-box">

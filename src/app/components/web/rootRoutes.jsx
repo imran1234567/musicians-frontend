@@ -19,6 +19,7 @@ import Singleproduct from './views/single-product';
 // import NotFound from '../../NotFound';
 // import Complete from './views/checkout/complete';
 import Account from './views/account';
+import CategoryList from './views/categoryList';
 // import Failed from './views/checkout/failed';
 
 export default class rootRoutes extends Component {
@@ -32,6 +33,7 @@ export default class rootRoutes extends Component {
                     <Route exact path='/about' component={About}/>
                     <Route exact path='/contact' component={Contact}/>
                     <Route exact path='/p/:slug/:id' component={Singleproduct} />
+                    <Route exact path='/cat/:catId/:SubId' component={CategoryList} />
                     <PrivateRoute path='/account' component={Account} />
 
 

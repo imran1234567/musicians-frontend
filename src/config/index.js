@@ -7,6 +7,9 @@ const Apis = {
     GetUserRegister: `${API_URL}/api/customer/register`,
     GetCustomerDetails: `${API_URL}/api/customer/getUserByEmailId?email=`,
 
+    // GetegoryList Api
+    GetCategoryList: `${API_URL}/api/category/sub-list`,
+
     // product api
     GetAllGroceryStaple: `${API_URL}/api/product/getAllproductList/`,
     GetProductById: `${API_URL}/api/product/getWebProductById?id=`,
@@ -16,6 +19,7 @@ const Apis = {
     GetProductByFilter: `${API_URL}/api/product/gcatalogsearch/result?search=`,
     GetCategoryListByFilter: `${API_URL}/api/category/catlogsearch/child-category`,
     GetProductBySubcategory: `${API_URL}/api/category/catlogsearch/product`,
+    GetProductByCategory: `${API_URL}/api/product/getProductByCategory`,
 
     //Get location 
     GetLocationListDetails: `${API_URL}/api/location/list`,
