@@ -1,59 +1,99 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { GetCategoryDetails } from '../../../services';
 import List from '../catgoryItem';
-import { Link } from 'react-router-dom';
 import cat1 from '../../../../../assets/cat-1.jpeg';
+import { connect } from 'react-redux';
+import {addToCart} from '../../../../store/actions/cartActions';
+class CategoryList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+    };
+  }
 
-const CategoryList = () => {
-    const { catId, SubId } = useParams();
-    const [products, setProducts] = useState([])
+  async componentDidMount() {
+    await this.getDetails();
+  }
 
-    const getDetails = async () => {
-        const productList = await GetCategoryDetails.getProductListByCategory(catId, SubId);
-        setProducts(productList.data);
+  async componentDidUpdate(prevProps) {
+    const { catId, subId } = this.props.match.params;
+    const prevCatId = prevProps.match.params.catId;
+    const prevSubId = prevProps.match.params.subId;
+
+    if (catId !== prevCatId || subId !== prevSubId) {
+      await this.getDetails();
     }
-    useEffect(() => {
-        getDetails();
-    }, [catId, SubId])
+  }
+
+  getDetails = async () => {
+    const { catId, SubId } = this.props.match.params;
+
+    try {
+      const productList = await GetCategoryDetails.getProductListByCategory(
+        catId,
+        SubId
+      );
+      this.setState({ products: productList.data });
+    } catch (error) {
+      console.error('Error getting product list:', error);
+    }
+  };
+
+  render() {
+    const { products } = this.state;
+
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-4">
-                    <List />
-                </div>
-                <div className="col-md-8">
-                    <section class="featured-product" style={{ padding: 0 }}>
-                        <div class="container-fluid">
-                            <div class="featured-product-list row">
-                                {products.map((row, index) => {
-                                    return (
-                                        <div class="col-lg-4 col-md-4 col-12" key={index}>
-                                            <div class="product-box">
-                                                <div class="product-image">
-                                                    <img src={cat1} />
-                                                </div>
-                                                <div class="product-text">
-                                                    <Link to={{ pathname: `/p/${row.slug}/${row.id}`, state: row }}>
-                                                        <h6>{row.name}</h6>
-                                                    </Link>
-                                                    <h5>${row.price}</h5>
-                                                    <div class="add-cart">
-                                                        <a href="javascript:void(0)" class="cart-btn" onClick={() => this.props.addToCart(row)}>add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>)
-                                })
-                                }
-                            </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
+            <List />
+          </div>
+          <div className="col-md-8">
+            <section className="featured-product" style={{ padding: 0 }}>
+              <div className="container-fluid">
+                <div className="featured-product-list row">
+                  {products.map((row, index) => (
+                    <div
+                      className="col-lg-4 col-md-4 col-12"
+                      key={index}
+                    >
+                      <div className="product-box">
+                        <div className="product-image">
+                          <img src={cat1} alt="Product" />
                         </div>
-                    </section>
+                        <div className="product-text">
+                          <Link
+                            to={{
+                              pathname: `/p/${row.slug}/${row.id}`,
+                              state: row,
+                            }}
+                          >
+                            <h6>{row.name}</h6>
+                          </Link>
+                          <h5>${row.price}</h5>
+                          <div className="add-cart">
+                            <a
+                              href="javascript:void(0)"
+                              className="cart-btn"
+                              onClick={() => this.props.addToCart(row)}
+                            >
+                              add to cart
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-            </div>
+              </div>
+            </section>
+          </div>
         </div>
+      </div>
     );
-};
+  }
+}
 
-
-export default CategoryList;
+export default connect(null, {addToCart})(CategoryList);
