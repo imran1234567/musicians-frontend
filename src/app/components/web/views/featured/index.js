@@ -33,8 +33,8 @@ class Featured extends Component {
         }
     }
 
-    checkCart =  (productId) => {
-        const {cartItems} = this.props;
+    checkCart = (productId) => {
+        const { cartItems } = this.props;
         const productExistsInCart = cartItems.some((product) => product.id === productId);
         if (productExistsInCart) {
             return true;
@@ -66,7 +66,6 @@ class Featured extends Component {
                                                 <h5>${row.price}</h5>
                                                 <div class="add-cart">
                                                     {isProductInCart ? <Link to="/cart" className="cart-btn">go to cart</Link> : <a href="javascript:void(0)" class="cart-btn" onClick={() => this.props.addToCart(row)}>add to cart</a>}
-
                                                 </div>
                                             </div>
                                         </div>
@@ -82,7 +81,7 @@ class Featured extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  cartItems: state.cart.cartItems,
+    cartItems: state.cart.cartItems,
 });
 
 export default connect(mapStateToProps, { addToCart })(Featured);
