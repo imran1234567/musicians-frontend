@@ -42,6 +42,16 @@ class CategoryList extends Component {
     }
   };
 
+  checkCart = (productId) => {
+    const { cartItems } = this.props;
+    const productExistsInCart = cartItems.some((product) => product.id === productId);
+    if (productExistsInCart) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     const { products } = this.state;
 
@@ -55,8 +65,9 @@ class CategoryList extends Component {
             <section className="featured-product" style={{ padding: 0 }}>
               <div className="container-fluid">
                 <div className="featured-product-list row">
-                  {products.map((row, index) => (
-                    <div className="col-lg-4 col-md-4 col-12" key={index}>
+                  {products.map((row, index) => {
+                    const isProductInCart = this.checkCart(row.id);
+                    return <div className="col-lg-4 col-md-4 col-12" key={index}>
                       <div className="product-box">
                         <div className="product-image">
                           <img src={cat1} alt="Product" />
@@ -74,18 +85,13 @@ class CategoryList extends Component {
                           </Link>
                           <h5>${row.price}</h5>
                           <div className="add-cart">
-                            <a
-                              href="javascript:void(0)"
-                              className="cart-btn"
-                              onClick={() => this.props.addToCart(row)}
-                            >
-                              add to cart
-                            </a>
+                            {isProductInCart ? <Link to="/cart" className="cart-btn">go to cart</Link> : <a href="javascript:void(0)" class="cart-btn" onClick={() => this.props.addToCart(row)}>add to cart</a>}
+
                           </div>
                         </div>
                       </div>
                     </div>
-                  ))}
+                  })}
                 </div>
               </div>
             </section>
@@ -96,4 +102,8 @@ class CategoryList extends Component {
   }
 }
 
-export default connect(null, { addToCart })(CategoryList);
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.cartItems,
+});
+
+export default connect(mapStateToProps, { addToCart })(CategoryList);
