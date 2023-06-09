@@ -171,7 +171,7 @@ class Footer extends Component {
                   </div>
                 </div>
 
-                <div class="footer-mid">
+                <div class="footer-mid" style={{ width: "100%" }}>
                   <div class="container-fluid">
                     <div class="footer-mid-content">
                       <div class="row">
@@ -281,11 +281,15 @@ class Footer extends Component {
                   </div>
                 </div>
 
-                <div class="bottom-footer">
+                <div class="bottom-footer" style={{ width: "100%" }}>
                   <div class="container-fluid">
                     <div class="row align-items-center">
                       <div class="col-lg-6 col-md-6 col-12">
-                        <p>Musicians Avenue @ 2023. All Rights Reserved.</p>
+                        {/* updated dynamic dated format */}
+                        <p>
+                          Musicians Avenue &copy; {new Date().getFullYear()}.
+                          All Rights Reserved.
+                        </p>
                       </div>
                       <div class="col-lg-6 col-md-6 col-12">
                         <ul>

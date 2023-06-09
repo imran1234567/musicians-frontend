@@ -176,7 +176,7 @@ export default class Register extends Component {
         <h5 className="heading-design-h5">Register Now!</h5>
         <form onSubmit={this.handleSubmit}>
           <fieldset className="form-group">
-            <label>First Name</label>
+            <label>Name</label>
             <input
               type="text"
               className={`form-control ${

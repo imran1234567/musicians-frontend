@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 class ContactForm extends React.Component {
   render() {
@@ -20,8 +20,12 @@ class ContactForm extends React.Component {
                   </li>
                   <li className="mail">
                     <h4>By Email</h4>
-                    <p>Please email us and we’ll get back to you within 24 hours</p>
-                    <a href="mailto:musiciansavenue@bigpond.com">musiciansavenue@bigpond.com</a>
+                    <p>
+                      Please email us and we’ll get back to you within 24 hours
+                    </p>
+                    <a href="mailto:musiciansavenue@bigpond.com">
+                      musiciansavenue@bigpond.com
+                    </a>
                   </li>
                   <li className="phone">
                     <h4>By Phone</h4>
@@ -41,12 +45,16 @@ class ContactForm extends React.Component {
                       enquiry: "",
                     }}
                     validationSchema={Yup.object({
-                      firstName: Yup.string().required("First Name is required"),
+                      firstName: Yup.string().required(
+                        "First Name is required"
+                      ),
                       lastName: Yup.string().required("Last Name is required"),
                       phone: Yup.string()
                         .required("Phone Number is required")
                         .matches(/^[0-9]{10}$/, "Invalid Phone Number"),
-                      email: Yup.string().email("Invalid Email Address").required("Email is required"),
+                      email: Yup.string()
+                        .email("Invalid Email Address")
+                        .required("Email is required"),
                       enquiry: Yup.string().required("Enquiry is required"),
                     })}
                     onSubmit={(values) => {
@@ -58,7 +66,11 @@ class ContactForm extends React.Component {
                         <div className="col-6">
                           <Field
                             type="text"
-                            className={`form-control ${errors.firstName && touched.firstName ? "is-invalid" : ""}`}
+                            className={`form-control ${
+                              errors.firstName && touched.firstName
+                                ? "is-invalid"
+                                : ""
+                            }`}
                             placeholder="First Name"
                             name="firstName"
                             onChange={handleChange}
@@ -68,13 +80,17 @@ class ContactForm extends React.Component {
                             name="firstName"
                             component="div"
                             className="invalid-feedback"
-                            style={{ color: "red" }}
+                            style={{ color: "red", paddingBottom: "15px" }}
                           />
                         </div>
                         <div className="col-6">
                           <Field
                             type="text"
-                            className={`form-control ${errors.lastName && touched.lastName ? "is-invalid" : ""}`}
+                            className={`form-control ${
+                              errors.lastName && touched.lastName
+                                ? "is-invalid"
+                                : ""
+                            }`}
                             placeholder="Last Name"
                             name="lastName"
                             onChange={handleChange}
@@ -90,7 +106,9 @@ class ContactForm extends React.Component {
                         <div className="col-6">
                           <Field
                             type="text"
-                            className={`form-control ${errors.phone && touched.phone ? "is-invalid" : ""}`}
+                            className={`form-control ${
+                              errors.phone && touched.phone ? "is-invalid" : ""
+                            }`}
                             placeholder="Phone"
                             name="phone"
                             onChange={handleChange}
@@ -106,7 +124,9 @@ class ContactForm extends React.Component {
                         <div className="col-6">
                           <Field
                             type="text"
-                            className={`form-control ${errors.email && touched.email ? "is-invalid" : ""}`}
+                            className={`form-control ${
+                              errors.email && touched.email ? "is-invalid" : ""
+                            }`}
                             placeholder="Email"
                             name="email"
                             onChange={handleChange}
@@ -122,7 +142,11 @@ class ContactForm extends React.Component {
                         <div className="col-12">
                           <Field
                             as="textarea"
-                            className={`form-control ${errors.enquiry && touched.enquiry ? "is-invalid" : ""}`}
+                            className={`form-control ${
+                              errors.enquiry && touched.enquiry
+                                ? "is-invalid"
+                                : ""
+                            }`}
                             rows="6"
                             placeholder="Enquiry"
                             name="enquiry"
@@ -137,7 +161,10 @@ class ContactForm extends React.Component {
                           />
                         </div>
                         <div className="submit-btn">
-                          <button type="submit" className="btn btn-primary mb-3">
+                          <button
+                            type="submit"
+                            className="btn btn-primary mb-3"
+                          >
                             Send Message
                           </button>
                         </div>
@@ -148,9 +175,7 @@ class ContactForm extends React.Component {
               </div>
             </div>
             <div className="map-location">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117839.97005470317!2d88.32219847714263!3d22.635174102036043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02750f0aaaf931%3A0xd393c016b906515d!2s6A%20Music%20School%20(6%20Avenue)!5e0!3m2!1sen!2sin!4v1684490136143!5m2!1sen!2sin"
-              ></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117839.97005470317!2d88.32219847714263!3d22.635174102036043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02750f0aaaf931%3A0xd393c016b906515d!2s6A%20Music%20School%20(6%20Avenue)!5e0!3m2!1sen!2sin!4v1684490136143!5m2!1sen!2sin"></iframe>
             </div>
           </div>
         </section>
