@@ -443,7 +443,7 @@ span.save-icon {
 }
 
 .add-cart-btn {
-    background: #e75f32;
+    background: #eb7a10;
     border: 0;
     color: #fff;
     height: 40px;
@@ -467,6 +467,7 @@ span.save-icon {
 .add-cart-btn i {
     margin-right: 5px;
     font-size: 16px;
+
 }
 
 .pdp-details {

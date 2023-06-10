@@ -2091,6 +2091,7 @@ footer .block ul li{
 	display: flex;
 	align-items: center;
 	gap: 10px;
+	background: transparent;
 
 }
 .upper-footer .block.address ul li .icon i{
@@ -2623,11 +2624,11 @@ ul.check-list li {
 	margin:100px auto;
   }
   .icon{
-	width: 100px;
+	/* width: 100px;
 	height: 40px;
 	position: absolute;
 	right: -10px;
-	display: flex;
+	display: flex; */
   }
   .list,
   .grid{

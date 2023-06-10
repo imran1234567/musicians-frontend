@@ -5,7 +5,8 @@ import List from "../catgoryItem";
 import cat1 from "../../../../../assets/cat-1.jpeg";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
-import category from "../categoryList/category.css";
+import category from "./category.css";
+import Range from "./Range/Range";
 class CategoryList extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +50,12 @@ class CategoryList extends Component {
       <div className="container">
         <div className="row">
           <div className="col-md-4">
-            <List />
+            <div className="list-name">
+              <List />
+            </div>
+          </div>
+          <div>
+            <Range />
           </div>
           <div className="col-md-8">
             <section className="featured-product" style={{ padding: 0 }}>

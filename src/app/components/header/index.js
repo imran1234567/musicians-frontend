@@ -207,7 +207,7 @@ class Navigation extends Component {
 
                       <span>{cartItems.length}</span>
                     </li>
-                    <li class="cart-total">
+                    {/* <li class="cart-total">
                       <h5>
                         $
                         {cartItems.reduce(
@@ -215,7 +215,7 @@ class Navigation extends Component {
                           0
                         )}
                       </h5>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>
