@@ -1,49 +1,137 @@
-.product-list-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  .slider-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .slider-container label {
-    margin-right: 10px;
-    font-weight: bold;
-  }
-  
-  .slider-container input[type='range'] {
-    width: 200px;
-    margin-right: 10px;
-  }
-  
-  .sort-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-  
-  .sort-buttons button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    font-size: 14px;
-    background-color: white;
-    color: rgb(35, 142, 241);
-    border-bottom: 2px blue;
-  }
-  
-  .product-list {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-  }
-  
-  .product-item {
-    margin-bottom: 5px;
-  }
-  
+.filter-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.price-range {
+  margin-bottom: 20px;
+}
+
+.price-values {
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider {
+  margin-top: 10px;
+}
+
+.range {
+  margin-bottom: 10px;
+}
+
+.product-list {
+  margin-top: 20px;
+}
+
+/* Additional styling for the product elements */
+.product-list > div {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* ... Previous CSS rules ... */
+
+.slider {
+  margin-top: 20px;
+  width: 80%; /* Adjust the width as desired */
+}
+
+.range {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+h6 {
+  color: #2874f0;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+#sortBy {
+  padding: 8px 15px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  appearance: none;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out;
+}
+
+#sortBy:focus {
+  outline: none;
+  border-color: #2874f0;
+  box-shadow: 0 0 5px #2874f0;
+}
+
+#sortBy option {
+  background-color: #fff;
+  color: #333;
+}
+
+#sortBy option:hover {
+  background-color: #2874f0;
+  color: #fff;
+}
+
+#sortBy option:checked {
+  background-color: #2874f0;
+  color: #fff;
+}
+/* ... Previous CSS rules ... */
+
+h4 {
+  color: #c828f0;
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.price-values span {
+  font-size: 14px;
+  color: #333;
+}
+
+.range h5 {
+  color: #f028a3;
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#sortBy {
+  /* ... Previous CSS rules ... */
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out;
+  background-image: linear-gradient(#fff, #f5f5f5);
+  padding-left: 10px;
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 12px;
+}
+
+#sortBy option {
+  /* ... Previous CSS rules ... */
+  background-image: linear-gradient(#f5f5f5, #fff);
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-left: 10px;
+}
+
+/* Styling for selected option */
+#sortBy option:checked {
+  background-image: linear-gradient(#2874f0, #2874f0);
+  color: #fff;
+}
+

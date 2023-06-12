@@ -60,16 +60,17 @@
     background-color: transparent;
     border: none;
     padding: 0;
-    margin-left: 10px;
+    margin-left: 60px;
     cursor: pointer;
     font-size: 24px;
     color: #3366cc;
     transition: all 0.3s ease;
+    width: 80px;
   }
   
-  .add-to-cart-button:hover {
+  /* .add-to-cart-button:hover {
     transform: scale(1.1);
-  }
+  } */
   
   .add-to-cart-icon {
     vertical-align: middle;
@@ -86,9 +87,10 @@
     font-size: 20px;
     color: #f44336;
     transition: all 0.3s ease;
+    width: 80px;
   }
   
-  .delete-button:hover {
+  /* .delete-button:hover {
     transform: scale(1.1);
-  }
+  } */
   

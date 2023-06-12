@@ -5,8 +5,12 @@ import List from "../catgoryItem";
 import cat1 from "../../../../../assets/cat-1.jpeg";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
-import category from "./category.css";
+import "./category.css";
 import Range from "./Range/Range";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
+
 class CategoryList extends Component {
   constructor(props) {
     super(props);
@@ -45,13 +49,15 @@ class CategoryList extends Component {
 
   checkCart = (productId) => {
     const { cartItems } = this.props;
-    const productExistsInCart = cartItems.some((product) => product.id === productId);
+    const productExistsInCart = cartItems.some(
+      (product) => product.id === productId
+    );
     if (productExistsInCart) {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
   render() {
     const { products } = this.state;
@@ -73,30 +79,61 @@ class CategoryList extends Component {
                 <div className="featured-product-list row">
                   {products.map((row, index) => {
                     const isProductInCart = this.checkCart(row.id);
-                    return <div className="col-lg-4 col-md-4 col-12" key={index}>
-                      <div className="product-box">
-                        <div className="product-image">
-                          <img src={cat1} alt="Product" />
-                        </div>
-                        <div className="product-text">
-                          <Link
-                            to={{
-                              pathname: `/p/${row.slug}/${row.id}`,
-                              state: row,
-                            }}
-                          >
-                            <h6>
-                              <b>{row.name}</b>
-                            </h6>
-                          </Link>
-                          <h5>${row.price}</h5>
-                          <div className="add-cart">
-                            {isProductInCart ? <Link to="/cart" className="cart-btn">go to cart</Link> : <a href="javascript:void(0)" class="cart-btn" onClick={() => this.props.addToCart(row)}>add to cart</a>}
-
+                    return (
+                      <div className="col-lg-4 col-md-4 col-12" key={index}>
+                        <div className="product-box">
+                          <div className="product-image">
+                            <img src={cat1} alt="Product" />
+                          </div>
+                          <div className="product-text">
+                            <Link
+                              to={{
+                                pathname: `/p/${row.slug}/${row.id}`,
+                                state: row,
+                              }}
+                            >
+                              <h6>
+                                <b>{row.name}</b>
+                              </h6>
+                            </Link>
+                            <h5>${row.price}</h5>
+                            <div className="add-cart">
+                              {isProductInCart ? (
+                                <Link to="/cart" className="cart-btn">
+                                  go to cart
+                                </Link>
+                              ) : (
+                                <a
+                                  href="javascript:void(0)"
+                                  class="cart-btn"
+                                  onClick={() => this.props.addToCart(row)}
+                                >
+                                  add to cart
+                                </a>
+                              )}
+                              <a href="/wishlist">
+                                {" "}
+                                <FontAwesomeIcon
+                                  icon={faHeart}
+                                  className="heart-icon"
+                                />
+                              </a>
+                            </div>
+                            <br></br>
+                            <div className="com">
+                              <a href="/compare">
+                                <FontAwesomeIcon
+                                  icon={faCodeCompare}
+                                  className="compare-icon"
+                                />
+                                {"  "}
+                                Add to Compare
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    );
                   })}
                 </div>
               </div>

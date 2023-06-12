@@ -1,0 +1,136 @@
+.comparison-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .comparison-page-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .comparison-page-section {
+    margin-bottom: 30px;
+  }
+  
+  .product-dropdown {
+    width: 200px;
+    padding: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+    color: #333;
+    height: 100%;
+  }
+  
+  .product-dropdown:hover {
+    border-color: #999;
+  }
+  
+  .add-to-comparison-button {
+    display: inline-block;
+    padding: 10px 16px;
+    margin-top: 10px;
+    margin-left: 20px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 200px;
+    height: 100%;
+  }
+  
+  .add-to-comparison-button:hover {
+    background-color: #45a049;
+  }
+  
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    text-align: left;
+  }
+  
+  .comparison-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .comparison-table td {
+    font-size: 16px;
+  }
+  
+  .add-to-comparison-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Additional Styles for User-Friendly UI */
+  .comparison-page {
+    background-color: #f5f5f5;
+  }
+  
+  .product-dropdown option {
+    background-color: white;
+    color: #333;
+  }
+  
+  .add-to-comparison-button:disabled {
+    opacity: 0.7;
+  }
+  
+  .add-to-comparison-button:focus,
+  .product-dropdown:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #4caf50;
+  }
+  
+  .add-to-comparison-button:active {
+    transform: translateY(1px);
+  }
+  
+  .add-to-comparison-button:disabled:hover {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    transition: background-color 0.3s ease;
+  }
+  
+  .comparison-table tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .comparison-table th:hover,
+  .comparison-table td:hover {
+    background-color: #e6e6e6;
+  }
+  
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    min-width: 150px;
+  }
+  

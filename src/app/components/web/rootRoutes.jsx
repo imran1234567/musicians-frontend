@@ -22,6 +22,8 @@ import Account from "./views/account";
 import CategoryList from "./views/categoryList";
 import Range from "./views/categoryList/Range/Range";
 import Wishlist from "./views/Wishlist/Wishlist";
+import compare from "./views/compare";
+
 // import Failed from './views/checkout/failed';
 
 export default class rootRoutes extends Component {
@@ -39,6 +41,7 @@ export default class rootRoutes extends Component {
           <PrivateRoute path="/account" component={Account} />
           <Route exact path="/range" component={Range} />
           <Route exact path="/wishlist" component={Wishlist} />
+          <Route exact path="/compare" component={compare} />
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />

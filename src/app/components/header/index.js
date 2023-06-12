@@ -184,7 +184,7 @@ class Navigation extends Component {
                     </li>
                     <li class="wishlist">
                       {token ? (
-                        <a href="#">
+                        <a href="/wishlist">
                           <i class="bx bx-heart"></i>
                         </a>
                       ) : (

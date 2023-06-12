@@ -126,7 +126,10 @@ export default class List extends Component {
                           <h6>Order List</h6>
                         </div>
                         <div className="order-body10">
-                          <div class="card card-body account-right">
+                          <div
+                            class="card card-body account-right"
+                            style={{ width: "100%" }}
+                          >
                             <div class="widget">
                               <div class="order-list-tabel-main table-responsive">
                                 <table

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-// import range from "./range.css";
+import "./range.css";
 
 class Range extends Component {
   constructor(props) {
@@ -100,9 +100,9 @@ class Range extends Component {
         <br></br>
         <div className="range">
           <label htmlFor="sortBy">
-            <h6 style={{ color: "blue" }}>
+            <h5>
               <b>Sort By: </b>
-            </h6>
+            </h5>
           </label>
           <select id="sortBy" value={sortBy} onChange={this.handleSortByChange}>
             <option value="lowToHigh">Low to High</option>
