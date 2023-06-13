@@ -16,8 +16,24 @@ export default class Profile extends Component {
       lastName: "",
       phoneNo: "",
       email: "",
+      profilePhoto: profile || null, //set the initial photo 
     };
   }
+
+  handleFileChange=(e)=>{
+    const file=e.target.files[0];
+    const reader=new FileReader();
+
+    reader.onloadend=()=>{
+      this.setState({
+        profilePhoto: reader.result, //updating the profile photo here  
+      });
+    }
+    if(file){
+      reader.readAsDataURL(file);
+    }
+  }
+
   handleChangeUser(event) {
     const target = event.target;
     const value = target.value;
@@ -53,16 +69,24 @@ export default class Profile extends Component {
       phone: phone,
       email: email,
       gender: gender,
+      profilePhoto: this.state.profilePhoto,//saving that uploading image into the image state
     };
     let user = await GetUserLogin.getCustomerUpdate(data);
     if (user) {
+
+      this.setState({
+        user: {
+          ...this.state.user,
+          profilePhoto: this.state.profilePhoto,
+        },
+      });
       NotificationManager.success("Successfully Update", "Profile");
     } else {
       NotificationManager.error("Please check your Field", "Input Error");
     }
   };
   render() {
-    let { user } = this.state;
+    let { user, profilePhoto } = this.state;
     console.log("Profile -> render -> user", user);
     return (
       <div className="wrapper">
@@ -88,9 +112,9 @@ export default class Profile extends Component {
               <div className="col-lg-12">
                 <div className="user-dt">
                   <div className="user-img">
-                    <img src={profile} alt="profile" />
+                    <img src={profilePhoto||profile} alt="profile" />
                     <div className="img-add">
-                      <input type="file" id="file" />
+                      <input type="file" id="file" onChange={this.handleFileChange} />
                       <label htmlFor="file">
                         <i className="uil uil-camera-plus" />
                       </label>
@@ -279,7 +303,7 @@ export default class Profile extends Component {
                             </div>
                           </div>
                           <div class="row">
-                            <button className="save-btn">Save</button>
+                            <button className="save-btn" onClick={this.handleSubmit}>Save</button>
                             <button className="cancel-btn">Cancel</button>
                           </div>
                         </form>
