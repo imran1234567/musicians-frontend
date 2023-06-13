@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import GroceryStampleDetails from "../../../services/GroceryStampleDetails";
 import { addToCart } from "../../../../store/actions/cartActions";
+import { addToWishlist } from "../../../../store/actions/wishlistActions";
 import { CircularProgress } from "@material-ui/core";
 import cat1 from "../../../../../assets/cat-1.jpeg";
 import { Link } from "react-router-dom";
@@ -94,7 +95,7 @@ class Featured extends Component {
                             </a>
                           )}
 
-                          <a href="/wishlist">
+                          <a href="javascript:void(0)" onClick={() => this.props.addToWishlist(row)}>
                             {" "}
                             <FontAwesomeIcon
                               icon={faHeart}
@@ -129,6 +130,7 @@ class Featured extends Component {
 
 const mapStateToProps = (state) => ({
   cartItems: state.cart.cartItems,
+  wishItems: state.wish.wishItems
 });
 
-export default connect(mapStateToProps, { addToCart })(Featured);
+export default connect(mapStateToProps, { addToCart, addToWishlist })(Featured);

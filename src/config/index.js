@@ -33,6 +33,10 @@ const Apis = {
     GetPaymentVerification: `${API_URL}/api/payment/verification`, 
     GetPaymentOrderList: `${API_URL}/api/payment/orderlist`, 
 
+    // product api
+    GetOrderCreateByUser: `${API_URL}/api/order/create`,
+    GetOrderByUser: `${API_URL}/api/order/list`
+
 };
 
 export {API_URL, Apis};
