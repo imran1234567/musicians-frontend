@@ -20,26 +20,27 @@
 
 .cart-item {
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
   border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
+  padding-bottom: 2px;
 }
 
 .cart-product-img {
-  width: 80px;
+  width: 70px;
   margin-right: 10px;
   position: relative;
 }
 
 .cart-product-img img {
-  width: 100%;
+  width: 80%;
+  height: 80%;
   border-radius: 3px;
 }
 
 .offer-badge {
   background-color: #000;
   color: #fff;
-  padding: 4px 8px;
+  padding: 4px 5px;
   font-size: 12px;
   position: absolute;
   top: 10px;
@@ -48,7 +49,7 @@
 }
 
 .cart-text {
-  flex-grow: 1;
+  margin-left: 16px;
 }
 
 .cart-text h4 {
@@ -72,11 +73,6 @@
   display: flex;
   align-items: center;
   margin-top: 5px;
-}
-
-.quantity {
-  display: flex;
-  align-items: center;
 }
 
 .minus,
@@ -121,8 +117,9 @@
 
 .cart-item-price {
   font-weight: bold;
-  font-size: 14px;
-  margin-top: 5px;
+  font-size: 18px;
+  margin-top: 2px;
+  font-family: sans-serif, Helvetica, sans-serif;
 }
 
 .cart-sidebar-footer {
@@ -155,4 +152,47 @@
 
 .btn-secondary:hover {
   background-color: #000;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+}
+
+.buttons_added {
+  display: flex;
+  align-items: center;
+}
+
+.decrease-btn,
+.increase-btn,
+.quantity {
+  font-weight: bold;
+  border: none;
+  background-color: #f2f2f2;
+  color: #333;
+  font-size: 17px;
+  padding: 4px 11px;
+  cursor: pointer;
+}
+
+.decrease-btn:hover,
+.increase-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.quantity {
+  margin: 0 8px;
+}
+.delete-btn {
+  /* Add desired styles for the delete button */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+@media (max-width: 602px) {
+  button .delete-btn {
+    margin-left: 5rem;
+  }
 }

@@ -56,8 +56,9 @@ class Wishlist extends Component {
 
     return (
       <div className="Wishlist-main">
-        <h2>Wishlist</h2>
+        
         <ul className="wishlist">
+        <h2>Wishlist</h2>
           {wishlistItems.map((item) => (
             <li key={item.id} className="wishlist-item">
               <div className="item-details">
@@ -75,12 +76,18 @@ class Wishlist extends Component {
               </div>
               <button
                 className="add-to-cart-button"
+                style={{ background: "none", transition: "transform 0.3s" , marginLeft: "20px", paddingRight: "0",}}
+                onMouseEnter={(e) => (e.target.style.transform = "scale(1.1)")}
+                onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
                 onClick={() => this.handleAddToCart(item)}
               >
                 <AiOutlineShoppingCart />
               </button>
               <button
                 className="delete-button"
+                style={{ background: "none", transition: "transform 0.3s" }}
+                onMouseEnter={(e) => (e.target.style.transform = "scale(1.1)")}
+                onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
                 onClick={() => this.handleDeleteItem(item.id)}
               >
                 <AiOutlineClose />
