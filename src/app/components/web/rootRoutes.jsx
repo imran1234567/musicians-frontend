@@ -23,7 +23,11 @@ import CategoryList from "./views/categoryList";
 import Range from "./views/categoryList/Range/Range";
 import Wishlist from "./views/Wishlist/Wishlist";
 import compare from "./views/compare";
-import Checkout from './views/checkout';
+import Checkout from "./views/checkout";
+import privacy_policy from "./views/privacy_policy";
+import Terms from "./views/terms";
+import Delivery from "./views/Delivery";
+import ScrollToTop from "./views/account/view/ScrollToTop";
 
 // import Failed from './views/checkout/failed';
 
@@ -32,6 +36,7 @@ export default class rootRoutes extends Component {
     return (
       <div>
         <Header />
+        <ScrollToTop />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/cart" component={Cart} />
@@ -40,10 +45,13 @@ export default class rootRoutes extends Component {
           <Route exact path="/p/:slug/:id" component={Singleproduct} />
           <Route exact path="/cat/:catId/:SubId" component={CategoryList} />
           <PrivateRoute path="/account" component={Account} />
-          <PrivateRoute path="/checkout" component={Checkout}/>
+          <PrivateRoute path="/checkout" component={Checkout} />
           <Route exact path="/range" component={Range} />
           <Route exact path="/wishlist" component={Wishlist} />
           <Route exact path="/compare" component={compare} />
+          <Route exact path="/policy" component={privacy_policy} />
+          <Route exact path="/terms" component={Terms} />
+          <Route exact path="/delivery" component={Delivery} />
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />
