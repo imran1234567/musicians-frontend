@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./wishlist.css";
 import { AiOutlineClose, AiOutlineShoppingCart } from "react-icons/ai";
+import { removeFromWishlist } from '../../../../store/actions/wishlistActions';
+import { addToCart } from '../../../../store/actions/cartActions';
+import { connect } from 'react-redux';
 
 class Wishlist extends Component {
   constructor(props) {
@@ -52,18 +55,19 @@ class Wishlist extends Component {
   };
 
   render() {
-    const { wishlistItems } = this.state;
+    const { wishItems } = this.props;
 
     return (
       <div className="Wishlist-main">
-        <h2>Wishlist</h2>
+
         <ul className="wishlist">
-          {wishlistItems.map((item) => (
+          <h2>Wishlist</h2>
+          {wishItems.map((item) => (
             <li key={item.id} className="wishlist-item">
               <div className="item-details">
                 <div className="item-info">
                   <img
-                    src={item.image}
+                    src={"https://cdn.pixabay.com/photo/2012/04/13/20/54/violin-33610_1280.png"}
                     alt={item.name}
                     className="item-image"
                   />
@@ -75,13 +79,19 @@ class Wishlist extends Component {
               </div>
               <button
                 className="add-to-cart-button"
-                onClick={() => this.handleAddToCart(item)}
+                style={{ background: "none", transition: "transform 0.3s", marginLeft: "20px", paddingRight: "0", }}
+                onMouseEnter={(e) => (e.target.style.transform = "scale(1.1)")}
+                onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+                onClick={() => { this.props.addToCart(item); this.props.removeFromWishlist(item) }}
               >
                 <AiOutlineShoppingCart />
               </button>
               <button
                 className="delete-button"
-                onClick={() => this.handleDeleteItem(item.id)}
+                style={{ background: "none", transition: "transform 0.3s" }}
+                onMouseEnter={(e) => (e.target.style.transform = "scale(1.1)")}
+                onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+                onClick={() => this.props.removeFromWishlist(item)}
               >
                 <AiOutlineClose />
               </button>
@@ -93,4 +103,11 @@ class Wishlist extends Component {
   }
 }
 
-export default Wishlist;
+
+
+export default connect(
+  (state) => ({
+    wishItems: state.wish.wishItems,
+  }),
+  { removeFromWishlist, addToCart }
+)(Wishlist);
