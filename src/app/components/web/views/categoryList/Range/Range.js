@@ -85,7 +85,7 @@ class Range extends Component {
               border: 'none',
               borderRadius: '5px',
               fontSize: '14px',
-              color: display === 'list' ? '#fff' : '#333',
+              color: display === 'list' ? '#000000' : '#333',
               cursor: 'pointer',
               transition: 'background-color 0.3s ease'
             }}
@@ -102,7 +102,7 @@ class Range extends Component {
               border: 'none',
               borderRadius: '5px',
               fontSize: '14px',
-              color: display === 'list' ? '#fff' : '#333',
+              color: display === 'list' ? '#000000' : '#333',
               cursor: 'pointer',
               transition: 'background-color 0.3s ease'
             }}
@@ -110,6 +110,7 @@ class Range extends Component {
             Grid
           </button>
         </div>
+        &nbsp; &nbsp;
         <div className="range">
           <h5><b>Sort By: </b></h5>
           <select
@@ -127,7 +128,7 @@ class Range extends Component {
             <option value="ModelZA">Model (Z-A)</option>
           </select>
         </div>
-    
+        &nbsp;&nbsp;
         <div className="show">
           <h5><b>Show: </b></h5>
           <select
