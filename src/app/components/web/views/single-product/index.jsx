@@ -112,7 +112,7 @@ class Singleproduct extends Component {
                       style={{backgroundColor:'#750000'}}
                     >
                       <i className="mdi mdi-cart-outline" /> Add To Cart
-                    </button>
+                    </button>                 
                     <h6 className="mb-3 mt-4">Why shop from Musicians?</h6>
                     <div className="row">
                       <div className="col-md-12">

@@ -29,12 +29,11 @@ class Cart extends Component {
                                             <button className="decrease-btn" onClick={() => this.props.decreaseToCart(row)}>-</button>
                                             <button className="quantity" style={{ backgroundColor: '#E2DEDE', margin: '0 5px' }}>{row.qty}</button>
                                             <button className="increase-btn" onClick={() => this.props.incrementToCart(row,1)}>+</button>
-                                        </div>
-                                        <div className="cart-item-price">${row.netPrice}<span></span></div>
+                                        </div> 
                                     </div>
                                     
                                 </div>
-                                <div className="delete-btn-container" style={{ marginLeft: "auto" ,paddingTop:'5px'}} onClick={() => this.props.removeFromCart(row)} >
+                                <div className="delete-btn-container" style={{ marginLeft: "auto" ,paddingTop:'5px'}} onClick={() => this.props.removeFromCart(row)} >             
                                 <img
                                     src="https://img.icons8.com/?size=512&id=67884&format=png"
                                     alt="Delete"
@@ -51,6 +50,12 @@ class Cart extends Component {
                                     e.target.style.transform = "scale(1)";
                                     }}
                                 />
+
+                                <br/><br/>
+                                <div className="cart-item-price" style={{ display: 'flex', justifyContent: 'center' }}>
+                                        ${row.qty * row.netPrice}
+                                        <span></span>
+                                </div>
                                 </div>
 
                             </div>

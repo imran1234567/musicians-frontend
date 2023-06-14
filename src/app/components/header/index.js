@@ -26,8 +26,15 @@ class Navigation extends Component {
       searchtxt: "",
       headerData: [],
       headerItems: [],
+      expanded: false
     };
   }
+  handleToggle = () => {
+    this.setState((prevState) => ({
+      expanded: !prevState.expanded
+    }));
+  };
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -69,6 +76,7 @@ class Navigation extends Component {
       }
     }
   }
+  
   handleLogout = async (event) => {
     event.preventDefault();
     await GetUserLogin.logout();
@@ -80,7 +88,7 @@ class Navigation extends Component {
   };
 
   render() {
-    let { token, userName, searchtxt, headerItems } = this.state;
+    let { token, userName, searchtxt, headerItems , expanded } = this.state;
     const { cartItems, wishItems } = this.props;
     return (
       <div>
@@ -132,9 +140,9 @@ class Navigation extends Component {
                 </Link>
                 <div class="mid-header-right">
                   {/* Updated Search box */}
-                  <div id="searchbox" class="s-search">
-                    <div class="input-group">
-                      <div class="form-outline">
+                  <div id="searchbox" class="s-search" style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                    <div class="input-group" style={{ maxWidth: '800px', width: '80%' }}>
+                      <div class="form-outline" style={{ position: 'relative' }}>
                         <input
                           type="search"
                           id="form1"
@@ -148,12 +156,14 @@ class Navigation extends Component {
                         <Link
                           to="/person"
                           style={{
-                            display: "flex",
-                            justifyContent: "end",
-                            position: "absolute",
-                            right: "10px",
-                            top: "50%",
-                            transform: "translateY(-50%)",
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            position: 'absolute',
+                            right: '8px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            height: '100%',
                           }}
                         >
                           <FontAwesomeIcon
@@ -223,37 +233,51 @@ class Navigation extends Component {
           </div>
 
           <div className="navigation-bar">
-            <Navbar className="navigate" expand="md">
-              <Container className="container-fluid">
-                <Nav className="me-auto1" style={{ color: "white" }}>
-                  {headerItems.map((item) => {
-                    return (
-                      <NavDropdown
-                        title={item.name.toUpperCase()}
-                        id="guitar-bass-dropdown"
-                        className=".nav-dropdown-title"
-                        color="white"
-                      >
-                        {item.subCategory.map((data) => {
-                          return (
-                            <div className="submenu">
-                              <NavDropdown.Item
-                                as={Link}
-                                to={`/cat/` + item.categoryId + "/" + data.id}
-                                activeClassName="active"
-                              >
-                                {data.sub_name.toUpperCase()}
-                              </NavDropdown.Item>
-                            </div>
-                          );
-                        })}
-                      </NavDropdown>
-                    );
-                  })}
-                </Nav>
-              </Container>
-            </Navbar>
-          </div>
+        <Navbar className="navigate" expand="md" expanded={expanded}>
+          <Container fluid>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={this.handleToggle}
+            style={{
+              border: 'none',
+              outline: 'none',
+              padding: '0.25rem 0.5rem',
+              marginLeft: 'auto',
+              marginTop: '18px',
+              alignContent:'flex-start',
+              transform: 'translateX(-40%)',
+              backgroundColor: 'transparent'
+            }} />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="me-auto1" style={{ color: 'white' }}>
+                {headerItems.map((item) => {
+                  return (
+                    <NavDropdown
+                      title={item.name.toUpperCase()}
+                      id="guitar-bass-dropdown"
+                      className="nav-dropdown-title"
+                      style={{ color: 'white', left: 0 }}
+                    >
+                      {item.subCategory.map((data) => {
+                        return (
+                          <div className="submenu" >
+                            <NavDropdown.Item
+                              as={Link}
+                              to={`/cat/${item.categoryId}/${data.id}`}
+                              activeClassName="active"
+                              style={{ textTransform: 'uppercase' }}
+                            >
+                              {data.sub_name.toUpperCase()}
+                            </NavDropdown.Item>
+                          </div>
+                        );
+                      })}
+                    </NavDropdown>
+                  );
+                })}
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      </div>
         </header>
         <Login />
       </div>
