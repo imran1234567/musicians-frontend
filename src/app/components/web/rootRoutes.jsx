@@ -23,6 +23,7 @@ import CategoryList from "./views/categoryList";
 import Range from "./views/categoryList/Range/Range";
 import Wishlist from "./views/Wishlist/Wishlist";
 import compare from "./views/compare";
+import Checkout from './views/checkout';
 
 // import Failed from './views/checkout/failed';
 
@@ -39,6 +40,7 @@ export default class rootRoutes extends Component {
           <Route exact path="/p/:slug/:id" component={Singleproduct} />
           <Route exact path="/cat/:catId/:SubId" component={CategoryList} />
           <PrivateRoute path="/account" component={Account} />
+          <PrivateRoute path="/checkout" component={Checkout}/>
           <Route exact path="/range" component={Range} />
           <Route exact path="/wishlist" component={Wishlist} />
           <Route exact path="/compare" component={compare} />

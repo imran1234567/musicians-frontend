@@ -27,7 +27,7 @@ export const addToCart = (product) => (dispatch, getState) => {
     type: ADD_TO_CART,
     payload: { cartItems, alreadyExists },
   });
-  checkCart(product.id);
+  // checkCart(product.id);
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 };
 

@@ -81,7 +81,7 @@ class Navigation extends Component {
 
   render() {
     let { token, userName, searchtxt, headerItems } = this.state;
-    const { cartItems } = this.props;
+    const { cartItems, wishItems } = this.props;
     return (
       <div>
         <header id="header">
@@ -184,15 +184,15 @@ class Navigation extends Component {
                     </li>
                     <li class="wishlist">
                       {token ? (
-                        <a href="/wishlist">
+                        <Link to="/wishlist">
                           <i class="bx bx-heart"></i>
-                        </a>
+                        </Link>
                       ) : (
                         <a data-target="#bd-example-modal" data-toggle="modal">
                           <i class="bx bx-heart"></i>
                         </a>
                       )}
-                      <span>0</span>
+                      <span>{wishItems.length}</span>
                     </li>
                     <li class="cart">
                       {token ? (
@@ -263,5 +263,6 @@ class Navigation extends Component {
 export default withRouter(
   connect((state) => ({
     cartItems: state.cart.cartItems,
+    wishItems: state.wish.wishItems
   }))(Navigation)
 );
