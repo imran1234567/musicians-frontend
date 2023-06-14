@@ -194,9 +194,9 @@ class Checkout extends Component {
                                             <div className="card-header" id="headingOne">
                                                 <h5 className="mb-0">
                                                     <button className="btn btn-link checkout-login-bk" disabled>
-                                                        <span className="number">1</span> Login <span className="mdi mdi-checkbox-marked-circle-outline"></span>
+                                                        <span className="number">1.</span> Checkout Options<span className="mdi mdi-checkbox-marked-circle-outline"></span>
                                                     </button>
-                                                    <div className="_2jDL7w"><div><span className="dNZmcB">{customer.firstName} </span><span className="_3MeY5j">{email}</span></div></div>
+                                                    <div className="_2jDL7w" style={{ display: 'flex', justifyContent: 'center' }}><div><span className="dNZmcB">{customer.firstName} </span><span className="_3MeY5j">{email}</span></div></div>
                                                 </h5>
                                             </div>
                                         </div>
