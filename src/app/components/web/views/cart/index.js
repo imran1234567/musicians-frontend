@@ -107,21 +107,16 @@ class Cart extends Component {
               <p>
                 Sub Total{" "}
                 <strong className="float-right">
-                  &#x24;
                   {cartItems.reduce((sum, i) => (sum += i.qty * i.netPrice), 0)}
                 </strong>
               </p>
               <p style={{ display: "flex", justifyContent: "space-between" }}>
                 Delivery Charges{" "}
-                <strong className="float-right text-danger">
-                  + &#x24;29.69
-                </strong>
+                <strong className="float-right text-danger"></strong>
               </p>
               <h6 style={{ display: "flex", justifyContent: "space-between" }}>
                 Your total savings{" "}
-                <strong className="float-right text-danger">
-                  &#x24;55 (42.31%)
-                </strong>
+                <strong className="float-right text-danger"></strong>
               </h6>
             </div>
             <a href="/checkout" style={{ display: "block", width: "100%" }}>
@@ -134,7 +129,6 @@ class Cart extends Component {
                 </span>
                 <span className="float-right">
                   <strong>
-                    &#x24;
                     {cartItems.reduce(
                       (sum, i) => (sum += i.qty * i.netPrice),
                       0

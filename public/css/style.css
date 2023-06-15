@@ -1125,7 +1125,7 @@ ul.check-list li {
     width: 15px;
     height: 15px;
 	border-radius: 50%;
-    background-image: url('images/icons/check-point.svg');
+    background-image: url('../../src/images/icons/check-point.svg');
 	background-color: rgb(237 230 255);
     position: absolute;
     top: 5px;
@@ -2319,7 +2319,7 @@ ul.check-list li {
     width: 15px;
     height: 15px;
 	border-radius: 50%;
-    background-image: url('images/check-circle-solid-24.png');
+    background-image: url('../../src/images/icons/check-point.svg');
 	background-color: rgb(237 230 255);
     position: absolute;
     top: 5px;
@@ -2523,10 +2523,10 @@ ul.check-list li {
 	width: 80px;
 	margin-left: 10px;
   }
-  .accordion-content {
+  /* .accordion-content {
 	  max-height: 0;
 	  overflow: hidden;
-  }
+  } */
   
   .accordion-inner {
 	  background-color: #eee;

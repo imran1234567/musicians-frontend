@@ -115,7 +115,7 @@ export default class Profile extends Component {
                     <img src={profilePhoto||profile} alt="profile" />
                     <div className="img-add">
                       <input type="file" id="file" onChange={this.handleFileChange} />
-                      <label htmlFor="file">
+                      <label htmlFor="file" onChange={this.handleFileChange}>
                         <i className="uil uil-camera-plus" />
                       </label>
                     </div>

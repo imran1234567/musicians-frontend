@@ -77,6 +77,7 @@ class Wishlist extends Component {
                   </div>
                 </div>
               </div>
+              <div style={{display:'flex', flexDirection:'row'}}>
               <button
                 className="add-to-cart-button"
                 style={{ background: "none", transition: "transform 0.3s", marginLeft: "20px", paddingRight: "0", }}
@@ -95,6 +96,7 @@ class Wishlist extends Component {
               >
                 <AiOutlineClose />
               </button>
+              </div>
             </li>
           ))}
         </ul>

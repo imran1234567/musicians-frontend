@@ -7,7 +7,6 @@ import stopwatch from "./../../../../../../../images/stopwatch.svg";
 import checkmark from "./../../../../../../../images/checkmark.svg";
 import timecalendar from "./../../../../../../../images/timecalendar.svg";
 import zipmoneylight from "./../../../../../../../images/zipmoneylight.svg";
-import Style from "./Style.css";
 
 export default function pay_method() {
   return (
