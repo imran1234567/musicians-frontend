@@ -8,6 +8,7 @@ import About from "./views/about";
 import Cart from "./views/cart";
 import Contact from "./views/contact";
 import PrivateRoute from "../PrivateRoute";
+import SearchItem from "../searchItem/SearchItem";
 
 // import Productview from '../web/views/product';
 import Singleproduct from "./views/single-product";
@@ -44,6 +45,7 @@ export default class rootRoutes extends Component {
           <Route exact path="/range" component={Range} />
           <Route exact path="/wishlist" component={Wishlist} />
           <Route exact path="/compare" component={compare} />
+          <Route exact path="/SearchItem" component={SearchItem} />
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />

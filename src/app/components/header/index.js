@@ -6,6 +6,7 @@ import { GetCategoryDetails, GetUserLogin } from "../services";
 import Logo from "../../../assets/logo.png";
 import Login from "../../auth/login";
 import { connect } from "react-redux";
+import axios from 'axios'
 import { NavDropdown } from "react-bootstrap";
 import {
   faSearch,
@@ -35,9 +36,26 @@ class Navigation extends Component {
     }));
   };
 
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+  // handleChange(e) {
+  //   this.setState({ [e.target.name]: e.target.value });
+  // }
+
+  //taking the search input
+  handleChange = (e) => {
+    console.log(this.setState({ searchtxt: e.target.value }));
+  };
+
+  
+
+ 
+
+  // handleClickSearch = (event) => {
+  //   let { searchtxt } = this.state;
+  //   console.log(searchtxt);
+
+  //   this.props.history.push(`/product/catalogsearch/result/${searchtxt}`);
+  // };
+
   async componentDidMount() {
     let cookies = await GetUserLogin.isAuthenticate();
     let navCatgory = await GetCategoryDetails.getCategoryList();
@@ -82,13 +100,14 @@ class Navigation extends Component {
     await GetUserLogin.logout();
   };
 
-  handleClickSearch = (event) => {
-    let { searchtxt } = this.state;
-    this.props.history.push(`/product/catalogsearch/result/${searchtxt}`);
-  };
+  // handleClickSearch = (event) => {
+  //   event.preventDefault();
+  //   let { searchtxt } = this.state;
+  //   this.props.history.push(`/product/catalogsearch/result/${searchtxt}`);
+  // };
 
   render() {
-    let { token, userName, searchtxt, headerItems , expanded } = this.state;
+    let { token, userName, searchtxt,performSearch, headerItems , expanded,searchResults } = this.state;
     const { cartItems, wishItems } = this.props;
     return (
       <div>
@@ -142,19 +161,25 @@ class Navigation extends Component {
                   {/* Updated Search box */}
                   <div id="searchbox" class="s-search" style={{ display: 'flex', justifyContent: 'flex-start' }}>
                     <div class="input-group" style={{ maxWidth: '800px', width: '80%' }}>
-                      <div class="form-outline" style={{ position: 'relative' }}>
-                        <input
-                          type="search"
-                          id="form1"
-                          class="control"
-                          placeholder="Search for a Product here..."
-                          style={{
-                            backgroundColor: "transparent",
-                            color: "white",
+                    <div className="form-outline" style={{ position: 'relative' }}>
+                          <input
+                            type="search"
+                            id="form1"
+                            className="control"
+                            placeholder="Search for a Product here..."
+                            style={{
+                              backgroundColor: "transparent",
+                              color: "white",
+                              paddingRight: "2.5rem", // Add padding on the right to accommodate the icon
+                            }}
+                            value={this.state.searchtxt}
+                            onChange={(e) => this.handleChange(e)}
+                          />
+                          <Link
+                          to={{pathname:"/SearchItem",
+                          state:{value: searchtxt}
                           }}
-                        />
-                        <Link
-                          to="/person"
+                          
                           style={{
                             display: 'flex',
                             justifyContent: 'center',
@@ -168,10 +193,18 @@ class Navigation extends Component {
                         >
                           <FontAwesomeIcon
                             icon={faSearch}
-                            style={{ marginTop: "2px", color: "white" }}
+                            style={{
+                              position: 'absolute',
+                              top: '50%',
+                              right: '10px',
+                              transform: 'translateY(-50%)',
+                              color: 'white',
+                              cursor: 'pointer',
+                            }}
                           />
                         </Link>
-                      </div>
+                          
+                        </div>
                     </div>
                   </div>
 

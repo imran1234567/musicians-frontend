@@ -4,6 +4,7 @@ import { NotificationManager } from 'react-notifications';
 import { GetUserLogin, GetOrderDetails, CartHelper } from '../../../services';
 import { removeFromCart, incrementToCart, decreaseToCart } from "../../../../store/actions/cartActions";
 import Deliverydetails from './delivery';
+import './checkOut.css'
 
 
 class Checkout extends Component {
@@ -11,15 +12,23 @@ class Checkout extends Component {
         super(props);
         this.state = {
             isLoaded: false,
-            subTotal: '', discount: '', deliveryCharge: 0, grandTotal: '', email: '', customer: '', paymentmethod: '', deliveryAddress: ''
+            subTotal: '', discount: '', deliveryCharge: 0, grandTotal: '', email: '', customer: '', paymentmethod: '', deliveryAddress: '',
+            deliveryAddress: '123 Main Street, City, State',
+            useExistingAddress: true
         }
     }
-    handleRadioChange = e => {
-        this.setState({ [e.target.name]: e.target.value })
-    }
-    handleDeliveryAddress = (value) => {
-        this.setState({ deliveryAddress: value })
-    }
+    // handleOptionChange = (e) => {
+    //     this.setState({
+    //       selectedOption: e.target.value
+    //     });
+    //   };
+
+      handleDeliveryAddress = (address) => {
+        this.setState({
+          deliveryAddress: address,
+          useExistingAddress: false
+        });
+      };
     async componentDidMount() {
         let email = sessionStorage.getItem('email')
         if (email) {
@@ -170,6 +179,7 @@ class Checkout extends Component {
 
     }
     render() {
+        const { deliveryAddress, useExistingAddress } = this.state;
         const { cartItems } = this.props;
         const { subTotal, discount, deliveryCharge, grandTotal, email, customer, paymentmethod, isLoaded } = this.state;
         return (
@@ -200,18 +210,88 @@ class Checkout extends Component {
                                                 </h5>
                                             </div>
                                         </div>
-                                        <div className="card checkout-step-two">
-                                            <div className="card-header" id="headingTwo">
-                                                <h5 className="mb-0">
-                                                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                        <span className="number">2</span> Delivery Address
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                                <Deliverydetails onSelectDeliveryAddress={this.handleDeliveryAddress} />
-                                            </div>
-                                        </div>
+
+<div className="card checkout-step-two">
+  <div className="card-header" id="headingTwo">
+    <h5 className="mb-0">
+      <button
+        className="btn btn-link collapsed"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapseTwo"
+        aria-expanded="false"
+        aria-controls="collapseTwo"
+      >
+        <span className="number">2</span> Delivery Address
+      </button>
+    </h5>
+  </div>
+
+  <div
+    id="collapseTwo"
+    className="collapse"
+    aria-labelledby="headingTwo"
+    data-parent="#accordionExample"
+  >
+    <div className="delivery-address">
+      <div>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="radio"
+            id="existingAddress"
+            name="addressOption"
+            checked={useExistingAddress}
+            onChange={() => this.setState({ useExistingAddress: true })}
+          />
+        </div>
+      </div>
+
+      <div>
+        <label className="form-check-label" htmlFor="existingAddress">
+          I want to use the existing address
+        </label>
+      </div>
+
+      {useExistingAddress && (
+        <div className="existing-address">
+          <h6>Existing Address:</h6>
+          <textarea
+            className="form-control"
+            rows="4"
+            value={deliveryAddress}
+            readOnly
+          ></textarea>
+          {/* Replace the above textarea with the actual existing address input */}
+        </div>
+      )}
+
+      <div>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="radio"
+            id="newAddress"
+            name="addressOption"
+            checked={!useExistingAddress}
+            onChange={() => this.setState({ useExistingAddress: false })}
+          />
+        </div>
+      </div>
+
+      <div>
+        <label className="form-check-label" htmlFor="newAddress">
+          Enter New Address
+        </label>
+      </div>
+
+      {!useExistingAddress && (
+        <Deliverydetails onSelectDeliveryAddress={this.handleDeliveryAddress} />
+      )}
+    </div>
+  </div>
+</div>
+                                   
                                         <div className="card">
                                             <div className="card-header" id="headingThree">
                                                 <h5 className="mb-0">

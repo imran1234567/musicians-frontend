@@ -39,8 +39,6 @@ class Cart extends Component {
                                 <div className="offer-badge" style={{ position: 'absolute', top: '0', right: '0', backgroundColor: 'red', color: 'white', padding: '5px',width: '30px', height: '30px' }}>{row.discountPer}% OFF</div>
                             </div>
                         </td>
-
-
                         <td style={{ padding: '10px', textAlign: 'center' }}>
                             <b>{row.name}</b>
                         </td>
@@ -97,7 +95,6 @@ class Cart extends Component {
                 </div>
             </div>
         </div>
-
         );
     }
 }
