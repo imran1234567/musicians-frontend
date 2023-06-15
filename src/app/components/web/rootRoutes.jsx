@@ -30,6 +30,7 @@ import Delivery from "./views/Delivery";
 import ScrollToTop from "./views/account/view/ScrollToTop";
 import pay_method from "./views/account/view/pay_method";
 import AccordionItem from "react-bootstrap/esm/AccordionItem";
+import { Affiliate } from "./views/Affiliate";
 
 // import Failed from './views/checkout/failed';
 
@@ -56,6 +57,7 @@ export default class rootRoutes extends Component {
           <Route exact path="/delivery" component={Delivery} />
           <Route exact path="/zip" component={pay_method} />
           <Route exact path="/accordion" component={AccordionItem} />
+          <Route exact path="/affiliate" component={Affiliate} />
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />

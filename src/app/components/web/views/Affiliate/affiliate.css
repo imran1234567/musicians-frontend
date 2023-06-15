@@ -1,0 +1,15 @@
+.affiliate-div{
+	display: flex;
+	flex-direction: row;
+
+  }
+  .affiliate-one{
+    margin-left: 20px;
+  }
+  .affiliate-two{
+    margin-left: 50px;
+  }
+
+  .affiliate-program{
+    margin-left: 20px;
+  }
