@@ -5,6 +5,7 @@ import { GetUserLogin, GetOrderDetails, CartHelper } from '../../../services';
 import { removeFromCart, incrementToCart, decreaseToCart } from "../../../../store/actions/cartActions";
 import Deliverydetails from './delivery';
 import './checkOut.css'
+import { PayPalButtons } from '@paypal/react-paypal-js';
 
 
 class Checkout extends Component {
@@ -178,6 +179,51 @@ class Checkout extends Component {
 
 
   }
+
+  createOrder = (data, actions) => {
+    const { customer, grandTotal, deliveryAddress, paymentmethod } = this.state;
+    // Logic to create an order on your server
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: grandTotal, // Total amount
+          },
+        },
+      ],
+    });
+  };
+
+  onApprove = async (data, actions) => {
+    // Logic to capture the approved payment
+    const { customer, grandTotal, deliveryAddress } = this.state;
+    let paymentmethod= "paypal"
+    let orderId = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
+    let { cartItems } = this.props
+    let data1 = { customerId: customer.id, paymentmethod: paymentmethod, orderId: orderId, deliveryAddress: deliveryAddress, product: cartItems, grandTotal, grandTotal }
+    return actions.order.capture().then( async (details)=> {
+      // Payment completed successfully
+      let order = await GetOrderDetails.getOrderCreateByUser(JSON.stringify(data1));
+      if (order) {
+        NotificationManager.success("Successfully Ordered", "Order");
+        setTimeout(
+          async function () {
+            CartHelper.emptyCart();
+          },
+          1000
+        );
+      } else {
+        NotificationManager.error("Order is declined", "Order");
+        setTimeout(
+          async function () {
+            window.location.href = "/failed"
+          },
+          1000
+        );
+      }
+    });
+  };
+
   render() {
     const { deliveryAddress, useExistingAddress } = this.state;
     const { cartItems } = this.props;
@@ -314,10 +360,11 @@ class Checkout extends Component {
                                       </div>
                                     </li>
                                     <li>
-                                      <div className="radio-item_1" onClick={this.handlePaymentSystem}>
-                                        {/* <input value="card" name="paymentmethod" type="button" onClick={this.handleRadioChange} /> */}
-                                        <label htmlFor="card1" className="radio-label_1">Pay With Card</label>
-                                      </div>
+                                      {/* <div className="radio-item_1" onClick={this.handlePaypalSystem}> */}
+                                      {/* <input value="card" name="paymentmethod" type="button" onClick={this.handleRadioChange} /> */}
+                                      {/* <label htmlFor="card1" className="radio-label_1">Pay With Card</label> */}
+                                      {/* </div> */}
+                                      <PayPalButtons createOrder={this.createOrder} onApprove={this.onApprove} />
                                     </li>
                                   </ul>
                                 </div>
