@@ -50,7 +50,7 @@ export default class Login extends Component {
         break;
       case "password":
         formErrors.password = formErrors.password =
-          value.length < 6 ? "minimum 6 character required" : "";
+          value.length < 6 ? "Invalid password" : "";
         break;
       default:
         break;

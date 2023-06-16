@@ -1,89 +1,77 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { NotificationManager } from "react-notifications";
-import { GetUserLogin, GetOrderDetails, CartHelper } from "../../../services";
-import {
-  removeFromCart,
-  incrementToCart,
-  decreaseToCart,
-} from "../../../../store/actions/cartActions";
-import Deliverydetails from "./delivery";
-import "./checkout.css";
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { NotificationManager } from 'react-notifications';
+import { GetUserLogin, GetOrderDetails, CartHelper } from '../../../services';
+import { removeFromCart, incrementToCart, decreaseToCart } from "../../../../store/actions/cartActions";
+import Deliverydetails from './delivery';
+import './checkOut.css'
+
 
 class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoaded: false,
-      subTotal: "",
-      discount: "",
-      deliveryCharge: 0,
-      grandTotal: "",
-      email: "",
-      customer: "",
-      paymentmethod: "",
-      deliveryAddress: "",
-    };
+      subTotal: '', discount: '', deliveryCharge: 0, grandTotal: '', email: '', customer: '', paymentmethod: '', deliveryAddress: '',
+      deliveryAddress: '123 Main Street, City, State',
+      useExistingAddress: true
+    }
   }
-  handleRadioChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-  handleDeliveryAddress = (value) => {
-    this.setState({ deliveryAddress: value });
+  // handleOptionChange = (e) => {
+  //     this.setState({
+  //       selectedOption: e.target.value
+  //     });
+  //   };
+
+  handleDeliveryAddress = (address) => {
+    this.setState({
+      deliveryAddress: address,
+      useExistingAddress: false
+    });
   };
   async componentDidMount() {
-    let email = sessionStorage.getItem("email");
+    let email = sessionStorage.getItem('email')
     if (email) {
       let user = await GetUserLogin.getCustomerDetail(email);
       if (user) {
-        this.setState({ customer: user.data, email: email });
+        this.setState({ customer: user.data, email: email })
       }
     }
     let cart = this.props.cartItems;
-    let subTotal = cart.reduce((sum, i) => (sum += i.qty * i.netPrice), 0);
-    let discount = cart.reduce((sum, i) => (sum += i.discount), 0);
+    let subTotal = cart.reduce((sum, i) => (sum += i.qty * i.netPrice), 0)
+    let discount = cart.reduce((sum, i) => (sum += i.discount), 0)
     let grandTotal = subTotal + discount + this.state.deliveryCharge;
 
-    this.setState({
-      subTotal: subTotal,
-      discount: discount,
-      grandTotal: grandTotal,
-      deliveryCharge: this.state.deliveryCharge,
-    });
+    this.setState({ subTotal: subTotal, discount: discount, grandTotal: grandTotal, deliveryCharge: this.state.deliveryCharge })
+
   }
   handlePlaceOrder = async (event) => {
     event.preventDefault();
     const { customer, grandTotal, deliveryAddress, paymentmethod } = this.state;
-    let orderId = Math.floor(
-      Math.random() * Math.floor(Math.random() * Date.now())
-    );
-    let { cartItems } = this.props;
-    let data = {
-      customerId: customer.id,
-      paymentmethod: paymentmethod,
-      orderId: orderId,
-      deliveryAddress: deliveryAddress,
-      product: cartItems,
-      grandTotal,
-      grandTotal,
-    };
+    let orderId = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
+    let { cartItems } = this.props
+    let data = { customerId: customer.id, paymentmethod: paymentmethod, orderId: orderId, deliveryAddress: deliveryAddress, product: cartItems, grandTotal, grandTotal }
     if (data) {
-      let order = await GetOrderDetails.getOrderCreateByUser(
-        JSON.stringify(data)
-      );
+      let order = await GetOrderDetails.getOrderCreateByUser(JSON.stringify(data));
       if (order) {
         NotificationManager.success("Successfully Ordered", "Order");
-        setTimeout(async function () {
-          CartHelper.emptyCart();
-        }, 1000);
+        setTimeout(
+          async function () {
+            CartHelper.emptyCart();
+          },
+          1000
+        );
       } else {
         NotificationManager.error("Order is declined", "Order");
-        setTimeout(async function () {
-          window.location.href = "/failed";
-        }, 1000);
+        setTimeout(
+          async function () {
+            window.location.href = "/failed"
+          },
+          1000
+        );
       }
     }
-  };
+  }
 
   loadScript(src) {
     return new Promise((resolve) => {
@@ -102,12 +90,10 @@ class Checkout extends Component {
   handlePaymentSystem = async (e) => {
     e.preventDefault();
     const { customer, grandTotal, deliveryAddress, paymentmethod } = this.state;
-    let { cartItems } = this.props;
-    let orderId = Math.floor(
-      Math.random() * Math.floor(Math.random() * Date.now())
-    );
-    this.setState({ isLoaded: true });
-    console.log("deliveryAddress", deliveryAddress);
+    let { cartItems } = this.props
+    let orderId = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
+    this.setState({ isLoaded: true })
+    console.log("deliveryAddress", deliveryAddress)
     if (deliveryAddress) {
       //payment system
       const res = await this.loadScript(
@@ -120,27 +106,22 @@ class Checkout extends Component {
       }
 
       //creating new order
-      let data1 = {
-        amount: grandTotal,
-        order_id: orderId,
-        currency: "INR",
-        payment_capture: 1,
-      };
+      let data1 = { amount: grandTotal, order_id: orderId, "currency": "INR", payment_capture: 1 }
       const result = await GetOrderDetails.getPaymentValue(data1);
       if (!result.data) {
         alert("Server error. Are you online?");
         return;
       } else {
-        const __DEV__ = document.domain === "localhost";
+        const __DEV__ = document.domain === 'localhost';
         var options = {
-          key: __DEV__ ? "rzp_test_OkYZMYKswptVZX" : "rzp_test_OkYZMYKswptVZX",
-          currency: result.data.currency,
-          amount: result.data.amount * 100,
-          order_id: result.data.id,
-          name: "CityBaazar",
-          description: "Test Transaction",
-          image: "https://example.com/your_logo",
-          handler: async function (response) {
+          "key": __DEV__ ? "rzp_test_OkYZMYKswptVZX" : "rzp_test_OkYZMYKswptVZX",
+          "currency": result.data.currency,
+          "amount": result.data.amount * 100,
+          "order_id": result.data.id,
+          "name": "CityBaazar",
+          "description": "Test Transaction",
+          "image": "https://example.com/your_logo",
+          "handler": async function (response) {
             const list = {
               custId: customer.id,
               orderCreationId: orderId,
@@ -149,29 +130,28 @@ class Checkout extends Component {
             };
             const result = await GetOrderDetails.getPaymentOrderList(list);
             if (result.data) {
-              const EMPTY_CART = { cartItems: [] };
+              const EMPTY_CART = { cartItems: [] }
               const carts = cartItems || EMPTY_CART;
-              setTimeout(async function () {
-                let data = {
-                  customerId: customer.id,
-                  paymentmethod: result.data.method,
-                  orderId: orderId,
-                  deliveryAddress: deliveryAddress,
-                  product: carts,
-                  grandTotal: result.data.amount / 100,
-                };
+              setTimeout(
+                async function () {
+                  let data = { customerId: customer.id, paymentmethod: result.data.method, orderId: orderId, deliveryAddress: deliveryAddress, product: carts, grandTotal: result.data.amount / 100 }
 
-                let order = await GetOrderDetails.getOrderCreateByUser(
-                  JSON.stringify(data)
-                );
-                if (order) {
-                  NotificationManager.success("Successfully Ordered", "Order");
-                  // this.setState({ isLoaded: false})
-                  setTimeout(async function () {
-                    CartHelper.emptyCart();
-                  }, 1000);
-                }
-              }, 1000);
+                  let order = await GetOrderDetails.getOrderCreateByUser(JSON.stringify(data));
+                  if (order) {
+                    NotificationManager.success("Successfully Ordered", "Order");
+                    // this.setState({ isLoaded: false})
+                    setTimeout(
+                      async function () {
+                        CartHelper.emptyCart();
+                      },
+                      1000
+                    );
+                  }
+                },
+                1000
+              );
+
+
             } else {
               window.location.href = "/order/failed";
             }
@@ -179,15 +159,15 @@ class Checkout extends Component {
           },
           prefill: {
             name: "",
-            email: "",
-            phone_number: "",
+            email: '',
+            phone_number: ''
           },
-          notes: {
-            address: "Razorpay Corporate Office",
+          "notes": {
+            "address": "Razorpay Corporate Office"
           },
-          theme: {
-            color: "#3399cc",
-          },
+          "theme": {
+            "color": "#3399cc"
+          }
         };
         let payementObject = new window.Razorpay(options);
         payementObject.open();
@@ -195,31 +175,20 @@ class Checkout extends Component {
     } else {
       NotificationManager.error("Please! check address details", "Input Field");
     }
-  };
+
+
+  }
   render() {
+    const { deliveryAddress, useExistingAddress } = this.state;
     const { cartItems } = this.props;
-    const {
-      subTotal,
-      discount,
-      deliveryCharge,
-      grandTotal,
-      email,
-      customer,
-      paymentmethod,
-      isLoaded,
-    } = this.state;
+    const { subTotal, discount, deliveryCharge, grandTotal, email, customer, paymentmethod, isLoaded } = this.state;
     return (
       <div>
         <section className="pt-3 pb-3 page-info section-padding border-bottom bg-white single-product-header-bk">
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <a href="/">
-                  <strong>
-                    <span class="mdi mdi-home"></span> Home
-                  </strong>
-                </a>{" "}
-                <span class="mdi mdi-chevron-right"></span> <a>Checkout</a>
+                <a href="/"><strong><span class="mdi mdi-home"></span> Home</strong></a> <span class="mdi mdi-chevron-right"></span> <a >Checkout</a>
               </div>
             </div>
           </div>
@@ -234,24 +203,14 @@ class Checkout extends Component {
                     <div className="card checkout-step-one">
                       <div className="card-header" id="headingOne">
                         <h5 className="mb-0">
-                          <button
-                            className="btn btn-link checkout-login-bk"
-                            disabled
-                          >
-                            <span className="number">1</span> Login{" "}
-                            <span className="mdi mdi-checkbox-marked-circle-outline"></span>
+                          <button className="btn btn-link checkout-login-bk" disabled>
+                            <span className="number">1.</span> Checkout Options<span className="mdi mdi-checkbox-marked-circle-outline"></span>
                           </button>
-                          <div className="_2jDL7w">
-                            <div>
-                              <span className="dNZmcB">
-                                {customer.firstName}{" "}
-                              </span>
-                              <span className="_3MeY5j">{email}</span>
-                            </div>
-                          </div>
+                          <div className="_2jDL7w" style={{ display: 'flex', justifyContent: 'center' }}><div><span className="dNZmcB">{customer.firstName} </span><span className="_3MeY5j">{email}</span></div></div>
                         </h5>
                       </div>
                     </div>
+
                     <div className="card checkout-step-two">
                       <div className="card-header" id="headingTwo">
                         <h5 className="mb-0">
@@ -267,38 +226,81 @@ class Checkout extends Component {
                           </button>
                         </h5>
                       </div>
+
                       <div
                         id="collapseTwo"
                         className="collapse"
                         aria-labelledby="headingTwo"
                         data-parent="#accordionExample"
                       >
-                        <Deliverydetails
-                          onSelectDeliveryAddress={this.handleDeliveryAddress}
-                        />
+                        <div className="delivery-address">
+                          <div>
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="radio"
+                                id="existingAddress"
+                                name="addressOption"
+                                checked={useExistingAddress}
+                                onChange={() => this.setState({ useExistingAddress: true })}
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="form-check-label" htmlFor="existingAddress">
+                              I want to use the existing address
+                            </label>
+                          </div>
+
+                          {useExistingAddress && (
+                            <div className="existing-address">
+                              <h6>Existing Address:</h6>
+                              <textarea
+                                className="form-control"
+                                rows="4"
+                                value={deliveryAddress}
+                                readOnly
+                              ></textarea>
+                              {/* Replace the above textarea with the actual existing address input */}
+                            </div>
+                          )}
+
+                          <div>
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="radio"
+                                id="newAddress"
+                                name="addressOption"
+                                checked={!useExistingAddress}
+                                onChange={() => this.setState({ useExistingAddress: false })}
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="form-check-label" htmlFor="newAddress">
+                              Enter New Address
+                            </label>
+                          </div>
+
+                          {!useExistingAddress && (
+                            <Deliverydetails onSelectDeliveryAddress={this.handleDeliveryAddress} />
+                          )}
+                        </div>
                       </div>
                     </div>
+
                     <div className="card">
                       <div className="card-header" id="headingThree">
                         <h5 className="mb-0">
-                          <button
-                            className="btn btn-link collapsed"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#collapseThree"
-                            aria-expanded="false"
-                            aria-controls="collapseThree"
-                          >
+                          <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             <span className="number">3</span> Payment
                           </button>
                         </h5>
                       </div>
-                      <div
-                        id="collapseThree"
-                        className="collapse"
-                        aria-labelledby="headingThree"
-                        data-parent="#accordionExample"
-                      >
+                      <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                         <div className="checkout-step-body">
                           <div className="payment_method-checkout">
                             <div className="row">
@@ -307,51 +309,28 @@ class Checkout extends Component {
                                   <ul className="radio--group-inline-container_1">
                                     <li>
                                       <div className="radio-item_1">
-                                        <input
-                                          id="cashondelivery1"
-                                          value="cash"
-                                          name="paymentmethod"
-                                          type="radio"
-                                          onChange={this.handleRadioChange}
-                                        />
-                                        <label
-                                          htmlFor="cashondelivery1"
-                                          className="radio-label_1"
-                                        >
-                                          Cash on Delivery
-                                        </label>
+                                        <input id="cashondelivery1" value="cash" name="paymentmethod" type="radio" onChange={this.handleRadioChange} />
+                                        <label htmlFor="cashondelivery1" className="radio-label_1">Cash on Delivery</label>
                                       </div>
                                     </li>
                                     <li>
-                                      <div
-                                        className="radio-item_1"
-                                        onClick={this.handlePaymentSystem}
-                                      >
+                                      <div className="radio-item_1" onClick={this.handlePaymentSystem}>
                                         {/* <input value="card" name="paymentmethod" type="button" onClick={this.handleRadioChange} /> */}
-                                        <label
-                                          htmlFor="card1"
-                                          className="radio-label_1"
-                                        >
-                                          Pay With Card
-                                        </label>
+                                        <label htmlFor="card1" className="radio-label_1">Pay With Card</label>
                                       </div>
                                     </li>
                                   </ul>
                                 </div>
-                                {paymentmethod === "cash" ? (
-                                  <button
-                                    className="next-btn16 hover-btn"
-                                    onClick={this.handlePlaceOrder}
-                                  >
-                                    Confirm Order
-                                  </button>
-                                ) : (
-                                  ""
-                                )}
+                                {
+                                  paymentmethod === "cash" ?
+                                    <button className="next-btn16 hover-btn" onClick={this.handlePlaceOrder}>Confirm Order</button>
+                                    : ''
+                                }
                               </div>
                             </div>
                           </div>
                         </div>
+
                       </div>
                     </div>
                   </div>
@@ -359,50 +338,32 @@ class Checkout extends Component {
               </div>
               <div className="col-md-4">
                 <div className="card">
-                  <h5 className="card-header">
-                    My Cart{" "}
-                    <span className="text-secondary float-right">
-                      ({cartItems.length} item)
-                    </span>
-                  </h5>
-                  {cartItems.map((row, index) => (
-                    <div className="card-body pt-0 pr-0 pl-0 pb-0" key={index}>
-                      <div className="cart-list-product">
-                        <img className="img-fluid" src={row.photo} alt="cart" />
-                        <span className="badge badge-success">
-                          {row.discountPer}% OFF
-                        </span>
-                        <h5>{row.name}</h5>
-                        <h6>
-                          <strong>
-                            <span className="mdi mdi-approval" /> Available in
-                          </strong>{" "}
-                          - {row.unitSize} gm
-                        </h6>
-                        <p className="offer-price mb-0">
-                          &#x20B9;{row.qty + "*" + row.netPrice}{" "}
-                          <i className="mdi mdi-tag-outline" />{" "}
-                          <span className="regular-price">
-                            &#x20B9;{row.price}
-                          </span>
-                        </p>
+                  <h5 className="card-header">My Cart <span className="text-secondary float-right">({cartItems.length} item)</span></h5>
+                  {
+                    cartItems.map((row, index) => (
+                      <div className="card-body pt-0 pr-0 pl-0 pb-0" key={index}>
+                        <div className="cart-list-product">
+                          <img className="img-fluid" src={row.photo} alt="cart" />
+                          <span className="badge badge-success">{row.discountPer}% OFF</span>
+                          <h5>{row.name}</h5>
+                          <h6><strong><span className="mdi mdi-approval" /> Available in</strong> - {row.unitSize} gm</h6>
+                          <p className="offer-price mb-0">&#x20B9;{row.qty + '*' + row.netPrice} <i className="mdi mdi-tag-outline" /> <span className="regular-price">&#x20B9;{row.price}</span></p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))
+                  }
                   <div className="total-checkout-group">
                     <div className="cart-total-dil">
-                      <h5>
-                        <b>SUB TOTAL:</b>
-                      </h5>
+                      <h4>Sub Total</h4>
                       <span>&#x20B9;{subTotal}</span>
                     </div>
                     <div className="cart-total-dil pt-3">
-                      <h5>DELIVERY CHARGES:</h5>
+                      <h4>Delivery Charges</h4>
                       <span>&#x20B9;{deliveryCharge}</span>
                     </div>
                   </div>
                   <div className="cart-total-dil saving-total ">
-                    <h5>TOTAL SAVING:</h5>
+                    <h4>Total Saving</h4>
                     <span>&#x20B9;{discount}</span>
                   </div>
                   <div className="main-total-cart">
@@ -414,8 +375,10 @@ class Checkout extends Component {
             </div>
           </div>
         </section>
+
+
       </div>
-    );
+    )
   }
 }
 
