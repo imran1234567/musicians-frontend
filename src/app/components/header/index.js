@@ -209,11 +209,11 @@ class Navigation extends Component {
                   </div>
 
                   <ul class="header-right-icon">
-                    <li class="h-search">
+                    {/* <li class="h-search">
                       <a href="#">
                         <i class="bx bx-search"></i>
                       </a>
-                    </li>
+                    </li> */}
                     <li class="user">
                       {token ? (
                         <Link to="/account/view">
