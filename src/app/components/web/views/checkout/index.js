@@ -8,7 +8,9 @@ import {
   decreaseToCart,
 } from "../../../../store/actions/cartActions";
 import Deliverydetails from "./delivery";
-import "./checkout.css";
+
+import "./checkOut.css";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 class Checkout extends Component {
   constructor(props) {
