@@ -64,7 +64,7 @@ class Featured extends Component {
             ) : (
               list.map((row, index) => {
                 const isProductInCart = this.checkCart(row.id);
-                return (                 
+                return (
                   <div class="col-lg-3 col-md-3 col-12" key={index}>
                     <div class="product-box">
                       <div class="product-image">
@@ -94,21 +94,22 @@ class Featured extends Component {
                               add to cart
                             </a>
                           )}
-
-                          <a href="javascript:void(0)" onClick={() => this.props.addToWishlist(row)}>
-                            {" "}
-                            <FontAwesomeIcon
-                              icon={faHeart}
-                              className="heart-icon"
-                            />
-                          </a>
-                          <br></br>
-                          <br></br>
                           <div className="com">
                             <a href="/compare">
                               <FontAwesomeIcon
                                 icon={faCodeCompare}
                                 className="compare-icon"
+                              />
+                            </a>
+
+                            <a
+                              href="javascript:void(0)"
+                              onClick={() => this.props.addToWishlist(row)}
+                            >
+                              {" "}
+                              <FontAwesomeIcon
+                                icon={faHeart}
+                                className="heart-icon"
                               />
                             </a>
                           </div>
@@ -129,7 +130,7 @@ class Featured extends Component {
 
 const mapStateToProps = (state) => ({
   cartItems: state.cart.cartItems,
-  wishItems: state.wish.wishItems
+  wishItems: state.wish.wishItems,
 });
 
 export default connect(mapStateToProps, { addToCart, addToWishlist })(Featured);

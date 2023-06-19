@@ -8,7 +8,7 @@ import {
   decreaseToCart,
 } from "../../../../store/actions/cartActions";
 import Deliverydetails from "./delivery";
-import "./checkOut.css";
+import "./checkout.css";
 
 class Checkout extends Component {
   constructor(props) {
