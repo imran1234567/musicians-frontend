@@ -26,7 +26,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 :root {
 	--primary-color: #750000;
-	--secondary-color: #1d0712;
+	--secondary-color: #000;
 	--white-color: #f5efef;
 
 }
@@ -92,7 +92,7 @@ a:hover{
 }
 .upper-header-content .upper-header-menu li{
 	display: inline-block;
-	margin-left: 22px;
+	/* margin-left: 22px; */
 }
 .upper-header-content .upper-header-menu li:first-child{
 	margin-left: 0;
@@ -223,7 +223,7 @@ a:hover{
 
 
 
-header .navbar{
+header .navigation-bar{
 	background-color: var(--primary-color);
 }
 header .navbar .navbar-collapse{
@@ -519,6 +519,7 @@ header .navbar .navbar-nav li.mobile-menu{
 	font-weight: 400;
 	color: var(--secondary-color);
 	margin-bottom: 18px;
+	min-height: 64px;
 }
 .featured-product .product-box .product-text h5{
 	font-size: 1.563rem;
@@ -991,8 +992,7 @@ footer .block ul li{
 
 .footer-mid-content{
 	padding: 64px 0 58px;
-	border-top: 1px solid #4d4d4d;
-	border-bottom: 1px solid #4d4d4d;
+	border: 0;
 }
 .footer-mid-content .block ul li a{
 	font-size: 0.938rem;
@@ -1242,16 +1242,21 @@ a:hover{
 }
 .upper-header-content .upper-header-menu li{
 	display: inline-block;
-	margin-left: 22px;
 }
 .upper-header-content .upper-header-menu li:first-child{
-	margin-left: 0;
+	/* margin-left: 0; */
 }
 .upper-header-content .upper-header-menu li a{
 	text-decoration: none;
 	font-size: 0.813rem;
 	font-weight: 400;
 	color: var(--secondary-color);
+}
+
+@media(min-width:1199px) {
+	.upper-header-content .upper-header-menu li:not(:last-of-type) {
+		margin-left: 22px;
+	}
 }
 
 .upper-header-content h5{
@@ -1309,7 +1314,7 @@ a:hover{
 	background-color: transparent;
 	border: 1px solid #fff;
 	border-radius: 0;
-	color: #000;
+	color: #fff;
 }
 .header-mid-content .mid-header-right .s-search .form-control::placeholder{
 	color: #fff;
@@ -2164,8 +2169,6 @@ footer .block ul li{
 
 .footer-mid-content{
 	padding: 64px 0 58px;
-	border-top: 1px solid #4d4d4d;
-	border-bottom: 1px solid #4d4d4d;
 }
 .footer-mid-content .block ul li a{
 	font-size: 0.938rem;
@@ -2222,6 +2225,10 @@ footer .block ul li{
 }
 .bottom-footer ul li{
 	display: inline-block;
+	margin-right: 5px;
+}
+.bottom-footer ul li:last-child{
+	margin-right: 0;
 }
 .information{
 	color: black;
@@ -2470,6 +2477,7 @@ ul.check-list li {
   .product-image{
 	border: 1px double black;
 	padding-right: 5px;
+	text-align: center;
   }
   .image-class {
     padding-right: 10px;
@@ -3324,7 +3332,73 @@ ul.check-list li {
 		 product-details-End
 ::::::::::::::::::::::::::::::::::*/
 
-/* 26 */
+/* 16/06 */
+
+.product-listing .accordion-box .accordion-list{
+	margin-bottom: 10px;
+}
+.product-listing .accordion-box .accordion-list .accordion-content{
+visibility: hidden;
+opacity: 0;
+height: 0;
+transition: ease-in-out all 300ms;
+}
+.product-listing .accordion-box .accordion-list.actived .accordion-content{
+visibility: visible;
+opacity: 1;
+height: auto;
+transition: ease-in-out all 300ms;
+}
+.product-box .add-cart{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.product-box .add-cart .com{
+display: flex;
+align-items: center;
+gap: 16px;
+}
+.footer-mid{
+	border-top: 1px solid #4d4d4d;
+border-bottom: 1px solid #4d4d4d;
+}
 
 
-/* 26 */
+/* responsive */
+
+@media(max-width: 767px){
+	.categories .categories-content .block{
+		margin-bottom: 20px;
+	}
+	.featured-product .product-box .product-text h6{
+		min-height: auto;
+	}
+	.filter-container .price-sort-row{
+		align-items: flex-start;
+		flex-direction: column;
+	}
+	.footer-mid-content > .row{
+		flex-direction: column;
+	}
+	.upper-footer{
+		padding: 40px 0;
+	}
+	.footer-mid-content{
+		padding: 40px 0;
+	}
+	footer .block h4{
+		margin-bottom: 26px;
+	}
+	.bottom-footer p{
+		text-align: center;
+		margin-bottom: 10px !important;
+	}
+	.bottom-footer ul{
+		text-align: center;	
+	}
+}
+
+/* responsive */
+
+/* 16/06 */

@@ -65,52 +65,59 @@ class CategoryList extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-3">
             <div className="list-name">
               <List />
             </div>
           </div>
-          <div>
-            <Range />
-          </div>
-          <div className="col-md-8">
+
+          <div className="col-md-9">
             <section className="featured-product" style={{ padding: 0 }}>
-              <div className="container-fluid">
-                <div className="featured-product-list row">
-                  {products.map((row, index) => {
-                    const isProductInCart = this.checkCart(row.id);
-                    return (
-                      <div className="col-lg-4 col-md-4 col-12" key={index}>
-                        <div className="product-box">
-                          <div className="product-image">
-                            <img src={cat1} alt="Product" />
-                          </div>
-                          <div className="product-text">
-                            <Link
-                              to={{
-                                pathname: `/p/${row.slug}/${row.id}`,
-                                state: row,
-                              }}
-                            >
-                              <h6>
-                                <b>{row.name}</b>
-                              </h6>
-                            </Link>
-                            <h5>${row.price}</h5>
-                            <div className="add-cart">
-                              {isProductInCart ? (
-                                <Link to="/cart" className="cart-btn">
-                                  go to cart
-                                </Link>
-                              ) : (
-                                <a
-                                  href="javascript:void(0)"
-                                  class="cart-btn"
-                                  onClick={() => this.props.addToCart(row)}
-                                >
-                                  add to cart
-                                </a>
-                              )}
+              <div>
+                <Range />
+              </div>
+              <div className="featured-product-list row">
+                {products.map((row, index) => {
+                  const isProductInCart = this.checkCart(row.id);
+                  return (
+                    <div className="col-lg-4 col-md-4 col-12" key={index}>
+                      <div className="product-box">
+                        <div className="product-image">
+                          <img src={cat1} alt="Product" />
+                        </div>
+                        <div className="product-text">
+                          <Link
+                            to={{
+                              pathname: `/p/${row.slug}/${row.id}`,
+                              state: row,
+                            }}
+                          >
+                            <h6>
+                              <b>{row.name}</b>
+                            </h6>
+                          </Link>
+                          <h5>${row.price}</h5>
+                          <div className="add-cart">
+                            {isProductInCart ? (
+                              <Link to="/cart" className="cart-btn">
+                                go to cart
+                              </Link>
+                            ) : (
+                              <a
+                                href="javascript:void(0)"
+                                class="cart-btn"
+                                onClick={() => this.props.addToCart(row)}
+                              >
+                                add to cart
+                              </a>
+                            )}
+                            <div className="com">
+                              <a href="/compare">
+                                <FontAwesomeIcon
+                                  icon={faCodeCompare}
+                                  className="compare-icon"
+                                />
+                              </a>
                               <a href="/wishlist">
                                 {" "}
                                 <FontAwesomeIcon
@@ -119,23 +126,12 @@ class CategoryList extends Component {
                                 />
                               </a>
                             </div>
-                            <br></br>
-                            <div className="com">
-                              <a href="/compare">
-                                <FontAwesomeIcon
-                                  icon={faCodeCompare}
-                                  className="compare-icon"
-                                />
-                                {"  "}
-                                Add to Compare
-                              </a>
-                            </div>
                           </div>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
             </section>
           </div>
