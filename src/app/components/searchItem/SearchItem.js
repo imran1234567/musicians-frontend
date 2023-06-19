@@ -1,6 +1,6 @@
-import React from 'react';
-import axios from 'axios';
-
+import React from "react";
+import axios from "axios";
+import "./SearchItem.css";
 class SearchItem extends React.Component {
   state = {
     productData: [],
@@ -24,12 +24,15 @@ class SearchItem extends React.Component {
 
   fetchProducts = async (searchKeyword) => {
     try {
-      const response = await axios.get('http://13.233.106.34:4000/api/product/gcatalogsearch/result', {
-        params: {
-          search: searchKeyword,
-        },
-      });
-      console.log('API Response:', response.data);
+      const response = await axios.get(
+        "http://13.233.106.34:4000/api/product/gcatalogsearch/result",
+        {
+          params: {
+            search: searchKeyword,
+          },
+        }
+      );
+      console.log("API Response:", response.data);
       const products = response.data.data[0].products;
 
       this.setState({
@@ -61,20 +64,25 @@ class SearchItem extends React.Component {
     }
 
     return (
-      <div className="card-container">
-        {productData.map((product) => (
-          <div key={product.id} className="card">
-            <h3>{product.name}</h3>
-            <p>{product.slug}</p>
-            <p>{product.sortDesc}</p>
-            {product.sortDesc.length > 3 && (
-              <span className="read-more" onClick={() => this.handleReadMore(product.id)}>
-                Read More
-              </span>
-            )}
-            <p>Price: {product.price}</p>
-          </div>
-        ))}
+      <div className="search-content">
+        <div className="card-container">
+          {productData.map((product) => (
+            <div key={product.id} className="card">
+              <h3>{product.name}</h3>
+              <p>{product.slug}</p>
+              <p>{product.sortDesc}</p>
+              {product.sortDesc.length > 3 && (
+                <span
+                  className="read-more"
+                  onClick={() => this.handleReadMore(product.id)}
+                >
+                  Read More
+                </span>
+              )}
+              <p>Price: {product.price}</p>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

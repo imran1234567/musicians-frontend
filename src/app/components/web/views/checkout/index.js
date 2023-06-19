@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { NotificationManager } from 'react-notifications';
-import { GetUserLogin, GetOrderDetails, CartHelper } from '../../../services';
-import { removeFromCart, incrementToCart, decreaseToCart } from "../../../../store/actions/cartActions";
-import Deliverydetails from './delivery';
-import './checkOut.css'
-import { PayPalButtons } from '@paypal/react-paypal-js';
-
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { NotificationManager } from "react-notifications";
+import { GetUserLogin, GetOrderDetails, CartHelper } from "../../../services";
+import {
+  removeFromCart,
+  incrementToCart,
+  decreaseToCart,
+} from "../../../../store/actions/cartActions";
+import Deliverydetails from "./delivery";
+import "./checkOut.css";
 
 class Checkout extends Component {
   constructor(props) {
@@ -253,10 +255,27 @@ class Checkout extends Component {
                     <div className="card checkout-step-one">
                       <div className="card-header" id="headingOne">
                         <h5 className="mb-0">
-                          <button className="btn btn-link checkout-login-bk" disabled>
-                            <span className="number">1.</span> Checkout Options<span className="mdi mdi-checkbox-marked-circle-outline"></span>
+                          <button
+                            className="btn btn-link checkout-login-bk"
+                            disabled
+                          >
+                            <span className="number">1.</span> Checkout Options
+                            <span className="mdi mdi-checkbox-marked-circle-outline"></span>
                           </button>
-                          <div className="_2jDL7w" style={{ display: 'flex', justifyContent: 'center' }}><div><span className="dNZmcB">{customer.firstName} </span><span className="_3MeY5j">{email}</span></div></div>
+                          <div
+                            className="_2jDL7w"
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <div>
+                              <span className="dNZmcB">
+                                {customer.firstName}{" "}
+                              </span>
+                              <span className="_3MeY5j">{email}</span>
+                            </div>
+                          </div>
                         </h5>
                       </div>
                     </div>
@@ -292,13 +311,18 @@ class Checkout extends Component {
                                 id="existingAddress"
                                 name="addressOption"
                                 checked={useExistingAddress}
-                                onChange={() => this.setState({ useExistingAddress: true })}
+                                onChange={() =>
+                                  this.setState({ useExistingAddress: true })
+                                }
                               />
                             </div>
                           </div>
 
                           <div>
-                            <label className="form-check-label" htmlFor="existingAddress">
+                            <label
+                              className="form-check-label"
+                              htmlFor="existingAddress"
+                            >
                               I want to use the existing address
                             </label>
                           </div>
@@ -324,19 +348,28 @@ class Checkout extends Component {
                                 id="newAddress"
                                 name="addressOption"
                                 checked={!useExistingAddress}
-                                onChange={() => this.setState({ useExistingAddress: false })}
+                                onChange={() =>
+                                  this.setState({ useExistingAddress: false })
+                                }
                               />
                             </div>
                           </div>
 
                           <div>
-                            <label className="form-check-label" htmlFor="newAddress">
+                            <label
+                              className="form-check-label"
+                              htmlFor="newAddress"
+                            >
                               Enter New Address
                             </label>
                           </div>
 
                           {!useExistingAddress && (
-                            <Deliverydetails onSelectDeliveryAddress={this.handleDeliveryAddress} />
+                            <Deliverydetails
+                              onSelectDeliveryAddress={
+                                this.handleDeliveryAddress
+                              }
+                            />
                           )}
                         </div>
                       </div>
