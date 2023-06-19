@@ -10,15 +10,6 @@ class Range extends Component {
       showBy: "10",
       display: "list",
       products: [
-        { id: 1, name: "Product 1", price: 10, model: "Model A" },
-        { id: 2, name: "Product 2", price: 20, model: "Model B" },
-        { id: 3, name: "Product 3", price: 15, model: "Model C" },
-        { id: 4, name: "Product 4", price: 12, model: "Model D" },
-        { id: 5, name: "Product 5", price: 18, model: "Model E" },
-        { id: 6, name: "Product 6", price: 25, model: "Model F" },
-        { id: 7, name: "Product 7", price: 30, model: "Model G" },
-        { id: 8, name: "Product 8", price: 22, model: "Model H" },
-        { id: 9, name: "Product 9", price: 17, model: "Model I" },
         // { id: 10, name: "Product 10", price: 16, model: "Model J" },
         // { id: 11, name: "Product 11", price: 19, model: "Model K" },
         // { id: 12, name: "Product 12", price: 14, model: "Model L" },
@@ -110,7 +101,14 @@ class Range extends Component {
               marginTop: "10px",
             }}
           >
-            <h5 style={{ margin: "0", marginRight: "10px", alignSelf: "center", fontWeight: "bold" }}>
+            <h5
+              style={{
+                margin: "0",
+                marginRight: "10px",
+                alignSelf: "center",
+                fontWeight: "bold",
+              }}
+            >
               <b>Display: </b>
             </h5>
             <button
@@ -151,7 +149,12 @@ class Range extends Component {
             <h5>
               <b>Sort By: </b>
             </h5>
-            <select id="sortBy" value={sortBy} onChange={this.handleSortByChange} placeholder="Default">
+            <select
+              id="sortBy"
+              value={sortBy}
+              onChange={this.handleSortByChange}
+              placeholder="Default"
+            >
               <option value="default">Default</option>
               <option value="NameAZ">Name (A-Z)</option>
               <option value="NameZA">Name (Z-A)</option>
@@ -166,7 +169,11 @@ class Range extends Component {
             <h5>
               <b>Show: </b>
             </h5>
-            <select id="showBy" value={showBy} onChange={this.handleShowByChange}>
+            <select
+              id="showBy"
+              value={showBy}
+              onChange={this.handleShowByChange}
+            >
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
@@ -176,7 +183,11 @@ class Range extends Component {
           </div>
         </div>
 
-        <div className={`product-list ${display === "grid" ? "grid-view" : ""}`}>{this.renderProducts()}</div>
+        <div
+          className={`product-list ${display === "grid" ? "grid-view" : ""}`}
+        >
+          {this.renderProducts()}
+        </div>
       </div>
     );
   }
