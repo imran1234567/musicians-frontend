@@ -102,7 +102,7 @@ export default class Register extends Component {
                                                 <h5 className="heading-design-h5">Register Now!</h5>
                                                 <fieldset className="form-group">
                                                     <label>First Name</label>
-                                                    <input type="text" className="form-control" name="firstName" value={firstName} onChange={this.handleChange} />
+                                                    <input type="text" className={`form-control ${formErrors.firstName.length > 0 ? 'error' : ''}`} name="firstName" value={firstName} onChange={this.handleChange} />
                                                     {formErrors.firstName.length > 0 && (
                                                         <span className="errorMessage">{formErrors.firstName}</span>
                                                     )}

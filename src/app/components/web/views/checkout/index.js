@@ -224,6 +224,10 @@ class Checkout extends Component {
     });
   };
 
+  handleRadioChange = e => {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+
   render() {
     const { deliveryAddress, useExistingAddress } = this.state;
     const { cartItems } = this.props;
@@ -359,11 +363,7 @@ class Checkout extends Component {
                                         <label htmlFor="cashondelivery1" className="radio-label_1">Cash on Delivery</label>
                                       </div>
                                     </li>
-                                    <li>
-                                      {/* <div className="radio-item_1" onClick={this.handlePaypalSystem}> */}
-                                      {/* <input value="card" name="paymentmethod" type="button" onClick={this.handleRadioChange} /> */}
-                                      {/* <label htmlFor="card1" className="radio-label_1">Pay With Card</label> */}
-                                      {/* </div> */}
+                                     <li>
                                       <PayPalButtons createOrder={this.createOrder} onApprove={this.onApprove} />
                                     </li>
                                   </ul>
@@ -422,8 +422,6 @@ class Checkout extends Component {
             </div>
           </div>
         </section>
-
-
       </div>
     )
   }

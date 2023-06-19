@@ -1,40 +1,80 @@
-import React, { Component } from "react";
+import React from 'react';
 import axios from 'axios';
 
-class SearchItem extends Component {
+class SearchItem extends React.Component {
   state = {
-    searchResults: null
+    productData: [],
+    isLoading: true,
+    error: null,
   };
 
-  async componentDidMount() {
-    const { value } = this.props.location.state; // Access the state value passed from the Link
+  componentDidMount() {
+    const { value } = this.props.location.state;
+    this.fetchProducts(value);
+  }
 
-    try {
-      // Perform the search action here
-      // You can define your search logic or call an API to fetch the search results
-      const response = await axios.get(`http://13.233.106.34:4000/api/product/gcatalogsearch/result?search=${value}`);
+  componentDidUpdate(prevProps) {
+    const { value } = this.props.location.state;
+    const prevValue = prevProps.location.state.value;
 
-      // Process the response and update the state or take any other necessary actions
-      const searchResults = response.data.data[0].products[0];
-      console.log(searchResults); // Example: Log the search results
-
-      this.setState({ searchResults });
-    } catch (error) {
-      console.error('Error occurred during search:', error);
-      // Handle the error condition
+    if (value !== prevValue) {
+      this.fetchProducts(value);
     }
   }
 
+  fetchProducts = async (searchKeyword) => {
+    try {
+      const response = await axios.get('http://13.233.106.34:4000/api/product/gcatalogsearch/result', {
+        params: {
+          search: searchKeyword,
+        },
+      });
+      console.log('API Response:', response.data);
+      const products = response.data.data[0].products;
+
+      this.setState({
+        productData: products,
+        isLoading: false,
+      });
+    } catch (error) {
+      this.setState({
+        error,
+        isLoading: false,
+      });
+    }
+  };
+
+  handleReadMore = (productId) => {
+    // Implement your logic here to handle the "Read More" functionality
+    console.log(`Read More clicked for product with id: ${productId}`);
+  };
+
   render() {
-    const { searchResults } = this.state;
+    const { productData, isLoading, error } = this.state;
+
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
 
     return (
-      <div>
-        {searchResults ? (
-          <h1>Received Value: {searchResults}</h1>
-        ) : (
-          <h1>Loading...</h1>
-        )}
+      <div className="card-container">
+        {productData.map((product) => (
+          <div key={product.id} className="card">
+            <h3>{product.name}</h3>
+            <p>{product.slug}</p>
+            <p>{product.sortDesc}</p>
+            {product.sortDesc.length > 3 && (
+              <span className="read-more" onClick={() => this.handleReadMore(product.id)}>
+                Read More
+              </span>
+            )}
+            <p>Price: {product.price}</p>
+          </div>
+        ))}
       </div>
     );
   }
