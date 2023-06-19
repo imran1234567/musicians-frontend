@@ -8,6 +8,7 @@ import About from "./views/about";
 import Cart from "./views/cart";
 import Contact from "./views/contact";
 import PrivateRoute from "../PrivateRoute";
+import SearchItem from "../searchItem/SearchItem";
 
 // import Productview from '../web/views/product';
 import Singleproduct from "./views/single-product";
@@ -30,7 +31,7 @@ import Delivery from "./views/Delivery";
 import ScrollToTop from "./views/account/view/ScrollToTop";
 import pay_method from "./views/account/view/pay_method";
 import AccordionItem from "react-bootstrap/esm/AccordionItem";
-import { Affiliate } from "./views/Affiliate";
+import Affiliate from "./views/Affiliate";
 
 // import Failed from './views/checkout/failed';
 
@@ -52,12 +53,14 @@ export default class rootRoutes extends Component {
           <Route exact path="/range" component={Range} />
           <Route exact path="/wishlist" component={Wishlist} />
           <Route exact path="/compare" component={compare} />
+
           <Route exact path="/policy" component={privacy_policy} />
           <Route exact path="/terms" component={Terms} />
           <Route exact path="/delivery" component={Delivery} />
           <Route exact path="/zip" component={pay_method} />
           <Route exact path="/accordion" component={AccordionItem} />
           <Route exact path="/affiliate" component={Affiliate} />
+          <Route exact path="/SearchItem" component={SearchItem} />
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />
@@ -66,7 +69,7 @@ export default class rootRoutes extends Component {
                     <PrivateRoute path='/order/success' component={Complete} /> 
                     <PrivateRoute path='/order/failed' component={Failed} />  
 
-                    <PrivateRoute path='/account' component={Account} />                     */}
+                    <PrivateRoute path='/account' component={Account} /> */}
           {/* <Route exact path='/login' component={Login} /> */}
           {/* <Route exact path='/register' component={Register} /> */}
           {/* <Route component={NotFound} /> */}

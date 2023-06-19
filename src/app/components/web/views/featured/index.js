@@ -110,7 +110,6 @@ class Featured extends Component {
                                 icon={faCodeCompare}
                                 className="compare-icon"
                               />
-                              Add to Compare
                             </a>
                           </div>
                         </div>

@@ -16,7 +16,7 @@
     border-radius: 5px;
     padding: 10px;
     transition: all 0.3s ease;
-    width: 500px; /* Adjust the desired width */
+    width: 900px; /* Adjust the desired width */
     
   }
   
@@ -93,4 +93,81 @@
   /* .delete-button:hover {
     transform: scale(1.1);
   } */
+  
+  .Wishlist-main {
+    padding: 20px;
+  }
+  
+  .wishlist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .wishlist h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .wishlist-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .item-details {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  .item-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .item-image {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+  }
+  
+  .item-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .item-name {
+    font-weight: bold;
+  }
+  
+  .item-price {
+    color: #888;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .add-to-cart-button,
+  .delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px;
+    transition: transform 0.3s;
+  }
+  
+  .add-to-cart-button:hover,
+  .delete-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .add-to-cart-button span {
+    margin-left: 5px;
+  }
   

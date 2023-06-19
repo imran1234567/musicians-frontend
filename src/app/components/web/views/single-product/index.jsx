@@ -7,7 +7,7 @@ import { GetProductDetails } from "../../../services";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
 import "./index.css";
-import cat1 from '../../../../../assets/cat-1.jpeg';
+import cat1 from "../../../../../assets/cat-1.jpeg";
 
 class Singleproduct extends Component {
   constructor(props) {
@@ -52,11 +52,7 @@ class Singleproduct extends Component {
                   <div className="shop-detail-left">
                     <Paper className="shop-detail-slider">
                       <Slider {...settings}>
-                        <img
-                          alt
-                          src={cat1}
-                          className="img-fluid img-center"
-                        />
+                        <img alt src={cat1} className="img-fluid img-center" />
                         {/* {product.productphotos
                           ? product.productphotos.map((r, index) => {
                               return (
@@ -76,7 +72,10 @@ class Singleproduct extends Component {
                 </div>
                 <div className="col-md-6">
                   <div className="shop-detail-right">
-                    <span className="badge badge-success" style={{backgroundColor:'#750000'}}>
+                    <span
+                      className="badge badge-success"
+                      style={{ backgroundColor: "#750000" }}
+                    >
                       {product.discountPer}% OFF
                     </span>
                     <h2>{product.name}</h2>
@@ -88,9 +87,7 @@ class Singleproduct extends Component {
                     </h6>
                     <div className="pdp-product__old-price">
                       <span className="space__right--2-unit">Product MRP:</span>
-                      <span className="regular-price">
-                        &#x20B9;{product.price}
-                      </span>
+                      <span className="regular-price">{product.price}</span>
                     </div>
 
                     <div className="pdp-product__new-price">
@@ -98,7 +95,7 @@ class Singleproduct extends Component {
                         Selling price:
                       </span>
                       <span className="pdp-product__price--new">
-                        &#x20B9;{product.netPrice}
+                        {product.netPrice}
                       </span>
                       <div className="pdp-product__tax-disclaimer">
                         (Inclusive of all taxes)
@@ -109,10 +106,10 @@ class Singleproduct extends Component {
                       type="button"
                       className="btn btn-secondary btn-lg"
                       onClick={() => this.props.addToCart(product)}
-                      style={{backgroundColor:'#750000'}}
+                      style={{ backgroundColor: "#750000" }}
                     >
                       <i className="mdi mdi-cart-outline" /> Add To Cart
-                    </button>                 
+                    </button>
                     <h6 className="mb-3 mt-4">Why shop from Musicians?</h6>
                     <div className="row">
                       <div className="col-md-12">

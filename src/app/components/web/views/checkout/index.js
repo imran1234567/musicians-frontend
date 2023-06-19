@@ -8,7 +8,7 @@ import {
   decreaseToCart,
 } from "../../../../store/actions/cartActions";
 import Deliverydetails from "./delivery";
-import "./checkout.css";
+import "./checkOut.css";
 
 class Checkout extends Component {
   constructor(props) {
@@ -23,13 +23,21 @@ class Checkout extends Component {
       customer: "",
       paymentmethod: "",
       deliveryAddress: "",
+      deliveryAddress: "123 Main Street, City, State",
+      useExistingAddress: true,
     };
   }
-  handleRadioChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-  handleDeliveryAddress = (value) => {
-    this.setState({ deliveryAddress: value });
+  // handleOptionChange = (e) => {
+  //     this.setState({
+  //       selectedOption: e.target.value
+  //     });
+  //   };
+
+  handleDeliveryAddress = (address) => {
+    this.setState({
+      deliveryAddress: address,
+      useExistingAddress: false,
+    });
   };
   async componentDidMount() {
     let email = sessionStorage.getItem("email");
@@ -197,6 +205,7 @@ class Checkout extends Component {
     }
   };
   render() {
+    const { deliveryAddress, useExistingAddress } = this.state;
     const { cartItems } = this.props;
     const {
       subTotal,
@@ -238,10 +247,16 @@ class Checkout extends Component {
                             className="btn btn-link checkout-login-bk"
                             disabled
                           >
-                            <span className="number">1</span> Login{" "}
+                            <span className="number">1.</span> Checkout Options
                             <span className="mdi mdi-checkbox-marked-circle-outline"></span>
                           </button>
-                          <div className="_2jDL7w">
+                          <div
+                            className="_2jDL7w"
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
                             <div>
                               <span className="dNZmcB">
                                 {customer.firstName}{" "}
@@ -252,6 +267,7 @@ class Checkout extends Component {
                         </h5>
                       </div>
                     </div>
+
                     <div className="card checkout-step-two">
                       <div className="card-header" id="headingTwo">
                         <h5 className="mb-0">
@@ -267,17 +283,86 @@ class Checkout extends Component {
                           </button>
                         </h5>
                       </div>
+
                       <div
                         id="collapseTwo"
                         className="collapse"
                         aria-labelledby="headingTwo"
                         data-parent="#accordionExample"
                       >
-                        <Deliverydetails
-                          onSelectDeliveryAddress={this.handleDeliveryAddress}
-                        />
+                        <div className="delivery-address">
+                          <div>
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="radio"
+                                id="existingAddress"
+                                name="addressOption"
+                                checked={useExistingAddress}
+                                onChange={() =>
+                                  this.setState({ useExistingAddress: true })
+                                }
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label
+                              className="form-check-label"
+                              htmlFor="existingAddress"
+                            >
+                              I want to use the existing address
+                            </label>
+                          </div>
+
+                          {useExistingAddress && (
+                            <div className="existing-address">
+                              <h6>Existing Address:</h6>
+                              <textarea
+                                className="form-control"
+                                rows="4"
+                                value={deliveryAddress}
+                                readOnly
+                              ></textarea>
+                              {/* Replace the above textarea with the actual existing address input */}
+                            </div>
+                          )}
+
+                          <div>
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="radio"
+                                id="newAddress"
+                                name="addressOption"
+                                checked={!useExistingAddress}
+                                onChange={() =>
+                                  this.setState({ useExistingAddress: false })
+                                }
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label
+                              className="form-check-label"
+                              htmlFor="newAddress"
+                            >
+                              Enter New Address
+                            </label>
+                          </div>
+
+                          {!useExistingAddress && (
+                            <Deliverydetails
+                              onSelectDeliveryAddress={
+                                this.handleDeliveryAddress
+                              }
+                            />
+                          )}
+                        </div>
                       </div>
                     </div>
+
                     <div className="card">
                       <div className="card-header" id="headingThree">
                         <h5 className="mb-0">
@@ -391,18 +476,16 @@ class Checkout extends Component {
                   ))}
                   <div className="total-checkout-group">
                     <div className="cart-total-dil">
-                      <h5>
-                        <b>SUB TOTAL:</b>
-                      </h5>
+                      <h4>Sub Total</h4>
                       <span>&#x20B9;{subTotal}</span>
                     </div>
                     <div className="cart-total-dil pt-3">
-                      <h5>DELIVERY CHARGES:</h5>
+                      <h4>Delivery Charges</h4>
                       <span>&#x20B9;{deliveryCharge}</span>
                     </div>
                   </div>
                   <div className="cart-total-dil saving-total ">
-                    <h5>TOTAL SAVING:</h5>
+                    <h4>Total Saving</h4>
                     <span>&#x20B9;{discount}</span>
                   </div>
                   <div className="main-total-cart">

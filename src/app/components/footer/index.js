@@ -242,7 +242,7 @@ class Footer extends Component {
                             <h4>My Account</h4>
                             <ul>
                               <li>
-                                <Link to="/login">My Account</Link>
+                                <Link to="/Account">My Account</Link>
                               </li>
                               <li>
                                 <Link to="/order">Order History </Link>

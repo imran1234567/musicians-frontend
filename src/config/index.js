@@ -2,6 +2,7 @@ const API_URL = document.domain === "localhost" ? "http://13.233.106.34:4000" : 
 
 
 const Apis = {
+    
     // Authntication Api
     GetUserLogin: `${API_URL}/api/customer/login`,
     GetUserRegister: `${API_URL}/api/customer/register`,
@@ -36,6 +37,7 @@ const Apis = {
     // product api
     GetOrderCreateByUser: `${API_URL}/api/order/create`,
     GetOrderByUser: `${API_URL}/api/order/list`
+    
 
 };
 

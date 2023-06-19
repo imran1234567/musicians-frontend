@@ -6,6 +6,7 @@ import { GetCategoryDetails, GetUserLogin } from "../services";
 import Logo from "../../../assets/logo.png";
 import Login from "../../auth/login";
 import { connect } from "react-redux";
+import axios from "axios";
 import { NavDropdown } from "react-bootstrap";
 import {
   faSearch,
@@ -26,18 +27,31 @@ class Navigation extends Component {
       searchtxt: "",
       headerData: [],
       headerItems: [],
-      expanded: false
+      expanded: false,
     };
   }
   handleToggle = () => {
     this.setState((prevState) => ({
-      expanded: !prevState.expanded
+      expanded: !prevState.expanded,
     }));
   };
 
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+  // handleChange(e) {
+  //   this.setState({ [e.target.name]: e.target.value });
+  // }
+
+  //taking the search input
+  handleChange = (e) => {
+    console.log(this.setState({ searchtxt: e.target.value }));
+  };
+
+  // handleClickSearch = (event) => {
+  //   let { searchtxt } = this.state;
+  //   console.log(searchtxt);
+
+  //   this.props.history.push(`/product/catalogsearch/result/${searchtxt}`);
+  // };
+
   async componentDidMount() {
     let cookies = await GetUserLogin.isAuthenticate();
     let navCatgory = await GetCategoryDetails.getCategoryList();
@@ -76,19 +90,28 @@ class Navigation extends Component {
       }
     }
   }
-  
+
   handleLogout = async (event) => {
     event.preventDefault();
     await GetUserLogin.logout();
   };
 
-  handleClickSearch = (event) => {
-    let { searchtxt } = this.state;
-    this.props.history.push(`/product/catalogsearch/result/${searchtxt}`);
-  };
+  // handleClickSearch = (event) => {
+  //   event.preventDefault();
+  //   let { searchtxt } = this.state;
+  //   this.props.history.push(`/product/catalogsearch/result/${searchtxt}`);
+  // };
 
   render() {
-    let { token, userName, searchtxt, headerItems , expanded } = this.state;
+    let {
+      token,
+      userName,
+      searchtxt,
+      performSearch,
+      headerItems,
+      expanded,
+      searchResults,
+    } = this.state;
     const { cartItems, wishItems } = this.props;
     return (
       <div>
@@ -140,35 +163,58 @@ class Navigation extends Component {
                 </Link>
                 <div class="mid-header-right">
                   {/* Updated Search box */}
-                  <div id="searchbox" class="s-search" style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                    <div class="input-group" style={{ maxWidth: '800px', width: '80%' }}>
-                      <div class="form-outline" style={{ position: 'relative' }}>
+                  <div
+                    id="searchbox"
+                    class="s-search"
+                    style={{ display: "flex", justifyContent: "flex-start" }}
+                  >
+                    <div
+                      class="input-group"
+                      style={{ maxWidth: "800px", width: "80%" }}
+                    >
+                      <div
+                        className="form-outline"
+                        style={{ position: "relative" }}
+                      >
                         <input
                           type="search"
                           id="form1"
-                          class="control"
+                          className="control"
                           placeholder="Search for a Product here..."
                           style={{
                             backgroundColor: "transparent",
                             color: "white",
+                            paddingRight: "2.5rem", // Add padding on the right to accommodate the icon
                           }}
+                          value={this.state.searchtxt}
+                          onChange={(e) => this.handleChange(e)}
                         />
                         <Link
-                          to="/person"
+                          to={{
+                            pathname: "/SearchItem",
+                            state: { value: searchtxt },
+                          }}
                           style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            position: 'absolute',
-                            right: '8px',
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            height: '100%',
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            position: "absolute",
+                            right: "8px",
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            height: "100%",
                           }}
                         >
                           <FontAwesomeIcon
                             icon={faSearch}
-                            style={{ marginTop: "2px", color: "white" }}
+                            style={{
+                              position: "absolute",
+                              top: "50%",
+                              right: "10px",
+                              transform: "translateY(-50%)",
+                              color: "white",
+                              cursor: "pointer",
+                            }}
                           />
                         </Link>
                       </div>
@@ -176,11 +222,11 @@ class Navigation extends Component {
                   </div>
 
                   <ul class="header-right-icon">
-                    <li class="h-search">
+                    {/* <li class="h-search">
                       <a href="#">
                         <i class="bx bx-search"></i>
                       </a>
-                    </li>
+                    </li> */}
                     <li class="user">
                       {token ? (
                         <Link to="/account/view">
@@ -233,51 +279,54 @@ class Navigation extends Component {
           </div>
 
           <div className="navigation-bar">
-        <Navbar className="navigate" expand="md" expanded={expanded}>
-          <Container fluid>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={this.handleToggle}
-            style={{
-              border: 'none',
-              outline: 'none',
-              padding: '0.25rem 0.5rem',
-              marginLeft: 'auto',
-              marginTop: '18px',
-              alignContent:'flex-start',
-              transform: 'translateX(-40%)',
-              backgroundColor: 'transparent'
-            }} />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="me-auto1" style={{ color: 'white' }}>
-                {headerItems.map((item) => {
-                  return (
-                    <NavDropdown
-                      title={item.name.toUpperCase()}
-                      id="guitar-bass-dropdown"
-                      className="nav-dropdown-title"
-                      style={{ color: 'white', left: 0 }}
-                    >
-                      {item.subCategory.map((data) => {
-                        return (
-                          <div className="submenu" >
-                            <NavDropdown.Item
-                              as={Link}
-                              to={`/cat/${item.categoryId}/${data.id}`}
-                              activeClassName="active"
-                              style={{ textTransform: 'uppercase' }}
-                            >
-                              {data.sub_name.toUpperCase()}
-                            </NavDropdown.Item>
-                          </div>
-                        );
-                      })}
-                    </NavDropdown>
-                  );
-                })}
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-      </div>
+            <Navbar className="navigate" expand="md" expanded={expanded}>
+              <Container fluid>
+                <Navbar.Toggle
+                  aria-controls="responsive-navbar-nav"
+                  onClick={this.handleToggle}
+                  style={{
+                    border: "none",
+                    outline: "none",
+                    padding: "0.25rem 0.5rem",
+                    marginLeft: "auto",
+                    marginTop: "18px",
+                    alignContent: "flex-start",
+                    transform: "translateX(-40%)",
+                    backgroundColor: "transparent",
+                  }}
+                />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                  <Nav className="me-auto1" style={{ color: "white" }}>
+                    {headerItems.map((item) => {
+                      return (
+                        <NavDropdown
+                          title={item.name.toUpperCase()}
+                          id="guitar-bass-dropdown"
+                          className="nav-dropdown-title"
+                          style={{ color: "white", left: 0 }}
+                        >
+                          {item.subCategory.map((data) => {
+                            return (
+                              <div className="submenu">
+                                <NavDropdown.Item
+                                  as={Link}
+                                  to={`/cat/${item.categoryId}/${data.id}`}
+                                  activeClassName="active"
+                                  style={{ textTransform: "uppercase" }}
+                                >
+                                  {data.sub_name.toUpperCase()}
+                                </NavDropdown.Item>
+                              </div>
+                            );
+                          })}
+                        </NavDropdown>
+                      );
+                    })}
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          </div>
         </header>
         <Login />
       </div>
@@ -287,6 +336,6 @@ class Navigation extends Component {
 export default withRouter(
   connect((state) => ({
     cartItems: state.cart.cartItems,
-    wishItems: state.wish.wishItems
+    wishItems: state.wish.wishItems,
   }))(Navigation)
 );

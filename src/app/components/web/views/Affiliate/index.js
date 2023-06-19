@@ -2,7 +2,7 @@ import { Component } from "react";
 import React from "react";
 import { Link } from "@material-ui/core";
 import "./affiliate.css";
-export class Affiliate extends Component {
+export default class Affiliate extends Component {
   render() {
     return (
       <div className="affiliate-program">
