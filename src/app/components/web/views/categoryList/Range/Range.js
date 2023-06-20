@@ -9,37 +9,9 @@ class Range extends Component {
       sortBy: "default",
       showBy: "10",
       display: "list",
-      products: [
-        { id: 1, name: "Product 1", price: 10, model: "Model A" },
-        { id: 2, name: "Product 2", price: 20, model: "Model B" },
-        { id: 3, name: "Product 3", price: 15, model: "Model C" },
-        { id: 4, name: "Product 4", price: 12, model: "Model D" },
-        { id: 5, name: "Product 5", price: 18, model: "Model E" },
-        { id: 6, name: "Product 6", price: 25, model: "Model F" },
-        { id: 7, name: "Product 7", price: 30, model: "Model G" },
-        { id: 8, name: "Product 8", price: 22, model: "Model H" },
-        { id: 9, name: "Product 9", price: 17, model: "Model I" },
-        // { id: 10, name: "Product 10", price: 16, model: "Model J" },
-        // { id: 11, name: "Product 11", price: 19, model: "Model K" },
-        // { id: 12, name: "Product 12", price: 14, model: "Model L" },
-        // { id: 13, name: "Product 13", price: 23, model: "Model M" },
-        // { id: 14, name: "Product 14", price: 28, model: "Model N" },
-        // { id: 15, name: "Product 15", price: 32, model: "Model O" },
-      ],
+      products: [],
     };
   }
-
-  // componentDidMount() {
-  //   // Fetch the product data from an API using Axios
-  //   axios
-  //     .get("https://example.com/api/products")
-  //     .then((response) => {
-  //       this.setState({ products: response.data });
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching product data:", error);
-  //     });
-  // }
 
   // Sort By changes function
   handleSortByChange = (event) => {
