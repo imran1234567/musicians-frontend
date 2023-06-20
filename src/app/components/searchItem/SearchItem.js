@@ -1,16 +1,22 @@
-import React from "react";
+
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
-import "./SearchItem.css";
+import { CircularProgress } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "@material-ui/core";
-import cat from "./../../../images/cat.jpg";
-import List from "../web/views/catgoryItem"
-class SearchItem extends React.Component {
+import { NotificationManager } from "react-notifications";
+import cat1 from "../../../assets/cat-1.jpeg";
+import Login from "../../auth/login";
+import { addToCart } from "../../store/actions/cartActions";
+import { addToWishlist } from "../../store/actions/wishlistActions";
+
+class SearchItem extends Component {
   state = {
-    productData: [],
-    isLoading: true,
+    productList: [],
+    isLoaded: false,
     error: null,
   };
 
@@ -39,97 +45,130 @@ class SearchItem extends React.Component {
         }
       );
       console.log("API Response:", response.data);
-      const products = response.data.data[0].products;
+      const data = response.data.data[0];
 
-      this.setState({
-        productData: products,
-        isLoading: false,
-      });
+      if (data && data.products) {
+        const products = data.products;
+        this.setState({
+          productList: products,
+          isLoaded: true,
+        });
+      } else {
+        throw new Error("No products found");
+      }
     } catch (error) {
       this.setState({
         error,
-        isLoading: false,
+        isLoaded: true,
       });
     }
   };
 
-  handleReadMore = (productId) => {
-    // Implement your logic here to handle the "Read More" functionality
-    console.log(`Read More clicked for product with id: ${productId}`);
+  checkCart = (productId) => {
+    const { cartItems } = this.props;
+    const productExistsInCart = cartItems.some(
+      (product) => product.id === productId
+    );
+    if (productExistsInCart) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   render() {
-    const { productData, isLoading, error } = this.state;
+    const { productList, isLoaded, error } = this.state;
 
-    if (isLoading) {
-      return <div>Loading...</div>;
+    if (!isLoaded) {
+      return <CircularProgress color="secondary" />;
     }
 
     if (error) {
       return <div>Error: {error.message}</div>;
     }
 
-    // checkCart = (productId) => {
-    //   const { cartItems } = this.props;
-    //   const productExistsInCart = cartItems.some(
-    //     (product) => product.id === productId
-    //   );
-    //   if (productExistsInCart) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // };
-
     return (
-      <div className="search-content container">
-        <div className="row">
-          <div className="col-md-3">
-            <div className="list-name">
-              <List />
-            </div>
-          </div>
-          <div className="col-md-8">
-            <div className="card-container">
-              {productData.map((product) => (
-                <div key={product.id} className="card">
-                  <img src={cat} alt="img" />
-                  <h3 style={{ color: "black" }}>{product.name}</h3>
-                  <p>{product.slug}</p>
-                  <p>{product.sortDesc}</p>
-                  {product.sortDesc.length > 3 && (
-                    <span
-                      className="read-more"
-                      onClick={() => this.handleReadMore(product.id)}
-                    >
-                      Read More
-                    </span>
-                  )}
-                  <p>Price: {product.price}</p>
-                  <div class="add-cart">
-                    <Link to="/cart" className="cart-btn">
-                      go to cart
-                    </Link>
-                    <div className="com">
-                      <a href="/compare">
-                        <FontAwesomeIcon
-                          icon={faCodeCompare}
-                          className="compare-icon"
-                        />
-                      </a>
-
-                      <a href="/wishlist"></a>
-                      <FontAwesomeIcon icon={faHeart} className="heart-icon" />
+      <section className="featured-product">
+        <div className="container-fluid">
+          <div className="featured-product-list row">
+            {productList.map((product) => {
+              const isProductInCart = this.checkCart(product.id);
+              return (
+                <div className="col-lg-3 col-md-3 col-12" key={product.id}>
+                  <div className="product-box">
+                    <div className="product-image">
+                      <img src={cat1} alt="Product" />
+                    </div>
+                    <div className="product-text">
+                      <Link
+                        to={{
+                          pathname: `/p/${product.slug}/${product.id}`,
+                          state: product,
+                        }}
+                      >
+                        <h6>{product.name}</h6>
+                      </Link>
+                      <h5>${product.price}</h5>
+                      <div className="add-cart">
+                        {isProductInCart ? (
+                          <Link to="/cart" className="cart-btn">
+                            go to cart
+                          </Link>
+                        ) : (
+                          <a
+                            href="javascript:void(0)"
+                            className="cart-btn"
+                            onClick={() => {
+                              this.props.addToCart(product);
+                              NotificationManager.success(
+                                `${product.name} added successfully to cart!`
+                              );
+                            }}
+                          >
+                            add to cart
+                          </a>
+                        )}
+                        <div className="com">
+                          <a href="/compare">
+                            <FontAwesomeIcon
+                              icon={faCodeCompare}
+                              className="compare-icon"
+                            />
+                          </a>
+                          <a
+                            href="javascript:void(0)"
+                            onClick={() => {
+                              this.props.addToWishlist(product);
+                              NotificationManager.success(
+                                `${product.name} added successfully to wishlist!`
+                              );
+                            }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faHeart}
+                              className="heart-icon"
+                            />
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
-      </div>
+        <Login />
+      </section>
     );
   }
 }
 
-export default SearchItem;
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.cartItems,
+  wishItems: state.wish.wishItems,
+});
+
+export default connect(mapStateToProps, { addToCart, addToWishlist })(
+  SearchItem
+);
