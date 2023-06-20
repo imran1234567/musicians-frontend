@@ -6,6 +6,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "@material-ui/core";
 import cat from "./../../../images/cat.jpg";
+import List from "../web/views/catgoryItem"
 class SearchItem extends React.Component {
   state = {
     productData: [],
@@ -81,57 +82,49 @@ class SearchItem extends React.Component {
     // };
 
     return (
-      <div className="search-content">
-        <div className="card-container row">
-          {productData.map((product) => (
-            <div key={product.id} className="card">
-              <img src={cat} alt="img" />
-              <h3 style={{ color: "black" }}>{product.name}</h3>
-              <p>{product.slug}</p>
-              <p>{product.sortDesc}</p>
-              {product.sortDesc.length > 3 && (
-                <span
-                  className="read-more"
-                  onClick={() => this.handleReadMore(product.id)}
-                >
-                  Read More
-                </span>
-              )}
-              <p>Price: {product.price}</p>
-              <div class="add-cart">
-                {/* {isProductInCart ? ( */}
-                <Link to="/cart" className="cart-btn">
-                  go to cart
-                </Link>
-                {/* ) : (
-                            <a
-                              href="javascript:void(0)"
-                              class="cart-btn"
-                              onClick={() => this.props.addToCart(row)}
-                            >
-                              add to cart
-                            </a>
-                          )} */}
-                <div className="com">
-                  <a href="/compare">
-                    <FontAwesomeIcon
-                      icon={faCodeCompare}
-                      className="compare-icon"
-                    />
-                  </a>
-
-                  {/* <a
-                              href="javascript:void(0)"
-                              onClick={() => this.props.addToWishlist(row)}
-                            >
-                              {" "} */}
-                  <a href="/wishlist"></a>
-                  <FontAwesomeIcon icon={faHeart} className="heart-icon" />
-                  {/* </a> */}
-                </div>
-              </div>
+      <div className="search-content container">
+        <div className="row">
+          <div className="col-md-3">
+            <div className="list-name">
+              <List />
             </div>
-          ))}
+          </div>
+          <div className="col-md-8">
+            <div className="card-container">
+              {productData.map((product) => (
+                <div key={product.id} className="card">
+                  <img src={cat} alt="img" />
+                  <h3 style={{ color: "black" }}>{product.name}</h3>
+                  <p>{product.slug}</p>
+                  <p>{product.sortDesc}</p>
+                  {product.sortDesc.length > 3 && (
+                    <span
+                      className="read-more"
+                      onClick={() => this.handleReadMore(product.id)}
+                    >
+                      Read More
+                    </span>
+                  )}
+                  <p>Price: {product.price}</p>
+                  <div class="add-cart">
+                    <Link to="/cart" className="cart-btn">
+                      go to cart
+                    </Link>
+                    <div className="com">
+                      <a href="/compare">
+                        <FontAwesomeIcon
+                          icon={faCodeCompare}
+                          className="compare-icon"
+                        />
+                      </a>
+                      <a href="/wishlist"></a>
+                      <FontAwesomeIcon icon={faHeart} className="heart-icon" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -4,7 +4,50 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 class ContactForm extends React.Component {
+
+
+//added mailto function here for sent message to the client
+state = {
+  firstName: "",
+  lastName: "",
+  phone: "",
+  email: "",
+  enquiry: "",
+};
+
+handleChange = (event) => {
+  this.setState({ [event.target.name]: event.target.value });
+};
+
+handleClick = () => {
+  const { firstName, lastName, phone, email, enquiry } = this.state;
+
+   // Validate required fields
+   if (!firstName || !lastName || !phone || !email || !enquiry) {
+    this.setState({ error: "Please fill in all the fields" });
+    return;
+  }
+
+  const subject = "Message Subject"; // Replace with the desired subject line
+
+  const body = `
+    First Name: ${firstName}
+    Last Name: ${lastName}
+    Phone: ${phone}
+    Email: ${email}
+    Enquiry: ${enquiry}
+  `;
+
+  const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+
+  window.open(mailtoUrl);
+};
+
+
   render() {
+    const { firstName, lastName, phone, email, enquiry, error } = this.state;
     return (
       <div>
         <section className="contact-sec py-5">
@@ -103,7 +146,7 @@ class ContactForm extends React.Component {
                             style={{ color: "red" }}
                           />
                         </div>
-                        <div className="col-6">
+                        <div className="col-6" style={{paddingBottom:'15px'}}>
                           <Field
                             type="text"
                             className={`form-control ${
@@ -121,7 +164,7 @@ class ContactForm extends React.Component {
                             style={{ color: "red" }}
                           />
                         </div>
-                        <div className="col-6">
+                        <div className="col-6" style={{paddingBottom:'15px'}}>
                           <Field
                             type="text"
                             className={`form-control ${
@@ -139,7 +182,7 @@ class ContactForm extends React.Component {
                             style={{ color: "red" }}
                           />
                         </div>
-                        <div className="col-12">
+                        <div className="col-12" style={{paddingBottom:'15px'}}>
                           <Field
                             as="textarea"
                             className={`form-control ${
@@ -162,11 +205,13 @@ class ContactForm extends React.Component {
                         </div>
                         <div className="submit-btn">
                           <button
-                            type="submit"
+                            type="button"
                             className="btn btn-primary mb-3"
+                            onClick={this.handleClick}
                           >
                             Send Message
                           </button>
+                          {error && <p className="error-message">{error}</p>}
                         </div>
                       </Form>
                     )}

@@ -53,7 +53,6 @@ export default class rootRoutes extends Component {
           <Route exact path="/range" component={Range} />
           <Route exact path="/wishlist" component={Wishlist} />
           <Route exact path="/compare" component={compare} />
-
           <Route exact path="/policy" component={privacy_policy} />
           <Route exact path="/terms" component={Terms} />
           <Route exact path="/delivery" component={Delivery} />
