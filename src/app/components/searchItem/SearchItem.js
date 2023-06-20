@@ -82,7 +82,7 @@ class SearchItem extends React.Component {
 
     return (
       <div className="search-content">
-        <div className="card-container">
+        <div className="card-container row">
           {productData.map((product) => (
             <div key={product.id} className="card">
               <img src={cat} alt="img" />
