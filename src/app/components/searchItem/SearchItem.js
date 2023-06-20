@@ -117,7 +117,6 @@ class SearchItem extends React.Component {
                           className="compare-icon"
                         />
                       </a>
-
                       <a href="/wishlist"></a>
                       <FontAwesomeIcon icon={faHeart} className="heart-icon" />
                     </div>
