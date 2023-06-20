@@ -1201,6 +1201,19 @@ a:hover{
 .option-zip{
 	width: 200px;
 }
+@media (max-width: 768px) {
+	/* Adjust the width for smaller screens */
+	.image-logo {
+	  width: 150px;
+	}
+  }
+  
+  @media (max-width: 480px) {
+	/* Adjust the width for even smaller screens */
+	.image-logo {
+	  width: 100px;
+	}
+  }
 
 /*::::::::::::::::::::::::::::::::::
 				BOOTSTRAP OVERITE
