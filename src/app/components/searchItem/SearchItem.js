@@ -10,6 +10,7 @@ import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import { NotificationManager } from "react-notifications";
 import cat1 from "../../../assets/cat-1.jpeg";
 import Login from "../../auth/login";
+import List from "../web/views/catgoryItem"
 import { addToCart } from "../../store/actions/cartActions";
 import { addToWishlist } from "../../store/actions/wishlistActions";
 
@@ -90,72 +91,82 @@ class SearchItem extends Component {
     return (
       <section className="featured-product">
         <div className="container-fluid">
-          <div className="featured-product-list row">
-            {productList.map((product) => {
-              const isProductInCart = this.checkCart(product.id);
-              return (
-                <div className="col-lg-3 col-md-3 col-12" key={product.id}>
-                  <div className="product-box">
-                    <div className="product-image">
-                      <img src={cat1} alt="Product" />
-                    </div>
-                    <div className="product-text">
-                      <Link
-                        to={{
-                          pathname: `/p/${product.slug}/${product.id}`,
-                          state: product,
-                        }}
-                      >
-                        <h6>{product.name}</h6>
-                      </Link>
-                      <h5>${product.price}</h5>
-                      <div className="add-cart">
-                        {isProductInCart ? (
-                          <Link to="/cart" className="cart-btn">
-                            go to cart
+          <div className="row">
+            <div className="col-lg-3 col-md-3 col-12">
+              <div className="list-name">
+                <List />
+              </div>
+            </div>
+            <div className="col-lg-9 col-md-9 col-12">
+              <div className="featured-product-list row">
+                {productList.map((product) => {
+                  const isProductInCart = this.checkCart(product.id);
+                  return (
+                    <div className="col-lg-3 col-md-3 col-12" key={product.id}>
+                      <div className="product-box">
+                        <div className="product-image">
+                          <img src={cat1} alt="Product" />
+                        </div>
+                        <div className="product-text">
+                          <Link
+                            to={{
+                              pathname: `/p/${product.slug}/${product.id}`,
+                              state: product,
+                            }}
+                          >
+                            <h6>{product.name}</h6>
                           </Link>
-                        ) : (
-                          <a
-                            href="javascript:void(0)"
-                            className="cart-btn"
-                            onClick={() => {
-                              this.props.addToCart(product);
-                              NotificationManager.success(
-                                `${product.name} added successfully to cart!`
-                              );
-                            }}
-                          >
-                            add to cart
-                          </a>
-                        )}
-                        <div className="com">
-                          <a href="/compare">
-                            <FontAwesomeIcon
-                              icon={faCodeCompare}
-                              className="compare-icon"
-                            />
-                          </a>
-                          <a
-                            href="javascript:void(0)"
-                            onClick={() => {
-                              this.props.addToWishlist(product);
-                              NotificationManager.success(
-                                `${product.name} added successfully to wishlist!`
-                              );
-                            }}
-                          >
-                            <FontAwesomeIcon
-                              icon={faHeart}
-                              className="heart-icon"
-                            />
-                          </a>
+                          <h5>${product.price}</h5>
+                          <div className="add-cart">
+                            {isProductInCart ? (
+                              <Link to="/cart" className="cart-btn">
+                                go to cart
+                              </Link>
+                            ) : (
+                              <a
+                                href="javascript:void(0)"
+                                className="cart-btn"
+                                onClick={() => {
+                                  this.props.addToCart(product);
+                                  NotificationManager.success(
+                                    `${product.name} added successfully to cart!`
+                                  );
+                                }}
+                              >
+                                add to cart
+                              </a>
+                            )}
+                            &nbsp; &nbsp;
+                            <div className="com">
+                              <a href="/compare">
+                                <FontAwesomeIcon
+                                  icon={faCodeCompare}
+                                  className="compare-icon"
+                                />
+                              </a>
+                              <a
+                                href="javascript:void(0)"
+                                onClick={() => {
+                                  this.props.addToWishlist(product);
+                                  NotificationManager.success(
+                                    `${product.name} added successfully to wishlist!`
+                                  );
+                                }}
+                              >
+                                <FontAwesomeIcon
+                                  icon={faHeart}
+                                  className="heart-icon"
+                                />
+                              </a>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
         <Login />
