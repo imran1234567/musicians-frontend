@@ -5,6 +5,7 @@ import { removeFromWishlist } from '../../../../store/actions/wishlistActions';
 import { addToCart } from '../../../../store/actions/cartActions';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
+import { NotificationManager } from "react-notifications";
 
 class Wishlist extends Component {
   constructor(props) {
@@ -110,7 +111,7 @@ class Wishlist extends Component {
                 style={{ background: "none", transition: "transform 0.3s", marginLeft: "20px", paddingRight: "0", }}
                 onMouseEnter={(e) => (e.target.style.transform = "scale(1.1)")}
                 onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
-                onClick={() => { this.props.addToCart(item); this.props.removeFromWishlist(item) }}
+                onClick={() => { this.props.addToCart(item); this.props.removeFromWishlist(item); NotificationManager.success(`${item.name} added successfuly in cart!`);}}
               >
                 <AiOutlineShoppingCart />
               </button>
@@ -119,7 +120,7 @@ class Wishlist extends Component {
                 style={{ background: "none", transition: "transform 0.3s" }}
                 onMouseEnter={(e) => (e.target.style.transform = "scale(1.1)")}
                 onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
-                onClick={() => this.props.removeFromWishlist(item)}
+                onClick={() => {this.props.removeFromWishlist(item); NotificationManager.warning(`${item.name} remove successfuly from wishlist!`);}}
               >
                 <AiOutlineClose />
               </button>

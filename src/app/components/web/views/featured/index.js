@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import "./feature.css";
+import { NotificationManager } from "react-notifications";
 
 class Featured extends Component {
   constructor(props) {
@@ -89,7 +90,7 @@ class Featured extends Component {
                             <a
                               href="javascript:void(0)"
                               class="cart-btn"
-                              onClick={() => this.props.addToCart(row)}
+                              onClick={() => {this.props.addToCart(row); NotificationManager.success(`${row.name} added successfuly in cart!`);}}
                             >
                               add to cart
                             </a>
@@ -104,7 +105,7 @@ class Featured extends Component {
 
                             <a
                               href="javascript:void(0)"
-                              onClick={() => this.props.addToWishlist(row)}
+                              onClick={() => {this.props.addToWishlist(row); NotificationManager.success(`${row.name} added successfuly in wishlist!`);}}
                             >
                               {" "}
                               <FontAwesomeIcon
