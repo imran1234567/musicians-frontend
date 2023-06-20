@@ -1,6 +1,11 @@
 import React from "react";
 import axios from "axios";
 import "./SearchItem.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "@material-ui/core";
+import cat from "./../../../images/cat.jpg";
 class SearchItem extends React.Component {
   state = {
     productData: [],
@@ -63,12 +68,25 @@ class SearchItem extends React.Component {
       return <div>Error: {error.message}</div>;
     }
 
+    // checkCart = (productId) => {
+    //   const { cartItems } = this.props;
+    //   const productExistsInCart = cartItems.some(
+    //     (product) => product.id === productId
+    //   );
+    //   if (productExistsInCart) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // };
+
     return (
       <div className="search-content">
         <div className="card-container">
           {productData.map((product) => (
             <div key={product.id} className="card">
-              <h3>{product.name}</h3>
+              <img src={cat} alt="img" />
+              <h3 style={{ color: "black" }}>{product.name}</h3>
               <p>{product.slug}</p>
               <p>{product.sortDesc}</p>
               {product.sortDesc.length > 3 && (
@@ -80,6 +98,38 @@ class SearchItem extends React.Component {
                 </span>
               )}
               <p>Price: {product.price}</p>
+              <div class="add-cart">
+                {/* {isProductInCart ? ( */}
+                <Link to="/cart" className="cart-btn">
+                  go to cart
+                </Link>
+                {/* ) : (
+                            <a
+                              href="javascript:void(0)"
+                              class="cart-btn"
+                              onClick={() => this.props.addToCart(row)}
+                            >
+                              add to cart
+                            </a>
+                          )} */}
+                <div className="com">
+                  <a href="/compare">
+                    <FontAwesomeIcon
+                      icon={faCodeCompare}
+                      className="compare-icon"
+                    />
+                  </a>
+
+                  {/* <a
+                              href="javascript:void(0)"
+                              onClick={() => this.props.addToWishlist(row)}
+                            >
+                              {" "} */}
+                  <a href="/wishlist"></a>
+                  <FontAwesomeIcon icon={faHeart} className="heart-icon" />
+                  {/* </a> */}
+                </div>
+              </div>
             </div>
           ))}
         </div>

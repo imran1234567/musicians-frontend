@@ -82,7 +82,14 @@ class Range extends Component {
               marginTop: "10px",
             }}
           >
-            <h5 style={{ margin: "0", marginRight: "10px", alignSelf: "center", fontWeight: "bold" }}>
+            <h5
+              style={{
+                margin: "0",
+                marginRight: "10px",
+                alignSelf: "center",
+                fontWeight: "bold",
+              }}
+            >
               <b>Display: </b>
             </h5>
             <button
@@ -123,7 +130,12 @@ class Range extends Component {
             <h5>
               <b>Sort By: </b>
             </h5>
-            <select id="sortBy" value={sortBy} onChange={this.handleSortByChange} placeholder="Default">
+            <select
+              id="sortBy"
+              value={sortBy}
+              onChange={this.handleSortByChange}
+              placeholder="Default"
+            >
               <option value="default">Default</option>
               <option value="NameAZ">Name (A-Z)</option>
               <option value="NameZA">Name (Z-A)</option>
@@ -138,7 +150,11 @@ class Range extends Component {
             <h5>
               <b>Show: </b>
             </h5>
-            <select id="showBy" value={showBy} onChange={this.handleShowByChange}>
+            <select
+              id="showBy"
+              value={showBy}
+              onChange={this.handleShowByChange}
+            >
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
@@ -148,7 +164,11 @@ class Range extends Component {
           </div>
         </div>
 
-        <div className={`product-list ${display === "grid" ? "grid-view" : ""}`}>{this.renderProducts()}</div>
+        <div
+          className={`product-list ${display === "grid" ? "grid-view" : ""}`}
+        >
+          {this.renderProducts()}
+        </div>
       </div>
     );
   }
