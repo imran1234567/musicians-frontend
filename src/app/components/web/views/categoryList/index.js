@@ -6,7 +6,7 @@ import cat1 from "../../../../../assets/cat-1.jpeg";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
 import "./category.css";
-import Range from "./Range/Range";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
@@ -66,11 +66,7 @@ class CategoryList extends Component {
         sortedProducts.sort((a, b) => a.price - b.price);
       } else if (sortBy === "highToLow") {
         sortedProducts.sort((a, b) => b.price - a.price);
-      } else if (sortBy === "ModelAZ") {
-        sortedProducts.sort((a, b) => a.model.localeCompare(b.model));
-      } else if (sortBy === "ModelZA") {
-        sortedProducts.sort((a, b) => b.model.localeCompare(a.model));
-      }
+      } 
   
       // Apply showBy limit
       const showByLimit = parseInt(showBy, 10);
@@ -234,8 +230,6 @@ class CategoryList extends Component {
                       <option value="NameZA">Name (Z-A)</option>
                       <option value="lowToHigh">Price (Low &gt; High)</option>
                       <option value="highToLow">Price (High &gt; Low)</option>
-                      <option value="ModelAZ">Model (A-Z)</option>
-                      <option value="ModelZA">Model (Z-A)</option>
                     </select>
                   </div>
                   &nbsp;&nbsp;
