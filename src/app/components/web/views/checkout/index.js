@@ -9,7 +9,7 @@ import {
 } from "../../../../store/actions/cartActions";
 import Deliverydetails from "./delivery";
 
-import "./checkOut.css";
+import "./checkout.css";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
 class Checkout extends Component {

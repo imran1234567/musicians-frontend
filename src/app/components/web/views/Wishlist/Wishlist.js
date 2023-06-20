@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "./wishlist.css";
 import { AiOutlineClose, AiOutlineShoppingCart } from "react-icons/ai";
-import { removeFromWishlist } from "../../../../store/actions/wishlistActions";
-import { addToCart } from "../../../../store/actions/cartActions";
-import { connect } from "react-redux";
+import { removeFromWishlist } from '../../../../store/actions/wishlistActions';
+import { addToCart } from '../../../../store/actions/cartActions';
+import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 
 class Wishlist extends Component {
   constructor(props) {
@@ -42,6 +43,28 @@ class Wishlist extends Component {
     };
   }
 
+  // if the wishlist item is empty then this function will triggered
+  renderEmptyWishlist() {
+    return (
+      <div className="empty-wishlist">
+        <h2>Your Wishlist is Empty</h2>
+        <p>Add items to your wishlist</p>
+        <img
+          src="https://img.icons8.com/?size=512&id=vdpEj4CzpSMF&format=png" // Replace with the path to your empty wishlist image
+          alt="Empty Wishlist"
+          className="empty-wishlist-image"
+        />
+        <br/>
+        <div style={{marginLeft:'32px'}}>
+        <Link to="/" className="wishlist-link">
+          Add Item
+        </Link>
+        </div>
+       
+      </div>
+    );
+  }
+
   handleDeleteItem = (itemId) => {
     this.setState((prevState) => ({
       wishlistItems: prevState.wishlistItems.filter(
@@ -57,65 +80,49 @@ class Wishlist extends Component {
   render() {
     const { wishItems } = this.props;
 
+    if (wishItems.length === 0) {
+      return this.renderEmptyWishlist();
+    }
+
     return (
       <div className="Wishlist-main">
+
         <ul className="wishlist">
-          <h2 style={{ color: "#d71f7a" }}>WISHLIST</h2>
+          <h2>Wishlist</h2>
           {wishItems.map((item) => (
             <li key={item.id} className="wishlist-item">
               <div className="item-details">
                 <div className="item-info">
                   <img
-                    src={
-                      "https://cdn.pixabay.com/photo/2012/04/13/20/54/violin-33610_1280.png"
-                    }
+                    src={"https://cdn.pixabay.com/photo/2012/04/13/20/54/violin-33610_1280.png"}
                     alt={item.name}
                     className="item-image"
                   />
                   <div className="item-column">
-                    <div className="item-name">
-                      <h5>{item.name}</h5>
-                    </div>
-                    <br></br>
-                    <div className="item-price">
-                      <h6 style={{ color: "#2a6fc9" }}>
-                        <b>${item.price}</b>
-                      </h6>
-                    </div>
+                    <div className="item-name">{item.name}</div>
+                    <div className="item-price">${item.price}</div>
                   </div>
                 </div>
               </div>
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <button
-                  className="add-to-cart-button"
-                  style={{
-                    background: "none",
-                    transition: "transform 0.3s",
-                    marginLeft: "20px",
-                    paddingRight: "0",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.transform = "scale(1.1)")
-                  }
-                  onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
-                  onClick={() => {
-                    this.props.addToCart(item);
-                    this.props.removeFromWishlist(item);
-                  }}
-                >
-                  <AiOutlineShoppingCart />
-                </button>
-                <button
-                  className="delete-button"
-                  style={{ background: "none", transition: "transform 0.3s" }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.transform = "scale(1.1)")
-                  }
-                  onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
-                  onClick={() => this.props.removeFromWishlist(item)}
-                >
-                  <AiOutlineClose />
-                </button>
+              <div style={{display:'flex', flexDirection:'row'}}>
+              <button
+                className="add-to-cart-button"
+                style={{ background: "none", transition: "transform 0.3s", marginLeft: "20px", paddingRight: "0", }}
+                onMouseEnter={(e) => (e.target.style.transform = "scale(1.1)")}
+                onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+                onClick={() => { this.props.addToCart(item); this.props.removeFromWishlist(item) }}
+              >
+                <AiOutlineShoppingCart />
+              </button>
+              <button
+                className="delete-button"
+                style={{ background: "none", transition: "transform 0.3s" }}
+                onMouseEnter={(e) => (e.target.style.transform = "scale(1.1)")}
+                onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+                onClick={() => this.props.removeFromWishlist(item)}
+              >
+                <AiOutlineClose />
+              </button>
               </div>
             </li>
           ))}
@@ -124,6 +131,8 @@ class Wishlist extends Component {
     );
   }
 }
+
+
 
 export default connect(
   (state) => ({
