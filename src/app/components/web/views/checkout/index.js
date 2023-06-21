@@ -9,6 +9,8 @@ import {
 } from "../../../../store/actions/cartActions";
 import Deliverydetails from "./delivery";
 import "./checkOut.css";
+import { PayPalButtons } from "@paypal/react-paypal-js";
+
 
 class checkout extends Component {
   constructor(props) {
@@ -25,6 +27,7 @@ class checkout extends Component {
       deliveryAddress: "",
       deliveryAddress: "123 Main Street, City, State",
       useExistingAddress: true,
+      subTotal: '', discount: '', deliveryCharge: 0, grandTotal: '', email: '', customer: '', paymentmethod: '', deliveryAddress: '',
     };
   }
   // handleOptionChange = (e) => {
@@ -204,6 +207,56 @@ class checkout extends Component {
       NotificationManager.error("Please! check address details", "Input Field");
     }
   };
+
+  createOrder = (data, actions) => {
+    const { customer, grandTotal, deliveryAddress, paymentmethod } = this.state;
+    // Logic to create an order on your server
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: grandTotal, // Total amount
+          },
+        },
+      ],
+    });
+  };
+
+  onApprove = async (data, actions) => {
+    // Logic to capture the approved payment
+    const { customer, grandTotal, deliveryAddress } = this.state;
+    let paymentmethod = "paypal"
+    let orderId = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
+    let { cartItems } = this.props
+    let data1 = { customerId: customer.id, paymentmethod: paymentmethod, orderId: orderId, deliveryAddress: deliveryAddress, product: cartItems, grandTotal, grandTotal }
+    return actions.order.capture().then(async (details) => {
+      // Payment completed successfully
+      let order = await GetOrderDetails.getOrderCreateByUser(JSON.stringify(data1));
+      if (order) {
+        NotificationManager.success("Successfully Ordered", "Order");
+        setTimeout(
+          async function () {
+            CartHelper.emptyCart();
+          },
+          1000
+        );
+      } else {
+        NotificationManager.error("Order is declined", "Order");
+        setTimeout(
+          async function () {
+            window.location.href = "/failed"
+          },
+          1000
+        );
+      }
+    });
+  };
+
+  handleRadioChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+
   render() {
     const { totalAmount } = this.props.location.state;
     const { deliveryAddress, useExistingAddress } = this.state;
@@ -409,18 +462,7 @@ class checkout extends Component {
                                       </div>
                                     </li>
                                     <li>
-                                      <div
-                                        className="radio-item_1"
-                                        onClick={this.handlePaymentSystem}
-                                      >
-                                        {/* <input value="card" name="paymentmethod" type="button" onClick={this.handleRadioChange} /> */}
-                                        <label
-                                          htmlFor="card1"
-                                          className="radio-label_1"
-                                        >
-                                          Pay With Card
-                                        </label>
-                                      </div>
+                                      <PayPalButtons createOrder={this.createOrder} onApprove={this.onApprove} />
                                     </li>
                                   </ul>
                                 </div>
