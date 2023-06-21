@@ -68,7 +68,7 @@ class Featured extends Component {
                   <div class="col-lg-3 col-md-3 col-12" key={index}>
                     <div class="product-box">
                       <div class="product-image">
-                        <img src={cat1} />
+                        <img src={row.photo} alt="product"/>
                       </div>
                       <div class="product-text">
                         <Link
