@@ -115,10 +115,7 @@ class CategoryList extends Component {
                           className="compare-icon"
                         />
                       </a>
-                      <a
-                        href="javascript:void(0)"
-                        onClick={() => this.props.addToWishlist(product)}
-                      >
+                      <a href="/wishlist">
                         <FontAwesomeIcon
                           icon={faHeart}
                           className="heart-icon"
