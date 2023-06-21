@@ -1,22 +1,22 @@
 .category-item {
-    padding: 8px;
-    text-align: center;
+  padding: 8px;
+  text-align: center;
 }
 
 .slick-slide img {
-    display: block;
+  display: block;
 }
 
 .category-item img {
-    background: #fff none repeat scroll 0 0;
-    border-radius: 50px;
-    box-shadow: 0 0 2px #ccc;
-    height: 80px;
-    margin: 1px 30px 8px;
-    object-fit: scale-down;
-    padding: 5px;
-    transform: scale(1);
-    transition-duration: 0.4s;
-    width: 80px;
-    border: 1px solid #000;
+  background: #fff none repeat scroll 0 0;
+  border-radius: 50px;
+  box-shadow: 0 0 2px #ccc;
+  height: 80px;
+  margin: 1px 30px 8px;
+  object-fit: scale-down;
+  padding: 5px;
+  transform: scale(1);
+  transition-duration: 0.4s;
+  width: 80px;
+  border: 1px solid #000;
 }

@@ -66,9 +66,7 @@ class Wishlist extends Component {
               <div className="item-details">
                 <div className="item-info">
                   <img
-                    src={
-                      "https://cdn.pixabay.com/photo/2012/04/13/20/54/violin-33610_1280.png"
-                    }
+                    src={item.photo}
                     alt={item.name}
                     className="item-image"
                   />
