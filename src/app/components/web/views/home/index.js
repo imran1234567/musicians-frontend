@@ -8,6 +8,7 @@ import Artical from "./Artical";
 import Store1 from "./Store";
 import Testimonial from "./testimonial";
 import Process from "./Process";
+import ScrollUpButton from "react-scroll-up-button";
 
 // import Topsavers from './top-section';
 // import Bestofferbanner from './best-offers-banner';
@@ -28,6 +29,11 @@ export default class Home extends Component {
         <Store1 />
         <Testimonial />
         <Process />
+        <ScrollUpButton
+                    EasingType="easeOutExpo"
+                    ShowAtPosition={146}
+                    AnimationDuration={3000}
+        />
 
         {/* <Bannerslider />
                 <Topsavers />
