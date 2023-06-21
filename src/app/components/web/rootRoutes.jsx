@@ -35,7 +35,7 @@ import Affiliate from "./views/Affiliate";
 import TopArrival from "./views/home/TopArrival";
 import Orange from "./views/home/Orange";
 import Artical from "./views/home/Artical";
-
+import Blog from "./views/home/Artical/Blog";
 import Store1 from "./views/home/Store";
 
 import Testimonial from "./views/home/testimonial";
@@ -72,6 +72,8 @@ export default class rootRoutes extends Component {
           <Route exact path="/arrival" component={TopArrival} />
           <Route exact path="/orange" component={Orange} />
           <Route exact path="/artical" component={Artical} />
+          <Route path="/blog/blog/:id" component={Blog} />
+
           <Route exact path="/store" component={Store1} />
           <Route exact path="/testimonial" component={Testimonial} />
           <Route exact path="/process" component={Process} />
