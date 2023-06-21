@@ -135,7 +135,7 @@
 }
 
 .cart-store-details p {
-  margin: 10px;
+  margin: 5px 0;
   font-size: 14px;
 }
 
@@ -212,43 +212,6 @@
 .cart-table th:last-child {
   border-right: none;
 }
-.apply-coupon-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.coupon-input-container {
-  margin-right: 10px;
-}
-
-.coupon-input {
-  width: 200px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.apply-btn-container {
-  display: flex;
-  align-items: center;
-}
-
-.apply-btn {
-  padding: 8px 16px;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.apply-btn:hover {
-  background-color: #e0e0e0;
-}
-
-
 @media (max-width: 602px) {
   button .delete-btn {
     margin-left: 5rem;
