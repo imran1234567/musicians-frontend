@@ -108,7 +108,7 @@ class SearchItem extends Component {
                     <div className="col-lg-3 col-md-3 col-12" key={product.id}>
                       <div className="product-box">
                         <div className="product-image">
-                          <img src={cat1} alt="Product" />
+                          <img src={product.photo} alt="Product" />
                         </div>
                         <div className="product-text">
                           <Link
