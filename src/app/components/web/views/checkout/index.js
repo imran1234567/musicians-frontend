@@ -205,6 +205,7 @@ class checkout extends Component {
     }
   };
   render() {
+    const { totalAmount } = this.props.location.state;
     const { deliveryAddress, useExistingAddress } = this.state;
     const { cartItems } = this.props;
     const {
@@ -490,7 +491,7 @@ class checkout extends Component {
                   </div>
                   <div className="main-total-cart">
                     <h2>Total</h2>
-                    <span>&#x20B9;{grandTotal}</span>
+                    <span>&#x20B9;{totalAmount}</span>
                   </div>
                 </div>
               </div>

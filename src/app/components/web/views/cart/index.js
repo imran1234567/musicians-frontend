@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   removeFromCart,
   incrementToCart,
@@ -202,7 +203,8 @@ class Cart extends Component {
                 <strong className="float-right text-danger"></strong>
               </h6>
             </div>
-            <a href="/checkout" style={{ display: "block", width: "100%" }}>
+            {/* <a href="/checkout" style={{ display: "block", width: "100%" }}> */}
+            <Link to={{ pathname: "/checkout", state: { totalAmount } }}>
               <button
                 className="btn btn-secondary btn-lg btn-block text-left"
                 type="button"
@@ -215,7 +217,8 @@ class Cart extends Component {
                   <span className="mdi mdi-chevron-right" />
                 </span>
               </button>
-            </a>
+              </Link>
+            {/* </a> */}
           </div>
         </div>
       </div>
