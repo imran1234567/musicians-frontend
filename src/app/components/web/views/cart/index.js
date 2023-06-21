@@ -54,6 +54,8 @@ class Cart extends Component {
   render() {
     const { cartItems } = this.props;
     const { appliedCoupon, couponDiscount } = this.state;
+    const subTotal = cartItems.reduce((sum, i) => (sum += i.qty * i.netPrice), 0);
+    const totalAmount = subTotal - couponDiscount;
 
     return (
       <div
@@ -213,7 +215,7 @@ class Cart extends Component {
                   <i className="mdi mdi-cart-outline" /> Proceed to Checkout{" "}
                 </span>
                 <span className="float-right">
-                  <strong>&#x24;{cartItems.reduce((sum, i) => (sum += (i.qty * i.netPrice) - couponDiscount), 0)}</strong>
+                  <strong>&#x24;{totalAmount}</strong>
                   <span className="mdi mdi-chevron-right" />
                 </span>
               </button>
