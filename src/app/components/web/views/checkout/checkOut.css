@@ -1,57 +1,56 @@
 .delivery-address {
-    padding: 20px;
-  }
-  
-  .radio-option {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .radio-option .form-check {
-    margin-right: 10px;
-  }
-  
-  .existing-address {
-    margin-top: 10px;
-  }
-  
-  .existing-address h6 {
-    margin-bottom: 5px;
-  }
-  
-  textarea {
-    width: 100%;
-    resize: vertical;
-  }
-  
-  .delivery-address {
-    width: 100%;
-    padding: 20px;
-  }
-  
-  .radio-option {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-  
-  .radio-option .form-check {
-    margin-right: 10px;
-    align-self: flex-start;
-  }
-  
-  .existing-address {
-    margin-top: 10px;
-  }
-  
-  .existing-address h6 {
-    margin-bottom: 5px;
-  }
-  
-  textarea {
-    width: 100%;
-    resize: vertical;
-  }
-  
+  padding: 20px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.radio-option .form-check {
+  margin-right: 10px;
+}
+
+.existing-address {
+  margin-top: 10px;
+}
+
+.existing-address h6 {
+  margin-bottom: 5px;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.delivery-address {
+  width: 100%;
+  padding: 20px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.radio-option .form-check {
+  margin-right: 10px;
+  align-self: flex-start;
+}
+
+.existing-address {
+  margin-top: 10px;
+}
+
+.existing-address h6 {
+  margin-bottom: 5px;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+}

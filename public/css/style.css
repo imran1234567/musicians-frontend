@@ -664,45 +664,6 @@ header .navbar .navbar-nav li.mobile-menu{
 
 
 
-.orange{
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	padding: 8.125rem 0;
-	background-image: url('images/d3.jpg');
-}
-.orange .orange-text{
-	max-width: 458px;
-}
-.orange h3{
-	font-size: 3rem;
-	font-weight: 400;
-	color: var(--secondary-color);
-	text-transform: uppercase;
-	margin-bottom: 35px;
-}
-.orange ul{
-	list-style: none;
-	padding-left: 0;
-	margin-bottom: 26px;
-}
-.orange ul li{
-	font-size: 1.063rem;
-	font-weight: 500;
-	color: var(--secondary-color);
-}
-.orange h4{
-	font-size: 2.25rem;
-	font-weight: 500;
-	color: var(--primary-color);
-	margin-bottom: 34px;
-}
-
-.orange .cart-btn{
-	background-color: var(--primary-color);
-	color: var(--white-color);
-}
 .btn-continue{
 	background-color: #017bbe;
 	align-items:flex-end;
@@ -774,7 +735,7 @@ header .navbar .navbar-nav li.mobile-menu{
 	background-attachment: fixed;
 	min-height: 600px;
 	position: relative;
-	background-image: url(images/image1.jpg);
+	background-image: url(../../src/images/d3.jpg);
 }
 .store .store-content{
 	display: flex;
@@ -1201,19 +1162,6 @@ a:hover{
 .option-zip{
 	width: 200px;
 }
-@media (max-width: 768px) {
-	/* Adjust the width for smaller screens */
-	.image-logo {
-	  width: 150px;
-	}
-  }
-  
-  @media (max-width: 480px) {
-	/* Adjust the width for even smaller screens */
-	.image-logo {
-	  width: 100px;
-	}
-  }
 
 /*::::::::::::::::::::::::::::::::::
 				BOOTSTRAP OVERITE
@@ -1853,13 +1801,14 @@ header .navbar .navbar-nav li.mobile-menu{
 
 
 
-.orange{
+.orange {
+	/* background: url('../../src/assets/d3.jpg'); */
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	padding: 8.125rem 0;
-	background-image: url('images/d3.jpg');
+
 }
 .orange .orange-text{
 	max-width: 458px;
@@ -1954,55 +1903,6 @@ header .navbar .navbar-nav li.mobile-menu{
 		 articals-End
 ::::::::::::::::::::::::::::::::::*/
 
-
-
-.store{
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	min-height: 600px;
-	position: relative;
-	background-image: url(images/image1.jpg);
-}
-.store .store-content{
-	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-	background-color: #00000099;
-}
-.store .store-content .store-text{
-	max-width: 44.375rem;
-	margin: 0 auto;
-	text-align: center;
-}
-.store .store-content .store-text h3{
-	font-size: 2.188rem;
-	font-weight: 300;
-	color: var(--white-color);
-	margin-bottom: 3.938rem;
-	}
-.store .store-content .store-text .store-btn a{
-	font-size: 1.375rem;
-	line-height: 1.375rem;
-	font-weight: 500;
-	color: var(--white-color);
-	padding: 15px 24px;
-	text-transform: uppercase;
-	border: 2px solid var(--white-color);
-}
-
-
-/*::::::::::::::::::::::::::::::::::
-		 store-End
-::::::::::::::::::::::::::::::::::*/
 
 
 .testimonial{

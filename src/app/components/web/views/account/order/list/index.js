@@ -141,10 +141,10 @@ export default class List extends Component {
                                     <tr>
                                       <th>Order #</th>
                                       <th>Date Purchased</th>
-                                      {/* <th>Delivery Date</th> */}
+                                      <th>Delivery Date</th>
                                       <th>Status</th>
                                       <th>Total</th>
-                                      {/* <th>Action</th> */}
+                                      <th>Action</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -157,7 +157,7 @@ export default class List extends Component {
                                               {row.createdAt}
                                             </Moment>
                                           </td>
-                                          {/* <td>
+                                          <td>
                                             {row.deliverydate ? (
                                               <Moment format="MMMM Do YYYY">
                                                 {row.deliverydate}
@@ -165,7 +165,7 @@ export default class List extends Component {
                                             ) : (
                                               ""
                                             )}
-                                          </td> */}
+                                          </td>
                                           <td>
                                             {row.status === "processing" ? (
                                               <span className="badge badge-info">
@@ -190,7 +190,7 @@ export default class List extends Component {
                                             )}
                                           </td>
                                           <td>{row.grandtotal}</td>
-                                          {/* <td>
+                                          <td>
                                             <Link
                                               className="btn btn-info btn-sm"
                                               to={{
@@ -201,7 +201,7 @@ export default class List extends Component {
                                             >
                                               <i className="mdi mdi-eye"></i>
                                             </Link>
-                                          </td> */}
+                                          </td>
                                         </tr>
                                       ))
                                     ) : (

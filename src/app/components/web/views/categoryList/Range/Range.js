@@ -9,9 +9,28 @@ class Range extends Component {
       sortBy: "default",
       showBy: "10",
       display: "list",
-      products: [],
+      products: [
+        // { id: 10, name: "Product 10", price: 16, model: "Model J" },
+        // { id: 11, name: "Product 11", price: 19, model: "Model K" },
+        // { id: 12, name: "Product 12", price: 14, model: "Model L" },
+        // { id: 13, name: "Product 13", price: 23, model: "Model M" },
+        // { id: 14, name: "Product 14", price: 28, model: "Model N" },
+        // { id: 15, name: "Product 15", price: 32, model: "Model O" },
+      ],
     };
   }
+
+  // componentDidMount() {
+  //   // Fetch the product data from an API using Axios
+  //   axios
+  //     .get("https://example.com/api/products")
+  //     .then((response) => {
+  //       this.setState({ products: response.data });
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching product data:", error);
+  //     });
+  // }
 
   // Sort By changes function
   handleSortByChange = (event) => {

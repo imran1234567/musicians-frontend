@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -10,9 +9,10 @@ import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import { NotificationManager } from "react-notifications";
 import cat1 from "../../../assets/cat-1.jpeg";
 import Login from "../../auth/login";
-import List from "../web/views/catgoryItem"
+import List from "../web/views/catgoryItem";
 import { addToCart } from "../../store/actions/cartActions";
 import { addToWishlist } from "../../store/actions/wishlistActions";
+import "./SearchItem.css";
 
 class SearchItem extends Component {
   state = {
@@ -98,7 +98,10 @@ class SearchItem extends Component {
               </div>
             </div>
             <div className="col-lg-9 col-md-9 col-12">
-              <div className="featured-product-list row">
+              <div
+                className="featured-product-list row"
+                style={{ width: "1040px" }}
+              >
                 {productList.map((product) => {
                   const isProductInCart = this.checkCart(product.id);
                   return (
@@ -132,6 +135,7 @@ class SearchItem extends Component {
                                     `${product.name} added successfully to cart!`
                                   );
                                 }}
+                                style={{ width: "300px" }}
                               >
                                 add to cart
                               </a>

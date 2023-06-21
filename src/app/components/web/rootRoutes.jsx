@@ -32,6 +32,14 @@ import ScrollToTop from "./views/account/view/ScrollToTop";
 import pay_method from "./views/account/view/pay_method";
 import AccordionItem from "react-bootstrap/esm/AccordionItem";
 import Affiliate from "./views/Affiliate";
+import TopArrival from "./views/home/TopArrival";
+import Orange from "./views/home/Orange";
+import Artical from "./views/home/Artical";
+
+import Store1 from "./views/home/Store";
+
+import Testimonial from "./views/home/testimonial";
+import Process from "./views/home/Process";
 
 // import Failed from './views/checkout/failed';
 
@@ -53,6 +61,7 @@ export default class rootRoutes extends Component {
           <Route exact path="/range" component={Range} />
           <Route exact path="/wishlist" component={Wishlist} />
           <Route exact path="/compare" component={compare} />
+
           <Route exact path="/policy" component={privacy_policy} />
           <Route exact path="/terms" component={Terms} />
           <Route exact path="/delivery" component={Delivery} />
@@ -60,6 +69,12 @@ export default class rootRoutes extends Component {
           <Route exact path="/accordion" component={AccordionItem} />
           <Route exact path="/affiliate" component={Affiliate} />
           <Route exact path="/SearchItem" component={SearchItem} />
+          <Route exact path="/arrival" component={TopArrival} />
+          <Route exact path="/orange" component={Orange} />
+          <Route exact path="/artical" component={Artical} />
+          <Route exact path="/store" component={Store1} />
+          <Route exact path="/testimonial" component={Testimonial} />
+          <Route exact path="/process" component={Process} />
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />
