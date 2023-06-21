@@ -4,6 +4,8 @@ import { AiOutlineClose, AiOutlineShoppingCart } from "react-icons/ai";
 import { removeFromWishlist } from "../../../../store/actions/wishlistActions";
 import { addToCart } from "../../../../store/actions/cartActions";
 import { connect } from "react-redux";
+import { NotificationManager } from "react-notifications";
+import { Link } from 'react-router-dom';
 
 class Wishlist extends Component {
   constructor(props) {
@@ -54,72 +56,98 @@ class Wishlist extends Component {
     console.log("Add to cart:", item);
   };
 
+  renderEmptyWishlist() {
+    return (
+      <div className="empty-wishlist">
+        <h2>Your Wishlist is Empty</h2>
+        <p>Add items to your wishlist</p>
+        <img
+          src="https://img.icons8.com/?size=512&id=vdpEj4CzpSMF&format=png" // Replace with the path to your empty wishlist image
+          alt="Empty Wishlist"
+          className="empty-wishlist-image"
+        />
+        <br />
+        <div style={{ marginLeft: '32px' }}>
+          <Link to="/" className="wishlist-link">
+            Add Item
+          </Link>
+        </div>
+
+      </div>
+    );
+  }
+
+
   render() {
     const { wishItems } = this.props;
-
-    return (
-      <div className="Wishlist-main">
-        <ul className="wishlist">
-          <h2 style={{ color: "#d71f7a" }}>WISHLIST</h2>
-          {wishItems.map((item) => (
-            <li key={item.id} className="wishlist-item">
-              <div className="item-details">
-                <div className="item-info">
-                  <img
-                    src={item.photo}
-                    alt={item.name}
-                    className="item-image"
-                  />
-                  <div className="item-column">
-                    <div className="item-name">
-                      <h5>{item.name}</h5>
-                    </div>
-                    <br></br>
-                    <div className="item-price">
-                      <h6 style={{ color: "#2a6fc9" }}>
-                        <b>${item.price}</b>
-                      </h6>
+    if (wishItems.length === 0) {
+      return this.renderEmptyWishlist();
+    } else {
+      return (
+        <div className="Wishlist-main">
+          <ul className="wishlist">
+            <h2 style={{ color: "#d71f7a" }}>WISHLIST</h2>
+            {wishItems.map((item) => (
+              <li key={item.id} className="wishlist-item">
+                <div className="item-details">
+                  <div className="item-info">
+                    <img
+                      src={item.photo}
+                      alt={item.name}
+                      className="item-image"
+                    />
+                    <div className="item-column">
+                      <div className="item-name">
+                        <h5>{item.name}</h5>
+                      </div>
+                      <br></br>
+                      <div className="item-price">
+                        <h6 style={{ color: "#2a6fc9" }}>
+                          <b>${item.price}</b>
+                        </h6>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <button
-                  className="add-to-cart-button"
-                  style={{
-                    background: "none",
-                    transition: "transform 0.3s",
-                    marginLeft: "20px",
-                    paddingRight: "0",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.transform = "scale(1.1)")
-                  }
-                  onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
-                  onClick={() => {
-                    this.props.addToCart(item);
-                    this.props.removeFromWishlist(item);
-                  }}
-                >
-                  <AiOutlineShoppingCart />
-                </button>
-                <button
-                  className="delete-button"
-                  style={{ background: "none", transition: "transform 0.3s" }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.transform = "scale(1.1)")
-                  }
-                  onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
-                  onClick={() => this.props.removeFromWishlist(item)}
-                >
-                  <AiOutlineClose />
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <button
+                    className="add-to-cart-button"
+                    style={{
+                      background: "none",
+                      transition: "transform 0.3s",
+                      marginLeft: "20px",
+                      paddingRight: "0",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.target.style.transform = "scale(1.1)")
+                    }
+                    onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+                    onClick={() => {
+                      this.props.addToCart(item);
+                      this.props.removeFromWishlist(item);
+                      NotificationManager.success(`${item.name} added successfuly in cart!`);
+                    }}
+                  >
+                    <AiOutlineShoppingCart />
+                  </button>
+                  <button
+                    className="delete-button"
+                    style={{ background: "none", transition: "transform 0.3s" }}
+                    onMouseEnter={(e) =>
+                      (e.target.style.transform = "scale(1.1)")
+                    }
+                    onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+                    onClick={() => { this.props.removeFromWishlist(item); NotificationManager.warning(`${item.name} remove successfuly from wishlist!`) }}
+                  >
+                    <AiOutlineClose />
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
   }
 }
 
