@@ -52,7 +52,11 @@ class Singleproduct extends Component {
                   <div className="shop-detail-left">
                     <Paper className="shop-detail-slider">
                       <Slider {...settings}>
-                        <img alt src={cat1} className="img-fluid img-center" />
+                        <img
+                          src={product.photo}
+                          className="img-fluid img-center"
+                          alt="product"
+                        />
                         {/* {product.productphotos
                           ? product.productphotos.map((r, index) => {
                               return (

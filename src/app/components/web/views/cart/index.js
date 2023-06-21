@@ -85,11 +85,7 @@ class Cart extends Component {
               <div className="cart-item" key={index}>
                 <div className="cart-product-img">
                   {/* <img className="img-fluid" src={row.photo} alt="cart" /> */}
-                  <img
-                    className="img-fluid"
-                    src="https://cdn.pixabay.com/photo/2013/07/13/10/06/violin-156558_1280.png"
-                    alt="cart"
-                  />
+                  <img className="img-fluid" src={row.photo} alt="cart" />
 
                   <div className="offer-badge">{row.discountPer}% OFF</div>
                 </div>

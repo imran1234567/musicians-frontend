@@ -14,7 +14,6 @@
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
- 
 }
 
 .product-image img {
@@ -31,7 +30,6 @@
   margin-bottom: 5px;
 }
 
-
 .product-text h5 {
   font-size: 18px;
   font-weight: bold;
@@ -43,7 +41,7 @@
 
 .cart-btn {
   display: inline-block;
-  background-color: var(--primary-color);;
+  background-color: var(--primary-color);
   color: #f8f9fa;
   padding: 8px 15px;
   border-radius: 5px;
