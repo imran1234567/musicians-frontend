@@ -144,7 +144,6 @@ export default class List extends Component {
                                       <th>Delivery Date</th>
                                       <th>Status</th>
                                       <th>Total</th>
-                                      <th>Action</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -163,7 +162,7 @@ export default class List extends Component {
                                                 {row.deliverydate}
                                               </Moment>
                                             ) : (
-                                              ""
+                                              "Update Soon"
                                             )}
                                           </td>
                                           <td>
@@ -190,18 +189,7 @@ export default class List extends Component {
                                             )}
                                           </td>
                                           <td>{row.grandtotal}</td>
-                                          <td>
-                                            <Link
-                                              className="btn btn-info btn-sm"
-                                              to={{
-                                                pathname:
-                                                  "/account/order/details",
-                                                query: row,
-                                              }}
-                                            >
-                                              <i className="mdi mdi-eye"></i>
-                                            </Link>
-                                          </td>
+                                          
                                         </tr>
                                       ))
                                     ) : (

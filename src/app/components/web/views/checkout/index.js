@@ -71,6 +71,7 @@ class checkout extends Component {
   handlePlaceOrder = async (event) => {
     event.preventDefault();
     const { customer, grandTotal, deliveryAddress, paymentmethod } = this.state;
+    const { totalAmount } = this.props.location.state;
     let orderId = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
     );
@@ -81,8 +82,7 @@ class checkout extends Component {
       orderId: orderId,
       deliveryAddress: deliveryAddress,
       product: cartItems,
-      grandTotal,
-      grandTotal,
+      grandTotal: totalAmount,
     };
     if (data) {
       let order = await GetOrderDetails.getOrderCreateByUser(
@@ -216,12 +216,13 @@ class checkout extends Component {
 
   createOrder = (data, actions) => {
     const { customer, grandTotal, deliveryAddress, paymentmethod } = this.state;
+    const { totalAmount } = this.props.location.state;
     // Logic to create an order on your server
     return actions.order.create({
       purchase_units: [
         {
           amount: {
-            value: grandTotal, // Total amount
+            value: totalAmount, // Total amount
           },
         },
       ],
@@ -230,21 +231,12 @@ class checkout extends Component {
 
   onApprove = async (data, actions) => {
     // Logic to capture the approved payment
+    const { totalAmount } = this.props.location.state;
     const { customer, grandTotal, deliveryAddress } = this.state;
-    let paymentmethod = "paypal";
-    let orderId = Math.floor(
-      Math.random() * Math.floor(Math.random() * Date.now())
-    );
-    let { cartItems } = this.props;
-    let data1 = {
-      customerId: customer.id,
-      paymentmethod: paymentmethod,
-      orderId: orderId,
-      deliveryAddress: deliveryAddress,
-      product: cartItems,
-      grandTotal,
-      grandTotal,
-    };
+    let paymentmethod = "paypal"
+    let orderId = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
+    let { cartItems } = this.props
+    let data1 = { customerId: customer.id, paymentmethod: paymentmethod, orderId: orderId, deliveryAddress: deliveryAddress, product: cartItems, grandTotal: totalAmount }
     return actions.order.capture().then(async (details) => {
       // Payment completed successfully
       let order = await GetOrderDetails.getOrderCreateByUser(
@@ -343,6 +335,7 @@ class checkout extends Component {
                             data-target="#collapseTwo"
                             aria-expanded="false"
                             aria-controls="collapseTwo"
+                            style={{textDecoration:'none', }}
                           >
                             <span className="number">2</span> Delivery Address
                           </button>
@@ -449,6 +442,7 @@ class checkout extends Component {
                         aria-labelledby="headingThree"
                         data-parent="#accordionExample"
                       >
+
                         <div className="checkout-step-body">
                           <div className="payment_method-checkout">
                             <div className="row">
@@ -494,6 +488,49 @@ class checkout extends Component {
                             </div>
                           </div>
                         </div>
+
+                        {/* <div className="checkout-step-body">
+                          <div className="payment_method-checkout">
+                            <div className="row">
+                              <div className="col-md-12">
+                                <div className="rpt100">
+                                  <ul className="radio--group-inline-container_1">
+                                    <li>
+                                      <div className="radio-item_1">
+                                        <input
+                                          id="cashondelivery1"
+                                          value="cash"
+                                          name="paymentmethod"
+                                          type="radio"
+                                          onChange={this.handleRadioChange}
+                                        />
+                                        <label
+                                          htmlFor="cashondelivery1"
+                                          className="radio-label_1"
+                                        >
+                                          Cash on Delivery
+                                        </label>
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <PayPalButtons createOrder={this.createOrder} onApprove={this.onApprove} />
+                                    </li>
+                                  </ul>
+                                </div>
+                                {paymentmethod === "cash" ? (
+                                  <button
+                                    className="next-btn16 hover-btn"
+                                    onClick={this.handlePlaceOrder}
+                                  >
+                                    Confirm Order
+                                  </button>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -539,16 +576,18 @@ class checkout extends Component {
                       <span>&#x20B9;{deliveryCharge}</span>
                     </div>
                   </div>
-                  <div className="cart-total-dil saving-total ">
+                  <div className="cart-total-dil saving-total">
                     <h4>Total Saving</h4>
-                    <span>&#x20B9;{discount}</span>
+                    <span style={{color: 'red'}}>- &#x24;{subTotal - totalAmount}</span>
                   </div>
+
                   <div className="main-total-cart">
                     <h2>Total</h2>
-                    <span>&#x20B9;{totalAmount}</span>
+                    <span>&#x24;{totalAmount}</span>
                   </div>
                 </div>
               </div>
+              
             </div>
           </div>
         </section>

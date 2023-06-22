@@ -58,7 +58,7 @@ export default class Address extends Component {
                     </div>
                   </div>
                   <h4>{user.firstName}</h4>
-                  <p>+977 {user.phone}</p>
+                  <p>+91 {user.phone}</p>
                   {/* <div className="earn-points"><img src="images/Dollar.svg" alt />Points : <span>20</span></div> */}
                 </div>
               </div>
@@ -119,14 +119,6 @@ export default class Address extends Component {
                           <h4>My Address</h4>
                         </div>
                         <div className="address-body">
-                          <a
-                            href="#"
-                            className="add-address hover-btn"
-                            data-toggle="modal"
-                            data-target="#address_model"
-                          >
-                            Add New Address
-                          </a>
                           {user ? (
                             user.Addresses.map((row, index) => (
                               <div className="address-item" key={index}>
