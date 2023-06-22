@@ -52,3 +52,11 @@
 .cart-btn:hover {
   background-color: #2b7fd8;
 }
+.grid-view{
+  height: auto;
+}
+
+.product-list .list-item{
+  display: flex;
+  margin-bottom: 20px;
+}
