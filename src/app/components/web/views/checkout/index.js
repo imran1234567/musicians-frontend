@@ -8,7 +8,7 @@ import {
   decreaseToCart,
 } from "../../../../store/actions/cartActions";
 import Deliverydetails from "./delivery";
-import "./checkOut.css";
+import "./checkout.css";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
 
@@ -65,6 +65,7 @@ class checkout extends Component {
   handlePlaceOrder = async (event) => {
     event.preventDefault();
     const { customer, grandTotal, deliveryAddress, paymentmethod } = this.state;
+    const { totalAmount } = this.props.location.state;
     let orderId = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
     );
@@ -75,8 +76,7 @@ class checkout extends Component {
       orderId: orderId,
       deliveryAddress: deliveryAddress,
       product: cartItems,
-      grandTotal,
-      grandTotal,
+      grandTotal: totalAmount,
     };
     if (data) {
       let order = await GetOrderDetails.getOrderCreateByUser(
@@ -210,12 +210,13 @@ class checkout extends Component {
 
   createOrder = (data, actions) => {
     const { customer, grandTotal, deliveryAddress, paymentmethod } = this.state;
+    const { totalAmount } = this.props.location.state;
     // Logic to create an order on your server
     return actions.order.create({
       purchase_units: [
         {
           amount: {
-            value: grandTotal, // Total amount
+            value: totalAmount, // Total amount
           },
         },
       ],
@@ -224,11 +225,12 @@ class checkout extends Component {
 
   onApprove = async (data, actions) => {
     // Logic to capture the approved payment
+    const { totalAmount } = this.props.location.state;
     const { customer, grandTotal, deliveryAddress } = this.state;
     let paymentmethod = "paypal"
     let orderId = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
     let { cartItems } = this.props
-    let data1 = { customerId: customer.id, paymentmethod: paymentmethod, orderId: orderId, deliveryAddress: deliveryAddress, product: cartItems, grandTotal, grandTotal }
+    let data1 = { customerId: customer.id, paymentmethod: paymentmethod, orderId: orderId, deliveryAddress: deliveryAddress, product: cartItems, grandTotal: totalAmount }
     return actions.order.capture().then(async (details) => {
       // Payment completed successfully
       let order = await GetOrderDetails.getOrderCreateByUser(JSON.stringify(data1));
