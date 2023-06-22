@@ -96,7 +96,7 @@ class checkout extends Component {
       } else {
         NotificationManager.error("Order is declined", "Order");
         setTimeout(async function () {
-          window.location.href = "/failed";
+          window.location.href = "/orderFailure";
         }, 1000);
       }
     }
@@ -258,7 +258,7 @@ class checkout extends Component {
       } else {
         NotificationManager.error("Order is declined", "Order");
         setTimeout(async function () {
-          window.location.href = "/failed";
+          window.location.href = "/orderFailure";
         }, 1000);
       }
     });

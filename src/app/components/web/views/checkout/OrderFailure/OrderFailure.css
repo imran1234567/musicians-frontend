@@ -1,0 +1,19 @@
+.order-failure-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px;
+  /* background-color: #f8f8f8; */
+}
+
+.order-failure-page h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.order-failure-page p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}

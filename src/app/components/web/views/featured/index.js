@@ -90,7 +90,12 @@ class Featured extends Component {
                             <a
                               href="javascript:void(0)"
                               class="cart-btn"
-                              onClick={() => { this.props.addToCart(row); NotificationManager.success(`${row.name} added successfuly in cart!`); }}
+                              onClick={() => {
+                                this.props.addToCart(row);
+                                NotificationManager.success(
+                                  `${row.name} added successfuly in cart!`
+                                );
+                              }}
                             >
                               Add To Cart
                             </a>
@@ -105,7 +110,12 @@ class Featured extends Component {
 
                             <a
                               href="javascript:void(0)"
-                              onClick={() => {this.props.addToWishlist(row); NotificationManager.success(`${row.name} added successfuly in wishlist!`);}}
+                              onClick={() => {
+                                this.props.addToWishlist(row);
+                                NotificationManager.success(
+                                  `${row.name} added successfuly in wishlist!`
+                                );
+                              }}
                             >
                               {" "}
                               <FontAwesomeIcon

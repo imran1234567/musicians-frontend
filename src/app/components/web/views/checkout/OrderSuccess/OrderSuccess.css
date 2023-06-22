@@ -1,0 +1,16 @@
+/* OrderSuccess.css */
+
+.order-success {
+  text-align: center;
+  margin: 20px;
+}
+
+.order-success h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.order-success p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}

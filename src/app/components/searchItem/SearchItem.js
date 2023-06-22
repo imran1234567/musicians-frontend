@@ -54,7 +54,8 @@ class SearchItem extends Component {
           isLoaded: true,
         });
       } else {
-        throw new Error("No products found");
+        window.location.href = "/noProduct";
+        // throw new Error("/noProduct");
       }
     } catch (error) {
       this.setState({

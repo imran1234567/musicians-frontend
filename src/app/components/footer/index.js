@@ -225,7 +225,7 @@ class Footer extends Component {
                           <Link to="/">Brands</Link>
                         </li>
                         <li>
-                          <Link to="/account/reward">Gift Vouchers</Link>
+                          <Link to="/account/rewards">Gift Vouchers</Link>
                         </li>
                         <li>
                           <Link to="/affiliate">Affiliates</Link>

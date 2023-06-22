@@ -1,0 +1,14 @@
+.no-product-found {
+  text-align: center;
+  padding: 20px;
+}
+
+.no-product-found h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.no-product-found p {
+  font-size: 16px;
+  color: #888;
+}
