@@ -30,9 +30,9 @@ export default class Home extends Component {
         <Testimonial />
         <Process />
         <ScrollUpButton
-                    EasingType="easeOutExpo"
-                    ShowAtPosition={146}
-                    AnimationDuration={3000}
+          EasingType="easeOutExpo"
+          ShowAtPosition={146}
+          AnimationDuration={3000}
         />
 
         {/* <Bannerslider />

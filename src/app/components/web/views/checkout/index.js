@@ -11,7 +11,6 @@ import Deliverydetails from "./delivery";
 import "./checkout.css";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
-
 class checkout extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +26,14 @@ class checkout extends Component {
       deliveryAddress: "",
       deliveryAddress: "123 Main Street, City, State",
       useExistingAddress: true,
-      subTotal: '', discount: '', deliveryCharge: 0, grandTotal: '', email: '', customer: '', paymentmethod: '', deliveryAddress: '',
+      subTotal: "",
+      discount: "",
+      deliveryCharge: 0,
+      grandTotal: "",
+      email: "",
+      customer: "",
+      paymentmethod: "",
+      deliveryAddress: "",
     };
   }
   // handleOptionChange = (e) => {
@@ -90,7 +96,7 @@ class checkout extends Component {
       } else {
         NotificationManager.error("Order is declined", "Order");
         setTimeout(async function () {
-          window.location.href = "/failed";
+          window.location.href = "/orderFailure";
         }, 1000);
       }
     }
@@ -233,31 +239,26 @@ class checkout extends Component {
     let data1 = { customerId: customer.id, paymentmethod: paymentmethod, orderId: orderId, deliveryAddress: deliveryAddress, product: cartItems, grandTotal: totalAmount }
     return actions.order.capture().then(async (details) => {
       // Payment completed successfully
-      let order = await GetOrderDetails.getOrderCreateByUser(JSON.stringify(data1));
+      let order = await GetOrderDetails.getOrderCreateByUser(
+        JSON.stringify(data1)
+      );
       if (order) {
         NotificationManager.success("Successfully Ordered", "Order");
-        setTimeout(
-          async function () {
-            CartHelper.emptyCart();
-          },
-          1000
-        );
+        setTimeout(async function () {
+          CartHelper.emptyCart();
+        }, 1000);
       } else {
         NotificationManager.error("Order is declined", "Order");
-        setTimeout(
-          async function () {
-            window.location.href = "/failed"
-          },
-          1000
-        );
+        setTimeout(async function () {
+          window.location.href = "/orderFailure";
+        }, 1000);
       }
     });
   };
 
-  handleRadioChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
+  handleRadioChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     const { totalAmount } = this.props.location.state;
@@ -466,7 +467,10 @@ class checkout extends Component {
                                       </div>
                                     </li>
                                     <li>
-                                      <PayPalButtons createOrder={this.createOrder} onApprove={this.onApprove} />
+                                      <PayPalButtons
+                                        createOrder={this.createOrder}
+                                        onApprove={this.onApprove}
+                                      />
                                     </li>
                                   </ul>
                                 </div>
@@ -555,11 +559,9 @@ class checkout extends Component {
                           - {row.unitSize} gm
                         </h6>
                         <p className="offer-price mb-0">
-                          {row.qty + "*"+ row.netPrice}{"  "}
+                          {row.qty + "*" + row.netPrice}{" "}
                           <i className="mdi mdi-tag-outline" />{" "}
-                          <span className="regular-price">
-                          &#x24;{row.price}
-                          </span>
+                          <span className="regular-price">{row.price}</span>
                         </p>
                       </div>
                     </div>
@@ -567,7 +569,11 @@ class checkout extends Component {
                   <div className="total-checkout-group">
                     <div className="cart-total-dil">
                       <h4>Sub Total</h4>
-                      <span>&#x24;{subTotal}</span>
+                      <span>{subTotal}</span>
+                    </div>
+                    <div className="cart-total-dil pt-3">
+                      <h4>Delivery Charges</h4>
+                      <span>&#x20B9;{deliveryCharge}</span>
                     </div>
                   </div>
                   <div className="cart-total-dil saving-total">

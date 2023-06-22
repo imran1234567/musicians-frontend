@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { GetCategoryDetails } from "../../../services";
 import List from "../catgoryItem";
+import cat1 from "../../../../../assets/cat-1.jpeg";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
-import { addToWishlist } from "../../../../store/actions/wishlistActions";
 import "./category.css";
-import { NotificationManager } from "react-notifications";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
@@ -101,20 +101,13 @@ class CategoryList extends Component {
                       </Link>
                     ) : (
                       <a
-                      href="javascript:void(0)"
-                      className="cart-btn"
-                      onClick={() => {
-                        this.props.addToCart(product);
-                        NotificationManager.success(
-                          `${product.name} added successfully to cart!`
-                        );
-                      }}
-                      style={{ width: "300px" }}
-                    >
+                        href="javascript:void(0)"
+                        className="cart-btn"
+                        onClick={() => this.props.addToCart(product)}
+                      >
                         Add To Cart
                       </a>
                     )}
-                    
                     <div className="com">
                       <a href="/compare">
                         <FontAwesomeIcon
@@ -122,15 +115,7 @@ class CategoryList extends Component {
                           className="compare-icon"
                         />
                       </a>
-                      <a
-                        href="javascript:void(0)"
-                        onClick={() => {
-                          this.props.addToWishlist(product);
-                          NotificationManager.success(
-                          `${product.name} added successfully to wishlist!`
-                            );
-                         }}
-                      >
+                      <a href="/wishlist">
                         <FontAwesomeIcon
                           icon={faHeart}
                           className="heart-icon"
@@ -362,4 +347,4 @@ const mapStateToProps = (state) => ({
   cartItems: state.cart.cartItems,
 });
 
-export default connect(mapStateToProps, { addToCart,addToWishlist })(CategoryList);
+export default connect(mapStateToProps, { addToCart })(CategoryList);

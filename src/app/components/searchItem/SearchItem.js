@@ -7,13 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import { NotificationManager } from "react-notifications";
-import cat1 from "../../../assets/cat-1.jpeg";
 import Login from "../../auth/login";
 import List from "../web/views/catgoryItem";
 import { addToCart } from "../../store/actions/cartActions";
 import { addToWishlist } from "../../store/actions/wishlistActions";
 import "./SearchItem.css";
-
+import Range from "./../../../app/components/web/views/categoryList/Range/Range";
 class SearchItem extends Component {
   state = {
     productList: [],
@@ -55,7 +54,8 @@ class SearchItem extends Component {
           isLoaded: true,
         });
       } else {
-        throw new Error("No products found");
+        window.location.href = "/noProduct";
+        // throw new Error("/noProduct");
       }
     } catch (error) {
       this.setState({
@@ -97,15 +97,15 @@ class SearchItem extends Component {
                 <List />
               </div>
             </div>
+
             <div className="col-lg-9 col-md-9 col-12">
-              <div
-                className="featured-product-list row"
-                style={{ width: "1040px" }}
-              >
+              <Range />
+              <br></br>
+              <div className="featured-product-list row">
                 {productList.map((product) => {
                   const isProductInCart = this.checkCart(product.id);
                   return (
-                    <div className="col-lg-3 col-md-3 col-12" key={product.id}>
+                    <div className="col-lg-4 col-md-4 col-12" key={product.id}>
                       <div className="product-box">
                         <div className="product-image">
                           <img src={product.photo} alt="Product" />
@@ -123,7 +123,7 @@ class SearchItem extends Component {
                           <div className="add-cart">
                             {isProductInCart ? (
                               <Link to="/cart" className="cart-btn">
-                                go to cart
+                                Go To Cart
                               </Link>
                             ) : (
                               <a
@@ -135,9 +135,8 @@ class SearchItem extends Component {
                                     `${product.name} added successfully to cart!`
                                   );
                                 }}
-                                style={{ width: "300px" }}
                               >
-                                add to cart
+                                Add To Cart
                               </a>
                             )}
                             &nbsp; &nbsp;
