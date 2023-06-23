@@ -222,10 +222,10 @@ class Footer extends Component {
                       <h4>Extras</h4>
                       <ul>
                         <li>
-                          <Link to="/brands">Brands</Link>
+                          <Link to="/">Brands</Link>
                         </li>
                         <li>
-                          <Link to="/gift">Gift Vouchers</Link>
+                          <Link to="/account/rewards">Gift Vouchers</Link>
                         </li>
                         <li>
                           <Link to="/affiliate">Affiliates</Link>
@@ -242,16 +242,16 @@ class Footer extends Component {
                       <h4>My Account</h4>
                       <ul>
                         <li>
-                          <Link to="/login">My Account</Link>
+                          <Link to="/account/view">My Account</Link>
                         </li>
                         <li>
-                          <Link to="/order">Order History </Link>
+                          <Link to="/account/order/list">Order History </Link>
                         </li>
                         <li>
                           <Link to="/wishlist">Wish List</Link>
                         </li>
                         <li>
-                          <Link to="/new">News Letter</Link>
+                          <Link to="/news">News Letter</Link>
                         </li>
                       </ul>
                     </div>

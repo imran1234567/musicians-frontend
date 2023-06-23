@@ -40,6 +40,9 @@ import Store1 from "./views/home/Store";
 
 import Testimonial from "./views/home/testimonial";
 import Process from "./views/home/Process";
+import OrderSuccess from "./views/checkout/OrderSuccess";
+import OrderFailure from "./views/checkout/OrderFailure";
+import NoProductFound from "../searchItem/NoProductFound";
 
 // import Failed from './views/checkout/failed';
 
@@ -77,6 +80,9 @@ export default class rootRoutes extends Component {
           <Route exact path="/store" component={Store1} />
           <Route exact path="/testimonial" component={Testimonial} />
           <Route exact path="/process" component={Process} />
+          <Route exact path="/orderSuccess" component={OrderSuccess} />
+          <Route exact path="/orderFailure" component={OrderFailure} />
+          <Route exact path="/noProduct" component={NoProductFound} />
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />
