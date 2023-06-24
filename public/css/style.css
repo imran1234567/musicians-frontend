@@ -3318,6 +3318,7 @@ ul.breadcrumbs-list li:not(a) {
   border: 1px solid var(--primary-color);
   background-color: var(--primary-color);
   color: #fff;
+  padding: 6px 0;
 }
 .pdpt-bg .add-address {
   background-color: var(--primary-color);
@@ -3356,6 +3357,37 @@ ul.breadcrumbs-list li:not(a) {
 }
 .wishlist-item .add-to-cart-button svg {
   color: var(--primary-color);
+}
+.Wishlist-main .wishlist-item {
+  width: 100%;
+}
+
+.user-dt h1 {
+  color: var(--primary-color);
+  font-size: 30px;
+}
+.user-dt p {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+}
+.empty-wishlist {
+  text-align: center;
+}
+.empty-wishlist-front {
+  padding: 3rem 0;
+}
+.empty-wishlist-front .empty-item {
+  padding-top: 20px;
+}
+.empty-wishlist-front .cart-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.empty-wishlist-front .cart-btn:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background-color: transparent;
 }
 /* 23/06 */
 
