@@ -1,168 +1,168 @@
 import React, { Component } from "react";
-import { GetUserLogin } from "../../../../services";
-import "../css/index.css";
-import profile from "../../../../../../images/profile.jpg";
-import d3 from "../../../../../../";
+// import "./wishlist.css";
+import { AiOutlineClose, AiOutlineShoppingCart } from "react-icons/ai";
+import { removeFromWishlist } from "../../../../../store/actions/wishlistActions";
+import { addToCart } from "../../../../../store/actions/cartActions";
+import { connect } from "react-redux";
+import { NotificationManager } from "react-notifications";
+import { Link } from "react-router-dom";
 
-export default class Wishlist extends Component {
-  handleLogout = async (event) => {
-    event.preventDefault();
-    await GetUserLogin.logout();
+class Wishlist extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      wishlistItems: [
+        {
+          id: 1,
+          name: "Guiter",
+          price: 10,
+          image:
+            "https://cdn.pixabay.com/photo/2013/07/12/15/06/guitar-149427_1280.png",
+        },
+        {
+          id: 2,
+          name: "Violine",
+          price: 20,
+          image:
+            "https://cdn.pixabay.com/photo/2013/07/13/10/06/violin-156558_1280.png",
+        },
+        {
+          id: 3,
+          name: "Violine2",
+          price: 15,
+          image:
+            "https://cdn.pixabay.com/photo/2012/04/13/20/54/violin-33610_1280.png",
+        },
+        {
+          id: 4,
+          name: "Saxophone",
+          price: 25,
+          image:
+            "https://cdn.pixabay.com/photo/2012/04/12/12/30/saxophone-29816_1280.png",
+        },
+      ],
+    };
+  }
+
+  handleDeleteItem = (itemId) => {
+    this.setState((prevState) => ({
+      wishlistItems: prevState.wishlistItems.filter(
+        (item) => item.id !== itemId
+      ),
+    }));
   };
-  render() {
+  handleAddToCart = (item) => {
+    // Implement the logic to add the item to the cart
+    console.log("Add to cart:", item);
+  };
+
+  renderEmptyWishlist() {
     return (
-      <div className="wrapper">
-        <div className="gambo-Breadcrumb">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <nav aria-label="breadcrumb">
-                  <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <a href="index.html">Home</a>
-                    </li>
-                    <li className="breadcrumb-item active" aria-current="page">
-                      User Dashboard
-                    </li>
-                  </ol>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="dashboard-group">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="user-dt">
-                  <div className="user-img">
-                    <img src={profile} alt="profile" />
-                    <div className="img-add">
-                      <input type="file" id="file" />
-                      <label htmlFor="file">
-                        <i className="uil uil-camera-plus" />
-                      </label>
-                    </div>
-                  </div>
-                  <h4>Johe Doe</h4>
-                  <p>
-                    +91999999999
-                    <a href="#">
-                      <i className="uil uil-edit" />
-                    </a>
-                  </p>
-                  <div className="earn-points">
-                    <img src="images/Dollar.svg" alt />
-                    Points : <span>20</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className>
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-3 col-md-4">
-                <div className="left-side-tabs">
-                  <div className="dashboard-left-links">
-                    <a href="/account/view" className="user-item ">
-                      <i className="uil uil-apps" />
-                      Overview
-                    </a>
-                    <a href="/account/profile" className="user-item">
-                      <i className="mdi mdi-account-outline" />
-                      My profile
-                    </a>
-                    <a href="/account/order/list" className="user-item">
-                      <i className="uil uil-box" />
-                      My Orders
-                    </a>
-                    <a href="/account/rewards" className="user-item">
-                      <i className="uil uil-gift" />
-                      My Rewards
-                    </a>
-                    <a href="/account/wishlist" className="user-item active">
-                      <i className="uil uil-heart" />
-                      Shopping Wishlist
-                    </a>
-                    <a href="/account/address" className="user-item">
-                      <i className="uil uil-location-point" />
-                      My Address
-                    </a>
-                    <a className="user-item" onClick={this.handleLogout}>
-                      <i className="uil uil-exit" />
-                      Logout
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-9 col-md-8">
-                <div className="dashboard-right">
-                  <div className="row">
-                    <div className="col-md-12">
-                      <div className="main-title-tab">
-                        <h4>
-                          <i className="uil uil-heart" />
-                          Shopping Wishlist
-                        </h4>
-                      </div>
-                    </div>
-                    <div className="col-lg-12 col-md-12">
-                      <div className="pdpt-bg">
-                        <div className="wishlist-body-dtt">
-                          <div className="cart-item">
-                            <div className="cart-product-img">
-                              <img src="images/product/img-11.jpg" alt />
-                              <div className="offer-badge">4% OFF</div>
-                            </div>
-                            <div className="cart-text">
-                              <h4>Product Title Here</h4>
-                              <div className="cart-item-price">
-                                $15 <span>$18</span>
-                              </div>
-                              <button type="button" className="cart-close-btn">
-                                <i className="uil uil-trash-alt" />
-                              </button>
-                            </div>
-                          </div>
-                          <div className="cart-item">
-                            <div className="cart-product-img">
-                              <img src="images/product/img-2.jpg" alt />
-                              <div className="offer-badge">1% OFF</div>
-                            </div>
-                            <div className="cart-text">
-                              <h4>Product Title Here</h4>
-                              <div className="cart-item-price">
-                                $9.9 <span>$10</span>
-                              </div>
-                              <button type="button" className="cart-close-btn">
-                                <i className="uil uil-trash-alt" />
-                              </button>
-                            </div>
-                          </div>
-                          <div className="cart-item">
-                            <div className="cart-product-img">
-                              <img src="images/product/img-14.jpg" alt />
-                            </div>
-                            <div className="cart-text">
-                              <h4>Product Title Here</h4>
-                              <div className="cart-item-price">$12</div>
-                              <button type="button" className="cart-close-btn">
-                                <i className="uil uil-trash-alt" />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="empty-wishlist">
+        <h2>Your Wishlist is Empty</h2>
+        <p>Add items to your wishlist</p>
+        <img
+          src="https://img.icons8.com/?size=512&id=vdpEj4CzpSMF&format=png" // Replace with the path to your empty wishlist image
+          alt="Empty Wishlist"
+          className="empty-wishlist-image"
+        />
+        <br />
+        <div style={{ marginLeft: "32px" }}>
+          <Link to="/" className="wishlist-link">
+            Add Item
+          </Link>
         </div>
       </div>
     );
   }
+
+  render() {
+    const { wishItems } = this.props;
+    if (wishItems.length === 0) {
+      return this.renderEmptyWishlist();
+    } else {
+      return (
+        <div className="Wishlist-main">
+          <ul className="wishlist">
+            <h2 style={{ color: "#d71f7a" }}>WISHLIST</h2>
+            {wishItems.map((item) => (
+              <li key={item.id} className="wishlist-item">
+                <div className="item-details">
+                  <div className="item-info">
+                    <img
+                      src={item.photo}
+                      alt={item.name}
+                      className="item-image"
+                    />
+                    <div className="item-column">
+                      <div className="item-name">
+                        <h5>{item.name}</h5>
+                      </div>
+                      <br></br>
+                      <div className="item-price">
+                        <h6 style={{ color: "#2a6fc9" }}>
+                          <b>${item.price}</b>
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <button
+                    className="add-to-cart-button"
+                    style={{
+                      background: "none",
+                      transition: "transform 0.3s",
+                      marginLeft: "20px",
+                      paddingRight: "0",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.target.style.transform = "scale(1.1)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.target.style.transform = "scale(1)")
+                    }
+                    onClick={() => {
+                      this.props.addToCart(item);
+                      this.props.removeFromWishlist(item);
+                      NotificationManager.success(
+                        `${item.name} added successfuly in cart!`
+                      );
+                    }}
+                  >
+                    <AiOutlineShoppingCart />
+                  </button>
+                  <button
+                    className="delete-button"
+                    style={{ background: "none", transition: "transform 0.3s" }}
+                    onMouseEnter={(e) =>
+                      (e.target.style.transform = "scale(1.1)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.target.style.transform = "scale(1)")
+                    }
+                    onClick={() => {
+                      this.props.removeFromWishlist(item);
+                      NotificationManager.warning(
+                        `${item.name} remove successfuly from wishlist!`
+                      );
+                    }}
+                  >
+                    <AiOutlineClose />
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+  }
 }
+
+export default connect(
+  (state) => ({
+    wishItems: state.wish.wishItems,
+  }),
+  { removeFromWishlist, addToCart }
+)(Wishlist);
