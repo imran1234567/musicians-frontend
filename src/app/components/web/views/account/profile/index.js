@@ -16,23 +16,23 @@ export default class Profile extends Component {
       lastName: "",
       phoneNo: "",
       email: "",
-      profilePhoto: profile || null, //set the initial photo 
+      profilePhoto: profile || null, //set the initial photo
     };
   }
 
-  handleFileChange=(e)=>{
-    const file=e.target.files[0];
-    const reader=new FileReader();
+  handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
 
-    reader.onloadend=()=>{
+    reader.onloadend = () => {
       this.setState({
-        profilePhoto: reader.result, //updating the profile photo here  
+        profilePhoto: reader.result, //updating the profile photo here
       });
-    }
-    if(file){
+    };
+    if (file) {
       reader.readAsDataURL(file);
     }
-  }
+  };
 
   handleChangeUser(event) {
     const target = event.target;
@@ -69,11 +69,10 @@ export default class Profile extends Component {
       phone: phone,
       email: email,
       gender: gender,
-      profilePhoto: this.state.profilePhoto,//saving that uploading image into the image state
+      profilePhoto: this.state.profilePhoto, //saving that uploading image into the image state
     };
     let user = await GetUserLogin.getCustomerUpdate(data);
     if (user) {
-
       this.setState({
         user: {
           ...this.state.user,
@@ -112,9 +111,13 @@ export default class Profile extends Component {
               <div className="col-lg-12">
                 <div className="user-dt">
                   <div className="user-img">
-                    <img src={profilePhoto||profile} alt="profile" />
+                    <img src={profilePhoto || profile} alt="profile" />
                     <div className="img-add">
-                      <input type="file" id="file" onChange={this.handleFileChange} />
+                      <input
+                        type="file"
+                        id="file"
+                        onChange={this.handleFileChange}
+                      />
                       <label htmlFor="file" onChange={this.handleFileChange}>
                         <i className="uil uil-camera-plus" />
                       </label>
@@ -146,10 +149,10 @@ export default class Profile extends Component {
                       <i className="uil uil-box" />
                       My Orders
                     </a>
-                    <a href="/account/rewards" className="user-item">
+                    {/* <a href="/account/rewards" className="user-item">
                       <i className="uil uil-gift" />
                       My Rewards
-                    </a>
+                    </a> */}
                     <a href="/account/wishlist" className="user-item">
                       <i className="uil uil-heart" />
                       Shopping Wishlist
@@ -303,7 +306,12 @@ export default class Profile extends Component {
                             </div>
                           </div>
                           <div class="row">
-                            <button className="save-btn" onClick={this.handleSubmit}>Save</button>
+                            <button
+                              className="save-btn"
+                              onClick={this.handleSubmit}
+                            >
+                              Save
+                            </button>
                             <button className="cancel-btn">Cancel</button>
                           </div>
                         </form>

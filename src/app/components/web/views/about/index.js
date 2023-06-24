@@ -85,7 +85,7 @@ class About extends Component {
               </div>
             </div>
             <section class="about-content py-5">
-              <div class="container-xxl">
+              <div class="container">
                 <div class="about-content-list">
                   <div class="row align-items-center">
                     <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12 av-image">

@@ -38,17 +38,3 @@
 .add-cart {
   margin-top: 15px;
 }
-
-.cart-btn {
-  display: inline-block;
-  background-color: var(--primary-color);
-  color: #f8f9fa;
-  padding: 8px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.cart-btn:hover {
-  background-color: #2b7fd8;
-}

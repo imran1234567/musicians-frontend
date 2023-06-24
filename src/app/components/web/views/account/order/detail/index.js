@@ -83,10 +83,10 @@ export default class Details extends Component {
                       <i className="uil uil-box" />
                       My Orders
                     </a>
-                    <a href="/account/rewards" className="user-item">
+                    {/* <a href="/account/rewards" className="user-item">
                       <i className="uil uil-gift" />
                       My Rewards
-                    </a>
+                    </a> */}
                     <a href="/account/wishlist" className="user-item">
                       <i className="uil uil-heart" />
                       Shopping Wishlist
