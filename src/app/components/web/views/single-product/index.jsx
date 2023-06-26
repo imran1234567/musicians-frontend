@@ -3,6 +3,7 @@ import { Paper } from "@material-ui/core";
 import Slider from "react-slick";
 import parse from "html-react-parser";
 import { GetProductDetails } from "../../../services";
+import { NotificationManager } from "react-notifications";
 // import Similarproduct from './same-product';
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
@@ -105,15 +106,18 @@ class Singleproduct extends Component {
                         (Inclusive of all taxes)
                       </div>
                     </div>
-
-                    <button
-                      type="button"
-                      className="btn btn-secondary btn-lg"
-                      onClick={() => this.props.addToCart(product)}
-                      style={{ backgroundColor: "#750000" }}
-                    >
-                      <i className="mdi mdi-cart-outline" /> Add To Cart
-                    </button>
+                    <a
+                              href="javascript:void(0)"
+                              class="cart-btn"
+                              onClick={() => {
+                                this.props.addToCart(product);
+                                NotificationManager.success(
+                                  `${product.name} added successfuly in cart!`
+                                );
+                              }}
+                            >
+                             <i className="mdi mdi-cart-outline" /> Add To Cart
+                            </a>
                     <h6 className="mb-3 mt-4">Why shop from Musicians?</h6>
                     <div className="row">
                       <div className="col-md-12">

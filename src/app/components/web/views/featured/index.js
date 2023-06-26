@@ -4,7 +4,6 @@ import GroceryStampleDetails from "../../../services/GroceryStampleDetails";
 import { addToCart } from "../../../../store/actions/cartActions";
 import { addToWishlist } from "../../../../store/actions/wishlistActions";
 import { CircularProgress } from "@material-ui/core";
-import cat1 from "../../../../../assets/cat-1.jpeg";
 import { Link } from "react-router-dom";
 import { GetUserLogin } from "../../../services";
 import Login from "../../../../auth/login";
