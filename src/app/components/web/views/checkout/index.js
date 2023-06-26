@@ -233,10 +233,19 @@ class checkout extends Component {
     // Logic to capture the approved payment
     const { totalAmount } = this.props.location.state;
     const { customer, grandTotal, deliveryAddress } = this.state;
-    let paymentmethod = "paypal"
-    let orderId = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
-    let { cartItems } = this.props
-    let data1 = { customerId: customer.id, paymentmethod: paymentmethod, orderId: orderId, deliveryAddress: deliveryAddress, product: cartItems, grandTotal: totalAmount }
+    let paymentmethod = "paypal";
+    let orderId = Math.floor(
+      Math.random() * Math.floor(Math.random() * Date.now())
+    );
+    let { cartItems } = this.props;
+    let data1 = {
+      customerId: customer.id,
+      paymentmethod: paymentmethod,
+      orderId: orderId,
+      deliveryAddress: deliveryAddress,
+      product: cartItems,
+      grandTotal: totalAmount,
+    };
     return actions.order.capture().then(async (details) => {
       // Payment completed successfully
       let order = await GetOrderDetails.getOrderCreateByUser(
@@ -335,7 +344,7 @@ class checkout extends Component {
                             data-target="#collapseTwo"
                             aria-expanded="false"
                             aria-controls="collapseTwo"
-                            style={{textDecoration:'none', }}
+                            style={{ textDecoration: "none" }}
                           >
                             <span className="number">2</span> Delivery Address
                           </button>
@@ -442,13 +451,12 @@ class checkout extends Component {
                         aria-labelledby="headingThree"
                         data-parent="#accordionExample"
                       >
-
                         <div className="checkout-step-body">
                           <div className="payment_method-checkout">
                             <div className="row">
                               <div className="col-md-12">
                                 <div className="rpt100">
-                                  <ul className="radio--group-inline-container_1">
+                                  <ul className="radio--group-inline-container_1 pay-delivery">
                                     <li>
                                       <div className="radio-item_1">
                                         <input
@@ -476,7 +484,7 @@ class checkout extends Component {
                                 </div>
                                 {paymentmethod === "cash" ? (
                                   <button
-                                    className="next-btn16 hover-btn"
+                                    className="cart-btn"
                                     onClick={this.handlePlaceOrder}
                                   >
                                     Confirm Order
@@ -488,49 +496,6 @@ class checkout extends Component {
                             </div>
                           </div>
                         </div>
-
-                        {/* <div className="checkout-step-body">
-                          <div className="payment_method-checkout">
-                            <div className="row">
-                              <div className="col-md-12">
-                                <div className="rpt100">
-                                  <ul className="radio--group-inline-container_1">
-                                    <li>
-                                      <div className="radio-item_1">
-                                        <input
-                                          id="cashondelivery1"
-                                          value="cash"
-                                          name="paymentmethod"
-                                          type="radio"
-                                          onChange={this.handleRadioChange}
-                                        />
-                                        <label
-                                          htmlFor="cashondelivery1"
-                                          className="radio-label_1"
-                                        >
-                                          Cash on Delivery
-                                        </label>
-                                      </div>
-                                    </li>
-                                    <li>
-                                      <PayPalButtons createOrder={this.createOrder} onApprove={this.onApprove} />
-                                    </li>
-                                  </ul>
-                                </div>
-                                {paymentmethod === "cash" ? (
-                                  <button
-                                    className="next-btn16 hover-btn"
-                                    onClick={this.handlePlaceOrder}
-                                  >
-                                    Confirm Order
-                                  </button>
-                                ) : (
-                                  ""
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -559,11 +524,9 @@ class checkout extends Component {
                           - {row.unitSize} gm
                         </h6>
                         <p className="offer-price mb-0">
-                          &#x20B9;{row.qty + "*" + row.netPrice}{" "}
+                          {row.qty + "*" + row.netPrice}{" "}
                           <i className="mdi mdi-tag-outline" />{" "}
-                          <span className="regular-price">
-                            &#x20B9;{row.price}
-                          </span>
+                          <span className="regular-price">{row.price}</span>
                         </p>
                       </div>
                     </div>
@@ -571,25 +534,26 @@ class checkout extends Component {
                   <div className="total-checkout-group">
                     <div className="cart-total-dil">
                       <h4>Sub Total</h4>
-                      <span>&#x20B9;{subTotal}</span>
+                      <span>{subTotal}</span>
                     </div>
                     <div className="cart-total-dil pt-3">
                       <h4>Delivery Charges</h4>
-                      <span>&#x20B9;{deliveryCharge}</span>
+                      <span>{deliveryCharge}</span>
                     </div>
                   </div>
                   <div className="cart-total-dil saving-total">
                     <h4>Total Saving</h4>
-                    <span style={{color: 'red'}}>- &#x24;{subTotal - totalAmount}</span>
+                    <span style={{ color: "red" }}>
+                      -{subTotal - totalAmount}
+                    </span>
                   </div>
 
                   <div className="main-total-cart">
                     <h2>Total</h2>
-                    <span>&#x24;{totalAmount}</span>
+                    <span>{totalAmount}</span>
                   </div>
                 </div>
               </div>
-              
             </div>
           </div>
         </section>

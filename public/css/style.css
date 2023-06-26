@@ -628,12 +628,17 @@ input {
   --bs-gutter-y: 1.5rem;
 }
 .articals .artical-box {
-}
-.articals .artical-box {
   position: relative;
+  height: 100%;
+  margin-bottom: 20px;
+}
+.articals .artical-link {
+  height: 100%;
 }
 .articals .artical-box img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .articals .artical-box .artical-text {
   position: absolute;
@@ -1422,45 +1427,6 @@ input {
 
 /*::::::::::::::::::::::::::::::::::
 		  orange-End
-::::::::::::::::::::::::::::::::::*/
-
-.articals {
-  padding: 8.125rem 0;
-}
-.articals .articals-list {
-  --bs-gutter-y: 1.5rem;
-}
-
-.articals .artical-box {
-  position: relative;
-}
-.articals .artical-box img {
-  width: 100%;
-}
-.articals .artical-box .artical-text {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  min-height: 72px;
-  padding: 14px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: var(--primary-color);
-}
-
-.articals .artical-box .artical-text h5 {
-  font-size: 1.125rem;
-  font-weight: 500;
-  color: var(--white-color);
-  text-transform: uppercase;
-  margin-bottom: 0;
-}
-
-/*::::::::::::::::::::::::::::::::::
-		 articals-End
 ::::::::::::::::::::::::::::::::::*/
 
 .testimonial {
@@ -3414,6 +3380,32 @@ ul.breadcrumbs-list li:not(a) {
 .order-failure-page img,
 .order-success img {
   max-width: 180px;
+}
+
+.cart-style .cart-btn:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.cart-style .proceeed-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 0;
+}
+.payment_method-checkout {
+  width: 60%;
+}
+.payment_method-checkout .pay-delivery {
+  display: block;
+}
+.payment_method-checkout .cart-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  width: 100% !important;
+}
+.delivery-address form .btn {
+  margin: 8px;
+  background-color: var(--primary-color);
+  color: #fff;
 }
 /* 23/06 */
 

@@ -38,3 +38,12 @@
 .add-cart {
   margin-top: 15px;
 }
+
+.grid-view {
+  height: auto;
+}
+
+.product-list .list-item {
+  display: flex;
+  margin-bottom: 20px;
+}

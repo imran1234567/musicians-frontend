@@ -354,7 +354,7 @@ class SearchItem extends Component {
                       Grid
                     </button>
                   </div>
-                  &nbsp; &nbsp;
+
                   <div className="range">
                     <h5>
                       <b>Sort By: </b>
@@ -372,7 +372,7 @@ class SearchItem extends Component {
                       <option value="highToLow">Price (High &gt; Low)</option>
                     </select>
                   </div>
-                  &nbsp;&nbsp;
+
                   <div className="show">
                     <h5>
                       <b>Show: </b>
@@ -404,7 +404,6 @@ class SearchItem extends Component {
         </div>
         <Login />
       </div>
-
       // </section>
     );
   }

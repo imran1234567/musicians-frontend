@@ -1,9 +1,14 @@
-// OrderSuccess.js
-
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./OrderSuccess.css";
 
 const OrderSuccess = () => {
+  const history = useHistory();
+
+  const handleTrackOrder = () => {
+    history.push("/account/order/list");
+  };
+
   return (
     <div className="order-success">
       <div className="container">
@@ -21,8 +26,8 @@ const OrderSuccess = () => {
             An email with the order details has been sent to your registered
             email address.
           </p>
-          <br></br>
-          <button>Track Your Order</button>
+          <br />
+          <button onClick={handleTrackOrder}>Track Your Order</button>
         </div>
       </div>
     </div>
