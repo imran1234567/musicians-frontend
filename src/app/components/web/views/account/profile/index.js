@@ -96,7 +96,7 @@ export default class Profile extends Component {
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">Home</li>
-                    <li className="breadcrumb-item-active" aria-current="page">
+                    <li className="breadcrumb-item active" aria-current="page">
                       My Profile
                     </li>
                   </ol>
@@ -123,8 +123,8 @@ export default class Profile extends Component {
                       </label>
                     </div>
                   </div>
-                  <h1 style={{ color: "black" }}>{user.firstName}</h1>
-                  <p style={{ color: "blue" }}>+977 {user.phone}</p>
+                  <h1>{user.firstName}</h1>
+                  <p>+977 {user.phone}</p>
                   {/* <div className="earn-points"><img src="images/Dollar.svg" alt />Points : <span>20</span></div> */}
                 </div>
               </div>
@@ -174,7 +174,7 @@ export default class Profile extends Component {
                   <div className="row">
                     <div className="col-md-12">
                       <div className="main-title-tab">
-                        <h4 style={{ color: "black" }}>
+                        <h4 className="mb-4 sec-title">
                           <i className="uil uil-box" />
                           My Profile
                         </h4>
@@ -242,7 +242,7 @@ export default class Profile extends Component {
                               </div>
                             </div>
                           </div>
-                          <div className="row">
+                          <div className="gender">
                             <div className="form-group col-lg-6">
                               <label>Gender</label>
                               <div className="chek-form">
