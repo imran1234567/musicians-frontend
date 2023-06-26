@@ -117,6 +117,7 @@ class CategoryList extends Component {
                         Add To Cart
                       </a>
                     )}
+
                     <div className="com">
                       <a href="/compare">
                         <FontAwesomeIcon
@@ -260,13 +261,13 @@ class CategoryList extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-lg-3 col-md-4 col-12">
             <div className="list-name">
               <List />
             </div>
           </div>
 
-          <div className="col-md-9">
+          <div className="col-lg-9 col-md-8 col-12">
             <section className="featured-product" style={{ padding: 0 }}>
               <div className="filter-container">
                 <div className="price-sort-row">

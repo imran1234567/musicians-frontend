@@ -54,3 +54,160 @@ textarea {
   width: 100%;
   resize: vertical;
 }
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.text-secondary {
+  color: #6c757d;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.cart-list-product {
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.cart-list-product img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.badge-success {
+  background-color: #28a745;
+}
+
+h5,
+h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.offer-price {
+  font-size: 18px;
+}
+
+.regular-price {
+  margin-left: 5px;
+}
+
+.total-checkout-group {
+  padding: 10px;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.cart-total-dil h4,
+.cart-total-dil span {
+  display: inline-block;
+}
+
+.cart-total-dil h4 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.cart-total-dil span {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.saving-total {
+  padding: 10px;
+  background-color: #f8f9fa;
+}
+
+.main-total-cart {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+}
+
+.main-total-cart h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.main-total-cart span {
+  font-size: 24px;
+  font-weight: bold;
+  color: #28a745;
+}
+.checkout-step-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.payment_method-checkout {
+  margin-top: 20px;
+}
+
+.rpt100 {
+  margin-bottom: 30px;
+}
+
+.radio--group-inline-container_1 {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.radio-item_1 {
+  margin-right: 10px;
+}
+
+.radio-label_1 {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.next-btn16 {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.next-btn16:hover {
+  background-color: #111;
+}
+.btn-link {
+  display: inline-block;
+  background-color: transparent;
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.btn-link:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.number {
+  display: inline-block;
+  background-color: #333;
+  color: #fff;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 16px;
+  line-height: 25px;
+  margin-right: 10px;
+}

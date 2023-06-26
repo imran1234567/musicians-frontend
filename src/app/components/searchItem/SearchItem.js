@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import { NotificationManager } from "react-notifications";
+import cat1 from "../../../assets/cat-1.jpeg";
 import Login from "../../auth/login";
 import List from "../web/views/catgoryItem";
 import { addToCart } from "../../store/actions/cartActions";
@@ -56,8 +57,7 @@ class SearchItem extends Component {
           isLoaded: true,
         });
       } else {
-        window.location.href = "/noProduct";
-        // throw new Error("/noProduct");
+        throw new Error("No products found");
       }
     } catch (error) {
       this.setState({

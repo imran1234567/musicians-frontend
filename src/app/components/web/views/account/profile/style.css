@@ -1,92 +1,81 @@
 .dashboard-right {
-    background-color: #f5f5f5;
-    padding: 20px;
-    
-  }
-  
-  .card {
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    
-    
-  }
-  
-  .account-right {
-    margin-top: 20px;
-    
-  }
-  
-  .main-title-tab {
-    margin-bottom: 20px;
-  }
-  
-  .main-title-tab h4 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .pdpt-bg {
-    background-color: #ffffff;
-    padding: 20px;
-  }
- 
-  
-  .user-form .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .user-form label {
-    font-weight: bold;
-  }
-  
-  .border-form-control {
-    border: 1px solid #ced4da;
-    border-radius: 3px;
-    padding: 10px;
-    width: 100%;
-  }
-  
-  .required {
-    color: red;
-  }
-  
-  .chek-form {
-    margin-top: 10px;
-  }
-  
-  .custome-radio {
-    margin-right: 10px;
-  }
-  
-  .text-right {
-    text-align: right;
-  }
-  
-  .btn-lg {
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .btn-danger {
-    background-color: #969696;
-    color: #ffffff;
-    border: none;
-  }
-  
-  .btn-success {
-    background-color: #28a745;
-    color: #ffffff;
-    border: none;
-  }
-  
-  .btn-danger:hover,
-  .btn-success:hover {
-    opacity: 0.9;
-  }
-  
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.account-right {
+  margin-top: 20px;
+}
+
+.main-title-tab {
+  margin-bottom: 20px;
+}
+
+.pdpt-bg {
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.user-form .form-group {
+  margin-bottom: 20px;
+}
+
+.user-form label {
+  font-weight: bold;
+}
+
+.border-form-control {
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
+  width: 100%;
+}
+
+.required {
+  color: red;
+}
+
+.chek-form {
+  margin-top: 10px;
+}
+
+.custome-radio {
+  margin-right: 10px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.btn-lg {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.btn-danger {
+  background-color: #969696;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-danger:hover,
+.btn-success:hover {
+  opacity: 0.9;
+}

@@ -3,13 +3,91 @@ import { GetUserLogin } from "../../../../services";
 import "../css/index.css";
 import profile from "../../../../../../images/profile.jpg";
 import d3 from "../../../../../../";
+import Wishlist from "../../Wishlist/Wishlist";
+import { NotificationManager } from "react-notifications";
+// import "../css/index.css";
 
-export default class Wishlist extends Component {
+export default class wishlist extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: "",
+      user: "",
+      firstName: "",
+      lastName: "",
+      phoneNo: "",
+      email: "",
+      profilePhoto: profile || null, //set the initial photo
+    };
+  }
+
+  handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      this.setState({
+        profilePhoto: reader.result, //updating the profile photo here
+      });
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  handleChangeUser(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      user: {
+        ...this.state.user,
+        [name]: value,
+      },
+    });
+  }
+  async componentDidMount() {
+    let email = sessionStorage.getItem("email");
+    if (email) {
+      let value = await GetUserLogin.getCustomerDetail(email);
+      if (value) {
+        this.setState({ user: value.data });
+      }
+    }
+  }
   handleLogout = async (event) => {
     event.preventDefault();
     await GetUserLogin.logout();
   };
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    const { id, firstName, lastName, phone, email, gender } = this.state.user;
+    const data = {
+      id: id,
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+      email: email,
+      gender: gender,
+      profilePhoto: this.state.profilePhoto, //saving that uploading image into the image state
+    };
+    let user = await GetUserLogin.getCustomerUpdate(data);
+    if (user) {
+      this.setState({
+        user: {
+          ...this.state.user,
+          profilePhoto: this.state.profilePhoto,
+        },
+      });
+      NotificationManager.success("Successfully Update", "Profile");
+    } else {
+      NotificationManager.error("Please check your Field", "Input Error");
+    }
+  };
   render() {
+    let { user, profilePhoto } = this.state;
+    console.log("Profile -> render -> user", user);
     return (
       <div className="wrapper">
         <div className="gambo-Breadcrumb">
@@ -36,25 +114,21 @@ export default class Wishlist extends Component {
               <div className="col-lg-12">
                 <div className="user-dt">
                   <div className="user-img">
-                    <img src={profile} alt="profile" />
+                    <img src={profilePhoto || profile} alt="profile" />
                     <div className="img-add">
-                      <input type="file" id="file" />
-                      <label htmlFor="file">
+                      <input
+                        type="file"
+                        id="file"
+                        onChange={this.handleFileChange}
+                      />
+                      <label htmlFor="file" onChange={this.handleFileChange}>
                         <i className="uil uil-camera-plus" />
                       </label>
                     </div>
                   </div>
-                  <h4>Johe Doe</h4>
-                  <p>
-                    +91999999999
-                    <a href="#">
-                      <i className="uil uil-edit" />
-                    </a>
-                  </p>
-                  <div className="earn-points">
-                    <img src="images/Dollar.svg" alt />
-                    Points : <span>20</span>
-                  </div>
+                  <h1>{user.firstName}</h1>
+                  <p>+977 {user.phone}</p>
+                  {/* <div className="earn-points"><img src="images/Dollar.svg" alt />Points : <span>20</span></div> */}
                 </div>
               </div>
             </div>
@@ -78,10 +152,10 @@ export default class Wishlist extends Component {
                       <i className="uil uil-box" />
                       My Orders
                     </a>
-                    <a href="/account/rewards" className="user-item">
+                    {/* <a href="/account/rewards" className="user-item">
                       <i className="uil uil-gift" />
                       My Rewards
-                    </a>
+                    </a> */}
                     <a href="/account/wishlist" className="user-item active">
                       <i className="uil uil-heart" />
                       Shopping Wishlist
@@ -110,50 +184,7 @@ export default class Wishlist extends Component {
                     </div>
                     <div className="col-lg-12 col-md-12">
                       <div className="pdpt-bg">
-                        <div className="wishlist-body-dtt">
-                          <div className="cart-item">
-                            <div className="cart-product-img">
-                              <img src="images/product/img-11.jpg" alt />
-                              <div className="offer-badge">4% OFF</div>
-                            </div>
-                            <div className="cart-text">
-                              <h4>Product Title Here</h4>
-                              <div className="cart-item-price">
-                                $15 <span>$18</span>
-                              </div>
-                              <button type="button" className="cart-close-btn">
-                                <i className="uil uil-trash-alt" />
-                              </button>
-                            </div>
-                          </div>
-                          <div className="cart-item">
-                            <div className="cart-product-img">
-                              <img src="images/product/img-2.jpg" alt />
-                              <div className="offer-badge">1% OFF</div>
-                            </div>
-                            <div className="cart-text">
-                              <h4>Product Title Here</h4>
-                              <div className="cart-item-price">
-                                $9.9 <span>$10</span>
-                              </div>
-                              <button type="button" className="cart-close-btn">
-                                <i className="uil uil-trash-alt" />
-                              </button>
-                            </div>
-                          </div>
-                          <div className="cart-item">
-                            <div className="cart-product-img">
-                              <img src="images/product/img-14.jpg" alt />
-                            </div>
-                            <div className="cart-text">
-                              <h4>Product Title Here</h4>
-                              <div className="cart-item-price">$12</div>
-                              <button type="button" className="cart-close-btn">
-                                <i className="uil uil-trash-alt" />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
+                        <Wishlist />
                       </div>
                     </div>
                   </div>
