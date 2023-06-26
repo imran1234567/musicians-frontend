@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import parse from "html-react-parser";
 import { GetProductDetails } from "../../../services";
 import { NotificationManager } from "react-notifications";
+import {Link} from "react-router-dom";
 // import Similarproduct from './same-product';
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
@@ -24,6 +25,7 @@ class Singleproduct extends Component {
     let list = await GetProductDetails.getProductById(lastSegment);
     this.setState({ product: list.data });
   }
+  
   render() {
     const { product } = this.state;
     const settings = {
@@ -106,7 +108,8 @@ class Singleproduct extends Component {
                         (Inclusive of all taxes)
                       </div>
                     </div>
-                    <a
+                    
+                            <a
                               href="javascript:void(0)"
                               class="cart-btn"
                               onClick={() => {
@@ -118,6 +121,7 @@ class Singleproduct extends Component {
                             >
                              <i className="mdi mdi-cart-outline" /> Add To Cart
                             </a>
+                        
                     <h6 className="mb-3 mt-4">Why shop from Musicians?</h6>
                     <div className="row">
                       <div className="col-md-12">
