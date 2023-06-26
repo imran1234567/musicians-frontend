@@ -1920,7 +1920,7 @@ ul.check-list li {
   border: none;
   padding-right: 5px;
   text-align: center;
-  min-height: 280px;
+  /* min-height: 280px; */
 }
 .image-class {
   padding-right: 10px;
