@@ -126,7 +126,7 @@ class Cart extends Component {
                         </button>
                       </div>
                       <div className="cart-item-price">
-                        ${row.netPrice}
+                      &#36;{row.netPrice}
                         <span></span>
                       </div>
                     </div>
@@ -161,7 +161,7 @@ class Cart extends Component {
                 <p>
                   Sub Total{" "}
                   <strong className="float-right">
-                    {cartItems.reduce(
+                  &#36;{cartItems.reduce(
                       (sum, i) => (sum += i.qty * i.netPrice),
                       0
                     )}

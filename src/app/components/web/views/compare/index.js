@@ -68,7 +68,7 @@ class compare extends Component {
                 <tr>
                   <td style={{ fontWeight: "bold" }}>Product Image</td>
                   {comarisionItems.map((product) => {
-                    return <td key={product.id}><img src={product.photo} style={{height:'200px', width:'200px'}}></img></td>;
+                    return <td key={product.id}><img src={product.photo} style={{ height: '200px', width: '200px' }}></img></td>;
                   })}
                 </tr>
                 <tr>
