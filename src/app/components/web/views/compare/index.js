@@ -17,6 +17,7 @@ class compare extends Component {
       { id: 9, name: "Bass Guitar", price: 600, brand: "Ibanez" },
       { id: 10, name: "Cello", price: 1200, brand: "Daddario" },
     ],
+    comarisionItems: []
   };
 
   handleProductSelect = (event) => {
@@ -34,63 +35,51 @@ class compare extends Component {
     }
   };
 
-  render() {
-    const { selectedProduct, selectedProducts, products } = this.state;
+  componentDidMount() {
+    const comarisionItems = JSON.parse(localStorage.getItem('comparisonItems'));
+    if (comarisionItems) {
+      this.setState({ comarisionItems })
+    }
+  }
 
+  render() {
+    const { selectedProduct, selectedProducts, products, comarisionItems } = this.state;
+    console.log("compareItems", comarisionItems)
     return (
       <div className="comparison-page">
         <h1 className="comparison-page-title">Instrument Comparison</h1>
         <div className="comparison-page-section">
           <h2>Available Instruments</h2>
-          <div className="dropdown-container">
-            <select
-              value={selectedProduct || ""}
-              onChange={this.handleProductSelect}
-              className="product-dropdown"
-            >
-              <option value="">Select an instrument</option>
-              {products.map((product) => (
-                <option key={product.id} value={product.id}>
-                  {product.name}
-                </option>
-              ))}
-            </select>
-            <button
-              className="add-to-comparison-button"
-              onClick={() => this.handleAddToComparison(selectedProduct)}
-              disabled={!selectedProduct}
-            >
-              Add to Compare
-            </button>
-          </div>
         </div>
 
-        {selectedProducts.length > 0 && (
+        {comarisionItems.length > 0 && (
           <div className="comparison-page-section">
             <h2>Selected Instruments</h2>
             <table className="comparison-table">
               <thead>
                 <tr>
-                  <th>Attribute</th>
-                  {selectedProducts.map((productId) => {
-                    const product = products.find((p) => p.id === productId);
-                    return <th key={productId}>{product.name}</th>;
+                  {comarisionItems.map((product) => {
+                    return <th key={product.id}>{product.name}</th>;
                   })}
                 </tr>
               </thead>
               <tbody>
                 <tr>
+                  <td style={{ fontWeight: "bold" }}>Product Image</td>
+                  {comarisionItems.map((product) => {
+                    return <td key={product.id}><img src={product.photo} style={{height:'200px', width:'200px'}}></img></td>;
+                  })}
+                </tr>
+                <tr>
                   <td style={{ fontWeight: "bold" }}>Brand</td>
-                  {selectedProducts.map((productId) => {
-                    const product = products.find((p) => p.id === productId);
-                    return <td key={productId}>{product.brand}</td>;
+                  {comarisionItems.map((product) => {
+                    return <td key={product.id}>{product.brand}</td>;
                   })}
                 </tr>
                 <tr>
                   <td style={{ fontWeight: "bold" }}>Price</td>
-                  {selectedProducts.map((productId) => {
-                    const product = products.find((p) => p.id === productId);
-                    return <td key={productId}>${product.price}</td>;
+                  {comarisionItems.map((product) => {
+                    return <td key={product.id}>${product.buyerPrice}</td>;
                   })}
                 </tr>
                 {/* Add more attributes as needed */}

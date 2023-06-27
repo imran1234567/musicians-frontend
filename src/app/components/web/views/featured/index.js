@@ -21,6 +21,7 @@ class Featured extends Component {
       token: "",
       productList: [],
       isLoaded: false,
+      comparisonItems: []
     };
   }
 
@@ -30,13 +31,25 @@ class Featured extends Component {
     this.setState({
       token: cookies,
     });
-    console.log("list", list.product);
     if (list) {
       this.setState({
         productList: list,
         isLoaded: true,
       });
     }
+  }
+
+  addToComparison = (product) => {
+    this.setState((prevState) => ({
+      comparisonItems: [...prevState.comparisonItems, product]
+    }))
+    NotificationManager.success(
+      `${product.name} added successfuly for comparsion!`
+    );
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('comparisonItems', JSON.stringify(this.state.comparisonItems))
   }
 
   checkCart = (productId) => {
@@ -101,7 +114,9 @@ class Featured extends Component {
                             </a>
                           )}
                           <div className="com">
-                            <a href="/compare">
+                            <a href="javascript:void(0)" onClick={() => {
+                              this.addToComparison(row)
+                            }}>
                               <FontAwesomeIcon
                                 icon={faCodeCompare}
                                 className="compare-icon"
