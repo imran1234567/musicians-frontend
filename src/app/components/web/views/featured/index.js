@@ -66,7 +66,7 @@ class Featured extends Component {
               list.map((row, index) => {
                 const isProductInCart = this.checkCart(row.id);
                 return (
-                  <div class="col-lg-3 col-md-3 col-12" key={index}>
+                  <div class="col-lg-3 col-md-4 col-12" key={index}>
                     <div class="product-box">
                       <div class="product-image">
                         <img src={row.photo} alt="product" />

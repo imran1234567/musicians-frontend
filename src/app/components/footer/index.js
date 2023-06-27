@@ -62,34 +62,34 @@ class Footer extends Component {
                     <h4>Shop Now</h4>
                     <ul>
                       <li>
-                        <Link to="/guitar">Guitar/Bass</Link>
+                        <Link to="/cat/4/4">Guitar/Bass</Link>
                       </li>
                       <li>
-                        <Link to="/keyboards">Keyboards/Pianos</Link>
+                        <Link to="/cat/5/24">Keyboards/Pianos</Link>
                       </li>
                       <li>
-                        <Link to="/amps">Amps/Effects</Link>
+                        <Link to="/cat/6/32">Amps/Effects</Link>
                       </li>
                       <li>
-                        <Link to="/live-sound">Live Sound</Link>
+                        <Link to="/cat/7/36">Live Sound</Link>
                       </li>
                       <li>
-                        <Link to="/recording-studio">Recording Studio</Link>
+                        <Link to="/cat/8/48">Recording Studio</Link>
                       </li>
                       <li>
-                        <Link to="/dj-lighting">Dj/Lighting</Link>
+                        <Link to="/cat/9/55">Dj/Lighting</Link>
                       </li>
                       <li>
-                        <Link to="/drums-percussion">Drums/Percussion </Link>
+                        <Link to="/cat/10/58">Drums/Percussion </Link>
                       </li>
                       <li>
-                        <Link to="/orchestral">Orchestral</Link>
+                        <Link to="/cat/12/72">Orchestral</Link>
                       </li>
                       <li>
-                        <Link to="/accessories">Accessories</Link>
+                        <Link to="/cat/9/57">Accessories</Link>
                       </li>
                       <li>
-                        <Link to="/shop-by-brand">Shop By Brand</Link>
+                        <Link to="/">Shop By Brand</Link>
                       </li>
                     </ul>
                   </div>

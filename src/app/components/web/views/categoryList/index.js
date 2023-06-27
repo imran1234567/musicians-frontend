@@ -54,7 +54,7 @@ class CategoryList extends Component {
   };
 
   renderProducts = () => {
-    const { products, sortBy, showBy,display } = this.state;
+    const { products, sortBy, showBy, display } = this.state;
 
     // Apply sorting based on sortBy value
     let sortedProducts = [...products];
@@ -71,7 +71,7 @@ class CategoryList extends Component {
     // Apply showBy limit
     const showByLimit = parseInt(showBy, 10);
     const limitedProducts = sortedProducts.slice(0, showByLimit);
-    if (display === 'list') {
+    if (display === "list") {
       return (
         <div className="featured-product-list">
           {limitedProducts.map((product, index) => {
@@ -83,7 +83,7 @@ class CategoryList extends Component {
                   <img
                     src={product.photo}
                     alt="Product"
-                    style={{ width: '120px', objectFit: 'contain' }}
+                    style={{ width: "120px", objectFit: "contain" }}
                   />
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -160,7 +160,7 @@ class CategoryList extends Component {
                     <img
                       src={product.photo}
                       alt="Product"
-                      style={{ width: '100%', height: 'auto' }}
+                      style={{ width: "100%", height: "auto" }}
                     />
                   </div>
                   <div className="product-text">
@@ -169,7 +169,7 @@ class CategoryList extends Component {
                         pathname: `/p/${product.slug}/${product.id}`,
                         state: product,
                       }}
-                      style={{ textDecoration: 'none', color: 'inherit' }}
+                      style={{ textDecoration: "none", color: "inherit" }}
                     >
                       <h6>
                         <b>{product.name}</b>
@@ -191,7 +191,7 @@ class CategoryList extends Component {
                               `${product.name} added successfully to cart!`
                             );
                           }}
-                          style={{ width: '100%' }}
+                          style={{ width: "100%" }}
                         >
                           Add To Cart
                         </a>
@@ -330,7 +330,7 @@ class CategoryList extends Component {
                       Grid
                     </button>
                   </div>
-                  &nbsp; &nbsp;
+
                   <div className="range">
                     <h5>
                       <b>Sort By: </b>
@@ -344,11 +344,11 @@ class CategoryList extends Component {
                       <option value="default">Default</option>
                       <option value="NameAZ">Name (A-Z)</option>
                       <option value="NameZA">Name (Z-A)</option>
-                      <option value="lowToHigh">Price (Low &gt; High)</option>
-                      <option value="highToLow">Price (High &gt; Low)</option>
+                      <option value="lowToHigh">Price (Low & High)</option>
+                      <option value="highToLow">Price (High & Low)</option>
                     </select>
                   </div>
-                  &nbsp;&nbsp;
+
                   <div className="show">
                     <h5>
                       <b>Show: </b>
@@ -375,8 +375,6 @@ class CategoryList extends Component {
                   {this.renderProducts()}
                 </div>
               </div>
-
-             
             </section>
           </div>
         </div>
@@ -389,4 +387,6 @@ const mapStateToProps = (state) => ({
   cartItems: state.cart.cartItems,
 });
 
-export default connect(mapStateToProps, { addToCart,addToWishlist })(CategoryList);
+export default connect(mapStateToProps, { addToCart, addToWishlist })(
+  CategoryList
+);
