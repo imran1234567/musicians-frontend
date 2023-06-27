@@ -38,12 +38,3 @@
 .product-list {
   flex-basis: 100%;
 }
-
-Additional Styles .filter-container:hover .range,
-.filter-container:hover .show {
-  background-color: #e6e6e6;
-}
-
-.filter-container:hover select {
-  background-color: #f0f0f0;
-}

@@ -80,7 +80,6 @@ class ContactForm extends React.Component {
                             name="firstName"
                             component="div"
                             className="invalid-feedback"
-                            style={{ color: "red", paddingBottom: "15px" }}
                           />
                         </div>
                         <div className="col-6">
@@ -100,7 +99,6 @@ class ContactForm extends React.Component {
                             name="lastName"
                             component="div"
                             className="invalid-feedback"
-                            style={{ color: "red" }}
                           />
                         </div>
                         <div className="col-6">
@@ -118,7 +116,6 @@ class ContactForm extends React.Component {
                             name="phone"
                             component="div"
                             className="invalid-feedback"
-                            style={{ color: "red" }}
                           />
                         </div>
                         <div className="col-6">
@@ -136,7 +133,6 @@ class ContactForm extends React.Component {
                             name="email"
                             component="div"
                             className="invalid-feedback"
-                            style={{ color: "red" }}
                           />
                         </div>
                         <div className="col-12">
@@ -157,7 +153,6 @@ class ContactForm extends React.Component {
                             name="enquiry"
                             component="div"
                             className="invalid-feedback"
-                            style={{ color: "red" }}
                           />
                         </div>
                         <div className="submit-btn">

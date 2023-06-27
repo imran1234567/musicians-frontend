@@ -1,6 +1,9 @@
 import React from "react";
 
 export default function Delivery() {
+  const handleClick = () => {
+    window.location.href = "../home";
+  };
   return (
     <>
       <div className="deliver">
@@ -38,7 +41,7 @@ export default function Delivery() {
         <br></br>
         <div className=" boxer-one">
           <br></br>
-          <button className="btn-continue">
+          <button className="btn-continue" onClick={handleClick}>
             <h5>Continue</h5>
           </button>
         </div>
