@@ -58,6 +58,7 @@ class compare extends Component {
             <table className="comparison-table">
               <thead>
                 <tr>
+                  <th>Product Name</th>
                   {comarisionItems.map((product) => {
                     return <th key={product.id}>{product.name}</th>;
                   })}

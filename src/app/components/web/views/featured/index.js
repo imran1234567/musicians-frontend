@@ -39,12 +39,14 @@ class Featured extends Component {
   }
 
   addToComparison = (product) => {
-    this.setState((prevState) => ({
-      comparisonItems: [...prevState.comparisonItems, product]
-    }))
     NotificationManager.success(
       `${product.name} added successfuly for comparsion!`
     );
+    this.setState((prevState) => ({
+      comparisonItems: [...prevState.comparisonItems, product]
+    }),()=>{
+      window.location.href = '/comare'
+    })
   }
 
   componentDidUpdate() {
