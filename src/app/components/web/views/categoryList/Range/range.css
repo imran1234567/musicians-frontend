@@ -6,11 +6,9 @@
 .price-sort-row {
   display: flex;
   align-items: center;
-  
 }
 .display-options,
-.range,
-.show {
+.range {
   display: flex;
   align-items: center;
   border-radius: 5px;
@@ -24,10 +22,9 @@
   background-color: #fff;
   border-radius: 3px;
   cursor: pointer;
- 
 }
 
- /* .show select:hover,
+/* .show select:hover,
 .range select:hover {
   background-color: #f7f7f7;
 } */
@@ -36,18 +33,17 @@
 .range h5 {
   margin: 0;
   font-size: 16px;
-} 
+}
 
 .product-list {
   flex-basis: 100%;
-} 
+}
 
- Additional Styles
-.filter-container:hover .range,
+Additional Styles .filter-container:hover .range,
 .filter-container:hover .show {
   background-color: #e6e6e6;
 }
 
 .filter-container:hover select {
   background-color: #f0f0f0;
-} 
+}

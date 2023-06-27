@@ -163,15 +163,8 @@ class Navigation extends Component {
                 </Link>
                 <div class="mid-header-right">
                   {/* Updated Search box */}
-                  <div
-                    id="searchbox"
-                    class="s-search"
-                    style={{ display: "flex", justifyContent: "flex-start" }}
-                  >
-                    <div
-                      class="input-group"
-                      style={{ maxWidth: "800px", width: "80%" }}
-                    >
+                  <div id="searchbox" class="s-search">
+                    <div class="input-group" style={{ maxWidth: "800px" }}>
                       <div
                         className="form-outline"
                         style={{ position: "relative" }}
@@ -284,16 +277,6 @@ class Navigation extends Component {
                 <Navbar.Toggle
                   aria-controls="responsive-navbar-nav"
                   onClick={this.handleToggle}
-                  style={{
-                    border: "none",
-                    outline: "none",
-                    padding: "0.25rem 0.5rem",
-                    marginLeft: "auto",
-                    marginTop: "18px",
-                    alignContent: "flex-start",
-                    transform: "translateX(-40%)",
-                    backgroundColor: "transparent",
-                  }}
                 />
                 <Navbar.Collapse id="responsive-navbar-nav">
                   <Nav className="me-auto1" style={{ color: "white" }}>

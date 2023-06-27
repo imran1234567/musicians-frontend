@@ -57,7 +57,7 @@ export default class Address extends Component {
                       </label>
                     </div>
                   </div>
-                  <h4>{user.firstName}</h4>
+                  <h1>{user.firstName}</h1>
                   <p>+91 {user.phone}</p>
                   {/* <div className="earn-points"><img src="images/Dollar.svg" alt />Points : <span>20</span></div> */}
                 </div>
@@ -83,10 +83,10 @@ export default class Address extends Component {
                       <i className="uil uil-box" />
                       My Orders
                     </a>
-                    <a href="/account/rewards" className="user-item">
+                    {/* <a href="/account/rewards" className="user-item">
                       <i className="uil uil-gift" />
                       My Rewards
-                    </a>
+                    </a> */}
                     <a href="/account/wishlist" className="user-item">
                       <i className="uil uil-heart" />
                       Shopping Wishlist

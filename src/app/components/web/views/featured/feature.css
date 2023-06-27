@@ -1,43 +1,41 @@
-.heart-icon{
-    height: 30px;
+.heart-icon {
+  height: 30px;
   width: 30px;
   color: rgb(228, 39, 102);
   border: black;
 }
-.heart-icon:hover{
-color: gray;
+.heart-icon:hover {
+  color: gray;
 }
 
-.btn-icon{
+.btn-icon {
   background-color: transparent;
 }
-.btn-icon:hover{
- background-color: transparent;
- color: transparent;
- width: 50px;
+.btn-icon:hover {
+  background-color: transparent;
+  color: transparent;
+  width: 50px;
 }
-.btn-compare{
+.btn-compare {
   width: 200px;
   color: blue;
   background-color: transparent;
   height: 30px;
   border: transparent;
- 
 }
-.btn-compare:hover{
+.btn-compare:hover {
   background-color: azure;
   color: bisque;
 }
-.compare-icon{
+.compare-icon {
   border: 1px black;
   height: 20px;
   color: orange;
- 
 }
-.btn-compare:hover{
+.btn-compare:hover {
   background-color: transparent;
 }
-.compare-div{
+.compare-div {
   display: flex;
   flex-direction: row;
 }

@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { GetCategoryDetails } from "../../../services";
 import List from "../catgoryItem";
-import cat1 from "../../../../../assets/cat-1.jpeg";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
+import { addToWishlist } from "../../../../store/actions/wishlistActions";
 import "./category.css";
-
+import { NotificationManager } from "react-notifications";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
@@ -54,7 +54,7 @@ class CategoryList extends Component {
   };
 
   renderProducts = () => {
-    const { products, sortBy, showBy } = this.state;
+    const { products, sortBy, showBy, display } = this.state;
 
     // Apply sorting based on sortBy value
     let sortedProducts = [...products];
@@ -71,18 +71,22 @@ class CategoryList extends Component {
     // Apply showBy limit
     const showByLimit = parseInt(showBy, 10);
     const limitedProducts = sortedProducts.slice(0, showByLimit);
-    return (
-      <div className="featured-product-list row">
-        {limitedProducts.map((product, index) => {
-          const isProductInCart = this.checkCart(product.id);
+    if (display === "list") {
+      return (
+        <div className="featured-product-list">
+          {limitedProducts.map((product, index) => {
+            const isProductInCart = this.checkCart(product.id);
 
-          return (
-            <div className="col-lg-4 col-md-4 col-12" key={index}>
-              <div className="product-box">
+            return (
+              <div className="list-item" key={index}>
                 <div className="product-image">
-                  <img src={product.photo} alt="Product" />
+                  <img
+                    src={product.photo}
+                    alt="Product"
+                    style={{ width: "120px", objectFit: "contain" }}
+                  />
                 </div>
-                <div className="product-text">
+                <div className="product-details" style={{ flex: 1 }}>
                   <Link
                     to={{
                       pathname: `/p/${product.slug}/${product.id}`,
@@ -93,7 +97,7 @@ class CategoryList extends Component {
                       <b>{product.name}</b>
                     </h6>
                   </Link>
-                  <h5>${product.price}</h5>
+                  <h5>{this.formatPrice(product.price)}</h5>
                   <div className="add-cart">
                     {isProductInCart ? (
                       <Link to="/cart" className="cart-btn">
@@ -103,11 +107,17 @@ class CategoryList extends Component {
                       <a
                         href="javascript:void(0)"
                         className="cart-btn"
-                        onClick={() => this.props.addToCart(product)}
+                        onClick={() => {
+                          this.props.addToCart(product);
+                          NotificationManager.success(
+                            `${product.name} added successfully to cart!`
+                          );
+                        }}
                       >
                         Add To Cart
                       </a>
                     )}
+
                     <div className="com">
                       <a href="/compare">
                         <FontAwesomeIcon
@@ -115,7 +125,15 @@ class CategoryList extends Component {
                           className="compare-icon"
                         />
                       </a>
-                      <a href="/wishlist">
+                      <a
+                        href="javascript:void(0)"
+                        onClick={() => {
+                          this.props.addToWishlist(product);
+                          NotificationManager.success(
+                            `${product.name} added successfully to wishlist!`
+                          );
+                        }}
+                      >
                         <FontAwesomeIcon
                           icon={faHeart}
                           className="heart-icon"
@@ -125,12 +143,92 @@ class CategoryList extends Component {
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-    );
+            );
+          })}
+        </div>
+      );
+    } else {
+      return (
+        <div className="featured-product-list row">
+          {limitedProducts.map((product, index) => {
+            const isProductInCart = this.checkCart(product.id);
+
+            return (
+              <div className="col-lg-4 col-md-4 col-12" key={index}>
+                <div className="product-box">
+                  <div className="product-image">
+                    <img
+                      src={product.photo}
+                      alt="Product"
+                      style={{ width: "100%", height: "auto" }}
+                    />
+                  </div>
+                  <div className="product-text">
+                    <Link
+                      to={{
+                        pathname: `/p/${product.slug}/${product.id}`,
+                        state: product,
+                      }}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <h6>
+                        <b>{product.name}</b>
+                      </h6>
+                    </Link>
+                    <h5>${product.price}</h5>
+                    <div className="add-cart">
+                      {isProductInCart ? (
+                        <Link to="/cart" className="cart-btn">
+                          Go To Cart
+                        </Link>
+                      ) : (
+                        <a
+                          href="javascript:void(0)"
+                          className="cart-btn"
+                          onClick={() => {
+                            this.props.addToCart(product);
+                            NotificationManager.success(
+                              `${product.name} added successfully to cart!`
+                            );
+                          }}
+                          style={{ width: "100%" }}
+                        >
+                          Add To Cart
+                        </a>
+                      )}
+                      <div className="com">
+                        <a href="/compare">
+                          <FontAwesomeIcon
+                            icon={faCodeCompare}
+                            className="compare-icon"
+                          />
+                        </a>
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            this.props.addToWishlist(product);
+                            NotificationManager.success(
+                              `${product.name} added successfully to wishlist!`
+                            );
+                          }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faHeart}
+                            className="heart-icon"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
   };
+
   getDetails = async () => {
     const { catId, SubId } = this.props.match.params;
 
@@ -163,13 +261,13 @@ class CategoryList extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-lg-3 col-md-4 col-12">
             <div className="list-name">
               <List />
             </div>
           </div>
 
-          <div className="col-md-9">
+          <div className="col-lg-9 col-md-8 col-12">
             <section className="featured-product" style={{ padding: 0 }}>
               <div className="filter-container">
                 <div className="price-sort-row">
@@ -232,7 +330,7 @@ class CategoryList extends Component {
                       Grid
                     </button>
                   </div>
-                  &nbsp; &nbsp;
+
                   <div className="range">
                     <h5>
                       <b>Sort By: </b>
@@ -246,11 +344,11 @@ class CategoryList extends Component {
                       <option value="default">Default</option>
                       <option value="NameAZ">Name (A-Z)</option>
                       <option value="NameZA">Name (Z-A)</option>
-                      <option value="lowToHigh">Price (Low &gt; High)</option>
-                      <option value="highToLow">Price (High &gt; Low)</option>
+                      <option value="lowToHigh">Price (Low & High)</option>
+                      <option value="highToLow">Price (High & Low)</option>
                     </select>
                   </div>
-                  &nbsp;&nbsp;
+
                   <div className="show">
                     <h5>
                       <b>Show: </b>
@@ -277,64 +375,6 @@ class CategoryList extends Component {
                   {this.renderProducts()}
                 </div>
               </div>
-
-              {/* <div className="featured-product-list row">
-                {products.map((row, index) => {
-                  const isProductInCart = this.checkCart(row.id);
-                  return (
-                    <div className="col-lg-4 col-md-4 col-12" key={index}>
-                      <div className="product-box">
-                        <div className="product-image">
-                          <img src={cat1} alt="Product" />
-                        </div>
-                        <div className="product-text">
-                          <Link
-                            to={{
-                              pathname: `/p/${row.slug}/${row.id}`,
-                              state: row,
-                            }}
-                          >
-                            <h6>
-                              <b>{row.name}</b>
-                            </h6>
-                          </Link>
-                          <h5>${row.price}</h5>
-                          <div className="add-cart">
-                            {isProductInCart ? (
-                              <Link to="/cart" className="cart-btn">
-                                go to cart
-                              </Link>
-                            ) : (
-                              <a
-                                href="javascript:void(0)"
-                                class="cart-btn"
-                                onClick={() => this.props.addToCart(row)}
-                              >
-                                add to cart
-                              </a>
-                            )}
-                            <div className="com">
-                              <a href="/compare">
-                                <FontAwesomeIcon
-                                  icon={faCodeCompare}
-                                  className="compare-icon"
-                                />
-                              </a>
-                              <a href="/wishlist">
-                                {" "}
-                                <FontAwesomeIcon
-                                  icon={faHeart}
-                                  className="heart-icon"
-                                />
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div> */}
             </section>
           </div>
         </div>
@@ -347,4 +387,6 @@ const mapStateToProps = (state) => ({
   cartItems: state.cart.cartItems,
 });
 
-export default connect(mapStateToProps, { addToCart })(CategoryList);
+export default connect(mapStateToProps, { addToCart, addToWishlist })(
+  CategoryList
+);

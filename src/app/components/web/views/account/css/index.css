@@ -2,36 +2,6 @@
 
 /* --- Product Grid Page --- */
 
-.gambo-Breadcrumb {
-  background: #1d1a1a;
-  border-top: 1px solid #efefef;
-  padding: 5px 0;
-}
-
-.gambo-Breadcrumb .breadcrumb {
-  background-color: transparent;
-  border-radius: 0;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgb(240, 233, 233);
-}
-
-.gambo-Breadcrumb .breadcrumb .breadcrumb-item a {
-  color: rgb(241, 234, 234) !important;
-}
-
-.gambo-Breadcrumb .breadcrumb .breadcrumb-item a:hover {
-  color: #2b2f4c !important;
-}
-
-.gambo-Breadcrumb .breadcrumb .breadcrumb-item.active {
-  color: #eff0f7;
-}
-.breadcrumb-item-active {
-  color: #f3f3f3;
-  margin-left: 10px;
-}
-
 .all-product-grid {
   margin-top: 40px;
 }
@@ -720,18 +690,6 @@ label.control-label {
   font-weight: 500;
 }
 
-.next-btn16 {
-  height: 40px;
-  padding: 9px 20px;
-  border: 1px solid #f55d2c;
-  background: #f55d2c;
-  color: #fff;
-  border-radius: 5px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  display: inline-block;
-}
-
 .time-radio {
   margin-top: 10px;
 }
@@ -860,9 +818,7 @@ label.control-label {
 }
 
 .radio--group-inline-container_1 li {
-  display: inline-block;
-  width: 33.333%;
-  margin-right: 10px;
+  display: block;
 }
 
 .radio--group-inline-container_1 li:last-child {
@@ -1289,15 +1245,6 @@ label.control-label {
   margin-top: 18px;
 }
 
-.user-dt p {
-  font-size: 14px;
-  color: #3e3f5e;
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: 500;
-  display: block;
-}
-
 .user-dt p a {
   color: #3e3f5e !important;
   font-size: 16px;
@@ -1403,15 +1350,6 @@ label.control-label {
 
 .dashboard-right {
   margin-top: 50px;
-}
-
-.main-title-tab h4 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #2b2f4c;
-  text-align: left;
-  margin-bottom: 0;
-  margin-top: 0;
 }
 
 .main-title-tab i {

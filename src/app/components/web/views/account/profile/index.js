@@ -16,23 +16,23 @@ export default class Profile extends Component {
       lastName: "",
       phoneNo: "",
       email: "",
-      profilePhoto: profile || null, //set the initial photo 
+      profilePhoto: profile || null, //set the initial photo
     };
   }
 
-  handleFileChange=(e)=>{
-    const file=e.target.files[0];
-    const reader=new FileReader();
+  handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
 
-    reader.onloadend=()=>{
+    reader.onloadend = () => {
       this.setState({
-        profilePhoto: reader.result, //updating the profile photo here  
+        profilePhoto: reader.result, //updating the profile photo here
       });
-    }
-    if(file){
+    };
+    if (file) {
       reader.readAsDataURL(file);
     }
-  }
+  };
 
   handleChangeUser(event) {
     const target = event.target;
@@ -69,11 +69,10 @@ export default class Profile extends Component {
       phone: phone,
       email: email,
       gender: gender,
-      profilePhoto: this.state.profilePhoto,//saving that uploading image into the image state
+      profilePhoto: this.state.profilePhoto, //saving that uploading image into the image state
     };
     let user = await GetUserLogin.getCustomerUpdate(data);
     if (user) {
-
       this.setState({
         user: {
           ...this.state.user,
@@ -97,7 +96,7 @@ export default class Profile extends Component {
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">Home</li>
-                    <li className="breadcrumb-item-active" aria-current="page">
+                    <li className="breadcrumb-item active" aria-current="page">
                       My Profile
                     </li>
                   </ol>
@@ -112,16 +111,20 @@ export default class Profile extends Component {
               <div className="col-lg-12">
                 <div className="user-dt">
                   <div className="user-img">
-                    <img src={profilePhoto||profile} alt="profile" />
+                    <img src={profilePhoto || profile} alt="profile" />
                     <div className="img-add">
-                      <input type="file" id="file" onChange={this.handleFileChange} />
+                      <input
+                        type="file"
+                        id="file"
+                        onChange={this.handleFileChange}
+                      />
                       <label htmlFor="file" onChange={this.handleFileChange}>
                         <i className="uil uil-camera-plus" />
                       </label>
                     </div>
                   </div>
-                  <h1 style={{ color: "black" }}>{user.firstName}</h1>
-                  <p style={{ color: "blue" }}>+977 {user.phone}</p>
+                  <h1>{user.firstName}</h1>
+                  <p>+977 {user.phone}</p>
                   {/* <div className="earn-points"><img src="images/Dollar.svg" alt />Points : <span>20</span></div> */}
                 </div>
               </div>
@@ -146,10 +149,10 @@ export default class Profile extends Component {
                       <i className="uil uil-box" />
                       My Orders
                     </a>
-                    <a href="/account/rewards" className="user-item">
+                    {/* <a href="/account/rewards" className="user-item">
                       <i className="uil uil-gift" />
                       My Rewards
-                    </a>
+                    </a> */}
                     <a href="/account/wishlist" className="user-item">
                       <i className="uil uil-heart" />
                       Shopping Wishlist
@@ -171,7 +174,7 @@ export default class Profile extends Component {
                   <div className="row">
                     <div className="col-md-12">
                       <div className="main-title-tab">
-                        <h4 style={{ color: "black" }}>
+                        <h4 className="mb-4 sec-title">
                           <i className="uil uil-box" />
                           My Profile
                         </h4>
@@ -239,7 +242,7 @@ export default class Profile extends Component {
                               </div>
                             </div>
                           </div>
-                          <div className="row">
+                          <div className="gender">
                             <div className="form-group col-lg-6">
                               <label>Gender</label>
                               <div className="chek-form">
@@ -303,7 +306,12 @@ export default class Profile extends Component {
                             </div>
                           </div>
                           <div class="row">
-                            <button className="save-btn" onClick={this.handleSubmit}>Save</button>
+                            <button
+                              className="save-btn"
+                              onClick={this.handleSubmit}
+                            >
+                              Save
+                            </button>
                             <button className="cancel-btn">Cancel</button>
                           </div>
                         </form>

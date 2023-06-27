@@ -4,7 +4,6 @@ import GroceryStampleDetails from "../../../services/GroceryStampleDetails";
 import { addToCart } from "../../../../store/actions/cartActions";
 import { addToWishlist } from "../../../../store/actions/wishlistActions";
 import { CircularProgress } from "@material-ui/core";
-import cat1 from "../../../../../assets/cat-1.jpeg";
 import { Link } from "react-router-dom";
 import { GetUserLogin } from "../../../services";
 import Login from "../../../../auth/login";
@@ -79,7 +78,7 @@ class Featured extends Component {
               list.map((row, index) => {
                 const isProductInCart = this.checkCart(row.id);
                 return (
-                  <div class="col-lg-3 col-md-3 col-12" key={index}>
+                  <div class="col-lg-3 col-md-4 col-12" key={index}>
                     <div class="product-box">
                       <div class="product-image">
                         <img src={row.photo} alt="product" />
