@@ -94,7 +94,9 @@ h6 {
 }
 
 .regular-price {
+  
   margin-left: 5px;
+  
 }
 
 .total-checkout-group {
@@ -150,6 +152,11 @@ h6 {
   margin-top: 20px;
 }
 
+.row {
+  display: flex;
+  justify-content: center;
+}
+
 .rpt100 {
   margin-bottom: 30px;
 }
@@ -199,3 +206,4 @@ h6 {
   line-height: 25px;
   margin-right: 10px;
 }
+

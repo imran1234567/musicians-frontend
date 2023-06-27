@@ -101,9 +101,15 @@ class Wishlist extends Component {
                       />
                       <div className="item-column">
                         <div className="item-name">
-                          <Link to="/p/:slug/:id">
-                            <h5>{item.name}</h5>
-                          </Link>
+                        <Link
+                          to={{
+                            pathname: `/p/${item.slug}/${item.id}`,
+                            state: item,
+                          }}
+                        >
+                          <h5>{item.name}</h5>
+                         </Link>
+
                         </div>
                         <br></br>
                         <div className="item-price">
