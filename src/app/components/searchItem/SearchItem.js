@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import { NotificationManager } from "react-notifications";
-import cat1 from "../../../assets/cat-1.jpeg";
 import Login from "../../auth/login";
 import List from "../web/views/catgoryItem";
 import { addToCart } from "../../store/actions/cartActions";
@@ -19,9 +18,9 @@ class SearchItem extends Component {
     productList: [],
     isLoaded: false,
     error: null,
-     sortBy: "default",
-      showBy: "10",
-      display: "list",
+    sortBy: "default",
+    showBy: "10",
+    display: "list",
   };
 
   componentDidMount() {
@@ -57,7 +56,8 @@ class SearchItem extends Component {
           isLoaded: true,
         });
       } else {
-        throw new Error("No products found");
+        window.location.href = "/noProduct";
+        // throw new Error("/noProduct");
       }
     } catch (error) {
       this.setState({
@@ -85,7 +85,7 @@ class SearchItem extends Component {
   };
 
   renderProducts = () => {
-    const { productList, sortBy, showBy,display } = this.state;
+    const { productList, sortBy, showBy, display } = this.state;
 
     // Apply sorting based on sortBy value
     let sortedProducts = [...productList];
@@ -102,7 +102,7 @@ class SearchItem extends Component {
     // Apply showBy limit
     const showByLimit = parseInt(showBy, 10);
     const limitedProducts = sortedProducts.slice(0, showByLimit);
-    if (display === 'list') {
+    if (display === "list") {
       return (
         <div className="featured-product-list">
           {limitedProducts.map((product, index) => {
@@ -114,7 +114,7 @@ class SearchItem extends Component {
                   <img
                     src={product.photo}
                     alt="Product"
-                    style={{ width: '120px', objectFit: 'contain' }}
+                    style={{ width: "120px", objectFit: "contain" }}
                   />
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -190,7 +190,7 @@ class SearchItem extends Component {
                     <img
                       src={product.photo}
                       alt="Product"
-                      style={{ width: '100%', height: 'auto' }}
+                      style={{ width: "100%", height: "auto" }}
                     />
                   </div>
                   <div className="product-text">
@@ -199,14 +199,14 @@ class SearchItem extends Component {
                         pathname: `/p/${product.slug}/${product.id}`,
                         state: product,
                       }}
-                      style={{ textDecoration: 'none', color: 'inherit' }}
+                      style={{ textDecoration: "none", color: "inherit" }}
                     >
                       <h6>
                         <b>{product.name}</b>
                       </h6>
                     </Link>
                     <h5>${product.price}</h5>
-                    <div className="add-cart" >
+                    <div className="add-cart">
                       {isProductInCart ? (
                         <Link to="/cart" className="cart-btn">
                           Go To Cart
@@ -221,7 +221,7 @@ class SearchItem extends Component {
                               `${product.name} added successfully to cart!`
                             );
                           }}
-                          style={{ width: '100%' }}
+                          style={{ width: "100%" }}
                         >
                           Add To Cart
                         </a>
@@ -259,8 +259,6 @@ class SearchItem extends Component {
     }
   };
 
-  
-
   checkCart = (productId) => {
     const { cartItems } = this.props;
     const productExistsInCart = cartItems.some(
@@ -274,7 +272,7 @@ class SearchItem extends Component {
   };
 
   render() {
-    const { isLoaded,error, sortBy, showBy, display } = this.state;
+    const { isLoaded, error, sortBy, showBy, display } = this.state;
 
     if (!isLoaded) {
       return <CircularProgress color="secondary" />;
@@ -356,7 +354,7 @@ class SearchItem extends Component {
                       Grid
                     </button>
                   </div>
-                  &nbsp; &nbsp;
+
                   <div className="range">
                     <h5>
                       <b>Sort By: </b>
@@ -374,7 +372,7 @@ class SearchItem extends Component {
                       <option value="highToLow">Price (High &gt; Low)</option>
                     </select>
                   </div>
-                  &nbsp;&nbsp;
+
                   <div className="show">
                     <h5>
                       <b>Show: </b>
@@ -401,14 +399,11 @@ class SearchItem extends Component {
                   {this.renderProducts()}
                 </div>
               </div>
-
-             
             </section>
           </div>
         </div>
         <Login />
       </div>
-      
       // </section>
     );
   }

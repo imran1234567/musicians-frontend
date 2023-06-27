@@ -178,17 +178,6 @@ h6 {
   cursor: pointer;
 }
 
-.next-btn16 {
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-.next-btn16:hover {
-  background-color: #111;
-}
 .btn-link {
   display: inline-block;
   background-color: transparent;
@@ -202,7 +191,6 @@ h6 {
 }
 
 .btn-link:hover {
-  color: #ffffff;
   text-decoration: none;
 }
 

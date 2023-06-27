@@ -60,7 +60,7 @@ class Wishlist extends Component {
     return (
       <div className="empty-wishlist">
         <div className="container">
-          <div className="empty-wishlist-front">
+          <div className="inner-order">
             <h1 className="mb-4 sec-title">Your Wishlist is Empty</h1>
             <p>Add items to your wishlist</p>
             <img
@@ -109,6 +109,7 @@ class Wishlist extends Component {
                         >
                           <h5>{item.name}</h5>
                          </Link>
+
                         </div>
                         <br></br>
                         <div className="item-price">

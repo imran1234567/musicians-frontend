@@ -188,7 +188,7 @@ class Cart extends Component {
                       <input
                         type="text"
                         style={{
-                          padding: "8px",
+                          padding: "12px 8px",
                           border: "1px solid #ccc",
                           borderRadius: "4px",
                           width: "200px",
@@ -202,21 +202,13 @@ class Cart extends Component {
                     </div>
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <button
-                        style={{
-                          padding: "8px 16px",
-                          backgroundColor: "#ff6f3c", // Light orange color
-                          border: "1px solid #ccc",
-                          borderRadius: "4px",
-                          cursor: "pointer",
-                          fontWeight: "bold",
-                          transition: "background-color 0.3s ease",
-                        }}
-                        onMouseEnter={(e) => {
-                          e.target.style.backgroundColor = "#42b883";
-                        }} // Light green color on hover
-                        onMouseLeave={(e) => {
-                          e.target.style.backgroundColor = "#ff6f3c";
-                        }} // Restore light orange color on hover out
+                        className="cart-btn"
+                        // onMouseEnter={(e) => {
+                        //   e.target.style.backgroundColor = "#42b883";
+                        // }} // Light green color on hover
+                        // onMouseLeave={(e) => {
+                        //   e.target.style.backgroundColor = "#ff6f3c";
+                        // }} // Restore light orange color on hover out-btn
                         onClick={this.handleApplyCoupon}
                       >
                         Apply
@@ -238,7 +230,7 @@ class Cart extends Component {
               {/* <a href="/checkout" style={{ display: "block", width: "100%" }}> */}
               <Link to={{ pathname: "/checkout", state: { totalAmount } }}>
                 <button
-                  className="btn btn-secondary btn-lg btn-block text-left"
+                  className="btn proceeed-btn btn-lg btn-block text-left"
                   type="button"
                 >
                   <span className="float-left">
