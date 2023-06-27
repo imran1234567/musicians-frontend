@@ -4,12 +4,11 @@ import Slider from "react-slick";
 import parse from "html-react-parser";
 import { GetProductDetails } from "../../../services";
 import { NotificationManager } from "react-notifications";
-import {Link} from "react-router-dom";
-// import Similarproduct from './same-product';
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
 import "./index.css";
-import cat1 from "../../../../../assets/cat-1.jpeg";
+
 
 class Singleproduct extends Component {
   constructor(props) {
@@ -25,7 +24,7 @@ class Singleproduct extends Component {
     let list = await GetProductDetails.getProductById(lastSegment);
     this.setState({ product: list.data });
   }
-  
+
   render() {
     const { product } = this.state;
     const settings = {
@@ -60,19 +59,6 @@ class Singleproduct extends Component {
                           className="img-fluid img-center"
                           alt="product"
                         />
-                        {/* {product.productphotos
-                          ? product.productphotos.map((r, index) => {
-                              return (
-                                <div key={index}>
-                                  <img
-                                    alt
-                                    src={r.imgUrl}
-                                    className="img-fluid img-center"
-                                  />
-                                </div>
-                              );
-                            })
-                          : "Please Upload Image"} */}
                       </Slider>
                     </Paper>
                   </div>
@@ -108,20 +94,27 @@ class Singleproduct extends Component {
                         (Inclusive of all taxes)
                       </div>
                     </div>
-                    
-                            <a
-                              href="javascript:void(0)"
-                              class="cart-btn"
-                              onClick={() => {
-                                this.props.addToCart(product);
-                                NotificationManager.success(
-                                  `${product.name} added successfuly in cart!`
-                                );
-                              }}
-                            >
-                             <i className="mdi mdi-cart-outline" /> Add To Cart
-                            </a>
-                        
+                    {this.props.cartItems.some(
+                      (product) => product.id === product.id
+                    ) ? (
+                      <Link to="/cart" className="cart-btn">
+                        Go To Cart
+                      </Link>
+                    ) : (
+                      <a
+                        href="javascript:void(0)"
+                        className="cart-btn"
+                        onClick={() => {
+                          this.props.addToCart(product);
+                          NotificationManager.success(
+                            `${product.name} added successfully to the cart!`
+                          );
+                        }}
+                      >
+                        <i className="mdi mdi-cart-outline" /> Add To Cart
+                      </a>
+                    )}
+
                     <h6 className="mb-3 mt-4">Why shop from Musicians?</h6>
                     <div className="row">
                       <div className="col-md-12">
@@ -131,7 +124,7 @@ class Singleproduct extends Component {
                             <span>Easy Returns &amp; Refunds</span>
                           </h6>
                           <p>
-                            Return products at doorstep and get refund in
+                            Return products at doorstep and get a refund in
                             seconds.
                           </p>
                         </div>
@@ -141,7 +134,7 @@ class Singleproduct extends Component {
                           <i className="mdi mdi-basket" />
                           <h6 className="text-info">Lowest price guaranteed</h6>
                           <p>
-                            Get difference refunded if you find it cheaper
+                            Get the difference refunded if you find it cheaper
                             anywhere else.
                           </p>
                         </div>
@@ -168,14 +161,13 @@ class Singleproduct extends Component {
             )}
           </div>
         </section>
-
-        {/* More like product */}
-
-        {/* <Similarproduct /> */}
-        {/* End Same product */}
       </div>
     );
   }
 }
 
-export default connect(null, { addToCart })(Singleproduct);
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.cartItems,
+});
+
+export default connect(mapStateToProps, { addToCart })(Singleproduct);
