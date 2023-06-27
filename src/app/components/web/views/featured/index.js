@@ -20,7 +20,7 @@ class Featured extends Component {
       token: "",
       productList: [],
       isLoaded: false,
-      comparisonItems: []
+      comparisonItems: JSON.parse(localStorage.getItem('comparisonItems')) ? JSON.parse(localStorage.getItem('comparisonItems')) : []
     };
   }
 
@@ -36,6 +36,10 @@ class Featured extends Component {
         isLoaded: true,
       });
     }
+    const comarisionItems = JSON.parse(localStorage.getItem('comparisonItems'));
+    if (comarisionItems) {
+      this.setState({ comarisionItems })
+    }
   }
 
   addToComparison = (product) => {
@@ -45,7 +49,7 @@ class Featured extends Component {
     this.setState((prevState) => ({
       comparisonItems: [...prevState.comparisonItems, product]
     }),()=>{
-      window.location.href = '/compare'
+      window.location.href = "/compare"
     })
   }
 
