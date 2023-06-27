@@ -84,6 +84,18 @@ class SearchItem extends Component {
     return `$${value}`;
   };
 
+  checkWishlist = (productId) => {
+    const { wishItems } = this.props;
+    const productExistsInWishlist = wishItems.some(
+      (product) => product.id === productId
+    );
+    if (productExistsInWishlist) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   renderProducts = () => {
     const { productList, sortBy, showBy, display } = this.state;
 
@@ -107,7 +119,7 @@ class SearchItem extends Component {
         <div className="featured-product-list">
           {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
-
+            const isProductInWishlist = this.checkWishlist(product.id);
             return (
               <div className="list-item" key={index}>
                 <div className="product-image">
@@ -156,19 +168,26 @@ class SearchItem extends Component {
                         />
                       </a>
                       <a
-                        href="javascript:void(0)"
-                        onClick={() => {
-                          this.props.addToWishlist(product);
-                          NotificationManager.success(
-                            `${product.name} added successfully to wishlist!`
-                          );
-                        }}
-                      >
-                        <FontAwesomeIcon
-                          icon={faHeart}
-                          className="heart-icon"
-                        />
-                      </a>
+                              href="javascript:void(0)"
+                              onClick={() => {
+                                if (isProductInWishlist) {
+                                  // Redirect to wishlist page
+                                  window.location.href = "/wishlist";
+                                } else {
+                                  this.props.addToWishlist(product);
+                                  NotificationManager.success(
+                                    `${product.name} added successfully to the wishlist!`
+                                  );
+                                }
+                              }}
+                              
+                            >
+                            <FontAwesomeIcon
+                              icon={faHeart}
+                              className="heart-icon"
+                              style={{ color: isProductInWishlist ? "red" : "gray" }}
+                            />
+                            </a>
                     </div>
                   </div>
                 </div>
@@ -182,7 +201,7 @@ class SearchItem extends Component {
         <div className="featured-product-list row">
           {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
-
+            const isProductInWishlist = this.checkWishlist(product.id);
             return (
               <div className="col-lg-4 col-md-4 col-12" key={index}>
                 <div className="product-box">
@@ -234,19 +253,26 @@ class SearchItem extends Component {
                           />
                         </a>
                         <a
-                          href="javascript:void(0)"
-                          onClick={() => {
-                            this.props.addToWishlist(product);
-                            NotificationManager.success(
-                              `${product.name} added successfully to wishlist!`
-                            );
-                          }}
-                        >
-                          <FontAwesomeIcon
-                            icon={faHeart}
-                            className="heart-icon"
-                          />
-                        </a>
+                              href="javascript:void(0)"
+                              onClick={() => {
+                                if (isProductInWishlist) {
+                                  // Redirect to wishlist page
+                                  window.location.href = "/wishlist";
+                                } else {
+                                  this.props.addToWishlist(product);
+                                  NotificationManager.success(
+                                    `${product.name} added successfully to the wishlist!`
+                                  );
+                                }
+                              }}
+                              
+                            >
+                            <FontAwesomeIcon
+                              icon={faHeart}
+                              className="heart-icon"
+                              style={{ color: isProductInWishlist ? "red" : "gray" }}
+                            />
+                            </a>
                       </div>
                     </div>
                   </div>
