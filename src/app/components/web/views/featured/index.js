@@ -45,7 +45,7 @@ class Featured extends Component {
     this.setState((prevState) => ({
       comparisonItems: [...prevState.comparisonItems, product]
     }),()=>{
-      window.location.href = '/comare'
+      window.location.href = '/compare'
     })
   }
 
