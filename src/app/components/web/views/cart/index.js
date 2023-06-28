@@ -93,13 +93,13 @@ class Cart extends Component {
                     <div className="offer-badge">{row.discountPer}% OFF</div>
                   </div>
                   <div className="cart-text">
-                  <Link
-                          to={{
-                            pathname: `/p/${row.slug}/${row.id}`,
-                            state: row,
-                          }}
-                        >
-                          <h6 style={{ color: "#545454", fontSize: "15px" }}>{row.name}</h6>
+                    <Link
+                      to={{
+                        pathname: `/p/${row.slug}/${row.id}`,
+                        state: row,
+                      }}
+                    >
+                      <h6>{row.name}</h6>
                     </Link>
                     <div className="qty-group">
                       <div className="quantity buttons_added">

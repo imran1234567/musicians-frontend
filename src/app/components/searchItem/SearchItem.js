@@ -310,122 +310,102 @@ class SearchItem extends Component {
 
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-md-3">
-            <div className="list-name">
-              <List />
-            </div>
-          </div>
-
-          <div className="col-md-9">
-            <section className="featured-product" style={{ padding: 0 }}>
-              <div className="filter-container">
-                <div className="price-sort-row">
-                  <div
-                    className="display-options"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      marginBottom: "10px",
-                      marginTop: "10px",
-                    }}
-                  >
-                    <h5
-                      style={{
-                        margin: "0",
-                        marginRight: "10px",
-                        alignSelf: "center",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      <b>Display: </b>
-                    </h5>
-                    <button
-                      className={`display-button ${
-                        display === "list" ? "active" : ""
-                      }`}
-                      onClick={() => this.handleDisplayChange("list")}
-                      style={{
-                        padding: "4px 12px",
-                        backgroundColor:
-                          display === "list" ? "#ccc" : "#f0f0f0",
-                        border: "none",
-                        borderRadius: "5px",
-                        fontSize: "14px",
-                        color: display === "list" ? "#000000" : "#333",
-                        cursor: "pointer",
-                        transition: "background-color 0.3s ease",
-                      }}
-                    >
-                      List
-                    </button>
-                    <button
-                      className={`display-button ${
-                        display === "grid" ? "active" : ""
-                      }`}
-                      onClick={() => this.handleDisplayChange("grid")}
-                      style={{
-                        padding: "4px 12px",
-                        backgroundColor:
-                          display === "grid" ? "#ccc" : "#f0f0f0",
-                        border: "none",
-                        borderRadius: "5px",
-                        fontSize: "14px",
-                        color: display === "grid" ? "#000000" : "#333",
-                        cursor: "pointer",
-                        transition: "background-color 0.3s ease",
-                      }}
-                    >
-                      Grid
-                    </button>
-                  </div>
-
-                  <div className="range">
-                    <h5>
-                      <b>Sort By: </b>
-                    </h5>
-                    <select
-                      id="sortBy"
-                      value={sortBy}
-                      onChange={this.handleSortByChange}
-                      placeholder="Default"
-                    >
-                      <option value="default">Default</option>
-                      <option value="NameAZ">Name (A-Z)</option>
-                      <option value="NameZA">Name (Z-A)</option>
-                      <option value="lowToHigh">Price (Low &gt; High)</option>
-                      <option value="highToLow">Price (High &gt; Low)</option>
-                    </select>
-                  </div>
-
-                  <div className="show">
-                    <h5>
-                      <b>Show: </b>
-                    </h5>
-                    <select
-                      id="showBy"
-                      value={showBy}
-                      onChange={this.handleShowByChange}
-                    >
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="50">50</option>
-                      <option value="75">75</option>
-                      <option value="100">100</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div
-                  className={`product-list ${
-                    display === "grid" ? "grid-view" : ""
-                  }`}
-                >
-                  {this.renderProducts()}
-                </div>
+        <div className="search-page">
+          <div className="row">
+            <div className="col-md-3">
+              <div className="list-name">
+                <List />
               </div>
-            </section>
+            </div>
+
+            <div className="col-md-9">
+              <section className="featured-product" style={{ padding: 0 }}>
+                <div className="filter-container">
+                  <div className="price-sort-row">
+                    <div
+                      className="display-options"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        marginBottom: "10px",
+                        marginTop: "10px",
+                      }}
+                    >
+                      <h5
+                        style={{
+                          margin: "0",
+                          marginRight: "10px",
+                          alignSelf: "center",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <b>Display: </b>
+                      </h5>
+                      <button
+                        className={`display-button ${
+                          display === "list" ? "active" : ""
+                        }`}
+                        onClick={() => this.handleDisplayChange("list")}
+                      >
+                        List
+                      </button>
+                      <button
+                        className={`display-button ${
+                          display === "grid" ? "active" : ""
+                        }`}
+                        onClick={() => this.handleDisplayChange("grid")}
+                      >
+                        Grid
+                      </button>
+                    </div>
+
+                    <div className="range">
+                      <h5>
+                        <b>Sort By: </b>
+                      </h5>
+                      <select
+                        id="sortBy"
+                        value={sortBy}
+                        onChange={this.handleSortByChange}
+                        placeholder="Default"
+                      >
+                        <option value="default">Default</option>
+                        <option value="NameAZ">Name (A-Z)</option>
+                        <option value="NameZA">Name (Z-A)</option>
+                        <option value="lowToHigh">Price (Low &gt; High)</option>
+                        <option value="highToLow">Price (High &gt; Low)</option>
+                      </select>
+                    </div>
+
+                    <div className="show">
+                      <h5>
+                        <b>Show: </b>
+                      </h5>
+                      <select
+                        id="showBy"
+                        value={showBy}
+                        onChange={this.handleShowByChange}
+                      >
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="75">75</option>
+                        <option value="100">100</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`product-list ${
+                      display === "grid" ? "grid-view" : ""
+                    }`}
+                  >
+                    {this.renderProducts()}
+                  </div>
+                </div>
+              </section>
+            </div>
           </div>
         </div>
         <Login />
