@@ -49,8 +49,11 @@ export default class Login extends Component {
           : "invalid email address";
         break;
       case "password":
-        formErrors.password = formErrors.password =
-          value.length < 6 ? "Invalid password" : "";
+        formErrors.password =value.length < 6 ? "Invalid password" : "";
+        // if (formErrors.password) {
+        //   // Show notification for wrong password
+        //   NotificationManager.error("Wrong password. Please try again.");
+        // }
         break;
       default:
         break;
@@ -68,7 +71,7 @@ export default class Login extends Component {
         await GetUserLogin.authenticate(user.token, email);
         NotificationManager.success("Successfully Logedin!");
       } else {
-        console.log("Please check you login, Input Error");
+        NotificationManager.error("Please check your login Credential");
       }
     }
   };

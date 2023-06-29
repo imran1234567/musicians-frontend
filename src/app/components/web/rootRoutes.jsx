@@ -43,7 +43,7 @@ import Process from "./views/home/Process";
 import OrderSuccess from "./views/checkout/OrderSuccess";
 import OrderFailure from "./views/checkout/OrderFailure";
 import NoProductFound from "../searchItem/NoProductFound";
-
+import returns from "./views/returns/returns";
 // import Failed from './views/checkout/failed';
 
 export default class rootRoutes extends Component {
@@ -83,6 +83,7 @@ export default class rootRoutes extends Component {
           <Route exact path="/orderSuccess" component={OrderSuccess} />
           <Route exact path="/orderFailure" component={OrderFailure} />
           <Route exact path="/noProduct" component={NoProductFound} />
+          <Route exact path="/returns" component={returns}/>
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />

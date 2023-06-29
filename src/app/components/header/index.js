@@ -36,21 +36,24 @@ class Navigation extends Component {
     }));
   };
 
-  // handleChange(e) {
-  //   this.setState({ [e.target.name]: e.target.value });
-  // }
 
   //taking the search input
   handleChange = (e) => {
     console.log(this.setState({ searchtxt: e.target.value }));
   };
-
-  // handleClickSearch = (event) => {
-  //   let { searchtxt } = this.state;
-  //   console.log(searchtxt);
-
-  //   this.props.history.push(`/product/catalogsearch/result/${searchtxt}`);
-  // };
+  handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      this.handleClickSearch();
+    }
+  };
+  handleClickSearch=()=>{
+    const {searchtxt} = this.state;
+    this.props.history.push({
+      pathname: "/SearchItem",
+      state:{value:searchtxt},
+    });
+  };
 
   async componentDidMount() {
     let cookies = await GetUserLogin.isAuthenticate();
@@ -96,11 +99,7 @@ class Navigation extends Component {
     await GetUserLogin.logout();
   };
 
-  // handleClickSearch = (event) => {
-  //   event.preventDefault();
-  //   let { searchtxt } = this.state;
-  //   this.props.history.push(`/product/catalogsearch/result/${searchtxt}`);
-  // };
+  
 
   render() {
     let {
@@ -181,6 +180,7 @@ class Navigation extends Component {
                           }}
                           value={this.state.searchtxt}
                           onChange={(e) => this.handleChange(e)}
+                          onKeyDown={this.handleKeyDown}
                         />
                         <Link
                           to={{
@@ -215,11 +215,6 @@ class Navigation extends Component {
                   </div>
 
                   <ul class="header-right-icon">
-                    {/* <li class="h-search">
-                      <a href="#">
-                        <i class="bx bx-search"></i>
-                      </a>
-                    </li> */}
                     <li class="user">
                       {token ? (
                         <Link to="/account/view">
@@ -256,15 +251,6 @@ class Navigation extends Component {
 
                       <span>{cartItems.length}</span>
                     </li>
-                    {/* <li class="cart-total">
-                      <h5>
-                        $
-                        {cartItems.reduce(
-                          (sum, i) => (sum += i.qty * i.netPrice),
-                          0
-                        )}
-                      </h5>
-                    </li> */}
                   </ul>
                 </div>
               </div>
