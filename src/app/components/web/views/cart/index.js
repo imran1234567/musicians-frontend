@@ -58,6 +58,16 @@ class Cart extends Component {
       );
     }
   };
+
+  //handling the decrease 
+  handleDecreaseToCart = (product) => {
+    if (product.qty <= 1) {
+      // If the quantity is less than or equal to 1, remove the product from the cart
+      this.props.removeFromCart(product);
+    } else {
+      this.props.decreaseToCart(product);
+    }
+  };
   render() {
     const { cartItems } = this.props;
     const { appliedCoupon, couponDiscount } = this.state;
@@ -70,6 +80,20 @@ class Cart extends Component {
     return (
       <div className="cart-style">
         <div className="container">
+        {cartItems.length === 0 ? ( // Check if cart is empty
+            <div className="cart-empty">
+            <h2>Your cart is empty</h2>
+            <img
+              src="https://img.icons8.com/?size=512&id=9720&format=png"
+              alt="Logo"
+              className="cart-logo"
+            />
+            <Link to="/">
+              <button className="add-item-button">Add Item</button>
+            </Link>
+            <div className="gap"></div>
+          </div>
+          ) :(
           <div className="cart-sidebar">
             <div className="bs-canvas-header side-cart-header p-3">
               <div className="d-inline-block main-cart-title">
@@ -105,7 +129,7 @@ class Cart extends Component {
                       <div className="quantity buttons_added">
                         <button
                           className="decrease-btn"
-                          onClick={() => this.props.decreaseToCart(row)}
+                          onClick={() => this.handleDecreaseToCart(row)}
                         >
                           -
                         </button>
@@ -126,7 +150,7 @@ class Cart extends Component {
                         </button>
                       </div>
                       <div className="cart-item-price">
-                        ${row.netPrice}
+                      &#36;{row.netPrice}
                         <span></span>
                       </div>
                     </div>
@@ -161,7 +185,7 @@ class Cart extends Component {
                 <p>
                   Sub Total{" "}
                   <strong className="float-right">
-                    {cartItems.reduce(
+                  &#36;{cartItems.reduce(
                       (sum, i) => (sum += i.qty * i.netPrice),
                       0
                     )}
@@ -245,6 +269,7 @@ class Cart extends Component {
               {/* </a> */}
             </div>
           </div>
+          )}
         </div>
       </div>
     );

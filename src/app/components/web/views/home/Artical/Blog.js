@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ReactHtmlParser from "react-html-parser";
 import "./Blog.css"; // Import the CSS file for styling
 
 export default class Blog extends Component {
@@ -39,8 +40,8 @@ export default class Blog extends Component {
           <img src={imageUrl} alt={title} />
         </div>
         <div className="blog-content">
-          <h2 style={{textAlign:'center'}}>{title}</h2>
-          <p>{content}</p>
+          <h2 style={{ textAlign: 'center' }}>{title}</h2>
+          {ReactHtmlParser(content)}
         </div>
       </div>
     );
