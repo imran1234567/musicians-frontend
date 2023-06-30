@@ -180,7 +180,7 @@ class ContactForm extends React.Component {
               </div>
             </div>
             <div className="map-location">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117839.97005470317!2d88.32219847714263!3d22.635174102036043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02750f0aaaf931%3A0xd393c016b906515d!2s6A%20Music%20School%20(6%20Avenue)!5e0!3m2!1sen!2sin!4v1684490136143!5m2!1sen!2sin"></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.7171290848146!2d150.95224381144715!3d-33.871180219070865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12bd876b6f62ff%3A0x8447dfd173be741b!2sMusicians%20Avenue!5e0!3m2!1sen!2sin!4v1688022201111!5m2!1sen!2sin"></iframe>
             </div>
           </div>
         </section>

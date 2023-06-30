@@ -17,7 +17,7 @@ class compare extends Component {
       { id: 9, name: "Bass Guitar", price: 600, brand: "Ibanez" },
       { id: 10, name: "Cello", price: 1200, brand: "Daddario" },
     ],
-    comarisionItems: []
+    comarisionItems: [],
   };
 
   handleProductSelect = (event) => {
@@ -36,58 +36,70 @@ class compare extends Component {
   };
 
   componentDidMount() {
-    const comarisionItems = JSON.parse(localStorage.getItem('comparisonItems'));
+    const comarisionItems = JSON.parse(localStorage.getItem("comparisonItems"));
     if (comarisionItems) {
-      this.setState({ comarisionItems })
+      this.setState({ comarisionItems });
     }
   }
 
   render() {
-    const { selectedProduct, selectedProducts, products, comarisionItems } = this.state;
-    console.log("compareItems", comarisionItems)
+    const { selectedProduct, selectedProducts, products, comarisionItems } =
+      this.state;
+    console.log("compareItems", comarisionItems);
     return (
       <div className="comparison-page">
-        <h1 className="comparison-page-title">Instrument Comparison</h1>
-        <div className="comparison-page-section">
-          {/* <h2>Available Instruments</h2> */}
-        </div>
-
-        {comarisionItems.length > 0 && (
+        <h1 className="mb-4 mt-4 sec-title">Instrument Comparison</h1>
+        <div className="container">
           <div className="comparison-page-section">
-            <h2>Selected Instruments</h2>
-            <table className="comparison-table">
-              <thead>
-                <tr>
-                  <th>Product Name</th>
-                  {comarisionItems.map((product) => {
-                    return <th key={product.id}>{product.name}</th>;
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={{ fontWeight: "bold" }}>Product Image</td>
-                  {comarisionItems.map((product) => {
-                    return <td key={product.id}><img src={product.photo} style={{ height: '200px', width: '200px' }}></img></td>;
-                  })}
-                </tr>
-                <tr>
-                  <td style={{ fontWeight: "bold" }}>Brand</td>
-                  {comarisionItems.map((product) => {
-                    return <td key={product.id}>{product.brand}</td>;
-                  })}
-                </tr>
-                <tr>
-                  <td style={{ fontWeight: "bold" }}>Price</td>
-                  {comarisionItems.map((product) => {
-                    return <td key={product.id}>${product.buyerPrice}</td>;
-                  })}
-                </tr>
-                {/* Add more attributes as needed */}
-              </tbody>
-            </table>
+            {/* <h2>Available Instruments</h2> */}
           </div>
-        )}
+
+          {comarisionItems.length > 0 && (
+            <div className="comparison-page-section">
+              <h2>Selected Instruments</h2>
+              <div class="table-responsive">
+                <table className="comparison-table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Product Name</th>
+                      {comarisionItems.map((product) => {
+                        return <th key={product.id}>{product.name}</th>;
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style={{ fontWeight: "bold" }}>Product Image</td>
+                      {comarisionItems.map((product) => {
+                        return (
+                          <td key={product.id}>
+                            <img
+                              src={product.photo}
+                              style={{ height: "200px", width: "200px" }}
+                            ></img>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      <td style={{ fontWeight: "bold" }}>Brand</td>
+                      {comarisionItems.map((product) => {
+                        return <td key={product.id}>{product.brand}</td>;
+                      })}
+                    </tr>
+                    <tr>
+                      <td style={{ fontWeight: "bold" }}>Price</td>
+                      {comarisionItems.map((product) => {
+                        return <td key={product.id}>${product.buyerPrice}</td>;
+                      })}
+                    </tr>
+                    {/* Add more attributes as needed */}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     );
   }

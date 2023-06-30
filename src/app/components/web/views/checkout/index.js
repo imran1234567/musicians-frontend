@@ -316,13 +316,7 @@ class checkout extends Component {
                             <span className="number">1.</span> Checkout Options
                             <span className="mdi mdi-checkbox-marked-circle-outline"></span>
                           </button>
-                          <div
-                            className="_2jDL7w"
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                            }}
-                          >
+                          <div className="_2jDL7w">
                             <div>
                               <span className="dNZmcB">
                                 {customer.firstName}{" "}
@@ -358,22 +352,17 @@ class checkout extends Component {
                         data-parent="#accordionExample"
                       >
                         <div className="delivery-address">
-                          <div>
-                            <div className="form-check">
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                id="existingAddress"
-                                name="addressOption"
-                                checked={useExistingAddress}
-                                onChange={() =>
-                                  this.setState({ useExistingAddress: true })
-                                }
-                              />
-                            </div>
-                          </div>
-
-                          <div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              id="existingAddress"
+                              name="addressOption"
+                              checked={useExistingAddress}
+                              onChange={() =>
+                                this.setState({ useExistingAddress: true })
+                              }
+                            />
                             <label
                               className="form-check-label"
                               htmlFor="existingAddress"
@@ -395,22 +384,17 @@ class checkout extends Component {
                             </div>
                           )}
 
-                          <div>
-                            <div className="form-check">
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                id="newAddress"
-                                name="addressOption"
-                                checked={!useExistingAddress}
-                                onChange={() =>
-                                  this.setState({ useExistingAddress: false })
-                                }
-                              />
-                            </div>
-                          </div>
-
-                          <div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              id="newAddress"
+                              name="addressOption"
+                              checked={!useExistingAddress}
+                              onChange={() =>
+                                this.setState({ useExistingAddress: false })
+                              }
+                            />
                             <label
                               className="form-check-label"
                               htmlFor="newAddress"

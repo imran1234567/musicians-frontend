@@ -94,9 +94,7 @@ h6 {
 }
 
 .regular-price {
-  
   margin-left: 5px;
-  
 }
 
 .total-checkout-group {
@@ -135,12 +133,14 @@ h6 {
 .main-total-cart h2 {
   margin: 0;
   font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .main-total-cart span {
   font-size: 24px;
   font-weight: bold;
-  color: #28a745;
+  color: var(--primary-color);
+  font-size: 22px;
 }
 .checkout-step-body {
   display: flex;
@@ -152,10 +152,10 @@ h6 {
   margin-top: 20px;
 }
 
-.row {
+/* .row {
   display: flex;
   justify-content: center;
-}
+} */
 
 .rpt100 {
   margin-bottom: 30px;
@@ -218,4 +218,3 @@ h6 {
   line-height: 25px;
   margin-right: 10px;
 }
-

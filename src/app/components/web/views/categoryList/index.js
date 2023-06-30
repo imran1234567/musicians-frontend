@@ -137,26 +137,27 @@ class CategoryList extends Component {
                         />
                       </a>
                       <a
-                              href="javascript:void(0)"
-                              onClick={() => {
-                                if (isProductInWishlist) {
-                                  // Redirect to wishlist page
-                                  window.location.href = "/wishlist";
-                                } else {
-                                  this.props.addToWishlist(product);
-                                  NotificationManager.success(
-                                    `${product.name} added successfully to the wishlist!`
-                                  );
-                                }
-                              }}
-                              
-                            >
-                            <FontAwesomeIcon
-                              icon={faHeart}
-                              className="heart-icon"
-                              style={{ color: isProductInWishlist ? "red" : "gray" }}
-                            />
-                            </a>
+                        href="javascript:void(0)"
+                        onClick={() => {
+                          if (isProductInWishlist) {
+                            // Redirect to wishlist page
+                            window.location.href = "/wishlist";
+                          } else {
+                            this.props.addToWishlist(product);
+                            NotificationManager.success(
+                              `${product.name} added successfully to the wishlist!`
+                            );
+                          }
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faHeart}
+                          className="heart-icon"
+                          style={{
+                            color: isProductInWishlist ? "red" : "gray",
+                          }}
+                        />
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -172,7 +173,7 @@ class CategoryList extends Component {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
             return (
-              <div className="col-lg-4 col-md-4 col-12" key={index}>
+              <div className="col-lg-4 col-md-4 col-6" key={index}>
                 <div className="product-box">
                   <div className="product-image">
                     <img
@@ -222,26 +223,27 @@ class CategoryList extends Component {
                           />
                         </a>
                         <a
-                              href="javascript:void(0)"
-                              onClick={() => {
-                                if (isProductInWishlist) {
-                                  // Redirect to wishlist page
-                                  window.location.href = "/wishlist";
-                                } else {
-                                  this.props.addToWishlist(product);
-                                  NotificationManager.success(
-                                    `${product.name} added successfully to the wishlist!`
-                                  );
-                                }
-                              }}
-                              
-                            >
-                            <FontAwesomeIcon
-                              icon={faHeart}
-                              className="heart-icon"
-                              style={{ color: isProductInWishlist ? "red" : "gray" }}
-                            />
-                            </a>
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            if (isProductInWishlist) {
+                              // Redirect to wishlist page
+                              window.location.href = "/wishlist";
+                            } else {
+                              this.props.addToWishlist(product);
+                              NotificationManager.success(
+                                `${product.name} added successfully to the wishlist!`
+                              );
+                            }
+                          }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faHeart}
+                            className="heart-icon"
+                            style={{
+                              color: isProductInWishlist ? "red" : "gray",
+                            }}
+                          />
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -287,7 +289,7 @@ class CategoryList extends Component {
       <div className="container">
         <div className="search-page">
           <div className="row">
-            <div className="col-lg-3 col-md-4 col-12">
+            <div className="col-lg-3 col-md-4 col-12 mob-hide">
               <div className="list-name">
                 <List />
               </div>
