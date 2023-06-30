@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {NotificationManager, NotificationContainer} from "react-notifications";
 
 import {
   faFacebook,
@@ -29,8 +30,18 @@ import c8 from "../../../images/c8.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+
 class Footer extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    NotificationManager.success('Successfully subscribed');
+  };
   render() {
+   
     return (
       <>
         <footer className="footer-section">
@@ -208,7 +219,7 @@ class Footer extends Component {
                           <Link to="/contact">Contact Us</Link>
                         </li>
                         <li>
-                          <Link to="/person">Returns</Link>
+                          <Link to="/returns">Returns</Link>
                         </li>
                         <li>
                           <Link to="/map">Site Map</Link>
@@ -257,24 +268,27 @@ class Footer extends Component {
                     </div>
                   </div>
 
-                  <div class="col-lg-4 col-md-4 col-12">
-                    <div class="block">
+                  <div className="col-lg-4 col-md-4 col-12">
+                    {/* Temporarily written need API to store the user email */}
+                    <div className="block">
                       <h4>Sign up to our monthly newsletter</h4>
                       <form>
-                        <div class="form-group">
+                        <div className="form-group">
                           <input
                             type="email"
-                            class="form-control"
+                            className="form-control"
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
                             placeholder="Enter Your Email ID here..."
+                            required
                           />
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
                           Submit
                         </button>
                       </form>
                     </div>
+                    <NotificationContainer />
                   </div>
                 </div>
               </div>

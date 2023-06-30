@@ -4,6 +4,18 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 class ContactForm extends React.Component {
+  handleFormSubmit = (values) => {
+    const { firstName, lastName, phone, email, enquiry } = values;
+
+    const subject = "Contact Form Submission";
+    const body = `First Name: ${firstName}\nLast Name: ${lastName}\nPhone: ${phone}\nEmail: ${email}\nEnquiry: ${enquiry}`;
+
+    const mailtoLink = `mailto:musiciansavenue@bigpond.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoLink;
+  };
   render() {
     return (
       <div>
@@ -57,9 +69,7 @@ class ContactForm extends React.Component {
                         .required("Email is required"),
                       enquiry: Yup.string().required("Enquiry is required"),
                     })}
-                    onSubmit={(values) => {
-                      alert(JSON.stringify(values, null, 2));
-                    }}
+                    onSubmit={this.handleFormSubmit}
                   >
                     {({ handleChange, handleBlur, errors, touched }) => (
                       <Form className="row g-3">
