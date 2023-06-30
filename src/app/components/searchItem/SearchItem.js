@@ -168,26 +168,27 @@ class SearchItem extends Component {
                         />
                       </a>
                       <a
-                              href="javascript:void(0)"
-                              onClick={() => {
-                                if (isProductInWishlist) {
-                                  // Redirect to wishlist page
-                                  window.location.href = "/wishlist";
-                                } else {
-                                  this.props.addToWishlist(product);
-                                  NotificationManager.success(
-                                    `${product.name} added successfully to the wishlist!`
-                                  );
-                                }
-                              }}
-                              
-                            >
-                            <FontAwesomeIcon
-                              icon={faHeart}
-                              className="heart-icon"
-                              style={{ color: isProductInWishlist ? "red" : "gray" }}
-                            />
-                            </a>
+                        href="javascript:void(0)"
+                        onClick={() => {
+                          if (isProductInWishlist) {
+                            // Redirect to wishlist page
+                            window.location.href = "/wishlist";
+                          } else {
+                            this.props.addToWishlist(product);
+                            NotificationManager.success(
+                              `${product.name} added successfully to the wishlist!`
+                            );
+                          }
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faHeart}
+                          className="heart-icon"
+                          style={{
+                            color: isProductInWishlist ? "red" : "gray",
+                          }}
+                        />
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -253,26 +254,27 @@ class SearchItem extends Component {
                           />
                         </a>
                         <a
-                              href="javascript:void(0)"
-                              onClick={() => {
-                                if (isProductInWishlist) {
-                                  // Redirect to wishlist page
-                                  window.location.href = "/wishlist";
-                                } else {
-                                  this.props.addToWishlist(product);
-                                  NotificationManager.success(
-                                    `${product.name} added successfully to the wishlist!`
-                                  );
-                                }
-                              }}
-                              
-                            >
-                            <FontAwesomeIcon
-                              icon={faHeart}
-                              className="heart-icon"
-                              style={{ color: isProductInWishlist ? "red" : "gray" }}
-                            />
-                            </a>
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            if (isProductInWishlist) {
+                              // Redirect to wishlist page
+                              window.location.href = "/wishlist";
+                            } else {
+                              this.props.addToWishlist(product);
+                              NotificationManager.success(
+                                `${product.name} added successfully to the wishlist!`
+                              );
+                            }
+                          }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faHeart}
+                            className="heart-icon"
+                            style={{
+                              color: isProductInWishlist ? "red" : "gray",
+                            }}
+                          />
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -312,7 +314,7 @@ class SearchItem extends Component {
       <div className="container">
         <div className="search-page">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-lg-3 col-md-4 col-6 mob-hide">
               <div className="list-name">
                 <List />
               </div>

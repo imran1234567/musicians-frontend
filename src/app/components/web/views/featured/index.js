@@ -21,7 +21,9 @@ class Featured extends Component {
       token: "",
       productList: [],
       isLoaded: false,
-      comparisonItems: JSON.parse(localStorage.getItem('comparisonItems')) ? JSON.parse(localStorage.getItem('comparisonItems')) : []
+      comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
+        ? JSON.parse(localStorage.getItem("comparisonItems"))
+        : [],
     };
   }
 
@@ -37,9 +39,9 @@ class Featured extends Component {
         isLoaded: true,
       });
     }
-    const comarisionItems = JSON.parse(localStorage.getItem('comparisonItems'));
+    const comarisionItems = JSON.parse(localStorage.getItem("comparisonItems"));
     if (comarisionItems) {
-      this.setState({ comarisionItems })
+      this.setState({ comarisionItems });
     }
   }
 
@@ -47,15 +49,21 @@ class Featured extends Component {
     NotificationManager.success(
       `${product.name} added successfuly for comparsion!`
     );
-    this.setState((prevState) => ({
-      comparisonItems: [...prevState.comparisonItems, product]
-    }),()=>{
-      window.location.href = "/compare"
-    })
-  }
+    this.setState(
+      (prevState) => ({
+        comparisonItems: [...prevState.comparisonItems, product],
+      }),
+      () => {
+        window.location.href = "/compare";
+      }
+    );
+  };
 
   componentDidUpdate() {
-    localStorage.setItem('comparisonItems', JSON.stringify(this.state.comparisonItems))
+    localStorage.setItem(
+      "comparisonItems",
+      JSON.stringify(this.state.comparisonItems)
+    );
   }
 
   checkCart = (productId) => {
@@ -71,17 +79,17 @@ class Featured extends Component {
   };
 
   checkWishlist = (productId) => {
-        const { wishItems } = this.props;
-        const productExistsInWishlist = wishItems.some(
-          (product) => product.id === productId
-        );
-        if (productExistsInWishlist) {
-          return true;
-        } else {
-          return false;
-        }
-      };
-     
+    const { wishItems } = this.props;
+    const productExistsInWishlist = wishItems.some(
+      (product) => product.id === productId
+    );
+    if (productExistsInWishlist) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   render() {
     let list = this.state.productList?.product;
     return (
@@ -98,7 +106,7 @@ class Featured extends Component {
                 const isProductInCart = this.checkCart(row.id);
                 const isProductInWishlist = this.checkWishlist(row.id);
                 return (
-                  <div class="col-lg-3 col-md-4 col-12" key={index}>
+                  <div class="col-lg-3 col-md-4 col-6" key={index}>
                     <div class="product-box">
                       <div class="product-image">
                         <img src={row.photo} alt="product" />
@@ -133,9 +141,12 @@ class Featured extends Component {
                             </a>
                           )}
                           <div className="com">
-                            <a href="javascript:void(0)" onClick={() => {
-                              this.addToComparison(row)
-                            }}>
+                            <a
+                              href="javascript:void(0)"
+                              onClick={() => {
+                                this.addToComparison(row);
+                              }}
+                            >
                               <FontAwesomeIcon
                                 icon={faCodeCompare}
                                 className="compare-icon"
@@ -154,13 +165,14 @@ class Featured extends Component {
                                   );
                                 }
                               }}
-                              
                             >
-                            <FontAwesomeIcon
-                              icon={faHeart}
-                              className="heart-icon"
-                              style={{ color: isProductInWishlist ? "red" : "gray" }}
-                            />
+                              <FontAwesomeIcon
+                                icon={faHeart}
+                                className="heart-icon"
+                                style={{
+                                  color: isProductInWishlist ? "red" : "gray",
+                                }}
+                              />
                             </a>
                           </div>
                         </div>
@@ -184,4 +196,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { addToCart, addToWishlist })(Featured);
- 

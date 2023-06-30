@@ -148,24 +148,30 @@ class Footer extends Component {
                     </ul>
                     <ul class="social-icon">
                       <li class="facebook">
-                        <Link to="/facebook">
+                        <a
+                          href="https://www.facebook.com/musiciansavenue/"
+                          target="_blank"
+                        >
                           <FontAwesomeIcon icon={faFacebook} />
-                        </Link>
+                        </a>
                       </li>
                       <li class="twitter">
-                        <Link to="/twitter">
+                        <a
+                          href="https://twitter.com/musiciansavenue"
+                          target="_blank"
+                        >
                           <FontAwesomeIcon icon={faTwitter} />
-                        </Link>
+                        </a>
                       </li>
                       <li class="linkedin">
-                        <Link to="/linkedin">
+                        <a href="/linkedin">
                           <FontAwesomeIcon icon={faLinkedin} />
-                        </Link>
+                        </a>
                       </li>
                       <li class="youtube">
-                        <Link to="/youtube">
+                        <a href="/youtube">
                           <FontAwesomeIcon icon={faYoutube} />
-                        </Link>
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -208,7 +214,7 @@ class Footer extends Component {
                           <Link to="/contact">Contact Us</Link>
                         </li>
                         <li>
-                          <Link to="/person">Returns</Link>
+                          <Link to="/returns">Returns</Link>
                         </li>
                         <li>
                           <Link to="/map">Site Map</Link>
@@ -225,7 +231,7 @@ class Footer extends Component {
                           <Link to="/">Brands</Link>
                         </li>
                         <li>
-                          <Link to="/account/rewards">Gift Vouchers</Link>
+                          <Link to="/gift">Gift Vouchers</Link>
                         </li>
                         <li>
                           <Link to="/affiliate">Affiliates</Link>

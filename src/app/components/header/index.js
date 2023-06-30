@@ -131,12 +131,12 @@ class Navigation extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/order" className="nav-link">
+                    <Link to="/support" className="nav-link">
                       ORDER SUPPORT
                     </Link>
                   </li>
                   <li>
-                    <Link to="/store" className="nav-link">
+                    <Link to="/locator" className="nav-link">
                       STORE LOCATOR
                     </Link>
                   </li>
@@ -278,7 +278,10 @@ class Navigation extends Component {
                   aria-controls="responsive-navbar-nav"
                   onClick={this.handleToggle}
                 />
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Collapse
+                  id="responsive-
+                -nav"
+                >
                   <Nav className="me-auto1" style={{ color: "white" }}>
                     {headerItems.map((item) => {
                       return (

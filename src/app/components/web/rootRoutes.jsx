@@ -43,6 +43,13 @@ import Process from "./views/home/Process";
 import OrderSuccess from "./views/checkout/OrderSuccess";
 import OrderFailure from "./views/checkout/OrderFailure";
 import NoProductFound from "../searchItem/NoProductFound";
+import gift from "../gift";
+import special from "../special";
+import returns from "../returns";
+import SiteMap from "../SiteMap";
+import StoreLocator from "../StoreLocator";
+import OrderSupport from "../OrderSupport";
+import NewsletterPopup from "../NewsLetterPopup";
 
 // import Failed from './views/checkout/failed';
 
@@ -83,6 +90,13 @@ export default class rootRoutes extends Component {
           <Route exact path="/orderSuccess" component={OrderSuccess} />
           <Route exact path="/orderFailure" component={OrderFailure} />
           <Route exact path="/noProduct" component={NoProductFound} />
+          <Route exact path="/gift" component={gift} />
+          <Route exact path="/special" component={special} />
+          <Route exact path="/returns" component={returns} />
+          <Route exact path="/map" component={SiteMap} />
+          <Route exact path="/locator" component={StoreLocator} />
+          <Route exact path="/support" component={OrderSupport} />
+          <Route exact path="/news" component={NewsletterPopup} />
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />
