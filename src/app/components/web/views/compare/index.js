@@ -49,7 +49,7 @@ class compare extends Component {
       <div className="comparison-page">
         <h1 className="comparison-page-title">Instrument Comparison</h1>
         <div className="comparison-page-section">
-          <h2>Available Instruments</h2>
+          {/* <h2>Available Instruments</h2> */}
         </div>
 
         {comarisionItems.length > 0 && (
