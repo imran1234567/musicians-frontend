@@ -50,7 +50,7 @@ import SiteMap from "../SiteMap";
 import StoreLocator from "../StoreLocator";
 import OrderSupport from "../OrderSupport";
 import NewsletterPopup from "../NewsLetterPopup";
-import returns from "./views/returns/returns";
+// import returns from "./views/returns/returns";
 // import Failed from './views/checkout/failed';
 
 export default class rootRoutes extends Component {
