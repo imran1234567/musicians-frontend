@@ -1,6 +1,45 @@
 import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export default function Gift() {
+  const formik = useFormik({
+    initialValues: {
+      recipientName: "",
+      recipientEmail: "",
+      yourName: "",
+      yourEmail: "",
+      giftCertificateTheme: "",
+      message: "",
+      amount: "",
+      agreedToTerms: false,
+    },
+    validationSchema: Yup.object({
+      recipientName: Yup.string().required("Recipient's name is required"),
+      recipientEmail: Yup.string()
+        .email("Recipient's email is invalid")
+        .required("Recipient's email is required"),
+      yourName: Yup.string().required("Your name is required"),
+      yourEmail: Yup.string()
+        .email("Your email is invalid")
+        .required("Your email is required"),
+      giftCertificateTheme: Yup.string().required(
+        "Please select a gift certificate theme"
+      ),
+      message: Yup.string().required("Message is required"),
+      amount: Yup.number()
+        .typeError("Amount must be a number")
+        .required("Amount is required"),
+      agreedToTerms: Yup.boolean()
+        .oneOf([true], "Please agree to the terms")
+        .required("Please agree to the terms"),
+    }),
+    onSubmit: (values) => {
+      // Handle form submission logic here
+      console.log("Form submitted successfully:", values);
+    },
+  });
+
   return (
     <div className="gift-page">
       <div className="container">
@@ -12,25 +51,67 @@ export default function Gift() {
                 This gift certificate will be emailed to the recipient after
                 your order has been paid for.
               </h6>
-              <form>
+              <form onSubmit={formik.handleSubmit}>
                 <div className="form-group">
                   <label>* Recipient's Name:</label>
-                  <input type="text" name="rn" className="form-control" />
+                  <input
+                    type="text"
+                    name="recipientName"
+                    className="form-control"
+                    value={formik.values.recipientName}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.recipientName &&
+                    formik.errors.recipientName && (
+                      <p className="error-message">
+                        {formik.errors.recipientName}
+                      </p>
+                    )}
                 </div>
 
                 <div className="form-group">
                   <label>* Recipient's Email:</label>
-                  <input type="email" name="re" className="form-control" />
+                  <input
+                    type="email"
+                    name="recipientEmail"
+                    className="form-control"
+                    value={formik.values.recipientEmail}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.recipientEmail &&
+                    formik.errors.recipientEmail && (
+                      <p className="error-message">
+                        {formik.errors.recipientEmail}
+                      </p>
+                    )}
                 </div>
 
                 <div className="form-group">
                   <label>* Your Name:</label>
-                  <input type="text" name="name" className="form-control" />
+                  <input
+                    type="text"
+                    name="yourName"
+                    className="form-control"
+                    value={formik.values.yourName}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.yourName && formik.errors.yourName && (
+                    <p className="error-message">{formik.errors.yourName}</p>
+                  )}
                 </div>
 
                 <div className="form-group">
                   <label>* Your Email:</label>
-                  <input type="email" name="email" className="form-control" />
+                  <input
+                    type="email"
+                    name="yourEmail"
+                    className="form-control"
+                    value={formik.values.yourEmail}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.yourEmail && formik.errors.yourEmail && (
+                    <p className="error-message">{formik.errors.yourEmail}</p>
+                  )}
                 </div>
 
                 <div className="form-group">
@@ -39,14 +120,15 @@ export default function Gift() {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="exampleRadios"
-                      id="exampleRadios1"
-                      value="option1"
+                      name="giftCertificateTheme"
+                      id="birthdayTheme"
+                      value="Birthday"
+                      checked={
+                        formik.values.giftCertificateTheme === "Birthday"
+                      }
+                      onChange={formik.handleChange}
                     />
-                    <label
-                      className="form-check-label"
-                      htmlFor="exampleRadios1"
-                    >
+                    <label className="form-check-label" htmlFor="birthdayTheme">
                       Birthday
                     </label>
                   </div>
@@ -54,13 +136,17 @@ export default function Gift() {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="exampleRadios"
-                      id="exampleRadios2"
-                      value="option2"
+                      name="giftCertificateTheme"
+                      id="christmasTheme"
+                      value="Christmas"
+                      checked={
+                        formik.values.giftCertificateTheme === "Christmas"
+                      }
+                      onChange={formik.handleChange}
                     />
                     <label
                       className="form-check-label"
-                      htmlFor="exampleRadios2"
+                      htmlFor="christmasTheme"
                     >
                       Christmas
                     </label>
@@ -69,17 +155,22 @@ export default function Gift() {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="exampleRadios"
-                      id="exampleRadios3"
-                      value="option3"
+                      name="giftCertificateTheme"
+                      id="generalTheme"
+                      value="General"
+                      checked={formik.values.giftCertificateTheme === "General"}
+                      onChange={formik.handleChange}
                     />
-                    <label
-                      className="form-check-label"
-                      htmlFor="exampleRadios3"
-                    >
+                    <label className="form-check-label" htmlFor="generalTheme">
                       General
                     </label>
                   </div>
+                  {formik.touched.giftCertificateTheme &&
+                    formik.errors.giftCertificateTheme && (
+                      <p className="error-message">
+                        {formik.errors.giftCertificateTheme}
+                      </p>
+                    )}
                 </div>
 
                 <div className="form-group">
@@ -88,26 +179,50 @@ export default function Gift() {
                     className="form-control"
                     name="message"
                     rows="3"
+                    value={formik.values.message}
+                    onChange={formik.handleChange}
                   ></textarea>
+                  {formik.touched.message && formik.errors.message && (
+                    <p className="error-message">{formik.errors.message}</p>
+                  )}
                 </div>
 
                 <div className="form-group">
                   <label>* Amount:</label>
-                  <input type="number" name="amount" className="form-control" />
+                  <input
+                    type="number"
+                    name="amount"
+                    className="form-control"
+                    value={formik.values.amount}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.amount && formik.errors.amount && (
+                    <p className="error-message">{formik.errors.amount}</p>
+                  )}
                 </div>
+
                 <div className="check-me">
                   <div className="form-check">
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      id="exampleCheck1"
+                      id="termsCheckbox"
+                      name="agreedToTerms"
+                      checked={formik.values.agreedToTerms}
+                      onChange={formik.handleChange}
                     />
-                    <label className="form-check-label" htmlFor="exampleCheck1">
+                    <label className="form-check-label" htmlFor="termsCheckbox">
                       I understand that gift certificates are non-refundable.
                     </label>
                   </div>
+                  {formik.touched.agreedToTerms &&
+                    formik.errors.agreedToTerms && (
+                      <p className="error-message">
+                        {formik.errors.agreedToTerms}
+                      </p>
+                    )}
 
-                  <button type="submit" className="cart-btn">
+                  <button type="submit" className="fill-cart-btn">
                     Continue
                   </button>
                 </div>

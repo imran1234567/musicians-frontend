@@ -14,10 +14,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-.form-group {
-  margin-bottom: 10px;
-}
-
 label {
   display: block;
   margin-bottom: 5px;
@@ -96,10 +92,6 @@ h5 {
   padding: 10px;
   vertical-align: top;
   border-bottom: 1px solid #ddd;
-}
-
-.form-group {
-  margin-bottom: 10px;
 }
 
 label {
@@ -187,7 +179,7 @@ textarea {
   border: 2px solid #ccc;
   border-radius: 4px;
   background-color: #fafdfb;
-  margin-left: 10px;
+  margin-bottom: 4px;
 }
 
 .captcha label {

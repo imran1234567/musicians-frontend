@@ -50,7 +50,7 @@ import SiteMap from "../SiteMap";
 import StoreLocator from "../StoreLocator";
 import OrderSupport from "../OrderSupport";
 import NewsletterPopup from "../NewsLetterPopup";
-// import returns from "./views/returns/returns";
+import BrandsList from "../brands";
 // import Failed from './views/checkout/failed';
 
 export default class rootRoutes extends Component {
@@ -97,7 +97,8 @@ export default class rootRoutes extends Component {
           <Route exact path="/locator" component={StoreLocator} />
           <Route exact path="/support" component={OrderSupport} />
           <Route exact path="/news" component={NewsletterPopup} />
-          <Route exact path="/returns" component={returns}/>
+          <Route exact path="/brands" component={BrandsList} />
+
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
                     <Route exact path='/shop/:slug' component={Shopdetails} />

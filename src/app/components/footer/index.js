@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {NotificationManager, NotificationContainer} from "react-notifications";
+import {
+  NotificationManager,
+  NotificationContainer,
+} from "react-notifications";
+
 
 import {
   faFacebook,
@@ -36,12 +40,36 @@ class Footer extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  state = {
+    isOpen: false,
+    name: "",
+    email: "",
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    NotificationManager.success('Successfully subscribed');
+    NotificationManager.success("Successfully subscribed");
   };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    // Code to handle form submission
+    console.log("Form submitted:", this.state.name, this.state.email);
+    // Reset form fields
+    this.setState({ name: "", email: "" });
+    // Close the popup modal
+    this.setState({ isOpen: false });
+  };
+
+  togglePopup = () => {
+    this.setState((prevState) => ({
+      isOpen: !prevState.isOpen,
+    }));
+  };
+
   render() {
-   
+    const { isOpen, name, email } = this.state;
     return (
       <>
         <footer className="footer-section">
@@ -239,7 +267,7 @@ class Footer extends Component {
                       <h4>Extras</h4>
                       <ul>
                         <li>
-                          <Link to="/">Brands</Link>
+                          <Link to="/brands">Brands</Link>
                         </li>
                         <li>
                           <Link to="/gift">Gift Vouchers</Link>
@@ -267,10 +295,71 @@ class Footer extends Component {
                         <li>
                           <Link to="/wishlist">Wish List</Link>
                         </li>
-                        <li>
-                          <Link to="/news">News Letter</Link>
-                        </li>
                       </ul>
+                      {isOpen && (
+                        <div className="popup-overlay">
+                          <div className="popup">
+                            <h2
+                              className="mb-4 mt-4 sec-title"
+                              style={{
+                                // color: "#750000",
+                                fontFamily: "fantasy",
+                                fontSize: "15px",
+                              }}
+                            >
+                              We Have Successfully Recieved Your Email For Our
+                              Newsletter
+                            </h2>
+                            <button
+                              className="cart-btn"
+                              onClick={this.togglePopup}
+                            >
+                              Close
+                            </button>
+                            {/* <form onSubmit={this.handleSubmit}>
+                              <label htmlFor="name">Name:</label>
+                              <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={name}
+                                onChange={(e) =>
+                                  this.setState({ name: e.target.value })
+                                }
+                                required
+                              />
+                              <label htmlFor="email">Email:</label>
+                              <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={email}
+                                onChange={(e) =>
+                                  this.setState({ email: e.target.value })
+                                }
+                                required
+                              />
+                              <br />
+                              <br />
+                              <div className="btn-news">
+                                <button
+                                  type="submit"
+                                  className="cart-btn"
+                                  style={{ margin: "10px" }}
+                                >
+                                  Send
+                                </button>
+                                <button
+                                  className="cart-btn"
+                                  onClick={this.togglePopup}
+                                >
+                                  Close
+                                </button>
+                              </div>
+                            </form> */}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -289,7 +378,11 @@ class Footer extends Component {
                             required
                           />
                         </div>
-                        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
+                        <button
+                          type="submit"
+                          className="btn btn-primary"
+                          onClick={this.togglePopup}
+                        >
                           Submit
                         </button>
                       </form>

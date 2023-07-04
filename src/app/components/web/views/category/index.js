@@ -1,20 +1,53 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
-import cat1 from "../../../../../assets/cat-1.jpeg";
-import cat2 from "../../../../../assets/cat-2.jpeg";
-import cat3 from "../../../../../assets/cat-3.jpeg";
-import cat4 from "../../../../../assets/cat-4.png";
-import cat5 from "../../../../../assets/cat-5.jpeg";
-import cat6 from "../../../../../assets/cat-6.jpeg";
-import cat7 from "../../../../../assets/cat-7.png";
-
+import axios from "axios";
+import {Link} from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./category.css";
 
 class Category extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+      loading: true,
+      error: null,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchProducts();
+  }
+
+  fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://13.233.106.34:4000/api/product/getAllproductList");
+      const data = response.data.product;
+
+      // Check if the response data is an array or an object with a 'data' property
+      const products = Array.isArray(data) ? data : (data.data || []);
+
+      console.log("Fetched products:", products); // Log the fetched products
+
+      const featuredProducts = products.filter(product => product.featured === true);
+      this.setState({ products: featuredProducts, loading: false });
+    } catch (error) {
+      this.setState({ error: error.message, loading: false });
+    }
+  };
+
   render() {
+    const { products, loading, error } = this.state;
+
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+
+    if (error) {
+      return <div>Error: {error}</div>;
+    }
+
     var settings = {
       dots: false,
       infinite: false,
@@ -49,64 +82,30 @@ class Category extends Component {
         },
       ],
     };
+
     return (
       <div style={{ background: "#fff" }}>
         <div className="container" id="header-category-bk">
           <Slider {...settings}>
-            <div className="item">
-              <div className="category-item">
-                <img className="img-fluid" src={cat1} />
-                <h6>Nitro Mesh</h6>
+            {products.map((product) => (
+              <div className="item" key={product.id}>
+                <div className="category-item">
+                  <img
+                    className="img-fluid"
+                    src={product.photo}
+                    alt={product.name}
+                  />
+                   <Link
+                    to={{
+                      pathname: `/p/${product.slug}/${product.id}`,
+                      state: product,
+                    }}
+                  ><h6>{product.name}</h6></Link>
+                  
+
+                </div>
               </div>
-            </div>
-            <div className="item">
-              <div className="category-item">
-                <img className="img-fluid" src={cat2} />
-                <h6>Strike Multi 9</h6>
-              </div>
-            </div>
-            <div className="item">
-              <div className="category-item">
-                <img className="img-fluid" src={cat3} />
-                <h6>Digital Keyboard</h6>
-              </div>
-            </div>
-            <div className="item">
-              <div className="category-item">
-                <img className="img-fluid" src={cat4} />
-                <h6>Electric Guiter</h6>
-              </div>
-            </div>
-            <div className="item">
-              <div className="category-item">
-                <img className="img-fluid" src={cat5} />
-                <h6>Aqustic Guiter</h6>
-              </div>
-            </div>
-            <div className="item">
-              <div className="category-item">
-                <img className="img-fluid" src={cat6} />
-                <h6>Ibanez</h6>
-              </div>
-            </div>
-            <div className="item">
-              <div className="category-item">
-                <img className="img-fluid" src={cat7} />
-                <h6>Amplif</h6>
-              </div>
-            </div>
-            <div className="item">
-              <div className="category-item">
-                <img className="img-fluid" src={cat5} />
-                <h6>Guitar</h6>
-              </div>
-            </div>
-            <div className="item">
-              <div className="category-item">
-                <img className="img-fluid" src={cat5} />
-                <h6>Effect Pedals</h6>
-              </div>
-            </div>
+            ))}
           </Slider>
         </div>
       </div>
@@ -115,3 +114,4 @@ class Category extends Component {
 }
 
 export default Category;
+
