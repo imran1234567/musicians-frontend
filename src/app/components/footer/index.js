@@ -126,7 +126,7 @@ class Footer extends Component {
                         <Link to="/cat/9/57">Accessories</Link>
                       </li>
                       <li>
-                        <Link to="/">Shop By Brand</Link>
+                        <Link to="/brands">Shop By Brand</Link>
                       </li>
                     </ul>
                   </div>

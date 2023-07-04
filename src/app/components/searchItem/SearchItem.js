@@ -136,20 +136,18 @@ class SearchItem extends Component {
                       state: product,
                     }}
                   >
-                    <h6>
-                      <b>{product.name}</b>
-                    </h6>
+                    <h6>{product.name}</h6>
                   </Link>
                   <h5>{this.formatPrice(product.price)}</h5>
                   <div className="add-cart">
                     {isProductInCart ? (
-                      <Link to="/cart" className="cart-btn">
+                      <Link to="/cart" className="fill-cart-btn">
                         Go To Cart
                       </Link>
                     ) : (
                       <a
                         href="javascript:void(0)"
-                        className="cart-btn"
+                        className="fill-cart-btn"
                         onClick={() => {
                           this.props.addToCart(product);
                           NotificationManager.success(
@@ -204,7 +202,7 @@ class SearchItem extends Component {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
             return (
-              <div className="col-lg-4 col-md-4 col-12" key={index}>
+              <div className="col-lg-4 col-md-4 col-6" key={index}>
                 <div className="product-box">
                   <div className="product-image">
                     <img
@@ -221,20 +219,18 @@ class SearchItem extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      <h6>
-                        <b>{product.name}</b>
-                      </h6>
+                      <h6>{product.name}</h6>
                     </Link>
                     <h5>${product.price}</h5>
                     <div className="add-cart">
                       {isProductInCart ? (
-                        <Link to="/cart" className="cart-btn">
+                        <Link to="/cart" className="fill-cart-btn">
                           Go To Cart
                         </Link>
                       ) : (
                         <a
                           href="javascript:void(0)"
-                          className="cart-btn"
+                          className="fill-cart-btn"
                           onClick={() => {
                             this.props.addToCart(product);
                             NotificationManager.success(

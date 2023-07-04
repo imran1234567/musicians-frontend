@@ -27,6 +27,7 @@
     "react-dom": "^16.13.1",
     "react-fullscreen-loading": "0.0.4",
     "react-icons": "^4.9.0",
+    "react-modal": "^3.16.1",
     "react-moment": "^0.9.7",
     "react-notifications": "^1.6.0",
     "react-redux": "^7.2.1",

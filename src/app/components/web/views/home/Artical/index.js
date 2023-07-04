@@ -34,7 +34,10 @@ export default class Artical extends Component {
 
             <div className="articals-list row">
               {blogs.map((blog) => (
-                <div className="col-lg-3 col-md-3 col-12" key={blog.id}>
+                <div
+                  className="col-lg-3 col-md-3 col-12 article-class"
+                  key={blog.id}
+                >
                   <Link to={`/blog/blog/${blog.id}`} className="artical-link">
                     <div className="artical-box">
                       <img src={blog.imageUrl} alt={blog.title} />
@@ -52,4 +55,3 @@ export default class Artical extends Component {
     );
   }
 }
-
