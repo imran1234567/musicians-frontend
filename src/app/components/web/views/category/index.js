@@ -90,11 +90,16 @@ class Category extends Component {
             {products.map((product) => (
               <div className="item" key={product.id}>
                 <div className="category-item">
-                  <img
+                <Link
+                    to={{
+                      pathname: `/p/${product.slug}/${product.id}`,
+                      state: product,
+                    }}
+                  ><img
                     className="img-fluid"
                     src={product.photo}
                     alt={product.name}
-                  />
+                  /></Link>
                    <Link
                     to={{
                       pathname: `/p/${product.slug}/${product.id}`,
