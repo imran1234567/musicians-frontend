@@ -1,0 +1,35 @@
+.brands-container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.brands-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.brands-table th,
+.brands-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.brands-table th {
+  text-align: center;
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.brands-table tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
+.brands-table tbody tr:hover {
+  background-color: #fff;
+}
