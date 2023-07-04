@@ -508,9 +508,9 @@ class checkout extends Component {
                           - {row.unitSize} gm
                         </h6>
                         <p className="offer-price mb-0">
-                          {row.qty + "*" + row.netPrice}{" "}
+                        {`${row.qty} * $${row.netPrice}`}{" "}
                           <i className="mdi mdi-tag-outline" />{" "}
-                          <span className="regular-price">{row.price}</span>
+                          <span className="regular-price">&#36;{row.price}</span>
                         </p>
                       </div>
                     </div>
@@ -518,23 +518,23 @@ class checkout extends Component {
                   <div className="total-checkout-group">
                     <div className="cart-total-dil">
                       <h4>Sub Total</h4>
-                      <span>{subTotal}</span>
+                      <span>&#36;{subTotal}</span>
                     </div>
                     <div className="cart-total-dil pt-3">
                       <h4>Delivery Charges</h4>
-                      <span>{deliveryCharge}</span>
+                      <span>&#36;{deliveryCharge}</span>
                     </div>
                   </div>
                   <div className="cart-total-dil saving-total">
                     <h4>Total Saving</h4>
                     <span style={{ color: "red" }}>
-                      -{subTotal - totalAmount}
+                      -&#36;{subTotal - totalAmount}
                     </span>
                   </div>
 
                   <div className="main-total-cart">
                     <h2>Total</h2>
-                    <span>{totalAmount}</span>
+                    <span>&#36;{totalAmount}</span>
                   </div>
                 </div>
               </div>

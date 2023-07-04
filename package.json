@@ -26,6 +26,7 @@
     "react-bootstrap": "^2.7.4",
     "react-dom": "^16.13.1",
     "react-fullscreen-loading": "0.0.4",
+    "react-html-parser": "^2.0.2",
     "react-icons": "^4.9.0",
     "react-moment": "^0.9.7",
     "react-notifications": "^1.6.0",
