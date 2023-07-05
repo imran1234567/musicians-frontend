@@ -105,6 +105,9 @@ class Featured extends Component {
               list.map((row, index) => {
                 const isProductInCart = this.checkCart(row.id);
                 const isProductInWishlist = this.checkWishlist(row.id);
+                const discountedPrice =
+                  row.price - (row.price * row.discountPer) / 100;
+                const netPrice = row.price - discountedPrice;
                 return (
                   <div class="col-lg-3 col-md-4 col-6" key={index}>
                     <div class="product-box">
@@ -120,16 +123,50 @@ class Featured extends Component {
                         >
                           <h6>{row.name}</h6>
                         </Link>
-                        <h5>${row.price}</h5>
+                        <div className="price-container">
+                          {row.discountPer ? (
+                            <div>
+                              <h5 className="original-price">
+                                <span
+                                  style={{
+                                    textDecoration: "line-through",
+                                    color: "gray",
+                                  }}
+                                >
+                                  ${row.price}
+                                </span>
+                              </h5>
+                            </div>
+                          ) : (
+                            <h5>${row.price}</h5>
+                          )}
+                          <div className="discount-price">
+                            {/* {row.discountPer && ( */}
+                            <div className="discount-tag">
+                              -{row.discountPer}%
+                            </div>
+
+                            {row.discountPer && row.netPrice !== 0 ? (
+                              <h5 className="net-price">${row.netPrice}</h5>
+                            ) : null}
+                          </div>
+                        </div>
+
+                        {/* <h5>${row.price}</h5>
+                        {row.discountPer && (
+                          <div className="discount-tag">
+                            -{row.discountPer}%
+                          </div>
+                        )} */}
                         <div class="add-cart">
                           {isProductInCart ? (
-                            <Link to="/cart" className="cart-btn">
+                            <Link to="/cart" className="fill-cart-btn">
                               Go To Cart
                             </Link>
                           ) : (
                             <a
                               href="javascript:void(0)"
-                              class="cart-btn"
+                              class="fill-cart-btn"
                               onClick={() => {
                                 this.props.addToCart(row);
                                 NotificationManager.success(

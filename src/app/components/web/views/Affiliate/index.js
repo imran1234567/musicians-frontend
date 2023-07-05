@@ -32,9 +32,9 @@ export default class Affiliate extends Component {
                     Please note that this is not connected in any way to your
                     customer account.
                   </p>
-                  <button className="cart-btn">
-                    <Link to="/login">Continue</Link>
-                  </button>
+                  <a href="/reg" className="cart-btn">
+                    Continue
+                  </a>
                   <br></br>
                   <br></br>
                 </div>
@@ -65,9 +65,9 @@ export default class Affiliate extends Component {
                     />
                   </div>
                   <br></br>
-                  <button className="cart-btn">
-                    <Link to="/login">LOGIN</Link>
-                  </button>
+                  <a href="#" className="cart-btn">
+                    <Link to="/">LOGIN</Link>
+                  </a>
                   <br></br>
                   <br></br>
                 </div>

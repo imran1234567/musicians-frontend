@@ -3,8 +3,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import Modal from "react-modal";
+import { Link } from "@material-ui/core";
 
-export default function Gift() {
+export default function AffiliateRegister() {
   const formik = useFormik({
     initialValues: {
       recipientName: "",
@@ -26,12 +27,12 @@ export default function Gift() {
         .email("Your email is invalid")
         .required("Your email is required"),
       giftCertificateTheme: Yup.string().required(
-        "Please select a gift certificate theme"
+        "Please select payment method"
       ),
-      message: Yup.string().required("Message is required"),
+      message: Yup.string().required("Cheque payee name is required"),
       amount: Yup.number()
-        .typeError("Amount must be a number")
-        .required("Amount is required"),
+        .typeError("password is required")
+        .required("password is required"),
       agreedToTerms: Yup.boolean()
         .oneOf([true], "Please agree to the terms")
         .required("Please agree to the terms"),
@@ -60,12 +61,12 @@ export default function Gift() {
     <div className="gift-page">
       <div className="container">
         <div className="info-site">
-          <h1 className="mb-4 mt-4 sec-title">PURCHASE A GIFT CERTIFICATE</h1>
+          <h1 className="mb-4 mt-4 sec-title">AFFILIATE PROGRAM</h1>
           <div className="policy-text">
             <div className="gift-coupon">
               <h6>
-                This gift certificate will be emailed to the recipient after
-                your order has been paid for.
+                To create an affiliate account, fill in the form below ensuring
+                you complete all the required fields:
               </h6>
               <form onSubmit={formik.handleSubmit}>
                 <div className="form-group">
@@ -131,21 +132,19 @@ export default function Gift() {
                 </div>
 
                 <div className="form-group">
-                  <label>* Gift Certificate Theme:</label>
+                  <label>PAYMENT INFORMATION</label>
                   <div className="form-check">
                     <input
                       className="form-check-input"
                       type="radio"
                       name="giftCertificateTheme"
-                      id="birthdayTheme"
-                      value="Birthday"
-                      checked={
-                        formik.values.giftCertificateTheme === "Birthday"
-                      }
+                      id="cheque"
+                      value="cheque"
+                      checked={formik.values.giftCertificateTheme === "cheque"}
                       onChange={formik.handleChange}
                     />
-                    <label className="form-check-label" htmlFor="birthdayTheme">
-                      Birthday
+                    <label className="form-check-label" htmlFor="cheque">
+                      Cheque
                     </label>
                   </div>
                   <div className="form-check">
@@ -153,18 +152,13 @@ export default function Gift() {
                       className="form-check-input"
                       type="radio"
                       name="giftCertificateTheme"
-                      id="christmasTheme"
-                      value="Christmas"
-                      checked={
-                        formik.values.giftCertificateTheme === "Christmas"
-                      }
+                      id="paypal"
+                      value="paypal"
+                      checked={formik.values.giftCertificateTheme === "paypal"}
                       onChange={formik.handleChange}
                     />
-                    <label
-                      className="form-check-label"
-                      htmlFor="christmasTheme"
-                    >
-                      Christmas
+                    <label className="form-check-label" htmlFor="paypal">
+                      PayPal
                     </label>
                   </div>
                   <div className="form-check">
@@ -172,13 +166,15 @@ export default function Gift() {
                       className="form-check-input"
                       type="radio"
                       name="giftCertificateTheme"
-                      id="generalTheme"
-                      value="General"
-                      checked={formik.values.giftCertificateTheme === "General"}
+                      id="bank_transfer"
+                      value="bank transfer"
+                      checked={
+                        formik.values.giftCertificateTheme === "bank transfer"
+                      }
                       onChange={formik.handleChange}
                     />
-                    <label className="form-check-label" htmlFor="generalTheme">
-                      General
+                    <label className="form-check-label" htmlFor="bank_transfer">
+                      Bank Transfer
                     </label>
                   </div>
                   {formik.touched.giftCertificateTheme &&
@@ -190,23 +186,23 @@ export default function Gift() {
                 </div>
 
                 <div className="form-group">
-                  <label>* Message:</label>
-                  <textarea
+                  <label>Cheque Payee Name:</label>
+                  <input
+                    type="text"
                     className="form-control"
                     name="message"
-                    rows="3"
                     value={formik.values.message}
                     onChange={formik.handleChange}
-                  ></textarea>
+                  />
                   {formik.touched.message && formik.errors.message && (
                     <p className="error-message">{formik.errors.message}</p>
                   )}
                 </div>
 
                 <div className="form-group">
-                  <label>* Amount:</label>
+                  <label>*Your Password:</label>
                   <input
-                    type="number"
+                    type="password"
                     name="amount"
                     className="form-control"
                     value={formik.values.amount}
@@ -215,6 +211,22 @@ export default function Gift() {
                   {formik.touched.amount && formik.errors.amount && (
                     <p className="error-message">{formik.errors.amount}</p>
                   )}
+                </div>
+                <div className="form-group">
+                  <label>*Confirm Password:</label>
+                  <input
+                    type="password"
+                    name="confirm_password"
+                    className="form-control"
+                    value={formik.values.confirm_password}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.confirm_password &&
+                    formik.errors.confirm_password && (
+                      <p className="error-message">
+                        {formik.errors.confirm_password}
+                      </p>
+                    )}
                 </div>
 
                 <div className="check-me">
@@ -228,7 +240,8 @@ export default function Gift() {
                       onChange={formik.handleChange}
                     />
                     <label className="form-check-label" htmlFor="termsCheckbox">
-                      I understand that gift certificates are non-refundable.
+                      I have read and agree to the{" "}
+                      <Link to="/about">About Us</Link>
                     </label>
                   </div>
                   {formik.touched.agreedToTerms &&
@@ -258,16 +271,20 @@ export default function Gift() {
                 contentLabel="Modal"
               >
                 <div className="modal-div">
-                  <h3 className="mb-4 mt-4">PURCHASE A GIFT CERTIFICATE</h3>
+                  <h2 className="mb-4 mt-4 sec-title">
+                    YOUR AFFILIATE ACCOUNT HAS BEEN CREATED!
+                  </h2>
                   <img
-                    src="https://t4.ftcdn.net/jpg/02/36/36/53/360_F_236365398_fE3DURoo5iWYfUEkhnXNnPwltpi6LY9q.jpg"
+                    src="https://voluum.com/blog/wp-content/uploads/sites/12/2022/02/V-Blog-Affiliate-Marketing-Ecommerce-2022-02-03.jpg"
                     alt="gift"
                     style={{ position: "center" }}
                   />
                   <p>
-                    Thank you for purchasing a gift certificate! Once you have
-                    completed your order your gift voucher recipient will be
-                    sent an email with details how to redeem their gift voucher.
+                    Thank you for registering for an affiliate account with
+                    Musicians Avenue! You will be notified by email once your
+                    account has been activated by the store owner. If you have
+                    ANY questions about the operation of this affiliate system,
+                    please contact the store owner.
                   </p>
 
                   <button onClick={closeModal} className="cart-btn">
