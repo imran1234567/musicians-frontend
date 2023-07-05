@@ -3,7 +3,7 @@ import image1 from "./../../../../../../images/image1.jpg";
 export default class Store1 extends Component {
   render() {
     const handleClick = () => {
-      window.location.href = "/";
+      window.location.href = "/locator";
     };
     return (
       <div>

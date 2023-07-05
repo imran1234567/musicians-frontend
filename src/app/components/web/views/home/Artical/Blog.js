@@ -35,13 +35,17 @@ export default class Blog extends Component {
     const { imageUrl, title, content } = blog;
 
     return (
-      <div className="blog-container">
-        <div className="blog-image">
-          <img src={imageUrl} alt={title} />
-        </div>
-        <div className="blog-content">
-          <h2 style={{ textAlign: 'center' }}>{title}</h2>
-          {ReactHtmlParser(content)}
+      <div className="container">
+        <div className="info-site">
+          <h1 className="mb-4 mt-4 sec-title" style={{ textAlign: "center" }}>
+            {title}
+          </h1>
+          <div className="blog-image">
+            <img src={imageUrl} alt={title} />
+          </div>
+          <div className="blog-content">
+            <p>{content}</p>
+          </div>
         </div>
       </div>
     );

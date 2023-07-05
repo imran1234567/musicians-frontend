@@ -1,6 +1,8 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useState } from "react";
+import Modal from "react-modal";
 
 export default function Gift() {
   const formik = useFormik({
@@ -39,6 +41,20 @@ export default function Gift() {
       console.log("Form submitted successfully:", values);
     },
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const onSubmit = (values) => {
+    openModal();
+  };
 
   return (
     <div className="gift-page">
@@ -222,11 +238,43 @@ export default function Gift() {
                       </p>
                     )}
 
-                  <button type="submit" className="fill-cart-btn">
+                  <button
+                    type="submit"
+                    className="fill-cart-btn"
+                    onClick={onSubmit}
+                    disabled={!formik.isValid} // Disable the button if the form is not valid
+                  >
                     Continue
                   </button>
                 </div>
               </form>
+            </div>
+
+            <div className="gift-cop">
+              {/* Existing code */}
+              <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                contentLabel="Modal"
+              >
+                <div className="modal-div">
+                  <h3 className="mb-4 mt-4">PURCHASE A GIFT CERTIFICATE</h3>
+                  <img
+                    src="https://t4.ftcdn.net/jpg/02/36/36/53/360_F_236365398_fE3DURoo5iWYfUEkhnXNnPwltpi6LY9q.jpg"
+                    alt="gift"
+                    style={{ position: "center" }}
+                  />
+                  <p>
+                    Thank you for purchasing a gift certificate! Once you have
+                    completed your order your gift voucher recipient will be
+                    sent an email with details how to redeem their gift voucher.
+                  </p>
+
+                  <button onClick={closeModal} className="cart-btn">
+                    Close
+                  </button>
+                </div>
+              </Modal>
             </div>
           </div>
         </div>
