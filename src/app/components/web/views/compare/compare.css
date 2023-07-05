@@ -85,6 +85,7 @@
   
   /* Additional Styles for User-Friendly UI */
 /*.comparison-page {
+
     background-color: #f5f5f5;
   }
   
@@ -244,8 +245,15 @@
 }
 
 /* Comparison Table Header */
+.comparison-table th {
+  /* Add a subtle gradient background */
+  background: linear-gradient(45deg, #e0e0e0, #bdbdbd);
+}
 
 /* Comparison Table Row Hover */
+.comparison-table tr:hover {
+  background-color: #f5f5f5;
+}
 
 /* Comparison Table Cell (Data) */
 .comparison-table td {
