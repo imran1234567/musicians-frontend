@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ReactHtmlParser from "react-html-parser";
 import "./Blog.css"; // Import the CSS file for styling
 
 export default class Blog extends Component {
