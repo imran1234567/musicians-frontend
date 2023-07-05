@@ -19,12 +19,32 @@ class CategoryList extends Component {
       showBy: "10",
       display: "list",
       products: [],
+      comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
+        ? JSON.parse(localStorage.getItem("comparisonItems"))
+        : [],
     };
   }
 
   async componentDidMount() {
     await this.getDetails();
+    const comarisionItems = JSON.parse(localStorage.getItem("comparisonItems"));
+    if (comarisionItems) {
+      this.setState({ comarisionItems });
+    }
   }
+  addToComparison = (product) => {
+    NotificationManager.success(
+      `${product.name} added successfuly for comparsion!`
+    );
+    this.setState(
+      (prevState) => ({
+        comparisonItems: [...prevState.comparisonItems, product],
+      }),
+      () => {
+        window.location.href = "/compare";
+      }
+    );
+  };
 
   async componentDidUpdate(prevProps) {
     const { catId, subId } = this.props.match.params;
@@ -34,6 +54,10 @@ class CategoryList extends Component {
     if (catId !== prevCatId || subId !== prevSubId) {
       await this.getDetails();
     }
+    localStorage.setItem(
+      "comparisonItems",
+      JSON.stringify(this.state.comparisonItems)
+    );
   }
   // Sort By changes function
   handleSortByChange = (event) => {
@@ -130,12 +154,17 @@ class CategoryList extends Component {
                     )}
 
                     <div className="com">
-                      <a href="/compare">
-                        <FontAwesomeIcon
-                          icon={faCodeCompare}
-                          className="compare-icon"
-                        />
-                      </a>
+                       <a
+                              href="javascript:void(0)"
+                              onClick={() => {
+                                this.addToComparison(product);
+                              }}
+                            >
+                              <FontAwesomeIcon
+                                icon={faCodeCompare}
+                                className="compare-icon"
+                              />
+                            </a>
                       <a
                         href="javascript:void(0)"
                         onClick={() => {
@@ -216,12 +245,17 @@ class CategoryList extends Component {
                         </a>
                       )}
                       <div className="com">
-                        <a href="/compare">
-                          <FontAwesomeIcon
-                            icon={faCodeCompare}
-                            className="compare-icon"
-                          />
-                        </a>
+                            <a
+                              href="javascript:void(0)"
+                              onClick={() => {
+                                this.addToComparison(product);
+                              }}
+                            >
+                              <FontAwesomeIcon
+                                icon={faCodeCompare}
+                                className="compare-icon"
+                              />
+                            </a>
                         <a
                           href="javascript:void(0)"
                           onClick={() => {
