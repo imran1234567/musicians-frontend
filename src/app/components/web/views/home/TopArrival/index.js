@@ -170,7 +170,7 @@
 
 import React, { Component } from "react";
 import axios from "axios";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import b2 from "./../../../../../../images/b2.jpg";
 import b1 from "./../../../../../../images/b1.jpg";
 import a10 from "./../../../../../../images/a10.jpg";
@@ -223,52 +223,56 @@ export default class TopArrival extends Component {
                     <div className="row new-arrival-content" key={productIndex}>
                       <div className="col-lg-6 col-md-6 col-12 av-box">
                         <div className="row h-100">
-                          <div className="col-lg-6 col-md-6 col-12">
+                          <div className="col-lg-6 col-md-6 col-6">
                             <div className="new-arrival-box">
                               <div className="arrival-image">
-                              <Link
-                                    to={{
-                                      pathname: `/p/${product.slug}/${product.id}`,
-                                      state: product,
-                                    }}
-                                  >
-                                <img src={product.photo} alt={product.name} /></Link>
+                                <Link
+                                  to={{
+                                    pathname: `/p/${product.slug}/${product.id}`,
+                                    state: product,
+                                  }}
+                                >
+                                  <img src={product.photo} alt={product.name} />
+                                </Link>
                               </div>
                               <div className="arrival-text">
-                              <Link
-                                    to={{
-                                      pathname: `/p/${product.slug}/${product.id}`,
-                                      state: product,
-                                    }}
-                                  >
-                                <h6>{product.name}</h6></Link>
+                                <Link
+                                  to={{
+                                    pathname: `/p/${product.slug}/${product.id}`,
+                                    state: product,
+                                  }}
+                                >
+                                  <h6>{product.name}</h6>
+                                </Link>
                                 <h5>${product.price}</h5>
                               </div>
                             </div>
                           </div>
                           {nextProductIndex < products.length && (
-                            <div className="col-lg-6 col-md-6 col-12">
+                            <div className="col-lg-6 col-md-6 col-6">
                               <div className="new-arrival-box">
                                 <div className="arrival-image">
-                                <Link
+                                  <Link
                                     to={{
                                       pathname: `/p/${product.slug}/${product.id}`,
                                       state: product,
                                     }}
                                   >
-                                  <img
-                                    src={products[nextProductIndex].photo}
-                                    alt={products[nextProductIndex].name}
-                                  /></Link>
+                                    <img
+                                      src={products[nextProductIndex].photo}
+                                      alt={products[nextProductIndex].name}
+                                    />
+                                  </Link>
                                 </div>
                                 <div className="arrival-text">
-                                <Link
+                                  <Link
                                     to={{
                                       pathname: `/p/${product.slug}/${product.id}`,
                                       state: product,
                                     }}
                                   >
-                                  <h6>{products[nextProductIndex].name}</h6></Link>
+                                    <h6>{products[nextProductIndex].name}</h6>
+                                  </Link>
                                   <h5>${products[nextProductIndex].price}</h5>
                                 </div>
                               </div>

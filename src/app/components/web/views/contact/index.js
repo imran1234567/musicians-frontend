@@ -20,7 +20,7 @@ class ContactForm extends React.Component {
     return (
       <div>
         <section className="contact-sec py-5">
-          <div className="container-fluid">
+          <div className="container">
             <h2 className="mb-4 sec-title">Contact us</h2>
             <div className="contact-content row">
               <div className="col-lg-6 col-md-6 col-12 contact-left">
