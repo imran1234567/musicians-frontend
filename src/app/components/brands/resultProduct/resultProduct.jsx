@@ -7,13 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import { NotificationManager } from "react-notifications";
-import Login from "../../auth/login";
-import List from "../web/views/catgoryItem";
-import { addToCart } from "../../store/actions/cartActions";
-import { addToWishlist } from "../../store/actions/wishlistActions";
-import "./SearchItem.css";
+import List from "../../web/views/catgoryItem";
+import { addToCart } from "../../../store/actions/cartActions";
+import { addToWishlist } from "../../../store/actions/wishlistActions";
 
-class SearchItem extends Component {
+
+class resultProduct extends Component {
   state = {
     productList: [],
     isLoaded: false,
@@ -315,7 +314,6 @@ class SearchItem extends Component {
                             ) : null}
                           </div>
                         </div>
-
                     {/* <h5>${product.price}</h5> */}
                     <div className="add-cart">
                       {isProductInCart ? (
@@ -512,7 +510,6 @@ class SearchItem extends Component {
             </div>
           </div>
         </div>
-        <Login />
       </div>
       // </section>
     );
@@ -525,5 +522,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { addToCart, addToWishlist })(
-  SearchItem
+  resultProduct
 );

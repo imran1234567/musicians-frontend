@@ -19,12 +19,32 @@ class CategoryList extends Component {
       showBy: "10",
       display: "list",
       products: [],
+      comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
+        ? JSON.parse(localStorage.getItem("comparisonItems"))
+        : [],
     };
   }
 
   async componentDidMount() {
     await this.getDetails();
+    const comarisionItems = JSON.parse(localStorage.getItem("comparisonItems"));
+    if (comarisionItems) {
+      this.setState({ comarisionItems });
+    }
   }
+  addToComparison = (product) => {
+    NotificationManager.success(
+      `${product.name} added successfuly for comparsion!`
+    );
+    this.setState(
+      (prevState) => ({
+        comparisonItems: [...prevState.comparisonItems, product],
+      }),
+      () => {
+        window.location.href = "/compare";
+      }
+    );
+  };
 
   async componentDidUpdate(prevProps) {
     const { catId, subId } = this.props.match.params;
@@ -34,6 +54,10 @@ class CategoryList extends Component {
     if (catId !== prevCatId || subId !== prevSubId) {
       await this.getDetails();
     }
+    localStorage.setItem(
+      "comparisonItems",
+      JSON.stringify(this.state.comparisonItems)
+    );
   }
   // Sort By changes function
   handleSortByChange = (event) => {
@@ -106,7 +130,35 @@ class CategoryList extends Component {
                   >
                     <h6>{product.name}</h6>
                   </Link>
-                  <h5>{this.formatPrice(product.price)}</h5>
+                  <div className="price-container">
+                          {product.discountPer ? (
+                            <div>
+                              <h5 className="original-price">
+                                <span
+                                  style={{
+                                    textDecoration: "line-through",
+                                    color: "gray",
+                                  }}
+                                >
+                                  ${product.price}
+                                </span>
+                              </h5>
+                            </div>
+                          ) : (
+                            <h5>${product.price}</h5>
+                          )}
+                          <div className="discount-price">
+                            {/* {row.discountPer && ( */}
+                            <div className="discount-tag">
+                              -{product.discountPer}%
+                            </div>
+
+                            {product.discountPer && product.netPrice !== 0 ? (
+                              <h5 className="net-price">${product.netPrice}</h5>
+                            ) : null}
+                          </div>
+                        </div>
+                  {/* <h5>{this.formatPrice(product.price)}</h5> */}
                   <div className="add-cart">
                     {isProductInCart ? (
                       <Link to="/cart" className="fill-cart-btn">
@@ -128,12 +180,17 @@ class CategoryList extends Component {
                     )}
 
                     <div className="com">
-                      <a href="/compare">
-                        <FontAwesomeIcon
-                          icon={faCodeCompare}
-                          className="compare-icon"
-                        />
-                      </a>
+                       <a
+                              href="javascript:void(0)"
+                              onClick={() => {
+                                this.addToComparison(product);
+                              }}
+                            >
+                              <FontAwesomeIcon
+                                icon={faCodeCompare}
+                                className="compare-icon"
+                              />
+                            </a>
                       <a
                         href="javascript:void(0)"
                         onClick={() => {
@@ -190,7 +247,35 @@ class CategoryList extends Component {
                     >
                       <h6>{product.name}</h6>
                     </Link>
-                    <h5>${product.price}</h5>
+                    <div className="price-container">
+                          {product.discountPer ? (
+                            <div>
+                              <h5 className="original-price">
+                                <span
+                                  style={{
+                                    textDecoration: "line-through",
+                                    color: "gray",
+                                  }}
+                                >
+                                  ${product.price}
+                                </span>
+                              </h5>
+                            </div>
+                          ) : (
+                            <h5>${product.price}</h5>
+                          )}
+                          <div className="discount-price">
+                            {/* {row.discountPer && ( */}
+                            <div className="discount-tag">
+                              -{product.discountPer}%
+                            </div>
+
+                            {product.discountPer && product.netPrice !== 0 ? (
+                              <h5 className="net-price">${product.netPrice}</h5>
+                            ) : null}
+                          </div>
+                        </div>
+                    {/* <h5>${product.price}</h5> */}
                     <div className="add-cart">
                       {isProductInCart ? (
                         <Link to="/cart" className="fill-cart-btn">
@@ -212,12 +297,17 @@ class CategoryList extends Component {
                         </a>
                       )}
                       <div className="com">
-                        <a href="/compare">
-                          <FontAwesomeIcon
-                            icon={faCodeCompare}
-                            className="compare-icon"
-                          />
-                        </a>
+                            <a
+                              href="javascript:void(0)"
+                              onClick={() => {
+                                this.addToComparison(product);
+                              }}
+                            >
+                              <FontAwesomeIcon
+                                icon={faCodeCompare}
+                                className="compare-icon"
+                              />
+                            </a>
                         <a
                           href="javascript:void(0)"
                           onClick={() => {
