@@ -21,3 +21,10 @@
   border: 1px solid #000;
   margin: 0 auto;
 }
+.category-item h6 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--primary-color);
+}

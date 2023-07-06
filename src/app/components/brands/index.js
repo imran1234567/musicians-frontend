@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./BrandsList.css"; // Import the CSS file for styling
+import { Link } from "react-router-dom";
 
 const BrandsList = () => {
   const [brands, setBrands] = useState([]);
@@ -28,13 +29,20 @@ const BrandsList = () => {
     fetchData();
   }, []);
 
-  const filterBrandsByAlphabet = (alphabet) => {
-    const filtered = brands.filter(
-      (brand) => brand.brand.charAt(0).toUpperCase() === alphabet.toUpperCase()
-    );
-    setFilteredBrands(filtered);
+  const filterBrandsByAlphabet = async (alphabet) => {
+    try {
+      const response = await fetch(
+        `http://13.233.106.34:4000/api/product/gcatalogsearch/result?brand=${alphabet}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
+      }
+      const data = await response.json();
+      // Handle the data for displaying the products
+    } catch (error) {
+      setError(error.message);
+    }
   };
-
   const alphabetList = Array.from(Array(26)).map((_, index) =>
     String.fromCharCode(65 + index)
   );
@@ -76,7 +84,11 @@ const BrandsList = () => {
                   (brand, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      <td>{brand.brand}</td>
+                      <td>
+                        <Link to={`/products/${brand.brand}`}>
+                          {brand.brand}
+                        </Link>
+                      </td>
                     </tr>
                   )
                 )}
