@@ -1,38 +1,41 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { GetCategoryDetails } from "../../../services";
-import List from "../catgoryItem";
 import { connect } from "react-redux";
-import { addToCart } from "../../../../store/actions/cartActions";
-import { addToWishlist } from "../../../../store/actions/wishlistActions";
-import "./category.css";
-import { NotificationManager } from "react-notifications";
+import axios from "axios";
+import { CircularProgress } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
+import { NotificationManager } from "react-notifications";
+import List from "../../web/views/catgoryItem";
+import { addToCart } from "../../../store/actions/cartActions";
+import { addToWishlist } from "../../../store/actions/wishlistActions";
 
-class CategoryList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sortBy: "default",
-      showBy: "10",
-      display: "list",
-      products: [],
-      comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
+
+class resultProduct extends Component {
+  state = {
+    productList: [],
+    isLoaded: false,
+    error: null,
+    sortBy: "default",
+    showBy: "10",
+    display: "list",
+    comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
         ? JSON.parse(localStorage.getItem("comparisonItems"))
         : [],
-    };
-  }
 
-  async componentDidMount() {
-    await this.getDetails();
+  };
+
+  componentDidMount() {
+    const { value } = this.props.location.state;
     const comarisionItems = JSON.parse(localStorage.getItem("comparisonItems"));
+    this.fetchProducts(value);
     if (comarisionItems) {
       this.setState({ comarisionItems });
     }
   }
-  addToComparison = (product) => {
+
+ addToComparison = (product) => {
     NotificationManager.success(
       `${product.name} added successfuly for comparsion!`
     );
@@ -46,19 +49,48 @@ class CategoryList extends Component {
     );
   };
 
-  async componentDidUpdate(prevProps) {
-    const { catId, subId } = this.props.match.params;
-    const prevCatId = prevProps.match.params.catId;
-    const prevSubId = prevProps.match.params.subId;
+  componentDidUpdate(prevProps) {
+    const { value } = this.props.location.state;
+    const prevValue = prevProps.location.state.value;
 
-    if (catId !== prevCatId || subId !== prevSubId) {
-      await this.getDetails();
+    if (value !== prevValue) {
+      this.fetchProducts(value);
     }
     localStorage.setItem(
       "comparisonItems",
       JSON.stringify(this.state.comparisonItems)
     );
   }
+  fetchProducts = async (searchKeyword) => {
+    try {
+      const response = await axios.get(
+        "http://13.233.106.34:4000/api/product/gcatalogsearch/result",
+        {
+          params: {
+            search: searchKeyword,
+          },
+        }
+      );
+      console.log("API Response:", response.data);
+      const data = response.data.data[0];
+
+      if (data && data.products) {
+        const products = data.products;
+        this.setState({
+          productList: products,
+          isLoaded: true,
+        });
+      } else {
+        window.location.href = "/noProduct";
+        // throw new Error("/noProduct");
+      }
+    } catch (error) {
+      this.setState({
+        error,
+        isLoaded: true,
+      });
+    }
+  };
   // Sort By changes function
   handleSortByChange = (event) => {
     this.setState({ sortBy: event.target.value });
@@ -76,6 +108,7 @@ class CategoryList extends Component {
   formatPrice = (value) => {
     return `$${value}`;
   };
+
   checkWishlist = (productId) => {
     const { wishItems } = this.props;
     const productExistsInWishlist = wishItems.some(
@@ -89,10 +122,10 @@ class CategoryList extends Component {
   };
 
   renderProducts = () => {
-    const { products, sortBy, showBy, display } = this.state;
+    const { productList, sortBy, showBy, display } = this.state;
 
     // Apply sorting based on sortBy value
-    let sortedProducts = [...products];
+    let sortedProducts = [...productList];
     if (sortBy === "NameAZ") {
       sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === "NameZA") {
@@ -178,9 +211,15 @@ class CategoryList extends Component {
                         Add To Cart
                       </a>
                     )}
-
                     <div className="com">
-                       <a
+                      {/* <a href="/compare">
+                        <FontAwesomeIcon
+                          icon={faCodeCompare}
+                          className="compare-icon"
+                        />
+                      </a> */}
+
+                            <a
                               href="javascript:void(0)"
                               onClick={() => {
                                 this.addToComparison(product);
@@ -297,7 +336,13 @@ class CategoryList extends Component {
                         </a>
                       )}
                       <div className="com">
-                            <a
+                        {/* <a href="/compare">
+                          <FontAwesomeIcon
+                            icon={faCodeCompare}
+                            className="compare-icon"
+                          />
+                        </a> */}
+                          <a
                               href="javascript:void(0)"
                               onClick={() => {
                                 this.addToComparison(product);
@@ -342,20 +387,6 @@ class CategoryList extends Component {
     }
   };
 
-  getDetails = async () => {
-    const { catId, SubId } = this.props.match.params;
-
-    try {
-      const productList = await GetCategoryDetails.getProductListByCategory(
-        catId,
-        SubId
-      );
-      this.setState({ products: productList.data });
-    } catch (error) {
-      console.error("Error getting product list:", error);
-    }
-  };
-
   checkCart = (productId) => {
     const { cartItems } = this.props;
     const productExistsInCart = cartItems.some(
@@ -369,19 +400,27 @@ class CategoryList extends Component {
   };
 
   render() {
-    const { products, sortBy, showBy, display } = this.state;
+    const { isLoaded, error, sortBy, showBy, display } = this.state;
+
+    if (!isLoaded) {
+      return <CircularProgress color="secondary" />;
+    }
+
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
 
     return (
       <div className="container">
         <div className="search-page">
           <div className="row">
-            <div className="col-lg-3 col-md-4 col-12 mob-hide">
+            <div className="col-lg-3 col-md-4 col-6 mob-hide">
               <div className="list-name">
                 <List />
               </div>
             </div>
 
-            <div className="col-lg-9 col-md-8 col-12">
+            <div className="col-md-9">
               <section className="featured-product" style={{ padding: 0 }}>
                 <div className="filter-container">
                   <div className="price-sort-row">
@@ -436,8 +475,8 @@ class CategoryList extends Component {
                         <option value="default">Default</option>
                         <option value="NameAZ">Name (A-Z)</option>
                         <option value="NameZA">Name (Z-A)</option>
-                        <option value="lowToHigh">Price (Low & High)</option>
-                        <option value="highToLow">Price (High & Low)</option>
+                        <option value="lowToHigh">Price (Low &gt; High)</option>
+                        <option value="highToLow">Price (High &gt; Low)</option>
                       </select>
                     </div>
 
@@ -472,6 +511,7 @@ class CategoryList extends Component {
           </div>
         </div>
       </div>
+      // </section>
     );
   }
 }
@@ -482,5 +522,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { addToCart, addToWishlist })(
-  CategoryList
+  resultProduct
 );

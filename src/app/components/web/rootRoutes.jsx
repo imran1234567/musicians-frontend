@@ -52,6 +52,7 @@ import OrderSupport from "../OrderSupport";
 import NewsletterPopup from "../NewsLetterPopup";
 import BrandsList from "../brands";
 import AffiliateRegister from "./views/Affiliate/AffiliateRegister";
+import resultProduct from "../brands/resultProduct/resultProduct";
 // import Failed from './views/checkout/failed';
 
 export default class rootRoutes extends Component {
@@ -100,6 +101,7 @@ export default class rootRoutes extends Component {
           <Route exact path="/news" component={NewsletterPopup} />
           <Route exact path="/brands" component={BrandsList} />
           <Route exact path="/reg" component={AffiliateRegister} />
+          <Route exact path="/resultProduct" component={resultProduct}/>
 
 
           {/* <Route exact path='/p/:slug/:id' component={Singleproduct} />
