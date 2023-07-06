@@ -14,9 +14,9 @@ export default class Orange extends Component {
                 <li>Availability: In Stock</li>
               </ul>
               <h4>$339.00</h4>
-              <div class="add-cart">
+              {/* <div class="add-cart">
                 <button class="cart-btn">add to cart</button>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

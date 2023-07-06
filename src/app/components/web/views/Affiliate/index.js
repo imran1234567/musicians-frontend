@@ -3,7 +3,25 @@ import React from "react";
 import { Link } from "@material-ui/core";
 import "./affiliate.css";
 export default class Affiliate extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showPopup: false,
+    };
+  }
+
+  handleLoginClick = () => {
+    // Perform login logic here
+
+    // Show the popup
+    this.setState({ showPopup: true });
+
+    // You can also make an API call or perform any other necessary actions here
+  };
+
   render() {
+    const { showPopup } = this.state;
+
     return (
       <div className="affiliate-program">
         <div className="container">
@@ -65,9 +83,38 @@ export default class Affiliate extends Component {
                     />
                   </div>
                   <br></br>
-                  <a href="#" className="fill-cart-btn">
-                    <Link to="/">LOGIN</Link>
-                  </a>
+                  <div>
+                    <a
+                      href="#"
+                      className="fill-cart-btn"
+                      onClick={this.handleLoginClick}
+                    >
+                      LOGIN
+                    </a>
+
+                    {showPopup && (
+                      <div className="popup">
+                        <div className="popup-content">
+                          <h3
+                            style={{
+                              color: "var(--primary-color)",
+                              paddingLeft: "30px",
+                              paddingRight: "30px",
+                            }}
+                            className="mb-4 mt-4"
+                          >
+                            {" "}
+                            We will shortly reach you out for affiliate
+                            programs.
+                          </h3>
+                          <p>Please Check Your Email for Further details.</p>
+                          <a href="/" className="cart-btn">
+                            Continue
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                   <br></br>
                   <br></br>
                 </div>
