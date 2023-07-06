@@ -41,7 +41,7 @@ class BannersSlider extends Component {
         <section class="categories">
           <div class="container-fluid">
             <div class="row categories-content">
-              <div class="col-lg-3 col-md-3 col-12">
+              <div class="col-lg-3 col-md-3 col-6">
                 <div class="block">
                   <img src={cat1} />
                   <div class="categories-text">
@@ -49,7 +49,7 @@ class BannersSlider extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-3 col-12">
+              <div class="col-lg-3 col-md-3 col-6">
                 <div class="block">
                   <img src={cat2} />
                   <div class="categories-text">
@@ -57,7 +57,7 @@ class BannersSlider extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-3 col-12">
+              <div class="col-lg-3 col-md-3 col-6">
                 <div class="block">
                   <img src={cat3} />
                   <div class="categories-text">
@@ -65,7 +65,7 @@ class BannersSlider extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-3 col-12">
+              <div class="col-lg-3 col-md-3 col-6">
                 <div class="block">
                   <img src={cat4} />
                   <div class="categories-text">
@@ -79,7 +79,7 @@ class BannersSlider extends Component {
         <section class="offers">
           <div class="container-fluid">
             <div class="offers-content row">
-              <div class="col-lg-4 col-md-4 col-12">
+              <div class="col-lg-4 col-md-4 col-12 offer-class">
                 <div class="offer-box of-1">
                   <div class="offer-image">
                     <img src={pay1} />
@@ -94,7 +94,7 @@ class BannersSlider extends Component {
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-4 col-12">
+              <div class="col-lg-4 col-md-4 col-12 offer-class">
                 <div class="offer-box of-2">
                   <div class="offer-image">
                     <img src={pay2} />
@@ -109,7 +109,7 @@ class BannersSlider extends Component {
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-4 col-12">
+              <div class="col-lg-4 col-md-4 col-12 offer-class">
                 <div class="offer-box of-3">
                   <div class="offer-image">
                     <img src={pay3} />

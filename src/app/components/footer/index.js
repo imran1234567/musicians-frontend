@@ -7,7 +7,6 @@ import {
   NotificationContainer,
 } from "react-notifications";
 
-
 import {
   faFacebook,
   faTwitter,
@@ -33,7 +32,6 @@ import c5 from "../../../images/c5.jpg";
 import c8 from "../../../images/c8.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 
 class Footer extends Component {
   constructor(props) {

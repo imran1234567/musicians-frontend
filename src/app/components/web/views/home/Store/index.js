@@ -6,8 +6,8 @@ export default class Store1 extends Component {
       window.location.href = "/locator";
     };
     return (
-      <div>
-        <section class="store" style={{ backgroundImage: `url(${image1})` }}>
+      <section class="store" style={{ backgroundImage: `url(${image1})` }}>
+        <div className="container">
           <div class="store-content">
             <div class="store-text">
               <h3>
@@ -19,8 +19,8 @@ export default class Store1 extends Component {
               </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     );
   }
 }

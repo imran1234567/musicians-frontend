@@ -133,188 +133,200 @@ export default class Profile extends Component {
         </div>
         <div className>
           <div className="container">
-            <div className="row">
-              <div className="col-lg-3 col-md-4">
-                <div className="left-side-tabs">
-                  <div className="dashboard-left-links">
-                    <a href="/account/view" className="user-item">
-                      <i className="uil uil-apps" />
-                      Overview
-                    </a>
-                    <a href="/account/profile" className="user-item active">
-                      <i className="mdi mdi-account-outline" />
-                      My Profile
-                    </a>
-                    <a href="/account/order/list" className="user-item">
-                      <i className="uil uil-box" />
-                      My Orders
-                    </a>
-                    {/* <a href="/account/rewards" className="user-item">
+            <div className="info-site">
+              <div className="row">
+                <div className="col-lg-3 col-md-3 col-12">
+                  <div className="left-side-tabs">
+                    <div className="dashboard-left-links">
+                      <a href="/account/view" className="user-item">
+                        <i className="uil uil-apps" />
+                        Overview
+                      </a>
+                      <a href="/account/profile" className="user-item active">
+                        <i className="mdi mdi-account-outline" />
+                        My Profile
+                      </a>
+                      <a href="/account/order/list" className="user-item">
+                        <i className="uil uil-box" />
+                        My Orders
+                      </a>
+                      {/* <a href="/account/rewards" className="user-item">
                       <i className="uil uil-gift" />
                       My Rewards
                     </a> */}
-                    <a href="/account/wishlist" className="user-item">
-                      <i className="uil uil-heart" />
-                      Shopping Wishlist
-                    </a>
-                    <a href="/account/address" className="user-item">
-                      <i className="uil uil-location-point" />
-                      My Address
-                    </a>
-                    <a className="user-item" onClick={this.handleLogout}>
-                      <i className="uil uil-exit" />
-                      Logout
-                    </a>
+                      <a href="/account/wishlist" className="user-item">
+                        <i className="uil uil-heart" />
+                        Shopping Wishlist
+                      </a>
+                      <a href="/account/address" className="user-item">
+                        <i className="uil uil-location-point" />
+                        My Address
+                      </a>
+                      <a className="user-item" onClick={this.handleLogout}>
+                        <i className="uil uil-exit" />
+                        Logout
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="user-div">
-                <div className="dashboard-right">
-                  <div className="row">
-                    <div className="col-md-12">
-                      <div className="main-title-tab">
-                        <h4 className="mb-4 sec-title">
-                          <i className="uil uil-box" />
-                          My Profile
-                        </h4>
+                <div className="col-lg-9 col-md-9 col-12 user-div">
+                  <div className="dashboard-right">
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="main-title-tab">
+                          <h4 className="mb-4 sec-title">
+                            <i className="uil uil-box" />
+                            My Profile
+                          </h4>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-lg-12 col-md-12">
-                      <div className="pdpt-bg">
-                        <form className="user-form">
-                          <div className="row">
-                            <div className="col-sm-6">
-                              <div className="form-group">
-                                <label className="control-label">
-                                  First Name <span className="required">*</span>
-                                </label>
-                                <input
-                                  className="form-control border-form-control"
-                                  type="text"
-                                  name="firstName"
-                                  value={user.firstName}
-                                  onChange={(e) => this.handleChangeUser(e)}
-                                />
-                              </div>
-                            </div>
-                            <div className="col-sm-6">
-                              <div className="form-group">
-                                <label className="control-label">
-                                  Last Name <span className="required">*</span>
-                                </label>
-                                <input
-                                  className="form-control border-form-control"
-                                  type="text"
-                                  name="lastName"
-                                  value={user.lastName}
-                                  onChange={(e) => this.handleChangeUser(e)}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-sm-6">
-                              <div className="form-group">
-                                <label className="control-label">
-                                  Phone <span className="required">*</span>
-                                </label>
-                                <input
-                                  className="form-control border-form-control"
-                                  type="number"
-                                  name="phone"
-                                  value={user.phone}
-                                  onChange={(e) => this.handleChangeUser(e)}
-                                />
-                              </div>
-                            </div>
-                            <div className="col-sm-6">
-                              <div className="form-group">
-                                <label className="control-label">
-                                  Email Address{" "}
-                                  <span className="required">*</span>
-                                </label>
-                                <input
-                                  className="form-control border-form-control "
-                                  type="email"
-                                  value={user.email}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="gender">
-                            <div className="form-group col-lg-6">
-                              <label>Gender</label>
-                              <div className="chek-form">
-                                <div className="custome-radio form-check-inline">
-                                  {user.gender === "Male" ? (
-                                    <input
-                                      className="form-check-input"
-                                      type="radio"
-                                      name="gender"
-                                      id="exampleRadios1"
-                                      defaultValue="Male"
-                                      onChange={(e) => this.handleChangeUser(e)}
-                                      checked
-                                    />
-                                  ) : (
-                                    <input
-                                      className="form-check-input"
-                                      type="radio"
-                                      name="gender"
-                                      id="exampleRadios1"
-                                      defaultValue="Male"
-                                      onChange={(e) => this.handleChangeUser(e)}
-                                    />
-                                  )}
-                                  <label
-                                    className="form-check-label"
-                                    htmlFor="exampleRadios1"
-                                  >
-                                    Male
+                      <div className="col-lg-12 col-md-12">
+                        <div className="pdpt-bg profile-div">
+                          <form className="user-form">
+                            <div className="row">
+                              <div className="col-sm-6">
+                                <div className="form-group">
+                                  <label className="control-label">
+                                    First Name{" "}
+                                    <span className="required">*</span>
                                   </label>
+                                  <input
+                                    className="form-control border-form-control"
+                                    type="text"
+                                    name="firstName"
+                                    value={user.firstName}
+                                    onChange={(e) => this.handleChangeUser(e)}
+                                  />
                                 </div>
-                                <div className="custome-radio form-check-inline">
-                                  {user.gender === "Female" ? (
-                                    <input
-                                      className="form-check-input"
-                                      type="radio"
-                                      name="gender"
-                                      id="exampleRadios2"
-                                      defaultValue="Female"
-                                      onChange={(e) => this.handleChangeUser(e)}
-                                      checked
-                                    />
-                                  ) : (
-                                    <input
-                                      className="form-check-input"
-                                      type="radio"
-                                      name="gender"
-                                      id="exampleRadios2"
-                                      defaultValue="Female"
-                                      onChange={(e) => this.handleChangeUser(e)}
-                                    />
-                                  )}
-                                  <label
-                                    className="form-check-label"
-                                    htmlFor="exampleRadios2"
-                                  >
-                                    Female
+                              </div>
+                              <div className="col-sm-6">
+                                <div className="form-group">
+                                  <label className="control-label">
+                                    Last Name{" "}
+                                    <span className="required">*</span>
                                   </label>
+                                  <input
+                                    className="form-control border-form-control"
+                                    type="text"
+                                    name="lastName"
+                                    value={user.lastName}
+                                    onChange={(e) => this.handleChangeUser(e)}
+                                  />
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="row">
-                            <button
-                              className="save-btn"
-                              onClick={this.handleSubmit}
-                            >
-                              Save
-                            </button>
-                            <button className="cancel-btn">Cancel</button>
-                          </div>
-                        </form>
+                            <div className="row">
+                              <div className="col-sm-6">
+                                <div className="form-group">
+                                  <label className="control-label">
+                                    Phone <span className="required">*</span>
+                                  </label>
+                                  <input
+                                    className="form-control border-form-control"
+                                    type="number"
+                                    name="phone"
+                                    value={user.phone}
+                                    onChange={(e) => this.handleChangeUser(e)}
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-sm-6">
+                                <div className="form-group">
+                                  <label className="control-label">
+                                    Email Address{" "}
+                                    <span className="required">*</span>
+                                  </label>
+                                  <input
+                                    className="form-control border-form-control "
+                                    type="email"
+                                    value={user.email}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div className="gender">
+                              <div className="form-group col-lg-6">
+                                <label>Gender</label>
+                                <div className="chek-form">
+                                  <div className="custome-radio form-check-inline">
+                                    {user.gender === "Male" ? (
+                                      <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="gender"
+                                        id="exampleRadios1"
+                                        defaultValue="Male"
+                                        onChange={(e) =>
+                                          this.handleChangeUser(e)
+                                        }
+                                        checked
+                                      />
+                                    ) : (
+                                      <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="gender"
+                                        id="exampleRadios1"
+                                        defaultValue="Male"
+                                        onChange={(e) =>
+                                          this.handleChangeUser(e)
+                                        }
+                                      />
+                                    )}
+                                    <label
+                                      className="form-check-label"
+                                      htmlFor="exampleRadios1"
+                                    >
+                                      Male
+                                    </label>
+                                  </div>
+                                  <div className="custome-radio form-check-inline">
+                                    {user.gender === "Female" ? (
+                                      <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="gender"
+                                        id="exampleRadios2"
+                                        defaultValue="Female"
+                                        onChange={(e) =>
+                                          this.handleChangeUser(e)
+                                        }
+                                        checked
+                                      />
+                                    ) : (
+                                      <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="gender"
+                                        id="exampleRadios2"
+                                        defaultValue="Female"
+                                        onChange={(e) =>
+                                          this.handleChangeUser(e)
+                                        }
+                                      />
+                                    )}
+                                    <label
+                                      className="form-check-label"
+                                      htmlFor="exampleRadios2"
+                                    >
+                                      Female
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="btn-profile">
+                              <button className="cart-btn">Cancel</button>
+                              <button
+                                className="fill-cart-btn"
+                                onClick={this.handleSubmit}
+                              >
+                                Save
+                              </button>
+                            </div>
+                          </form>
+                        </div>
                       </div>
                     </div>
                   </div>

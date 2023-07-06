@@ -18,7 +18,7 @@
   display: flex;
   margin-bottom: 2px;
   border-bottom: 1px solid #ddd;
-  padding-bottom: 2px;
+  padding-bottom: 10px;
 }
 
 .cart-product-img {
@@ -140,10 +140,6 @@
   font-size: 16px;
   border-radius: 3px;
   transition: background-color 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background-color: #000;
 }
 
 .quantity {

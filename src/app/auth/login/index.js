@@ -272,7 +272,7 @@ export default class Login extends Component {
           : "invalid email address";
         break;
       case "password":
-        formErrors.password =value.length < 6 ? "Invalid password" : "";
+        formErrors.password = value.length < 6 ? "Invalid password" : "";
         // if (formErrors.password) {
         //   // Show notification for wrong password
         //   NotificationManager.error("Wrong password. Please try again.");
@@ -328,7 +328,7 @@ export default class Login extends Component {
             <div className="modal-content">
               <div className="modal-body">
                 <div className="login-modal">
-                  <div className="row">
+                  <div className="row login-content">
                     <div
                       className="col-lg-6 pad-right-0"
                       style={{
@@ -423,6 +423,7 @@ export default class Login extends Component {
 
                               {/* updated register form in login form                     */}
                               <div
+                                className="login-div"
                                 style={{
                                   display: "flex",
                                   justifyContent: "center",
@@ -436,13 +437,17 @@ export default class Login extends Component {
                                   data-toggle="tab"
                                   href="#register"
                                   role="tab"
-                                  style={{ marginLeft: "2px" }}
+                                  style={{
+                                    marginLeft: "2px",
+                                    color: "var(--primary-color)",
+                                  }}
                                 >
                                   Sign up now
                                 </a>
                               </div>
 
                               <div
+                                className="forgot-pass"
                                 style={{
                                   display: "flex",
                                   justifyContent: "center",
@@ -452,6 +457,7 @@ export default class Login extends Component {
                                 <a
                                   href="/"
                                   onClick={this.handleForgotPassword}
+                                  style={{ color: "var(--primary-color)" }}
                                 >
                                   Forgot Password?
                                 </a>
@@ -478,4 +484,3 @@ export default class Login extends Component {
     );
   }
 }
-
