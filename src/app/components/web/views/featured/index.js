@@ -92,6 +92,7 @@ class Featured extends Component {
 
   render() {
     let list = this.state.productList?.product;
+    const {token} = this.state;
     return (
       <section class="featured-product">
         <div class="container-fluid">
@@ -159,7 +160,9 @@ class Featured extends Component {
                           </div>
                         )} */}
                         <div class="add-cart">
-                          {isProductInCart ? (
+                          {!token ? <a data-target="#bd-example-modal" data-toggle="modal" className="fill-cart-btn">
+                          Add To Cart
+                        </a>: isProductInCart ? (
                             <Link to="/cart" className="fill-cart-btn">
                               Go To Cart
                             </Link>

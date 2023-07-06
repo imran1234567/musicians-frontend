@@ -9,6 +9,7 @@ import Store1 from "./Store";
 import Testimonial from "./testimonial";
 import Process from "./Process";
 import ScrollUpButton from "react-scroll-up-button";
+import Login from "../../../../auth/login";
 
 // import Topsavers from './top-section';
 // import Bestofferbanner from './best-offers-banner';
@@ -34,7 +35,7 @@ export default class Home extends Component {
           ShowAtPosition={146}
           AnimationDuration={3000}
         />
-
+        <Login/>
         {/* <Bannerslider />
                 <Topsavers />
                 <Bestofferbanner />

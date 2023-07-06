@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { Paper } from "@material-ui/core";
 import Slider from "react-slick";
 import parse from "html-react-parser";
-import { GetProductDetails } from "../../../services";
+import { GetProductDetails, GetUserLogin } from "../../../services";
 import { NotificationManager } from "react-notifications";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
 import "./index.css";
+import Login from "../../../../auth/login";
 
 
 class Singleproduct extends Component {
@@ -15,6 +16,7 @@ class Singleproduct extends Component {
     super(props);
     this.state = {
       product: "",
+      token:""
     };
   }
   async componentDidMount() {
@@ -22,6 +24,8 @@ class Singleproduct extends Component {
     let url = window.location.href.split("/");
     var lastSegment = url.pop() || url.pop();
     let list = await GetProductDetails.getProductById(lastSegment);
+    let cookies = await GetUserLogin.isAuthenticate();
+    this.setState({token: cookies});
     this.setState({ product: list.data });
   }
   checkCart = (productId) => {
@@ -37,7 +41,7 @@ class Singleproduct extends Component {
   };
 
   render() {
-    const { product } = this.state;
+    const { product, token } = this.state;
     const settings = {
       customPaging: function (i) {
         return (
@@ -107,7 +111,7 @@ class Singleproduct extends Component {
                         (Inclusive of all taxes)
                       </div>
                     </div>
-                    {isProductInCart ? (
+                    {!token ? <a data-target="#bd-example-modal" data-toggle="modal" className="fill-cart-btn">Add To Cart</a> : isProductInCart ? (
                       <Link to="/cart" className="fill-cart-btn">
                         Go To Cart
                       </Link>
@@ -172,6 +176,7 @@ class Singleproduct extends Component {
             )}
           </div>
         </section>
+        <Login/>
       </div>
     );
   }
