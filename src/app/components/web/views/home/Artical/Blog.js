@@ -44,7 +44,7 @@ export default class Blog extends Component {
             <img src={imageUrl} alt={title} />
           </div>
           <div className="blog-content">
-            <p>{content}</p>
+          <p>{ReactHtmlParser(content)}</p>
           </div>
         </div>
       </div>
