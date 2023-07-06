@@ -24,6 +24,17 @@ class Singleproduct extends Component {
     let list = await GetProductDetails.getProductById(lastSegment);
     this.setState({ product: list.data });
   }
+  checkCart = (productId) => {
+    const { cartItems } = this.props;
+    const productExistsInCart = cartItems.some(
+      (product) => product.id === productId
+    );
+    if (productExistsInCart) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   render() {
     const { product } = this.state;
@@ -44,11 +55,13 @@ class Singleproduct extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
     };
+    const isProductInCart = this.checkCart(product.id);
     return (
       <div>
         <section className="shop-single section-padding pt-3">
           <div className="container">
             {product ? (
+              
               <div className="row">
                 <div className="col-md-6">
                   <div className="shop-detail-left">
@@ -94,10 +107,8 @@ class Singleproduct extends Component {
                         (Inclusive of all taxes)
                       </div>
                     </div>
-                    {this.props.cartItems.some(
-                      (product) => product.id === product.id
-                    ) ? (
-                      <Link to="/cart" className="cart-btn">
+                    {isProductInCart ? (
+                      <Link to="/cart" className="fill-cart-btn">
                         Go To Cart
                       </Link>
                     ) : (
