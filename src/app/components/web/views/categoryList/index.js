@@ -102,11 +102,11 @@ class CategoryList extends Component {
     } else if (sortBy === "NameZA") {
       sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
     } else if (sortBy === "lowToHigh") {
-      sortedProducts.sort((a, b) => a.price - b.price);
+      sortedProducts.sort((a, b) => a.netPrice - b.netPrice);
     } else if (sortBy === "highToLow") {
-      sortedProducts.sort((a, b) => b.price - a.price);
+      sortedProducts.sort((a, b) => b.netPrice - a.netPrice);
     }
-
+    
     // Apply showBy limit
     const showByLimit = parseInt(showBy, 10);
     const limitedProducts = sortedProducts.slice(0, showByLimit);
