@@ -254,8 +254,8 @@ export default class TopArrival extends Component {
                                 <div className="arrival-image">
                                   <Link
                                     to={{
-                                      pathname: `/p/${product.slug}/${product.id}`,
-                                      state: product,
+                                      pathname: `/p/${products[nextProductIndex].slug}/${products[nextProductIndex].id}`,
+                                      state: products[nextProductIndex],
                                     }}
                                   >
                                     <img
@@ -267,8 +267,8 @@ export default class TopArrival extends Component {
                                 <div className="arrival-text">
                                   <Link
                                     to={{
-                                      pathname: `/p/${product.slug}/${product.id}`,
-                                      state: product,
+                                      pathname: `/p/${products[nextProductIndex].slug}/${products[nextProductIndex].id}`,
+                                      state: products[nextProductIndex],
                                     }}
                                   >
                                     <h6>{products[nextProductIndex].name}</h6>
