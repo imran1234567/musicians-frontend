@@ -41,7 +41,6 @@ class BrandsList extends Component {
     this.props.history.push({
       pathname: "/resultProduct",
       state: { value: brandName },
-      
     });
     console.log(brandName);
   };
@@ -99,11 +98,15 @@ class BrandsList extends Component {
                     (brand, index) => (
                       <tr
                         key={index}
-                        style={{cursor:'pointer'}}
+                        style={{ cursor: "pointer" }}
                         onClick={() => this.handleClickSearch(brand.brand)}
                       >
-                        <td>{index + 1}</td>
-                        <td>{brand.brand}</td>
+                        <td style={{ color: "var(--primary-color)" }}>
+                          {index + 1}
+                        </td>
+                        <td style={{ color: "var(--primary-color)" }}>
+                          {brand.brand}
+                        </td>
                       </tr>
                     )
                   )}
