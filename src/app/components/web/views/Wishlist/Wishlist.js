@@ -6,6 +6,8 @@ import { addToCart } from "../../../../store/actions/cartActions";
 import { connect } from "react-redux";
 import { NotificationManager } from "react-notifications";
 import { Link } from "react-router-dom";
+import Login from "../../../../auth/login";
+import { GetUserLogin } from "../../../services";
 
 class Wishlist extends Component {
   constructor(props) {
@@ -41,6 +43,7 @@ class Wishlist extends Component {
             "https://cdn.pixabay.com/photo/2012/04/12/12/30/saxophone-29816_1280.png",
         },
       ],
+      token: ""
     };
   }
 
@@ -55,6 +58,11 @@ class Wishlist extends Component {
     // Implement the logic to add the item to the cart
     console.log("Add to cart:", item);
   };
+
+  async componentDidMount() {
+    let cookies = await GetUserLogin.isAuthenticate();
+    this.setState({ token: cookies })
+  }
 
   renderEmptyWishlist() {
     return (
@@ -82,6 +90,8 @@ class Wishlist extends Component {
 
   render() {
     const { wishItems } = this.props;
+    const { token } = this.state;
+
     if (wishItems.length === 0) {
       return this.renderEmptyWishlist();
     } else {
@@ -118,7 +128,7 @@ class Wishlist extends Component {
                     </div>
                   </div>
                   <div style={{ display: "flex", flexDirection: "row" }}>
-                    <button
+                    {token ? <button
                       className="add-to-cart-button"
                       style={{
                         background: "none",
@@ -141,7 +151,18 @@ class Wishlist extends Component {
                       }}
                     >
                       <AiOutlineShoppingCart />
-                    </button>
+                    </button> : <a
+                      className="add-to-cart-button"
+                      style={{
+                        background: "none",
+                        transition: "transform 0.3s",
+                        marginLeft: "20px",
+                        paddingRight: "0",
+                      }}
+                      data-target="#bd-example-modal" data-toggle="modal"
+                    >
+                      <AiOutlineShoppingCart />
+                    </a>}
                     <button
                       className="delete-button"
                       style={{
@@ -168,6 +189,7 @@ class Wishlist extends Component {
               ))}
             </ul>
           </div>
+          <Login />
         </div>
       );
     }

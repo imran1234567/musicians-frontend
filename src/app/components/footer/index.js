@@ -32,6 +32,8 @@ import c5 from "../../../images/c5.jpg";
 import c8 from "../../../images/c8.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Login from "../../auth/login";
+import { GetUserLogin } from "../services";
 
 class Footer extends Component {
   constructor(props) {
@@ -43,6 +45,7 @@ class Footer extends Component {
     isOpen: false,
     name: "",
     email: "",
+    token: "",
   };
 
   handleSubmit = (event) => {
@@ -66,8 +69,13 @@ class Footer extends Component {
     }));
   };
 
+  async componentDidMount() {
+    let cookies = await GetUserLogin.isAuthenticate();
+    this.setState({ token: cookies });
+  }
+
   render() {
-    const { isOpen, name, email } = this.state;
+    const { isOpen, name, email, token } = this.state;
     return (
       <>
         <footer className="footer-section">
@@ -284,15 +292,23 @@ class Footer extends Component {
                     <div class="block">
                       <h4>My Account</h4>
                       <ul>
-                        <li>
+                        {token ? <li>
                           <Link to="/account/view">My Account</Link>
-                        </li>
-                        <li>
+                        </li> : <li><a data-target="#bd-example-modal" data-toggle="modal">
+                          My Account
+                        </a></li>}
+
+                        {token ? <li>
                           <Link to="/account/order/list">Order History </Link>
-                        </li>
-                        <li>
+                        </li> : <li><a data-target="#bd-example-modal" data-toggle="modal">
+                          Order History
+                        </a></li>}
+
+                        {token ? <li>
                           <Link to="/wishlist">Wish List</Link>
-                        </li>
+                        </li> : <li><a data-target="#bd-example-modal" data-toggle="modal">
+                          Wish List
+                        </a></li>}
                       </ul>
                       {isOpen && (
                         <div className="popup-overlay">
@@ -427,6 +443,7 @@ class Footer extends Component {
               </div>
             </div>
           </div>
+          <Login />
         </footer>
       </>
     );
