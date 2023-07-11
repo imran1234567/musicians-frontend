@@ -149,11 +149,18 @@ class SearchItem extends Component {
             return (
               <div className="list-item" key={index}>
                 <div className="product-image">
+                <Link
+                    to={{
+                      pathname: `/p/${product.slug}/${product.id}`,
+                      state: product,
+                    }}
+                  >
                   <img
                     src={product.photo}
                     alt="Product"
                     style={{ width: "120px", objectFit: "contain" }}
                   />
+                  </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
                   <Link
@@ -271,11 +278,18 @@ class SearchItem extends Component {
               <div className="col-lg-4 col-md-4 col-6" key={index}>
                 <div className="product-box">
                   <div className="product-image">
+                  <Link
+                    to={{
+                      pathname: `/p/${product.slug}/${product.id}`,
+                      state: product,
+                    }}
+                  >
                     <img
                       src={product.photo}
                       alt="Product"
                       style={{ width: "100%", height: "auto" }}
                     />
+                    </Link>
                   </div>
                   <div className="product-text">
                     <Link

@@ -91,8 +91,10 @@ class Featured extends Component {
   };
 
   render() {
-    let list = this.state.productList?.product;
-    const {token} = this.state;
+    const { token } = this.state;
+    const { productList } = this.state;
+    const displayedProducts = productList?.product?.slice(0, 8);
+
     return (
       <section class="featured-product">
         <div class="container-fluid">
@@ -103,7 +105,7 @@ class Featured extends Component {
                 <CircularProgress color="secondary" />
               </div>
             ) : (
-              list.map((row, index) => {
+              displayedProducts.map((row, index) => {
                 const isProductInCart = this.checkCart(row.id);
                 const isProductInWishlist = this.checkWishlist(row.id);
                 const discountedPrice =
@@ -113,7 +115,14 @@ class Featured extends Component {
                   <div class="col-lg-3 col-md-4 col-6" key={index}>
                     <div class="product-box">
                       <div class="product-image">
-                        <img src={row.photo} alt="product" />
+                        <Link
+                          to={{
+                            pathname: `/p/${row.slug}/${row.id}`,
+                            state: row,
+                          }}
+                        >
+                          <img src={row.photo} alt="product" />
+                        </Link>
                       </div>
                       <div class="product-text">
                         <Link
@@ -160,9 +169,15 @@ class Featured extends Component {
                           </div>
                         )} */}
                         <div class="add-cart">
-                          {!token ? <a data-target="#bd-example-modal" data-toggle="modal" className="fill-cart-btn">
-                          Add To Cart
-                        </a>: isProductInCart ? (
+                          {!token ? (
+                            <a
+                              data-target="#bd-example-modal"
+                              data-toggle="modal"
+                              className="fill-cart-btn"
+                            >
+                              Add To Cart
+                            </a>
+                          ) : isProductInCart ? (
                             <Link to="/cart" className="fill-cart-btn">
                               Go To Cart
                             </Link>

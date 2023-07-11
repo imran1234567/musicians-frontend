@@ -11,7 +11,6 @@ import List from "../../web/views/catgoryItem";
 import { addToCart } from "../../../store/actions/cartActions";
 import { addToWishlist } from "../../../store/actions/wishlistActions";
 
-
 class resultProduct extends Component {
   state = {
     productList: [],
@@ -21,9 +20,8 @@ class resultProduct extends Component {
     showBy: "10",
     display: "list",
     comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
-        ? JSON.parse(localStorage.getItem("comparisonItems"))
-        : [],
-
+      ? JSON.parse(localStorage.getItem("comparisonItems"))
+      : [],
   };
 
   componentDidMount() {
@@ -35,7 +33,7 @@ class resultProduct extends Component {
     }
   }
 
- addToComparison = (product) => {
+  addToComparison = (product) => {
     NotificationManager.success(
       `${product.name} added successfuly for comparsion!`
     );
@@ -148,11 +146,19 @@ class resultProduct extends Component {
             return (
               <div className="list-item" key={index}>
                 <div className="product-image">
-                  <img
-                    src={product.photo}
-                    alt="Product"
-                    style={{ width: "120px", objectFit: "contain" }}
-                  />
+                  <Link
+                    to={{
+                      pathname: `/p/${product.slug}/${product.id}`,
+                      state: product,
+                    }}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <img
+                      src={product.photo}
+                      alt="Product"
+                      style={{ width: "120px", objectFit: "contain" }}
+                    />
+                  </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
                   <Link
@@ -164,33 +170,33 @@ class resultProduct extends Component {
                     <h6>{product.name}</h6>
                   </Link>
                   <div className="price-container">
-                          {product.discountPer ? (
-                            <div>
-                              <h5 className="original-price">
-                                <span
-                                  style={{
-                                    textDecoration: "line-through",
-                                    color: "gray",
-                                  }}
-                                >
-                                  ${product.price}
-                                </span>
-                              </h5>
-                            </div>
-                          ) : (
-                            <h5>${product.price}</h5>
-                          )}
-                          <div className="discount-price">
-                            {/* {row.discountPer && ( */}
-                            <div className="discount-tag">
-                              -{product.discountPer}%
-                            </div>
+                    {product.discountPer ? (
+                      <div>
+                        <h5 className="original-price">
+                          <span
+                            style={{
+                              textDecoration: "line-through",
+                              color: "gray",
+                            }}
+                          >
+                            ${product.price}
+                          </span>
+                        </h5>
+                      </div>
+                    ) : (
+                      <h5>${product.price}</h5>
+                    )}
+                    <div className="discount-price">
+                      {/* {row.discountPer && ( */}
+                      <div className="discount-tag">
+                        -{product.discountPer}%
+                      </div>
 
-                            {product.discountPer && product.netPrice !== 0 ? (
-                              <h5 className="net-price">${product.netPrice}</h5>
-                            ) : null}
-                          </div>
-                        </div>
+                      {product.discountPer && product.netPrice !== 0 ? (
+                        <h5 className="net-price">${product.netPrice}</h5>
+                      ) : null}
+                    </div>
+                  </div>
                   {/* <h5>{this.formatPrice(product.price)}</h5> */}
                   <div className="add-cart">
                     {isProductInCart ? (
@@ -219,17 +225,17 @@ class resultProduct extends Component {
                         />
                       </a> */}
 
-                            <a
-                              href="javascript:void(0)"
-                              onClick={() => {
-                                this.addToComparison(product);
-                              }}
-                            >
-                              <FontAwesomeIcon
-                                icon={faCodeCompare}
-                                className="compare-icon"
-                              />
-                            </a>
+                      <a
+                        href="javascript:void(0)"
+                        onClick={() => {
+                          this.addToComparison(product);
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faCodeCompare}
+                          className="compare-icon"
+                        />
+                      </a>
                       <a
                         href="javascript:void(0)"
                         onClick={() => {
@@ -270,11 +276,19 @@ class resultProduct extends Component {
               <div className="col-lg-4 col-md-4 col-6" key={index}>
                 <div className="product-box">
                   <div className="product-image">
-                    <img
-                      src={product.photo}
-                      alt="Product"
-                      style={{ width: "100%", height: "auto" }}
-                    />
+                    <Link
+                      to={{
+                        pathname: `/p/${product.slug}/${product.id}`,
+                        state: product,
+                      }}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <img
+                        src={product.photo}
+                        alt="Product"
+                        style={{ width: "100%", height: "auto" }}
+                      />
+                    </Link>
                   </div>
                   <div className="product-text">
                     <Link
@@ -287,33 +301,33 @@ class resultProduct extends Component {
                       <h6>{product.name}</h6>
                     </Link>
                     <div className="price-container">
-                          {product.discountPer ? (
-                            <div>
-                              <h5 className="original-price">
-                                <span
-                                  style={{
-                                    textDecoration: "line-through",
-                                    color: "gray",
-                                  }}
-                                >
-                                  ${product.price}
-                                </span>
-                              </h5>
-                            </div>
-                          ) : (
-                            <h5>${product.price}</h5>
-                          )}
-                          <div className="discount-price">
-                            {/* {row.discountPer && ( */}
-                            <div className="discount-tag">
-                              -{product.discountPer}%
-                            </div>
-
-                            {product.discountPer && product.netPrice !== 0 ? (
-                              <h5 className="net-price">${product.netPrice}</h5>
-                            ) : null}
-                          </div>
+                      {product.discountPer ? (
+                        <div>
+                          <h5 className="original-price">
+                            <span
+                              style={{
+                                textDecoration: "line-through",
+                                color: "gray",
+                              }}
+                            >
+                              ${product.price}
+                            </span>
+                          </h5>
                         </div>
+                      ) : (
+                        <h5>${product.price}</h5>
+                      )}
+                      <div className="discount-price">
+                        {/* {row.discountPer && ( */}
+                        <div className="discount-tag">
+                          -{product.discountPer}%
+                        </div>
+
+                        {product.discountPer && product.netPrice !== 0 ? (
+                          <h5 className="net-price">${product.netPrice}</h5>
+                        ) : null}
+                      </div>
+                    </div>
                     {/* <h5>${product.price}</h5> */}
                     <div className="add-cart">
                       {isProductInCart ? (
@@ -342,17 +356,17 @@ class resultProduct extends Component {
                             className="compare-icon"
                           />
                         </a> */}
-                          <a
-                              href="javascript:void(0)"
-                              onClick={() => {
-                                this.addToComparison(product);
-                              }}
-                            >
-                              <FontAwesomeIcon
-                                icon={faCodeCompare}
-                                className="compare-icon"
-                              />
-                            </a>
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            this.addToComparison(product);
+                          }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faCodeCompare}
+                            className="compare-icon"
+                          />
+                        </a>
                         <a
                           href="javascript:void(0)"
                           onClick={() => {
