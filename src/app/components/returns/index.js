@@ -1,6 +1,8 @@
 import React from "react";
 import * as Yup from "yup";
 import "./ReturnForm.css";
+import axios from "axios";
+import order from "../../../images/order.png";
 
 export default class returns extends React.Component {
   state = {
@@ -58,43 +60,49 @@ export default class returns extends React.Component {
     this.setState({ [name]: value });
   };
 
-  handleFormSubmit = (event) => {
+  handleFormSubmit = async (event) => {
     event.preventDefault();
     const { formErrors, ...data } = this.state;
 
-    this.validationSchema
-      .validate(data, { abortEarly: false })
-      .then(() => {
-        console.log("Form submitted");
-        console.log("Form data:", data);
+    try {
+      await this.validationSchema.validate(data, { abortEarly: false });
+      console.log("Form submitted");
+      console.log("Form data:", data);
 
-        // Reset the form fields and display success message
-        this.setState({
-          submittedData: data,
-          firstName: "",
-          lastName: "",
-          email: "",
-          telephone: "",
-          orderId: "",
-          orderDate: "",
-          productName: "",
-          productCode: "",
-          quantity: "",
-          reasonForReturn: "",
-          productOpened: "",
-          faultyDetails: "",
-          verificationCode: "",
-          formErrors: {},
-          captchaCode: "",
-        });
-      })
-      .catch((validationErrors) => {
-        const errors = {};
-        validationErrors.inner.forEach((error) => {
-          errors[error.path] = error.message;
-        });
-        this.setState({ formErrors: errors });
+      // Send the form data to the API
+      const response = await axios.post(
+        "http://13.233.106.34:4000/api/return/add",
+        data
+      );
+
+      console.log("API response:", response.data);
+
+      // Reset the form fields and display success message
+      this.setState({
+        submittedData: data,
+        firstName: "",
+        lastName: "",
+        email: "",
+        telephone: "",
+        orderId: "",
+        orderDate: "",
+        productName: "",
+        productCode: "",
+        quantity: "",
+        reasonForReturn: "",
+        productOpened: "",
+        faultyDetails: "",
+        verificationCode: "",
+        formErrors: {},
+        captchaCode: "",
       });
+    } catch (validationErrors) {
+      const errors = {};
+      validationErrors.inner.forEach((error) => {
+        errors[error.path] = error.message;
+      });
+      this.setState({ formErrors: errors });
+    }
   };
 
   generateRandomCaptcha = () => {
@@ -127,6 +135,7 @@ export default class returns extends React.Component {
           <div className="policy-text">
             <div className="gift-coupon">
               <h5>please complete the form below to request an RMA number</h5>
+
               <form onSubmit={this.handleFormSubmit}>
                 <h2>ORDER INFORMATION</h2>
                 <div class="form-row">
@@ -399,7 +408,11 @@ export default class returns extends React.Component {
                 </div>
 
                 <div className="return-btn">
-                  <button type="submit" className="cart-btn">
+                  <button
+                    type="submit"
+                    className="fill-cart-btn"
+                    onClick={() => (window.location.href = "/")}
+                  >
                     Back
                   </button>
                   <button type="submit" className="fill-cart-btn">
@@ -409,9 +422,25 @@ export default class returns extends React.Component {
 
                 {submittedData && (
                   <div>
-                    <h2>Success!</h2>
-                    <p>Form submitted successfully. Here are the details:</p>
-                    <pre>{JSON.stringify(submittedData, null, 2)}</pre>
+                    <br></br>
+                    {/* <h2>Success!</h2> */}
+                    <h2 style={{ color: "#750000" }}>
+                      Thank you for submitting your return request.
+                    </h2>
+                    <div className="return-class">
+                      <img
+                        src={order}
+                        alt="orderReturn"
+                        style={{ width: "100px", height: "100px" }}
+                      />
+                      {/* <pre>{JSON.stringify(submittedData, null, 2)}</pre> */}
+                      <h5 style={{ color: "#750000", marginLeft: "15px" }}>
+                        Your request has been sent to the relevant department
+                        for processing.
+                        <br></br> You will be notified via e-mail as to the
+                        status of your request.
+                      </h5>
+                    </div>
                   </div>
                 )}
               </form>
