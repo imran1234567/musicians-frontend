@@ -95,7 +95,7 @@ class SingleProduct extends Component {
                   <div className="img-slider">
                     {product.productphotos.length === 0 ? (
                       <div key={product.id}>
-                        <img src={product.src} alt={product.alt} />
+                        <img src={product.photo} alt={product.alt} />
                       </div>
                     ) : (
                       <Slider {...settings}>
