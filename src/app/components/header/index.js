@@ -1,12 +1,6 @@
 import React, { Component } from "react";
-// import Login from '../../auth/login';
 import { Link, withRouter } from "react-router-dom";
-// import Cartsidebar from '../web/views/cart-sidebar';
-import { GetCategoryDetails, GetUserLogin } from "../services";
-import Logo from "../../../assets/logo.png";
-import Login from "../../auth/login";
 import { connect } from "react-redux";
-import axios from "axios";
 import { NavDropdown } from "react-bootstrap";
 import {
   faSearch,
@@ -16,7 +10,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "react-bootstrap/Navbar";
-import { Nav, Container, Row } from "react-bootstrap";
+import { Nav, Container } from "react-bootstrap";
+import Logo from "../../../assets/logo.png";
+import Login from "../../auth/login";
+import { GetCategoryDetails, GetUserLogin } from "../services";
+import b6 from "../../../images/b6.jpg";
+import { orange } from "@material-ui/core/colors";
 
 class Navigation extends Component {
   constructor(props) {
@@ -30,29 +29,58 @@ class Navigation extends Component {
       expanded: false,
     };
   }
+
   handleToggle = () => {
     this.setState((prevState) => ({
       expanded: !prevState.expanded,
     }));
   };
 
-
-  //taking the search input
   handleChange = (e) => {
-    console.log(this.setState({ searchtxt: e.target.value }));
+    this.setState({ searchtxt: e.target.value });
   };
+
   handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       this.handleClickSearch();
     }
   };
-  handleClickSearch=()=>{
-    const {searchtxt} = this.state;
+
+  handleClickSearch = () => {
+    const { searchtxt } = this.state;
     this.props.history.push({
       pathname: "/SearchItem",
-      state:{value:searchtxt},
+      state: { value: searchtxt },
     });
+  };
+
+  handleMouseEnter = (categoryId) => {
+    this.setState((prevState) => ({
+      headerItems: prevState.headerItems.map((item) => {
+        if (item.categoryId === categoryId) {
+          return {
+            ...item,
+            showSubmenu: true,
+          };
+        }
+        return item;
+      }),
+    }));
+  };
+
+  handleMouseLeave = (categoryId) => {
+    this.setState((prevState) => ({
+      headerItems: prevState.headerItems.map((item) => {
+        if (item.categoryId === categoryId) {
+          return {
+            ...item,
+            showSubmenu: false,
+          };
+        }
+        return item;
+      }),
+    }));
   };
 
   async componentDidMount() {
@@ -98,8 +126,6 @@ class Navigation extends Component {
     event.preventDefault();
     await GetUserLogin.logout();
   };
-
-  
 
   render() {
     let {
@@ -258,40 +284,54 @@ class Navigation extends Component {
           </div>
 
           <div className="navigation-bar">
-            <Navbar className="navigate" expand="md" expanded={expanded}>
+            <Navbar className="navigate" expand="lg" expanded={expanded}>
               <Container fluid>
                 <Navbar.Toggle
                   aria-controls="responsive-navbar-nav"
                   onClick={this.handleToggle}
                 />
-                <Navbar.Collapse
-                  id="responsive-
-                -nav"
-                >
+                <Navbar.Collapse id="responsive-nav">
                   <Nav className="me-auto1" style={{ color: "white" }}>
                     {headerItems.map((item) => {
                       return (
-                        <NavDropdown
-                          title={item.name.toUpperCase()}
-                          id="guitar-bass-dropdown"
-                          className="nav-dropdown-title"
-                          style={{ color: "white", left: 0 }}
-                        >
-                          {item.subCategory.map((data) => {
-                            return (
-                              <div className="submenu">
-                                <NavDropdown.Item
-                                  as={Link}
-                                  to={`/cat/${item.categoryId}/${data.id}`}
-                                  activeClassName="active"
-                                  style={{ textTransform: "uppercase" }}
-                                >
-                                  {data.sub_name.toUpperCase()}
-                                </NavDropdown.Item>
-                              </div>
-                            );
-                          })}
-                        </NavDropdown>
+                        <div className="navbar-cat">
+                          <NavDropdown
+                            title={item.name.toUpperCase()}
+                            id="guitar-bass-dropdown"
+                            className="nav-dropdown-title"
+                            style={{ color: "white", left: 0 }}
+                            onMouseEnter={() =>
+                              this.handleMouseEnter(item.categoryId)
+                            }
+                            onMouseLeave={() =>
+                              this.handleMouseLeave(item.categoryId)
+                            }
+                            show={item.showSubmenu}
+                          >
+                            <div className="nav-image">
+                              <img src={b6} alt="product" />
+                            </div>
+                            <div className="submenu-class">
+                              {item.subCategory.map((data) => {
+                                return (
+                                  <div className="submenu" key={data.id}>
+                                    <NavDropdown.Item
+                                      as={Link}
+                                      to={`/cat/${item.categoryId}/${data.id}`}
+                                      activeClassName="active"
+                                      style={{ textTransform: "uppercase" }}
+                                    >
+                                      {data.sub_name.toUpperCase()} <br></br>
+                                      <small style={{ color: "blue" }}>
+                                        View All
+                                      </small>
+                                    </NavDropdown.Item>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </NavDropdown>
+                        </div>
                       );
                     })}
                   </Nav>
@@ -305,6 +345,7 @@ class Navigation extends Component {
     );
   }
 }
+
 export default withRouter(
   connect((state) => ({
     cartItems: state.cart.cartItems,
