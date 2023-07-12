@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot as thinLocationDot } from "@fortawesome/free-solid-svg-icons";
+
 import {
   NotificationManager,
   NotificationContainer,
@@ -172,13 +175,13 @@ class Footer extends Component {
                     <ul>
                       <li class="map">
                         <Link to="/map">
-                          <FontAwesomeIcon icon={faMapMarker} />
+                          <FontAwesomeIcon icon={thinLocationDot} />
                         </Link>
                         63 Ware St, Fairfield NSW 2165
                       </li>
                       <li class="phone">
                         <Link to="/phone">
-                          <FontAwesomeIcon icon={faPhone} />
+                          <FontAwesomeIcon icon={faPhone} size="xs" />
                         </Link>
                         <Link to="tel:(02) 9755 9999">(02) 9755 9999</Link>
                       </li>
@@ -292,23 +295,50 @@ class Footer extends Component {
                     <div class="block">
                       <h4>My Account</h4>
                       <ul>
-                        {token ? <li>
-                          <Link to="/account/view">My Account</Link>
-                        </li> : <li><a data-target="#bd-example-modal" data-toggle="modal">
-                          My Account
-                        </a></li>}
+                        {token ? (
+                          <li>
+                            <Link to="/account/view">My Account</Link>
+                          </li>
+                        ) : (
+                          <li>
+                            <a
+                              data-target="#bd-example-modal"
+                              data-toggle="modal"
+                            >
+                              My Account
+                            </a>
+                          </li>
+                        )}
 
-                        {token ? <li>
-                          <Link to="/account/order/list">Order History </Link>
-                        </li> : <li><a data-target="#bd-example-modal" data-toggle="modal">
-                          Order History
-                        </a></li>}
+                        {token ? (
+                          <li>
+                            <Link to="/account/order/list">Order History </Link>
+                          </li>
+                        ) : (
+                          <li>
+                            <a
+                              data-target="#bd-example-modal"
+                              data-toggle="modal"
+                            >
+                              Order History
+                            </a>
+                          </li>
+                        )}
 
-                        {token ? <li>
-                          <Link to="/wishlist">Wish List</Link>
-                        </li> : <li><a data-target="#bd-example-modal" data-toggle="modal">
-                          Wish List
-                        </a></li>}
+                        {token ? (
+                          <li>
+                            <Link to="/wishlist">Wish List</Link>
+                          </li>
+                        ) : (
+                          <li>
+                            <a
+                              data-target="#bd-example-modal"
+                              data-toggle="modal"
+                            >
+                              Wish List
+                            </a>
+                          </li>
+                        )}
                       </ul>
                       {isOpen && (
                         <div className="popup-overlay">
@@ -393,11 +423,11 @@ class Footer extends Component {
                           />
                         </div>
                         <button
-                          type="submit"
+                          type="Subscribe"
                           className="btn btn-primary"
                           onClick={this.togglePopup}
                         >
-                          Submit
+                          Subscribe
                         </button>
                       </form>
                     </div>

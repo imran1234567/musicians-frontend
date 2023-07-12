@@ -213,6 +213,7 @@ export default class TopArrival extends Component {
           <div className="container-fluid">
             <h2 className="sec-title">Top Deals & New Arrivals</h2>
             <div className="new-arrival-list">
+              {" "}
               {products.map((product, index) => {
                 const productIndex = index % products.length;
                 const imageIndex = index % images.length;
