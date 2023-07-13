@@ -118,8 +118,8 @@ class Featured extends Component {
                     {row.special && (
                       <img
                         src={offerImage}
-                        alt="Special Product"
-                        className="special-product-image"
+                        alt="Special Offer"
+                        className="special-offer-image"
                       />
                     )}
                       <div class="product-image">
