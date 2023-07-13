@@ -177,4 +177,13 @@ p:last-child {
     font-size: 14px;
     color: #777;
   }
-  
+
+.item-thumb{
+  width: 80px !important;
+  height: 80px !important;
+}
+
+.slick-dots{
+  justify-content:space-around !important;
+  display:flex !important
+}
