@@ -270,7 +270,7 @@ export default function Gift() {
                     sent an email with details how to redeem their gift voucher.
                   </p>
 
-                  <button onClick={closeModal} className="cart-btn">
+                  <button onClick={closeModal} className="fill-cart-btn">
                     Close
                   </button>
                 </div>

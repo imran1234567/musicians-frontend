@@ -43,7 +43,7 @@ export default function Delivery() {
             <br></br>
             <div className=" boxer-one">
               <br></br>
-              <button className="cart-btn" onClick={handleClick}>
+              <button className="fill-cart-btn" onClick={handleClick}>
                 Continue
               </button>
             </div>

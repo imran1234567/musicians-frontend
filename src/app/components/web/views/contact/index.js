@@ -19,6 +19,18 @@ class ContactForm extends React.Component {
   render() {
     return (
       <div>
+        <section class="breadcrumbs py-4">
+          <div class="container-fluid">
+            <div class="b-crumb pb-2">
+              <ul class="breadcrumbs-list">
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>Contact Us</li>
+              </ul>
+            </div>
+          </div>
+        </section>
         <section className="contact-sec py-5">
           <div className="container">
             <h2 className="mb-4 sec-title">Contact us</h2>

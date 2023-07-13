@@ -287,7 +287,7 @@ export default function AffiliateRegister() {
                     please contact the store owner.
                   </p>
 
-                  <button onClick={closeModal} className="cart-btn">
+                  <button onClick={closeModal} className="fill-cart-btn">
                     Close
                   </button>
                 </div>

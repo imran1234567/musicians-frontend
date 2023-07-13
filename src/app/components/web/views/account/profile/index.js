@@ -95,7 +95,9 @@ export default class Profile extends Component {
               <div className="col-md-12">
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb">
-                    <li className="breadcrumb-item">Home</li>
+                    <li className="breadcrumb-item">
+                      <a href="/">Home</a>
+                    </li>
                     <li className="breadcrumb-item active" aria-current="page">
                       My Profile
                     </li>
@@ -317,7 +319,7 @@ export default class Profile extends Component {
                               </div>
                             </div>
                             <div class="btn-profile">
-                              <button className="cart-btn">Cancel</button>
+                              <button className="fill-cart-btn">Cancel</button>
                               <button
                                 className="fill-cart-btn"
                                 onClick={this.handleSubmit}
