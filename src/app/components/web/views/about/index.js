@@ -19,20 +19,18 @@ class About extends Component {
         <div class="inner-banner">
           <img src={banner} alt="banner" class="w-100" />
         </div>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <b>Home</b>
-            </li>
-            <li
-              className="breadcrumb-item "
-              aria-current="page"
-              style={{ color: "#750000" }}
-            >
-              <b>About Us</b>
-            </li>
-          </ol>
-        </nav>
+        <section class="breadcrumbs py-4">
+          <div class="container-fluid">
+            <div class="b-crumb pb-2">
+              <ul class="breadcrumbs-list">
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>About Us</li>
+              </ul>
+            </div>
+          </div>
+        </section>
         <section class="about-article pt-5">
           <div class="container-fluid">
             <div class="about-article-content">

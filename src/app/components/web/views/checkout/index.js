@@ -285,17 +285,15 @@ class checkout extends Component {
     } = this.state;
     return (
       <div>
-        <section className="pt-3 pb-3 page-info section-padding border-bottom bg-white single-product-header-bk">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <a href="/">
-                  <strong>
-                    <span class="mdi mdi-home"></span> Home
-                  </strong>
-                </a>{" "}
-                <span class="mdi mdi-chevron-right"></span> <a>Checkout</a>
-              </div>
+        <section class="breadcrumbs py-4">
+          <div class="container-fluid">
+            <div class="b-crumb pb-2">
+              <ul class="breadcrumbs-list">
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>Checkout</li>
+              </ul>
             </div>
           </div>
         </section>
@@ -508,9 +506,11 @@ class checkout extends Component {
                           - {row.unitSize} gm
                         </h6>
                         <p className="offer-price mb-0">
-                        {`${row.qty} * $${row.netPrice}`}{" "}
+                          {`${row.qty} * $${row.netPrice}`}{" "}
                           <i className="mdi mdi-tag-outline" />{" "}
-                          <span className="regular-price">&#36;{row.price}</span>
+                          <span className="regular-price">
+                            &#36;{row.price}
+                          </span>
                         </p>
                       </div>
                     </div>

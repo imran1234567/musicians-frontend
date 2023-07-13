@@ -474,6 +474,10 @@ header .navbar .navbar-nav li.mobile-menu {
   font-size: 1.125rem;
   font-weight: 400;
   color: var(--secondary-color);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   margin-bottom: 20px;
 }
 .new-arrival .new-arrival-box .arrival-text h5 {
@@ -1295,7 +1299,7 @@ ul.check-list li {
 }
 .fill-cart-btn:hover {
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
 }
 .fill-cart-btn:not([href]) {
   color: #fff;
@@ -2636,6 +2640,8 @@ h2 {
   font-weight: 400;
   color: var(--primary-color);
   border-radius: 0;
+  background-color: transparent;
+  outline: none;
 }
 .product-details .nav-tabs .nav-item .nav-link.active {
   border-color: var(--primary-color);
@@ -4161,7 +4167,4 @@ input[type="email"] {
 /* 16/06 */
 .slick-slide img {
   width: 100%;
-}
-.breadcrumb {
-  border-bottom: 1px solid #823431;
 }

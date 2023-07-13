@@ -3,6 +3,18 @@ import React from "react";
 export default function StoreLocator() {
   return (
     <>
+      <section class="breadcrumbs py-4">
+        <div class="container-fluid">
+          <div class="b-crumb pb-2">
+            <ul class="breadcrumbs-list">
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>Store Locator</li>
+            </ul>
+          </div>
+        </div>
+      </section>
       <div className="store-location">
         <h1 className="mb-4 mt-4 sec-title">OUR STORE LOCATION</h1>
 

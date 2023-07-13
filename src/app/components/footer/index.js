@@ -355,7 +355,7 @@ class Footer extends Component {
                               Newsletter
                             </h2>
                             <button
-                              className="cart-btn"
+                              className="fill-cart-btn"
                               onClick={this.togglePopup}
                             >
                               Close
