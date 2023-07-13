@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import "./feature.css";
+import offerImage from "../../../../../images/special-offer.png";
 import { NotificationManager } from "react-notifications";
 
 class Featured extends Component {
@@ -113,7 +114,14 @@ class Featured extends Component {
                 const netPrice = row.price - discountedPrice;
                 return (
                   <div class="col-lg-3 col-md-4 col-6" key={index}>
-                    <div class="product-box">
+                    <div className={`product-box ${row.special ? 'special-product' : ''}`}>
+                    {row.special && (
+                      <img
+                        src={offerImage}
+                        alt="Special Product"
+                        className="special-product-image"
+                      />
+                    )}
                       <div class="product-image">
                         <Link
                           to={{
