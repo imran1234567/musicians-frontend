@@ -10,6 +10,7 @@ import { NotificationManager } from "react-notifications";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
+import offerImage from "../../../../../images/special-offer.png";
 import Login from "../../../../auth/login";
 
 class CategoryList extends Component {
@@ -95,8 +96,16 @@ class CategoryList extends Component {
   renderProducts = () => {
     const { products, sortBy, showBy, display, token } = this.state;
 
+    
+    let filteredProducts = [...products];
+    if (sortBy === "special") {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.special === true
+      );
+    }
+
     // Apply sorting based on sortBy value
-    let sortedProducts = [...products];
+    let sortedProducts = [...filteredProducts];
     if (sortBy === "NameAZ") {
       sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === "NameZA") {
@@ -116,21 +125,31 @@ class CategoryList extends Component {
           {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
+
             return (
-              <div className="list-item" key={index}>
-                <div className="product-image">
-                <Link
-                      to={{
-                        pathname: `/p/${product.slug}/${product.id}`,
-                        state: product,
-                      }}
-                      style={{ textDecoration: "none", color: "inherit" }}
-                    >
+              <div className={`list-item ${product.special ? 'special-product' : ''}`} key={index}>
+                {/* Add offerImage for special offer products */}
+                {product.special && (
                   <img
-                    src={product.photo}
-                    alt="Product"
-                    style={{ width: "120px", objectFit: "contain" }}
+                    src={offerImage}
+                    alt="Special Offer"
+                    className="special-offer-image"
                   />
+                )}
+
+                <div className="product-image">
+                  <Link
+                    to={{
+                      pathname: `/p/${product.slug}/${product.id}`,
+                      state: product,
+                    }}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <img
+                      src={product.photo}
+                      alt="Product"
+                      style={{ width: "120px", objectFit: "contain" }}
+                    />
                   </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -172,7 +191,15 @@ class CategoryList extends Component {
                   </div>
                   {/* <h5>{this.formatPrice(product.price)}</h5> */}
                   <div className="add-cart">
-                    {!token ? <a data-target="#bd-example-modal" data-toggle="modal" className="fill-cart-btn">Add To Cart</a> : isProductInCart ? (
+                    {!token ? (
+                      <a
+                        data-target="#bd-example-modal"
+                        data-toggle="modal"
+                        className="fill-cart-btn"
+                      >
+                        Add To Cart
+                      </a>
+                    ) : isProductInCart ? (
                       <Link to="/cart" className="fill-cart-btn">
                         Go To Cart
                       </Link>
@@ -240,22 +267,32 @@ class CategoryList extends Component {
           {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
+
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
-                <div className="product-box">
+                <div className={`product-box ${product.special ? 'special-product' : ''}`}>
+                  {/* Add offerImage for special offer products */}
+                  {product.special && (
+                    <img
+                      src={offerImage}
+                      alt="Special Offer"
+                      className="special-offer-image"
+                    />
+                  )}
+
                   <div className="product-image">
-                  <Link
+                    <Link
                       to={{
                         pathname: `/p/${product.slug}/${product.id}`,
                         state: product,
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                    <img
-                      src={product.photo}
-                      alt="Product"
-                      style={{ width: "100%", height: "auto" }}
-                    />
+                      <img
+                        src={product.photo}
+                        alt="Product"
+                        style={{ width: "100%", height: "auto" }}
+                      />
                     </Link>
                   </div>
                   <div className="product-text">
@@ -298,7 +335,15 @@ class CategoryList extends Component {
                     </div>
                     {/* <h5>${product.price}</h5> */}
                     <div className="add-cart">
-                      {!token ? <a data-target="#bd-example-modal" data-toggle="modal" className="fill-cart-btn">Add To Cart</a> : isProductInCart ? (
+                      {!token ? (
+                        <a
+                          data-target="#bd-example-modal"
+                          data-toggle="modal"
+                          className="fill-cart-btn"
+                        >
+                          Add To Cart
+                        </a>
+                      ) : isProductInCart ? (
                         <Link to="/cart" className="fill-cart-btn">
                           Go To Cart
                         </Link>
@@ -458,6 +503,7 @@ class CategoryList extends Component {
                         <option value="NameZA">Name (Z-A)</option>
                         <option value="lowToHigh">Price (Low & High)</option>
                         <option value="highToLow">Price (High & Low)</option>
+                        <option value="special">Special Offer</option>
                       </select>
                     </div>
 

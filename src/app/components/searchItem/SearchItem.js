@@ -11,6 +11,7 @@ import Login from "../../auth/login";
 import List from "../web/views/catgoryItem";
 import { addToCart } from "../../store/actions/cartActions";
 import { addToWishlist } from "../../store/actions/wishlistActions";
+import offerImage from "../../../images/special-offer.png";
 import "./SearchItem.css";
 
 class SearchItem extends Component {
@@ -125,8 +126,15 @@ class SearchItem extends Component {
   renderProducts = () => {
     const { productList, sortBy, showBy, display } = this.state;
 
+    let filteredProducts = [...productList];
+    if (sortBy === "special") {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.special === true
+      );
+    }
     // Apply sorting based on sortBy value
-    let sortedProducts = [...productList];
+    let sortedProducts = [...filteredProducts];
+    
     if (sortBy === "NameAZ") {
       sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === "NameZA") {
@@ -147,7 +155,14 @@ class SearchItem extends Component {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
             return (
-              <div className="list-item" key={index}>
+              <div className={`list-item ${product.special ? 'special-product' : ''}`} key={index}>
+                {product.special && (
+                  <img
+                    src={offerImage}
+                    alt="Special Offer"
+                    className="special-offer-image"
+                  />
+                )}
                 <div className="product-image">
                 <Link
                     to={{
@@ -276,7 +291,14 @@ class SearchItem extends Component {
             const isProductInWishlist = this.checkWishlist(product.id);
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
-                <div className="product-box">
+                 <div className={`product-box ${product.special ? 'special-product' : ''}`}>
+                 {product.special && (
+                    <img
+                      src={offerImage}
+                      alt="Special Offer"
+                      className="special-offer-image"
+                    />
+                  )}
                   <div className="product-image">
                   <Link
                     to={{
@@ -493,6 +515,7 @@ class SearchItem extends Component {
                         <option value="NameZA">Name (Z-A)</option>
                         <option value="lowToHigh">Price (Low &gt; High)</option>
                         <option value="highToLow">Price (High &gt; Low)</option>
+                        <option value="special">Special Offer</option>
                       </select>
                     </div>
 

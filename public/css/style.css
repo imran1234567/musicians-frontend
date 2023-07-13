@@ -3850,6 +3850,21 @@ input[type="email"] {
   align-items: center;
   gap: 10px;
 }
+
+.special-product{
+  position: relative;
+}
+.special-product .special-offer-image{
+  position: absolute;
+  top: -8px;
+  left: -9px;
+}
+.product-list.grid-view .featured-product-list{
+  justify-content: flex-start;
+}
+.checkout-page .btn.btn-link:hover{
+  color: inherit;
+}
 /* 23/06 */
 
 /* responsive */
