@@ -37,8 +37,10 @@ export default class returns extends React.Component {
     productCode: Yup.string().required("Product Code is required"),
     quantity: Yup.number()
       .typeError("Quantity must be a number")
-      .positive("Quantity must be positive")
+      .min(0, "Quantity must be a non-negative value")
+      .integer("Quantity must be an integer")
       .required("Quantity is required"),
+
     reasonForReturn: Yup.string().required("Reason for Return is required"),
     productOpened: Yup.string().required("Product Opened is required"),
     faultyDetails: Yup.string().required("Faulty or Other Details is required"),
@@ -57,7 +59,19 @@ export default class returns extends React.Component {
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    let sanitizedValue = value; // Initialize sanitized value
+
+    // Check if the input field is "quantity" and value is numeric and greater than 0
+    if (name === "quantity") {
+      const parsedValue = parseInt(value);
+      if (!isNaN(parsedValue) && parsedValue >= 1) {
+        sanitizedValue = parsedValue.toString();
+      } else {
+        sanitizedValue = ""; // Reset the value if it's invalid
+      }
+    }
+
+    this.setState({ [name]: sanitizedValue });
   };
 
   handleFormSubmit = async (event) => {
