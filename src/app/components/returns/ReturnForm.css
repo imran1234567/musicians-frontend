@@ -173,15 +173,6 @@ textarea {
   margin-top: 10px;
 }
 
-.captcha {
-  display: inline-block;
-  padding: 8px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #fafdfb;
-  margin-bottom: 4px;
-}
-
 .captcha label {
   margin-right: 10px;
 }

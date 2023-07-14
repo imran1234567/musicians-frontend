@@ -425,78 +425,6 @@ header .navbar .navbar-nav li.mobile-menu {
 		  Offers-End
 ::::::::::::::::::::::::::::::::::*/
 
-.new-arrival {
-  background-color: #f4f4f4;
-  padding: 5.375rem 0 4.25rem;
-}
-.sec-title {
-  font-size: 3.125rem;
-  font-weight: 300;
-  color: var(--primary-color);
-  text-align: center;
-  margin-bottom: 5rem;
-}
-.new-arrival .new-arrival-list .new-arrival-content {
-  margin-bottom: 30px;
-}
-
-.new-arrival
-  .new-arrival-list
-  .new-arrival-content:nth-of-type(even)
-  .av-image {
-  order: 1;
-}
-.new-arrival .new-arrival-list .new-arrival-content:nth-of-type(even) .av-box {
-  order: 2;
-}
-.new-arrival .av-image .arrival-image {
-  height: 100%;
-}
-.new-arrival .arrival-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.new-arrival .new-arrival-box {
-  height: 100%;
-  border: 2px solid #fff;
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.16);
-  -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.16);
-  -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.16);
-}
-.new-arrival .new-arrival-box .arrival-image {
-  height: 250px;
-}
-.new-arrival .new-arrival-box .arrival-text {
-  padding: 26px 18px;
-}
-.new-arrival .new-arrival-box .arrival-text h6 {
-  font-size: 1.125rem;
-  font-weight: 400;
-  color: var(--secondary-color);
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-.new-arrival .new-arrival-box .arrival-text h5 {
-  font-size: 1.563rem;
-  font-weight: 400;
-  color: var(--primary-color);
-  margin-bottom: 0;
-}
-
-@media (max-width: 767px) {
-  .new-arrival .new-arrival-list .new-arrival-content {
-    --bs-gutter-y: 1.5rem;
-  }
-}
-
-/*::::::::::::::::::::::::::::::::::
-		  new-arrival-End
-::::::::::::::::::::::::::::::::::*/
-
 .featured-product {
   padding: 100px 0 60px;
 }
@@ -1154,7 +1082,7 @@ ul.check-list li {
   font-weight: 300;
   color: var(--primary-color);
   text-align: center;
-  margin-bottom: 5rem;
+  margin-bottom: 5rem !important;
 }
 .new-arrival .new-arrival-list .new-arrival-content {
   margin-bottom: 30px;
@@ -3851,19 +3779,66 @@ input[type="email"] {
   gap: 10px;
 }
 
-.special-product{
+.special-product {
   position: relative;
 }
-.special-product .special-offer-image{
+.special-product .special-offer-image {
   position: absolute;
   top: -8px;
   left: -9px;
 }
-.product-list.grid-view .featured-product-list{
+.product-list.grid-view .featured-product-list {
   justify-content: flex-start;
 }
-.checkout-page .btn.btn-link:hover{
+.checkout-page .btn.btn-link:hover {
   color: inherit;
+}
+.return-page h5 {
+  text-transform: uppercase;
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+.return-page form .form-row {
+  margin-bottom: 40px;
+}
+.return-page form .form-group {
+  margin: 0;
+  padding: 15px;
+}
+.return-page form .form-group select {
+  width: 100%;
+}
+.return-page form .form-group .radio-container {
+  margin-bottom: 20px;
+}
+.return-page form h2 {
+  margin: 30px 0 18px;
+  font-weight: 500;
+  color: var(--primary-color);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--primary-color);
+}
+.return-page form .form-group .textarea-input {
+  height: 100px;
+  resize: none;
+}
+.return-page form .capcha-section {
+  display: flex;
+  gap: 20px;
+}
+.return-page form .capcha-section .captcha-input {
+  width: 55%;
+}
+.return-page form .capcha-section .captcha .captcha-refresh {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 0;
+  background-color: transparent;
+}
+.return-page form .capcha-section .captcha .captcha-code {
+  color: #000;
+  font-weight: 500;
+  font-size: 20px;
 }
 /* 23/06 */
 
@@ -3920,7 +3895,7 @@ input[type="email"] {
 @media (max-width: 767px) {
   .sec-title {
     font-size: 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 3rem !important;
   }
   .categories .categories-content .block {
     margin-bottom: 20px;
@@ -4174,6 +4149,10 @@ input[type="email"] {
   }
   .store .store-content .store-text h3 {
     font-size: 1.8rem;
+  }
+  .return-page form .capcha-section {
+    flex-direction: column;
+    gap: 8px;
   }
 }
 

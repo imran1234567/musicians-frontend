@@ -132,7 +132,7 @@ export default class returns extends React.Component {
       <div className="info-site">
         <div className="container">
           <h1 className="mb-4 mt-4 sec-title">PRODUCT RETURNS</h1>
-          <div className="policy-text">
+          <div className="return-page">
             <div className="gift-coupon">
               <h5>please complete the form below to request an RMA number</h5>
 
@@ -294,7 +294,7 @@ export default class returns extends React.Component {
                     )}
                   </div>
 
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-6">
                     <label>Reason for Return</label>
                     <select
                       name="reasonForReturn"
@@ -321,7 +321,7 @@ export default class returns extends React.Component {
                     )}
                   </div>
 
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-6">
                     <label>Product is opened</label>
                     <div className="radio-container">
                       <div>
@@ -354,7 +354,9 @@ export default class returns extends React.Component {
                         {formErrors.productOpened}
                       </span>
                     )}
+                  </div>
 
+                  <div class="form-group col-md-12">
                     <label>Faulty or Other Details</label>
                     <textarea
                       name="faultyDetails"
@@ -371,50 +373,49 @@ export default class returns extends React.Component {
                     )}
                   </div>
 
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-lg-6 col-md-12">
                     <label>Enter the code shown above</label>
-                    <div className="captcha">
-                      <span className="captcha-code">{captchaCode}</span>
-                      <button
-                        type="button"
-                        className="captcha-refresh"
-                        onClick={this.generateRandomCaptcha}
-                      >
-                        Refresh
-                      </button>
-                    </div>
-                    <div className="captcha-input">
-                      <input
-                        type="text"
-                        name="verificationCode"
-                        onChange={this.handleInputChange}
-                        className={formErrors.verificationCode ? "error" : ""}
-                        class="form-control"
-                      />
-                      {formErrors.verificationCode && (
-                        <span className="error-message">
-                          {formErrors.verificationCode}
-                        </span>
-                      )}
-                      {!formErrors.verificationCode &&
-                      this.state.verificationCode &&
-                      this.state.verificationCode === captchaCode ? (
-                        <span className="success-message">success!</span>
-                      ) : (
-                        <span className="error-message">Try again!</span>
-                      )}
+                    <div className="capcha-section">
+                      <div className="captcha-input">
+                        <input
+                          type="text"
+                          name="verificationCode"
+                          onChange={this.handleInputChange}
+                          className={formErrors.verificationCode ? "error" : ""}
+                          class="form-control"
+                        />
+
+                        {formErrors.verificationCode && (
+                          <span className="error-message">
+                            {formErrors.verificationCode}
+                          </span>
+                        )}
+                        {!formErrors.verificationCode &&
+                        this.state.verificationCode &&
+                        this.state.verificationCode === captchaCode ? (
+                          <span className="success-message">success!</span>
+                        ) : (
+                          <span className="error-message">Try again!</span>
+                        )}
+                      </div>
+                      <div className="captcha">
+                        <span className="captcha-code">{captchaCode}</span>
+                        <button
+                          type="button"
+                          className="captcha-refresh"
+                          onClick={this.generateRandomCaptcha}
+                        >
+                          Refresh
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="return-btn">
-                  <button
-                    type="submit"
-                    className="fill-cart-btn"
-                    onClick={() => (window.location.href = "/")}
-                  >
+                  <a className="fill-cart-btn" href="/">
                     Back
-                  </button>
+                  </a>
                   <button type="submit" className="fill-cart-btn">
                     Continue
                   </button>

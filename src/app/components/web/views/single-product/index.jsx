@@ -188,11 +188,12 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                       <strong>Or Rent For $14.08 </strong>per week
                     </h5>
                     <h6>
-                      Return any time after 6 months. <a href="#">Learn More</a>
+                      Return any time after 6 months.{" "}
+                      <a href="/returns">Learn More</a>
                     </h6>
                   </div>
                   <div className="apply-btn">
-                    <a href="#">Apply Now</a>
+                    <a href="/returns">Apply Now</a>
                   </div>
                 </div>
                 {/* <hr style={{ color: "black", height: "1px" }} /> */}
