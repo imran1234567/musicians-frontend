@@ -3843,6 +3843,9 @@ input[type="email"] {
 .store-location {
   margin-bottom: 60px;
 }
+.s-search input#form1.control{
+  background: transparent !important;
+}
 /* 23/06 */
 
 /* responsive */
