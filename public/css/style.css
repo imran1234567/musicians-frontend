@@ -3840,6 +3840,9 @@ input[type="email"] {
   font-weight: 500;
   font-size: 20px;
 }
+.store-location {
+  margin-bottom: 60px;
+}
 /* 23/06 */
 
 /* responsive */
