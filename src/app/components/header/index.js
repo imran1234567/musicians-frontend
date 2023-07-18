@@ -27,6 +27,7 @@ class Navigation extends Component {
       headerData: [],
       headerItems: [],
       expanded: false,
+      isSearchButtonDisables: true,
     };
   }
 
@@ -37,7 +38,11 @@ class Navigation extends Component {
   };
 
   handleChange = (e) => {
-    this.setState({ searchtxt: e.target.value });
+    const searchtxt = e.target.value;
+    this.setState({
+      searchtxt,
+      isSearchButtonDisables: searchtxt.trim() === "",
+    });
   };
 
   handleKeyDown = (event) => {
@@ -48,11 +53,13 @@ class Navigation extends Component {
   };
 
   handleClickSearch = () => {
-    const { searchtxt } = this.state;
-    this.props.history.push({
-      pathname: "/SearchItem",
-      state: { value: searchtxt },
-    });
+    const { searchtxt, isSearchButtonDisables } = this.state;
+    if (!isSearchButtonDisables) {
+      this.props.history.push({
+        pathname: "/SearchItem",
+        state: { value: searchtxt },
+      });
+    }
   };
 
   handleMouseEnter = (categoryId) => {
@@ -137,7 +144,7 @@ class Navigation extends Component {
       expanded,
       searchResults,
     } = this.state;
-    const { cartItems, wishItems } = this.props;
+    const { cartItems, wishItems, isSearchButtonDisables } = this.props;
     return (
       <div>
         <header id="header">
@@ -204,15 +211,12 @@ class Navigation extends Component {
                             color: "white",
                             paddingRight: "2.5rem", // Add padding on the right to accommodate the icon
                           }}
-                          value={this.state.searchtxt}
+                          value={searchtxt}
                           onChange={(e) => this.handleChange(e)}
                           onKeyDown={this.handleKeyDown}
                         />
-                        <Link
-                          to={{
-                            pathname: "/SearchItem",
-                            state: { value: searchtxt },
-                          }}
+                        <button
+                          onClick={this.handleClickSearch}
                           style={{
                             display: "flex",
                             justifyContent: "center",
@@ -222,7 +226,13 @@ class Navigation extends Component {
                             top: "50%",
                             transform: "translateY(-50%)",
                             height: "100%",
+                            border: "none",
+                            backgroundColor: "transparent",
+                            cursor: isSearchButtonDisables
+                              ? "default"
+                              : "pointer",
                           }}
+                          disabled={isSearchButtonDisables}
                         >
                           <FontAwesomeIcon
                             icon={faSearch}
@@ -231,11 +241,10 @@ class Navigation extends Component {
                               top: "50%",
                               right: "10px",
                               transform: "translateY(-50%)",
-                              color: "white",
-                              cursor: "pointer",
+                              color: isSearchButtonDisables ? "gray" : "white",
                             }}
                           />
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>
