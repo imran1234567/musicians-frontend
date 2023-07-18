@@ -215,8 +215,13 @@ class Navigation extends Component {
                           onChange={(e) => this.handleChange(e)}
                           onKeyDown={this.handleKeyDown}
                         />
-                        <button
-                          onClick={this.handleClickSearch}
+                        <Link
+                          to={{
+                            pathname: isSearchButtonDisables
+                              ? "/"
+                              : "/SearchItem",
+                            state: { value: searchtxt },
+                          }}
                           style={{
                             display: "flex",
                             justifyContent: "center",
@@ -226,13 +231,14 @@ class Navigation extends Component {
                             top: "50%",
                             transform: "translateY(-50%)",
                             height: "100%",
-                            border: "none",
-                            backgroundColor: "transparent",
-                            cursor: isSearchButtonDisables
-                              ? "default"
-                              : "pointer",
                           }}
-                          disabled={isSearchButtonDisables}
+                          onClick={(e) => {
+                            if (isSearchButtonDisables) {
+                              e.preventDefault(); // Prevent link navigation when search is disabled
+                            } else if (searchtxt.trim() === "") {
+                              e.preventDefault(); // Prevent link navigation when search text is empty
+                            }
+                          }}
                         >
                           <FontAwesomeIcon
                             icon={faSearch}
@@ -241,10 +247,11 @@ class Navigation extends Component {
                               top: "50%",
                               right: "10px",
                               transform: "translateY(-50%)",
-                              color: isSearchButtonDisables ? "gray" : "white",
+                              color: "white",
+                              cursor: "pointer",
                             }}
                           />
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
