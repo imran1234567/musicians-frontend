@@ -31,7 +31,6 @@ export default class List extends Component {
   };
   render() {
     let { user, orderList } = this.state;
-    console.log("List -> render -> orderList", orderList);
     return (
       <div className="wrapper">
         <div className="gambo-Breadcrumb">

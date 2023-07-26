@@ -86,7 +86,6 @@ export default class Profile extends Component {
   };
   render() {
     let { user, profilePhoto } = this.state;
-    console.log("Profile -> render -> user", user);
     return (
       <div className="wrapper">
         <div className="gambo-Breadcrumb">

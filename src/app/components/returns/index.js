@@ -80,17 +80,11 @@ export default class returns extends React.Component {
 
     try {
       await this.validationSchema.validate(data, { abortEarly: false });
-      console.log("Form submitted");
-      console.log("Form data:", data);
-
       // Send the form data to the API
       const response = await axios.post(
         "http://13.233.106.34:4000/api/return/add",
         data
       );
-
-      console.log("API response:", response.data);
-
       // Reset the form fields and display success message
       this.setState({
         submittedData: data,

@@ -56,7 +56,6 @@ class Wishlist extends Component {
   };
   handleAddToCart = (item) => {
     // Implement the logic to add the item to the cart
-    console.log("Add to cart:", item);
   };
 
   async componentDidMount() {

@@ -45,7 +45,6 @@ class compare extends Component {
   render() {
     const { selectedProduct, selectedProducts, products, comarisionItems } =
       this.state;
-    console.log("compareItems", comarisionItems);
     return (
       <div className="comparison-page">
         <h1 className="mb-4 mt-4 sec-title">Instrument Comparison</h1>
