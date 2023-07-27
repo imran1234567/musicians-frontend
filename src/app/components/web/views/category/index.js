@@ -28,8 +28,6 @@ class Category extends Component {
       // Check if the response data is an array or an object with a 'data' property
       const products = Array.isArray(data) ? data : (data.data || []);
 
-      console.log("Fetched products:", products); // Log the fetched products
-
       const featuredProducts = products.filter(product => product.featured === true);
       this.setState({ products: featuredProducts, loading: false });
     } catch (error) {

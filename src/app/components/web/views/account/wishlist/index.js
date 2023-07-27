@@ -87,7 +87,6 @@ export default class wishlist extends Component {
   };
   render() {
     let { user, profilePhoto } = this.state;
-    console.log("Profile -> render -> user", user);
     return (
       <div className="shopping-wishlist">
         <div className="wrapper">

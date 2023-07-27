@@ -37,8 +37,6 @@ export default function Gift() {
         .required("Please agree to the terms"),
     }),
     onSubmit: (values) => {
-      // Handle form submission logic here
-      console.log("Form submitted successfully:", values);
     },
   });
 

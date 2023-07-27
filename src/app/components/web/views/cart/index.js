@@ -19,7 +19,51 @@ class Cart extends Component {
     couponCode: "",
     appliedCoupon: false,
     couponDiscount: 0,
+    couponPercentage: 0,
   };
+  componentDidUpdate(prevProps) {
+    if (prevProps.cartItems !== this.props.cartItems) {
+      const { appliedCoupon, couponCode } = this.state;
+      const { cartItems } = this.props;
+
+      if (appliedCoupon && couponCode) {
+        axios
+          .get(`http://13.233.106.34:4000/api/coupon/get/?code=${couponCode}`)
+          .then((response) => {
+            const { data } = response;
+            if (data.success && data.coupon.code === couponCode) {
+              const couponPercentage = data.coupon.discount;
+              const couponDiscount =
+                (couponPercentage / 100) *
+                cartItems.reduce((sum, i) => (sum += i.qty * i.netPrice), 0);
+              this.setState({
+                appliedCoupon: true,
+                couponDiscount: couponDiscount.toFixed(2),
+                couponPercentage,
+              });
+            } else {
+              this.setState({
+                appliedCoupon: false,
+                couponDiscount: 0,
+                couponPercentage: 0,
+              });
+              NotificationManager.error("Invalid coupon code. Please try again.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error applying coupon:", error);
+            this.setState({
+              appliedCoupon: false,
+              couponDiscount: 0,
+              couponPercentage: 0,
+            });
+            NotificationManager.error(
+              "Failed to apply coupon. Please try again later."
+            );
+          });
+      }
+    }
+  }
   handleApplyCoupon = async () => {
     const { couponCode } = this.state;
     const { cartItems } = this.props;
@@ -30,12 +74,14 @@ class Cart extends Component {
       const { data } = response;
 
       if (data.success && data.coupon.code === couponCode) {
+        const couponPercentage = data.coupon.discount;
         const couponDiscount =
-          (data.coupon.discount / 100) *
+          (couponPercentage / 100) *
           cartItems.reduce((sum, i) => (sum += i.qty * i.netPrice), 0);
         this.setState({
           appliedCoupon: true,
           couponDiscount: couponDiscount.toFixed(2),
+          couponPercentage,
         });
 
         // Show success notification
@@ -70,7 +116,7 @@ class Cart extends Component {
   };
   render() {
     const { cartItems } = this.props;
-    const { appliedCoupon, couponDiscount } = this.state;
+    const { appliedCoupon, couponDiscount, couponPercentage } = this.state;
     const subTotal = cartItems.reduce(
       (sum, i) => (sum += i.qty * i.netPrice),
       0
@@ -213,7 +259,7 @@ class Cart extends Component {
                     >
                       Coupon Discount{" "}
                       <strong className="float-right text-success">
-                        - &#x24;{couponDiscount}
+                      ({couponPercentage}% OFF) &nbsp; - &#x24;{couponDiscount}
                       </strong>
                     </p>
                   ) : (

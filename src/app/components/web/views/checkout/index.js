@@ -124,7 +124,6 @@ class checkout extends Component {
       Math.random() * Math.floor(Math.random() * Date.now())
     );
     this.setState({ isLoaded: true });
-    console.log("deliveryAddress", deliveryAddress);
     if (deliveryAddress) {
       //payment system
       const res = await this.loadScript(
@@ -192,7 +191,6 @@ class checkout extends Component {
             } else {
               window.location.href = "/orderFailure";
             }
-            // console.log(result)
           },
           prefill: {
             name: "",

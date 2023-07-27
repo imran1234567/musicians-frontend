@@ -58,8 +58,6 @@ class Footer extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // Code to handle form submission
-    console.log("Form submitted:", this.state.name, this.state.email);
     // Reset form fields
     this.setState({ name: "", email: "" });
     // Close the popup modal

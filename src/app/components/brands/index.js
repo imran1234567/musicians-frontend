@@ -42,7 +42,6 @@ class BrandsList extends Component {
       pathname: "/resultProduct",
       state: { value: brandName },
     });
-    console.log(brandName);
   };
 
   filterBrandsByAlphabet = (alphabet) => {

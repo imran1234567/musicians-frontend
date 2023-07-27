@@ -65,8 +65,6 @@ class Returns extends React.Component {
     this.validationSchema
       .validate(data, { abortEarly: false })
       .then(() => {
-        console.log("Form submitted");
-        console.log("Form data:", data);
 
         // Reset the form fields and display success message
         this.setState({

@@ -11,10 +11,6 @@ const NewsletterPopup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Do something with the name and email (e.g., send them to a server)
-    // You can add your logic here
-    console.log("Name:", name);
-    console.log("Email:", email);
     togglePopup();
   };
 

@@ -70,7 +70,6 @@ class resultProduct extends Component {
           },
         }
       );
-      console.log("API Response:", response.data);
       const data = response.data.data[0];
 
       if (data && data.products) {
