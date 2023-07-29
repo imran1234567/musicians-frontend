@@ -22,6 +22,8 @@ export default class returns extends React.Component {
     formErrors: {},
     captchaCode: "",
     submittedData: null, // To store the submitted data
+    captchaVerificationSuccess: false,
+    hasTriedVerification: false,
   };
 
   validationSchema = Yup.object().shape({
@@ -71,12 +73,12 @@ export default class returns extends React.Component {
       }
     }
 
-    this.setState({ [name]: sanitizedValue });
+    this.setState({ [name]: sanitizedValue, hasTriedVerification: false });
   };
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
-    const { formErrors, ...data } = this.state;
+    const { formErrors, captchaVerificationSuccess, ...data } = this.state;
 
     try {
       await this.validationSchema.validate(data, { abortEarly: false });
@@ -103,6 +105,7 @@ export default class returns extends React.Component {
         verificationCode: "",
         formErrors: {},
         captchaCode: "",
+        captchaVerificationSuccess: false,
       });
     } catch (validationErrors) {
       const errors = {};
@@ -124,16 +127,22 @@ export default class returns extends React.Component {
       captcha += characters[randomIndex];
     }
 
-    this.setState({ captchaCode: captcha });
+    this.setState({ captchaCode: captcha, captchaVerificationSuccess: false });
   };
 
   render() {
-    const { formErrors, captchaCode, verificationCode, submittedData } =
-      this.state;
+    const {
+      formErrors,
+      captchaCode,
+      verificationCode,
+      submittedData,
+      captchaVerificationSuccess,
+      hasTriedVerification,
+    } = this.state;
     const isFormValid =
       Object.values(formErrors).every((error) => !error) &&
       verificationCode === captchaCode;
-    const showTryAgainMessage =
+    const hasEnteredCaptchaCode =
       verificationCode && verificationCode !== captchaCode;
 
     return (
@@ -381,7 +390,7 @@ export default class returns extends React.Component {
                     )}
                   </div>
 
-                  <div class="form-group col-lg-6 col-md-12">
+                  <div className="form-group col-lg-6 col-md-12">
                     <label>Enter the code shown above</label>
                     <div className="capcha-section">
                       <div className="captcha-input">
@@ -389,8 +398,30 @@ export default class returns extends React.Component {
                           type="text"
                           name="verificationCode"
                           onChange={this.handleInputChange}
-                          className={formErrors.verificationCode ? "error" : ""}
-                          class="form-control"
+                          value={this.state.verificationCode}
+                          className={`form-control ${
+                            formErrors.verificationCode ||
+                            (hasTriedVerification &&
+                              !captchaVerificationSuccess)
+                              ? "error"
+                              : ""
+                          }`}
+                          onKeyPress={(event) => {
+                            if (event.key === "Enter") {
+                              event.preventDefault();
+                              // Check if the verification code matches the captcha code
+                              const isSuccess =
+                                this.state.verificationCode === captchaCode;
+                              this.setState({
+                                captchaVerificationSuccess: isSuccess,
+                                hasTriedVerification: true,
+                              });
+                            }
+                          }}
+                          onBlur={() => {
+                            // Mark that user has tried verification when the input field loses focus
+                            this.setState({ hasTriedVerification: true });
+                          }}
                         />
 
                         {formErrors.verificationCode && (
@@ -398,12 +429,12 @@ export default class returns extends React.Component {
                             {formErrors.verificationCode}
                           </span>
                         )}
-                        {!formErrors.verificationCode &&
-                        this.state.verificationCode &&
-                        this.state.verificationCode === captchaCode ? (
-                          <span className="success-message">success!</span>
-                        ) : (
-                          <span className="error-message">Try again!</span>
+                        {hasTriedVerification &&
+                          !captchaVerificationSuccess && (
+                            <span className="error-message">Try again!</span>
+                          )}
+                        {captchaVerificationSuccess && (
+                          <span className="success-message">Success!</span>
                         )}
                       </div>
                       <div className="captcha">
