@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Axios from "axios";
+import { API_URL } from "../../../../../config";
+import { Apis } from "../../../../../config";
 import bg1 from "../../../../../assets/bg-1.jpeg";
 import bg2 from "../../../../../assets/bg-2.jpeg";
 import bg3 from "../../../../../assets/bg-3.jpeg";
@@ -14,7 +17,36 @@ import pay2 from "../../../../../assets/pay-img-2.png";
 import pay3 from "../../../../../assets/pay-img-3.png";
 
 class BannersSlider extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sliderImages: [], 
+      loading: true, 
+      error: null, 
+    };
+  }
+  componentDidMount(){
+    this.fetchSliderImages();
+  }
+  fetchSliderImages = () => {
+    Axios
+      .get(Apis.GetBannerImage)
+      .then((response) => {
+        this.setState({
+          sliderImages: response.data.cover,
+          loading: false,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          loading: false,
+          error: "Error fetching slider images",
+        });
+      });
+  };
+
   render() {
+    const { sliderImages, loading, error } = this.state;
     var settings = {
       dots: false,
       infinite: true,
@@ -27,17 +59,20 @@ class BannersSlider extends Component {
     };
     return (
       <div>
-        <Slider {...settings}>
-          <div className="owl-item">
-            <img src={bg1} />
-          </div>
-          <div className="owl-item">
-            <img src={bg2} />
-          </div>
-          <div className="owl-item">
-            <img src={bg3} />
-          </div>
-        </Slider>
+        {/* working here wih api */}
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          <Slider {...settings}>
+            {sliderImages.map((image, index) => (
+              <div className="owl-item" key={index}>
+                <img src={image.imageUrl} alt={`Slide ${index + 1}`} />
+              </div>
+            ))}
+          </Slider>
+        )}
         <section class="categories">
           <div class="container-fluid">
             <div class="row categories-content">
