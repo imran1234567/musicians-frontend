@@ -2,6 +2,8 @@ const API_URL = document.domain === "localhost" ? "http://13.233.106.34:4000" : 
 
 
 const Apis = {
+    //banner api
+    GetBannerImage:`${API_URL}/api/cover/getAllCover`,
     
     // Authntication Api
     GetUserLogin: `${API_URL}/api/customer/login`,
