@@ -276,7 +276,7 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                       aria-labelledby="home-tab"
                       tabIndex="0"
                     >
-                      <div className="block">{parse(product.desc)}</div>
+                      <div className="block">{parse(product.sortDesc)}</div>
                     </div>
                     <div
                       className={`tab-pane fade ${
