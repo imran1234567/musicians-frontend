@@ -66,10 +66,16 @@ const SingleProduct = ({ cartItems, addToCart }) => {
     customPaging: function (i) {
       return (
         <div className="item-thumb">
-          <img
+          {/* <img
             width="200"
             height="200"
             src={product.productphotos[i].imgUrl}
+            alt={`Thumbnail ${i}`}
+          /> */}
+          <img
+            width="200"
+            height="200"
+            src={imgArray[i]}
             alt={`Thumbnail ${i}`}
           />
         </div>
@@ -81,6 +87,9 @@ const SingleProduct = ({ cartItems, addToCart }) => {
   const handlePhotoClick = (index) => {
     setSelectedPhoto(index);
   };
+ 
+  const imgArray = [product.photo, ...product.productphotos.map((photo) => photo.imgUrl)];
+  
 
   return (
     <div>
@@ -105,12 +114,13 @@ const SingleProduct = ({ cartItems, addToCart }) => {
             <div className="col-lg-6 col-md-6 col-12">
               <div className="shop-detail-left">
                 <div className="img-slider">
-                  {product.productphotos.length === 0 ? (
+                  {/* {product.productphotos.length === 0 ? (
                     <div key={product.id}>
                       <img src={product.photo} alt={product.alt} />
                     </div>
                   ) : (
                     <Slider {...settings}>
+                      
                       {product.productphotos.map((photo) => (
                         <div key={photo.id}>
                           <img
@@ -120,8 +130,21 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                         </div>
                       ))}
                     </Slider>
+                  )} */}
+                {product.productphotos.length === 0 ? (
+                    <div key={product.id}>
+                      <img src={product.photo} alt={product.alt} />
+                    </div>
+                  ) : (
+                    <Slider {...settings}>
+                      {imgArray.map((img, index) => (
+                        <div key={`photo_${index}`}>
+                          <img src={img} alt={`Thumbnail ${index}`} />
+                        </div>
+                      ))}
+                    </Slider>
                   )}
-                </div>
+                </div>    
               </div>
             </div>
             <div className="col-lg-6 col-md-6 col-12">
