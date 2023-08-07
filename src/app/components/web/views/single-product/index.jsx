@@ -75,12 +75,7 @@ class SingleProduct extends Component {
       customPaging: function (i) {
         return (
           <div className="item-thumb">
-            <img
-              width="200"
-              height="300"
-              src={product.productphotos[i].imgUrl}
-              alt={`Thumbnail ${i}`}
-            />
+            <img src={product.productphotos[i].imgUrl} alt={`Thumbnail ${i}`} />
           </div>
         );
       },
@@ -148,18 +143,16 @@ class SingleProduct extends Component {
                         <span className="regular-price">
                           <div className="price-container">
                             {product.discountPer ? (
-                              <div>
-                                <h5 className="original-price">
-                                  <span
-                                    style={{
-                                      textDecoration: "line-through",
-                                      color: "gray",
-                                    }}
-                                  >
-                                    ${product.price}
-                                  </span>
-                                </h5>
-                              </div>
+                              <h5 className="original-price">
+                                <span
+                                  style={{
+                                    textDecoration: "line-through",
+                                    color: "gray",
+                                  }}
+                                >
+                                  ${product.price}
+                                </span>
+                              </h5>
                             ) : (
                               <h5>${product.price}</h5>
                             )}
@@ -228,19 +221,17 @@ class SingleProduct extends Component {
               </div>
               <div className="col-lg-12 col-md-12">
                 <div className="pdpt-bg">
-                  <div>
-                    <div className="product-info">
-                      <h2 style={{ color: "#750000" }}>Product Description</h2>
-                      <hr
-                        style={{
-                          color: "#750000",
-                          background: "#750000",
-                          height: 0,
-                        }}
-                      />
-                      <h6>{parse(product.desc)}</h6>
-                      <h6>{parse(product.sortDesc)}</h6>
-                    </div>
+                  <div className="product-info">
+                    <h2 style={{ color: "#750000" }}>Product Description</h2>
+                    <hr
+                      style={{
+                        color: "#750000",
+                        background: "#750000",
+                        height: 0,
+                      }}
+                    />
+                    <h6>{parse(product.desc)}</h6>
+                    <h6>{parse(product.sortDesc)}</h6>
                   </div>
                 </div>
               </div>

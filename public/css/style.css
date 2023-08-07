@@ -3881,6 +3881,35 @@ input[type="email"] {
 .av-box .arrival-image img {
   height: 100%;
 }
+.shop-single .slick-slide {
+  height: 520px;
+  padding: 20px;
+  background-color: #fff;
+}
+.shop-single .slick-slide > div {
+  height: 100%;
+}
+.shop-single .slick-slide > div > div {
+  height: 100%;
+}
+.shop-single .slick-slide img {
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
+}
+.shop-single .slick-dots {
+  bottom: -80px;
+}
+.shop-single .slick-dots li {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+}
+.item-thumb img {
+  width: auto;
+  height: 100%;
+}
+
 /* 23/06 */
 
 /* responsive */
