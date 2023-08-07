@@ -209,7 +209,7 @@ class Footer extends Component {
                           <FontAwesomeIcon icon={faTwitter} />
                         </a>
                       </li>
-                      <li class="linkedin">
+                      {/* <li class="linkedin">
                         <a href="/linkedin">
                           <FontAwesomeIcon icon={faLinkedin} />
                         </a>
@@ -218,7 +218,7 @@ class Footer extends Component {
                         <a href="/youtube">
                           <FontAwesomeIcon icon={faYoutube} />
                         </a>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 </div>
