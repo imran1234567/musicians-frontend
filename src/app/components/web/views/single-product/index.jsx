@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { CircularProgress } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { Paper } from "@material-ui/core";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,59 +10,48 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
 import pay from "./../../../../../images/pay.png";
-import zippay1 from "./../../../../../images/zippay1.png";
-import paypal1 from "./../../../../../images/paypal1.png";
 import download from "./../../../../../images/download.png";
 import st from "./../../../../../images/st.png";
 import "./index.css";
 import Login from "../../../../auth/login";
 import Process from "../home/Process";
-import { red } from "@material-ui/core/colors";
 
-class SingleProduct extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      product: null,
-      token: "",
-      selectedPhoto: 0,
-      activeTab: "home-tab-pane",
-      isLoaded: false,
-    };
-  }
+const SingleProduct = ({ cartItems, addToCart }) => {
+  const [product, setProduct] = useState(null);
+  const [token, setToken] = useState("");
+  const [selectedPhoto, setSelectedPhoto] = useState(0);
+  const [activeTab, setActiveTab] = useState("home-tab-pane");
 
-  checkCart = (productId) => {
-    const productExistsInCart = this.props.cartItems.some(
+  const checkCart = (productId) => {
+    const productExistsInCart = cartItems.some(
       (product) => product.id === productId
     );
     return productExistsInCart;
   };
 
-  handleTabChange = (tabId) => {
-    this.setState({ activeTab: tabId });
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
   };
 
-  async componentDidMount() {
-    window.scrollTo(0, 0);
-    let url = window.location.href.split("/");
-    var lastSegment = url.pop() || url.pop();
-    let list = await GetProductDetails.getProductById(lastSegment);
-    let cookies = await GetUserLogin.isAuthenticate();
-    this.setState({ token: cookies, product: list.data, isLoaded: true });
+  useEffect(() => {
+    const fetchData = async () => {
+      window.scrollTo(0, 0);
+      let url = window.location.href.split("/");
+      var lastSegment = url.pop() || url.pop();
+      let list = await GetProductDetails.getProductById(lastSegment);
+      let cookies = await GetUserLogin.isAuthenticate();
+      setToken(cookies);
+      setProduct(list.data);
+    };
+
+    fetchData();
+  }, []);
+
+  if (!product) {
+    return "Loading";
   }
 
-  handlePhotoClick = (index) => {
-    this.setState({ selectedPhoto: index });
-  };
-
-  render() {
-    const { product, token, selectedPhoto, activeTab, isLoaded } = this.state;
-
-    if (!product) {
-      return "Loading";
-    }
-
-    const isProductInCart = this.checkCart(product.id);
+  const isProductInCart = checkCart(product.id);
 
     const settings = {
       dots: true,
@@ -75,7 +64,12 @@ class SingleProduct extends Component {
       customPaging: function (i) {
         return (
           <div className="item-thumb">
-            <img src={product.productphotos[i].imgUrl} alt={`Thumbnail ${i}`} />
+            <img
+              width="200"
+              height="300"
+              src={product.productphotos[i].imgUrl}
+              alt={`Thumbnail ${i}`}
+            />
           </div>
         );
       },
@@ -143,16 +137,18 @@ class SingleProduct extends Component {
                         <span className="regular-price">
                           <div className="price-container">
                             {product.discountPer ? (
-                              <h5 className="original-price">
-                                <span
-                                  style={{
-                                    textDecoration: "line-through",
-                                    color: "gray",
-                                  }}
-                                >
-                                  ${product.price}
-                                </span>
-                              </h5>
+                              <div>
+                                <h5 className="original-price">
+                                  <span
+                                    style={{
+                                      textDecoration: "line-through",
+                                      color: "gray",
+                                    }}
+                                  >
+                                    ${product.price}
+                                  </span>
+                                </h5>
+                              </div>
                             ) : (
                               <h5>${product.price}</h5>
                             )}
@@ -221,17 +217,19 @@ class SingleProduct extends Component {
               </div>
               <div className="col-lg-12 col-md-12">
                 <div className="pdpt-bg">
-                  <div className="product-info">
-                    <h2 style={{ color: "#750000" }}>Product Description</h2>
-                    <hr
-                      style={{
-                        color: "#750000",
-                        background: "#750000",
-                        height: 0,
-                      }}
-                    />
-                    <h6>{parse(product.desc)}</h6>
-                    <h6>{parse(product.sortDesc)}</h6>
+                  <div>
+                    <div className="product-info">
+                      <h2 style={{ color: "#750000" }}>Product Description</h2>
+                      <hr
+                        style={{
+                          color: "#750000",
+                          background: "#750000",
+                          height: 0,
+                        }}
+                      />
+                      <h6>{parse(product.desc)}</h6>
+                      <h6>{parse(product.sortDesc)}</h6>
+                    </div>
                   </div>
                 </div>
               </div>
