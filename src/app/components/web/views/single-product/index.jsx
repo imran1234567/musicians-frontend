@@ -10,8 +10,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../../../store/actions/cartActions";
 import pay from "./../../../../../images/pay.png";
-import zippay1 from "./../../../../../images/zippay1.png";
-import paypal1 from "./../../../../../images/paypal1.png";
 import download from "./../../../../../images/download.png";
 import st from "./../../../../../images/st.png";
 import "./index.css";
@@ -87,9 +85,11 @@ const SingleProduct = ({ cartItems, addToCart }) => {
   const handlePhotoClick = (index) => {
     setSelectedPhoto(index);
   };
- 
-  const imgArray = [product.photo, ...product.productphotos.map((photo) => photo.imgUrl)];
-  
+
+  const imgArray = [
+    product.photo,
+    ...product.productphotos.map((photo) => photo.imgUrl),
+  ];
 
   return (
     <div>
@@ -131,7 +131,7 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                       ))}
                     </Slider>
                   )} */}
-                {product.productphotos.length === 0 ? (
+                  {product.productphotos.length === 0 ? (
                     <div key={product.id}>
                       <img src={product.photo} alt={product.alt} />
                     </div>
@@ -144,7 +144,7 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                       ))}
                     </Slider>
                   )}
-                </div>    
+                </div>
               </div>
             </div>
             <div className="col-lg-6 col-md-6 col-12">
@@ -158,7 +158,30 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                 <h3>{product.name}</h3>
                 <div className="pdp-product__old-price">
                   <span className="regular-price">
-                    <h4>${product.price}</h4>
+                    <div className="price-container">
+                      {product.discountPer ? (
+                        <div>
+                          <h5 className="original-price">
+                            <span
+                              style={{
+                                textDecoration: "line-through",
+                                color: "gray",
+                              }}
+                            >
+                              ${product.price}
+                            </span>
+                          </h5>
+                        </div>
+                      ) : (
+                        <h5>${product.price}</h5>
+                      )}
+                      <div className="discount-price">
+                        {product.discountPer && product.netPrice !== 0 ? (
+                          <h4 className="net-price">${product.netPrice}</h4>
+                        ) : null}
+                      </div>
+                    </div>
+                    {/* <h4>${product.price}</h4> */}
                   </span>
                   <h5>
                     <strong>Online Stock:</strong> In Stock {product.qty}
@@ -227,23 +250,23 @@ const SingleProduct = ({ cartItems, addToCart }) => {
               </div>
             </div>
             <div className="col-lg-12 col-md-12">
-                <div className="pdpt-bg">
-                  <div>
-                    <div className="product-info">
-                      <h2 style={{ color: "#750000" }}>Product Description</h2>
-                      <hr
-                        style={{
-                          color: "#750000",
-                          background: "#750000",
-                          height: 0,
-                        }}
-                      />
-                      <h6>{parse(product.desc)}</h6>
-                      <h6>{parse(product.sortDesc)}</h6>
-                    </div>
+              <div className="pdpt-bg">
+                <div>
+                  <div className="product-info">
+                    <h2 style={{ color: "#750000" }}>Product Description</h2>
+                    <hr
+                      style={{
+                        color: "#750000",
+                        background: "#750000",
+                        height: 0,
+                      }}
+                    />
+                    <h6>{parse(product.desc)}</h6>
+                    <h6>{parse(product.sortDesc)}</h6>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </section>

@@ -114,14 +114,18 @@ class Featured extends Component {
                 const netPrice = row.price - discountedPrice;
                 return (
                   <div class="col-lg-3 col-md-4 col-6" key={index}>
-                    <div className={`product-box ${row.special ? 'special-product' : ''}`}>
-                    {row.special && (
-                      <img
-                        src={offerImage}
-                        alt="Special Offer"
-                        className="special-offer-image"
-                      />
-                    )}
+                    <div
+                      className={`product-box ${
+                        row.special ? "special-product" : ""
+                      }`}
+                    >
+                      {row.special && (
+                        <img
+                          src={offerImage}
+                          alt="Special Offer"
+                          className="special-offer-image"
+                        />
+                      )}
                       <div class="product-image">
                         <Link
                           to={{
