@@ -205,7 +205,7 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                   )}
                 </div>
                 {/* <hr style={{ color: "black", height: "1px" }} /> */}
-                <div className="apply">
+                {/* <div className="apply">
                   <div className="rent-text">
                     <h5>
                       <strong>Or Rent For $14.08 </strong>per week
@@ -218,83 +218,32 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                   <div className="apply-btn">
                     <a href="/returns">Apply Now</a>
                   </div>
-                </div>
+                </div> */}
                 {/* <hr style={{ color: "black", height: "1px" }} /> */}
-                <div className="pay-img">
+                {/* <div className="pay-img">
                   <img src={paypal1} alt="paypal" />
                   <img src={zippay1} alt="zippay" />
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="col-lg-12 col-md-12">
-              <div className="pdpt-bg">
-                <div>
-                  <ul className="nav nav-tabs" id="myTab" role="tablist">
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className={`nav-link ${
-                          activeTab === "home-tab-pane" ? "active" : ""
-                        }`}
-                        id="home-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#home-tab-pane"
-                        type="button"
-                        role="tab"
-                        aria-controls="home-tab-pane"
-                        aria-selected={activeTab === "home-tab-pane"}
-                        onClick={() => handleTabChange("home-tab-pane")}
-                      >
-                        Product Information
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className={`nav-link ${
-                          activeTab === "profile-tab-pane" ? "active" : ""
-                        }`}
-                        id="profile-tab"
-                        data-toggle="tab"
-                        data-target="#profile-tab-pane"
-                        type="button"
-                        role="tab"
-                        aria-controls="profile-tab-pane"
-                        aria-selected={activeTab === "profile-tab-pane"}
-                        onClick={() => handleTabChange("profile-tab-pane")}
-                      >
-                        Features
-                      </button>
-                    </li>
-                  </ul>
-
-                  <div className="tab-content" id="myTabContent">
-                    <div
-                      className={`tab-pane fade show ${
-                        activeTab === "home-tab-pane" ? "active" : ""
-                      }`}
-                      id="home-tab-pane"
-                      role="tabpanel"
-                      aria-labelledby="home-tab"
-                      tabIndex="0"
-                    >
-                      <div className="block">{parse(product.desc)}</div>
-                    </div>
-                    <div
-                      className={`tab-pane fade ${
-                        activeTab === "profile-tab-pane" ? "active" : ""
-                      }`}
-                      id="profile-tab-pane"
-                      role="tabpanel"
-                      aria-labelledby="profile-tab"
-                      tabIndex="0"
-                    >
-                      <div className="block" style={{ color: "black" }}>
-                        {parse(product.desc)}
-                      </div>
+                <div className="pdpt-bg">
+                  <div>
+                    <div className="product-info">
+                      <h2 style={{ color: "#750000" }}>Product Description</h2>
+                      <hr
+                        style={{
+                          color: "#750000",
+                          background: "#750000",
+                          height: 0,
+                        }}
+                      />
+                      <h6>{parse(product.desc)}</h6>
+                      <h6>{parse(product.sortDesc)}</h6>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </section>
