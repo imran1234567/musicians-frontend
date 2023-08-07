@@ -83,9 +83,31 @@ class BrandsList extends Component {
               </button>
             ))}
           </div>
-          <div className="policy-text">
-            <div className="brands-table">
-              <table>
+
+          <div className="brands-item">
+            <div className="row justify-content-start">
+              {" "}
+              {(filteredBrands.length > 0 ? filteredBrands : brands).map(
+                (brand, index) => (
+                  <div className="col-lg-2 col-md-3 col-6">
+                    <div
+                      className="brand-box"
+                      key={index}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => this.handleClickSearch(brand.brand)}
+                    >
+                      {/* <h4 style={{ color: "var(--primary-color)" }}>
+                        {index + 1}
+                      </h4> */}
+                      <h4 style={{ color: "var(--primary-color)" }}>
+                        {brand.brand}
+                      </h4>
+                    </div>
+                  </div>
+                )
+              )}
+            </div>
+            {/* <table>
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -110,8 +132,7 @@ class BrandsList extends Component {
                     )
                   )}
                 </tbody>
-              </table>
-            </div>
+              </table> */}
           </div>
         </div>
       </div>
