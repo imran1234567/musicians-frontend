@@ -96,7 +96,6 @@ class CategoryList extends Component {
   renderProducts = () => {
     const { products, sortBy, showBy, display, token } = this.state;
 
-    
     let filteredProducts = [...products];
     if (sortBy === "special") {
       filteredProducts = filteredProducts.filter(
@@ -115,7 +114,7 @@ class CategoryList extends Component {
     } else if (sortBy === "highToLow") {
       sortedProducts.sort((a, b) => b.netPrice - a.netPrice);
     }
-    
+
     // Apply showBy limit
     const showByLimit = parseInt(showBy, 10);
     const limitedProducts = sortedProducts.slice(0, showByLimit);
@@ -127,7 +126,12 @@ class CategoryList extends Component {
             const isProductInWishlist = this.checkWishlist(product.id);
 
             return (
-              <div className={`list-item ${product.special ? 'special-product' : ''}`} key={index}>
+              <div
+                className={`list-item ${
+                  product.special ? "special-product" : ""
+                }`}
+                key={index}
+              >
                 {/* Add offerImage for special offer products */}
                 {product.special && (
                   <img
@@ -270,7 +274,11 @@ class CategoryList extends Component {
 
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
-                <div className={`product-box ${product.special ? 'special-product' : ''}`}>
+                <div
+                  className={`product-box ${
+                    product.special ? "special-product" : ""
+                  }`}
+                >
                   {/* Add offerImage for special offer products */}
                   {product.special && (
                     <img
@@ -288,11 +296,7 @@ class CategoryList extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      <img
-                        src={product.photo}
-                        alt="Product"
-                        style={{ width: "100%", height: "auto" }}
-                      />
+                      <img src={product.photo} alt="Product" />
                     </Link>
                   </div>
                   <div className="product-text">
@@ -473,15 +477,17 @@ class CategoryList extends Component {
                         <b>Display: </b>
                       </h5>
                       <button
-                        className={`display-button ${display === "list" ? "active" : ""
-                          }`}
+                        className={`display-button ${
+                          display === "list" ? "active" : ""
+                        }`}
                         onClick={() => this.handleDisplayChange("list")}
                       >
                         List
                       </button>
                       <button
-                        className={`display-button ${display === "grid" ? "active" : ""
-                          }`}
+                        className={`display-button ${
+                          display === "grid" ? "active" : ""
+                        }`}
                         onClick={() => this.handleDisplayChange("grid")}
                       >
                         Grid
@@ -526,8 +532,9 @@ class CategoryList extends Component {
                   </div>
 
                   <div
-                    className={`product-list ${display === "grid" ? "grid-view" : ""
-                      }`}
+                    className={`product-list ${
+                      display === "grid" ? "grid-view" : ""
+                    }`}
                   >
                     {this.renderProducts()}
                   </div>

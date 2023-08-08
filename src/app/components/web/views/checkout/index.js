@@ -492,10 +492,16 @@ class checkout extends Component {
                   {cartItems.map((row, index) => (
                     <div className="card-body pt-0 pr-0 pl-0 pb-0" key={index}>
                       <div className="cart-list-product">
-                        <img className="img-fluid" src={row.photo} alt="cart" />
-                        <span className="badge badge-success">
-                          {row.discountPer}% OFF
-                        </span>
+                        <div className="check-here">
+                          <img
+                            className="img-fluid"
+                            src={row.photo}
+                            alt="cart"
+                          />
+                          <span className="badge badge-success">
+                            {row.discountPer}% OFF
+                          </span>
+                        </div>
                         <h5>{row.name}</h5>
                         <h6>
                           <strong>

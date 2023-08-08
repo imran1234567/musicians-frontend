@@ -116,11 +116,13 @@ class Wishlist extends Component {
                   <li key={item.id} className="wishlist-item">
                     <div className="item-details">
                       <div className="item-info">
-                        <img
-                          src={item.photo}
-                          alt={item.name}
-                          className="item-image"
-                        />
+                        <div className="img-wish">
+                          <img
+                            src={item.photo}
+                            alt={item.name}
+                            className="item-image"
+                          />
+                        </div>
                         <div className="item-column">
                           <div className="item-name">
                             <Link
