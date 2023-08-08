@@ -108,31 +108,28 @@ class Footer extends Component {
                     <h4>Shop Now</h4>
                     <ul>
                       <li>
-                        <Link to="/cat/4/4">Guitar/Bass</Link>
+                        <Link to="/cat/1/1">Guitars</Link>
                       </li>
                       <li>
-                        <Link to="/cat/5/24">Keyboards/Pianos</Link>
+                        <Link to="/cat/2/14">Effects</Link>
                       </li>
                       <li>
-                        <Link to="/cat/6/32">Amps/Effects</Link>
+                        <Link to="/cat/3/15">BlueGrass</Link>
                       </li>
                       <li>
-                        <Link to="/cat/7/36">Live Sound</Link>
+                        <Link to="/cat/4/17">Accessori</Link>
                       </li>
                       <li>
-                        <Link to="/cat/8/48">Recording Studio</Link>
+                        <Link to="/cat/5/21">Effects Pedal</Link>
                       </li>
                       <li>
-                        <Link to="/cat/9/55">Dj/Lighting</Link>
+                        <Link to="/cat/10/58">Ukuleles</Link>
                       </li>
                       <li>
-                        <Link to="/cat/10/58">Drums/Percussion </Link>
+                        <Link to="/cat/7/25">Artwood</Link>
                       </li>
                       <li>
-                        <Link to="/cat/12/72">Orchestral</Link>
-                      </li>
-                      <li>
-                        <Link to="/cat/9/57">Accessories</Link>
+                        <Link to="/cat/8/29">Amplifiers</Link>
                       </li>
                       <li>
                         <Link to="/brands">Shop By Brand</Link>

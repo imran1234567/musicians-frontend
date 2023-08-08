@@ -251,19 +251,17 @@ const SingleProduct = ({ cartItems, addToCart }) => {
             </div>
             <div className="col-lg-12 col-md-12">
               <div className="pdpt-bg">
-                <div>
-                  <div className="product-info">
-                    <h2 style={{ color: "#750000" }}>Product Description</h2>
-                    <hr
-                      style={{
-                        color: "#750000",
-                        background: "#750000",
-                        height: 0,
-                      }}
-                    />
-                    <h6>{parse(product.desc)}</h6>
-                    <h6>{parse(product.sortDesc)}</h6>
-                  </div>
+                <div className="product-info">
+                  <h2 style={{ color: "#750000" }}>Product Description</h2>
+                  <hr
+                    style={{
+                      color: "#750000",
+                      background: "#750000",
+                      height: 0,
+                    }}
+                  />
+                  <h6>{parse(product.desc)}</h6>
+                  <h6>{parse(product.sortDesc)}</h6>
                 </div>
               </div>
             </div>
