@@ -150,7 +150,12 @@ class resultProduct extends Component {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
             return (
-              <div className={`list-item ${product.special ? 'special-product' : ''}`} key={index}>
+              <div
+                className={`list-item ${
+                  product.special ? "special-product" : ""
+                }`}
+                key={index}
+              >
                 {/* Add offerImage for special offer products */}
                 {product.special && (
                   <img
@@ -288,7 +293,11 @@ class resultProduct extends Component {
             const isProductInWishlist = this.checkWishlist(product.id);
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
-                <div className={`product-box ${product.special ? 'special-product' : ''}`}>
+                <div
+                  className={`product-box ${
+                    product.special ? "special-product" : ""
+                  }`}
+                >
                   {/* Add offerImage for special offer products */}
                   {product.special && (
                     <img

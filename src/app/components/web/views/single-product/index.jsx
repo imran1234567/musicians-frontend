@@ -132,13 +132,13 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                     </Slider>
                   )} */}
                   {product.productphotos.length === 0 ? (
-                    <div key={product.id}>
+                    <div className="image-single" key={product.id}>
                       <img src={product.photo} alt={product.alt} />
                     </div>
                   ) : (
                     <Slider {...settings}>
                       {imgArray.map((img, index) => (
-                        <div key={`photo_${index}`}>
+                        <div className="slider-img" key={`photo_${index}`}>
                           <img src={img} alt={`Thumbnail ${index}`} />
                         </div>
                       ))}
