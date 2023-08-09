@@ -498,7 +498,7 @@ class checkout extends Component {
                             src={row.photo}
                             alt="cart"
                           />
-                          <span className="badge badge-success">
+                          <span className="badge discount-tag">
                             {row.discountPer}% OFF
                           </span>
                         </div>
@@ -509,12 +509,13 @@ class checkout extends Component {
                           </strong>{" "}
                           - {row.unitSize} gm
                         </h6>
+
                         <p className="offer-price mb-0">
-                          {`${row.qty} * $${row.netPrice}`}{" "}
-                          <i className="mdi mdi-tag-outline" />{" "}
                           <span className="regular-price">
                             &#36;{row.price}
                           </span>
+                          {`${row.qty} * $${row.netPrice}`}{" "}
+                          <i className="mdi mdi-tag-outline" />{" "}
                         </p>
                       </div>
                     </div>

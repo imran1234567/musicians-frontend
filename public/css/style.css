@@ -155,7 +155,7 @@ header {
   background-color: #dfb178;
   color: #fff;
   right: -6px;
-  top: -5px;
+  top: -8px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -293,12 +293,12 @@ header .navbar .navbar-nav li.mobile-menu {
   .header-mid-content .header-right-icon li span {
     width: 14px;
     height: 14px;
-    font-size: 12px;
+    font-size: 10px;
   }
   header #searchbox {
     display: block;
     text-align: center;
-    margin-right: 24px;
+    margin-right: 10px;
   }
   header #searchbox .input-group {
     justify-content: center;
@@ -3541,11 +3541,6 @@ ul.breadcrumbs-list li:not(a) {
 .captcha .captcha-input {
   margin: 5px 0;
 }
-.store-location {
-  width: 800px;
-  height: 500px;
-  margin: 0 auto;
-}
 
 .map-store {
   width: 100%;
@@ -3885,6 +3880,14 @@ input[type="email"] {
 .shop-single .img-slider {
   height: 590px;
 }
+.shop-single .img-slider .image-single {
+  height: 100%;
+  text-align: center;
+}
+.shop-single .img-slider .image-single img {
+  height: 100%;
+  width: auto;
+}
 .shop-single .slick-slide {
   height: 520px;
   padding: 20px;
@@ -3945,6 +3948,16 @@ input[type="email"] {
 .img-wish .item-image {
   width: auto;
   margin: 0 auto;
+}
+.checkout-page .offer-price {
+  font-size: 1.563rem;
+  font-weight: 400;
+  color: var(--primary-color);
+}
+.checkout-page .regular-price {
+  font-size: 16px;
+  color: grey;
+  margin-right: 10px;
 }
 /* 23/06 */
 
@@ -4136,7 +4149,12 @@ input[type="email"] {
     background-color: var(--primary-color);
   }
   .navbar-light .dropdown-menu .submenu a {
-    color: #fff;
+    color: #000;
+    background-color: #fff;
+  }
+  .navbar-light .dropdown-menu .submenu a small {
+    color: var(--primary-color) !important;
+    font-weight: 500;
   }
 
   .shopping-wishlist .pdpt-bg {
@@ -4224,9 +4242,7 @@ input[type="email"] {
     height: 180px;
     background-color: #fff;
   }
-  .new-arrival .arrival-image img {
-    height: auto;
-  }
+
   .new-arrival-content .av-box {
     order: 1;
     margin-bottom: 20px;

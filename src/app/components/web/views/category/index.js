@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./category.css";
+import Pagination from "./Pagination";
 
 class Category extends Component {
   constructor(props) {
@@ -13,6 +14,8 @@ class Category extends Component {
       products: [],
       loading: true,
       error: null,
+      currentPage: 1,
+      itemsPerPage: 7, // Adjust as needed
     };
   }
 
@@ -22,21 +25,34 @@ class Category extends Component {
 
   fetchProducts = async () => {
     try {
-      const response = await axios.get("http://13.233.106.34:4000/api/product/getAllproductList");
+      const response = await axios.get(
+        "http://13.233.106.34:4000/api/product/getAllproductList"
+      );
       const data = response.data.product;
 
       // Check if the response data is an array or an object with a 'data' property
-      const products = Array.isArray(data) ? data : (data.data || []);
+      const products = Array.isArray(data) ? data : data.data || [];
 
-      const featuredProducts = products.filter(product => product.featured === true);
+      const featuredProducts = products.filter(
+        (product) => product.featured === true
+      );
       this.setState({ products: featuredProducts, loading: false });
     } catch (error) {
       this.setState({ error: error.message, loading: false });
     }
   };
 
+  // Calculate the total number of pages based on itemsPerPage
+  getTotalPages = () =>
+    Math.ceil(this.state.products.length / this.state.itemsPerPage);
+
+  // Update currentPage in state and fetch new data based on the page
+  handlePageChange = (newPage) => {
+    this.setState({ currentPage: newPage });
+  };
+
   render() {
-    const { products, loading, error } = this.state;
+    const { products, loading, error, currentPage, itemsPerPage } = this.state;
 
     if (loading) {
       return <div>Loading...</div>;
@@ -45,6 +61,10 @@ class Category extends Component {
     if (error) {
       return <div>Error: {error}</div>;
     }
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const displayedProducts = products.slice(startIndex, endIndex);
 
     var settings = {
       dots: false,
@@ -88,28 +108,35 @@ class Category extends Component {
             {products.map((product) => (
               <div className="item" key={product.id}>
                 <div className="category-item">
-                <Link
+                  <Link
                     to={{
                       pathname: `/p/${product.slug}/${product.id}`,
                       state: product,
                     }}
-                  ><img
-                    className="img-fluid"
-                    src={product.photo}
-                    alt={product.name}
-                  /></Link>
-                   <Link
+                  >
+                    <img
+                      className="img-fluid"
+                      src={product.photo}
+                      alt={product.name}
+                    />
+                  </Link>
+                  <Link
                     to={{
                       pathname: `/p/${product.slug}/${product.id}`,
                       state: product,
                     }}
-                  ><h6>{product.name}</h6></Link>
-                  
-
+                  >
+                    <h6>{product.name}</h6>
+                  </Link>
                 </div>
               </div>
             ))}
           </Slider>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={this.getTotalPages()}
+            onPageChange={this.handlePageChange}
+          />
         </div>
       </div>
     );
@@ -117,4 +144,3 @@ class Category extends Component {
 }
 
 export default Category;
-

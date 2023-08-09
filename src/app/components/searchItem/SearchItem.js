@@ -23,9 +23,10 @@ class SearchItem extends Component {
     showBy: "10",
     display: "list",
     comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
-        ? JSON.parse(localStorage.getItem("comparisonItems"))
-        : [],
-
+      ? JSON.parse(localStorage.getItem("comparisonItems"))
+      : [],
+    currentPage: 1,
+    itemsPerPage: 10,
   };
 
   componentDidMount() {
@@ -37,7 +38,7 @@ class SearchItem extends Component {
     }
   }
 
- addToComparison = (product) => {
+  addToComparison = (product) => {
     NotificationManager.success(
       `${product.name} added successfuly for comparsion!`
     );
@@ -122,8 +123,21 @@ class SearchItem extends Component {
     }
   };
 
+  scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Use "auto" for instant scroll
+    });
+  };
+
+  handlePageChange = (pageNumber) => {
+    this.scrollToTop();
+    this.setState({ currentPage: pageNumber });
+  };
+
   renderProducts = () => {
-    const { productList, sortBy, showBy, display } = this.state;
+    const { productList, sortBy, showBy, display, currentPage, itemsPerPage } =
+      this.state;
 
     let filteredProducts = [...productList];
     if (sortBy === "special") {
@@ -133,7 +147,7 @@ class SearchItem extends Component {
     }
     // Apply sorting based on sortBy value
     let sortedProducts = [...filteredProducts];
-    
+
     if (sortBy === "NameAZ") {
       sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === "NameZA") {
@@ -147,14 +161,26 @@ class SearchItem extends Component {
     // Apply showBy limit
     const showByLimit = parseInt(showBy, 10);
     const limitedProducts = sortedProducts.slice(0, showByLimit);
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    // Get the products to display for the current page
+    const productsToDisplay = sortedProducts.slice(startIndex, endIndex);
+
     if (display === "list") {
       return (
         <div className="featured-product-list">
-          {limitedProducts.map((product, index) => {
+          {productsToDisplay.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
             return (
-              <div className={`list-item ${product.special ? 'special-product' : ''}`} key={index}>
+              <div
+                className={`list-item ${
+                  product.special ? "special-product" : ""
+                }`}
+                key={index}
+              >
                 {product.special && (
                   <img
                     src={offerImage}
@@ -163,17 +189,17 @@ class SearchItem extends Component {
                   />
                 )}
                 <div className="product-image">
-                <Link
+                  <Link
                     to={{
                       pathname: `/p/${product.slug}/${product.id}`,
                       state: product,
                     }}
                   >
-                  <img
-                    src={product.photo}
-                    alt="Product"
-                    style={{ width: "120px", objectFit: "contain" }}
-                  />
+                    <img
+                      src={product.photo}
+                      alt="Product"
+                      style={{ width: "120px", objectFit: "contain" }}
+                    />
                   </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -186,33 +212,33 @@ class SearchItem extends Component {
                     <h6>{product.name}</h6>
                   </Link>
                   <div className="price-container">
-                          {product.discountPer ? (
-                            <div>
-                              <h5 className="original-price">
-                                <span
-                                  style={{
-                                    textDecoration: "line-through",
-                                    color: "gray",
-                                  }}
-                                >
-                                  ${product.price}
-                                </span>
-                              </h5>
-                            </div>
-                          ) : (
-                            <h5>${product.price}</h5>
-                          )}
-                          <div className="discount-price">
-                            {/* {row.discountPer && ( */}
-                            <div className="discount-tag">
-                              -{product.discountPer}%
-                            </div>
+                    {product.discountPer ? (
+                      <div>
+                        <h5 className="original-price">
+                          <span
+                            style={{
+                              textDecoration: "line-through",
+                              color: "gray",
+                            }}
+                          >
+                            ${product.price}
+                          </span>
+                        </h5>
+                      </div>
+                    ) : (
+                      <h5>${product.price}</h5>
+                    )}
+                    <div className="discount-price">
+                      {/* {row.discountPer && ( */}
+                      <div className="discount-tag">
+                        -{product.discountPer}%
+                      </div>
 
-                            {product.discountPer && product.netPrice !== 0 ? (
-                              <h5 className="net-price">${product.netPrice}</h5>
-                            ) : null}
-                          </div>
-                        </div>
+                      {product.discountPer && product.netPrice !== 0 ? (
+                        <h5 className="net-price">${product.netPrice}</h5>
+                      ) : null}
+                    </div>
+                  </div>
                   {/* <h5>{this.formatPrice(product.price)}</h5> */}
                   <div className="add-cart">
                     {isProductInCart ? (
@@ -241,17 +267,17 @@ class SearchItem extends Component {
                         />
                       </a> */}
 
-                            <a
-                              href="javascript:void(0)"
-                              onClick={() => {
-                                this.addToComparison(product);
-                              }}
-                            >
-                              <FontAwesomeIcon
-                                icon={faCodeCompare}
-                                className="compare-icon"
-                              />
-                            </a>
+                      <a
+                        href="javascript:void(0)"
+                        onClick={() => {
+                          this.addToComparison(product);
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faCodeCompare}
+                          className="compare-icon"
+                        />
+                      </a>
                       <a
                         href="javascript:void(0)"
                         onClick={() => {
@@ -285,13 +311,17 @@ class SearchItem extends Component {
     } else {
       return (
         <div className="featured-product-list row">
-          {limitedProducts.map((product, index) => {
+          {productsToDisplay.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
-                 <div className={`product-box ${product.special ? 'special-product' : ''}`}>
-                 {product.special && (
+                <div
+                  className={`product-box ${
+                    product.special ? "special-product" : ""
+                  }`}
+                >
+                  {product.special && (
                     <img
                       src={offerImage}
                       alt="Special Offer"
@@ -299,17 +329,17 @@ class SearchItem extends Component {
                     />
                   )}
                   <div className="product-image">
-                  <Link
-                    to={{
-                      pathname: `/p/${product.slug}/${product.id}`,
-                      state: product,
-                    }}
-                  >
-                    <img
-                      src={product.photo}
-                      alt="Product"
-                      style={{ width: "100%", height: "auto" }}
-                    />
+                    <Link
+                      to={{
+                        pathname: `/p/${product.slug}/${product.id}`,
+                        state: product,
+                      }}
+                    >
+                      <img
+                        src={product.photo}
+                        alt="Product"
+                        style={{ width: "100%", height: "auto" }}
+                      />
                     </Link>
                   </div>
                   <div className="product-text">
@@ -323,33 +353,33 @@ class SearchItem extends Component {
                       <h6>{product.name}</h6>
                     </Link>
                     <div className="price-container">
-                          {product.discountPer ? (
-                            <div>
-                              <h5 className="original-price">
-                                <span
-                                  style={{
-                                    textDecoration: "line-through",
-                                    color: "gray",
-                                  }}
-                                >
-                                  ${product.price}
-                                </span>
-                              </h5>
-                            </div>
-                          ) : (
-                            <h5>${product.price}</h5>
-                          )}
-                          <div className="discount-price">
-                            {/* {row.discountPer && ( */}
-                            <div className="discount-tag">
-                              -{product.discountPer}%
-                            </div>
-
-                            {product.discountPer && product.netPrice !== 0 ? (
-                              <h5 className="net-price">${product.netPrice}</h5>
-                            ) : null}
-                          </div>
+                      {product.discountPer ? (
+                        <div>
+                          <h5 className="original-price">
+                            <span
+                              style={{
+                                textDecoration: "line-through",
+                                color: "gray",
+                              }}
+                            >
+                              ${product.price}
+                            </span>
+                          </h5>
                         </div>
+                      ) : (
+                        <h5>${product.price}</h5>
+                      )}
+                      <div className="discount-price">
+                        {/* {row.discountPer && ( */}
+                        <div className="discount-tag">
+                          -{product.discountPer}%
+                        </div>
+
+                        {product.discountPer && product.netPrice !== 0 ? (
+                          <h5 className="net-price">${product.netPrice}</h5>
+                        ) : null}
+                      </div>
+                    </div>
 
                     {/* <h5>${product.price}</h5> */}
                     <div className="add-cart">
@@ -379,17 +409,17 @@ class SearchItem extends Component {
                             className="compare-icon"
                           />
                         </a> */}
-                          <a
-                              href="javascript:void(0)"
-                              onClick={() => {
-                                this.addToComparison(product);
-                              }}
-                            >
-                              <FontAwesomeIcon
-                                icon={faCodeCompare}
-                                className="compare-icon"
-                              />
-                            </a>
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            this.addToComparison(product);
+                          }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faCodeCompare}
+                            className="compare-icon"
+                          />
+                        </a>
                         <a
                           href="javascript:void(0)"
                           onClick={() => {
@@ -437,8 +467,16 @@ class SearchItem extends Component {
   };
 
   render() {
-    const { isLoaded, error, sortBy, showBy, display } = this.state;
-
+    const {
+      isLoaded,
+      error,
+      sortBy,
+      showBy,
+      display,
+      currentPage,
+      itemsPerPage,
+    } = this.state;
+    const { productList } = this.state;
     if (!isLoaded) {
       return <CircularProgress color="secondary" />;
     }
@@ -446,6 +484,16 @@ class SearchItem extends Component {
     if (error) {
       return <div>Error: {error.message}</div>;
     }
+
+    // Calculate the indexes of the products to be shown on the current page
+    const indexOfLastProduct = currentPage * itemsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+    const currentProducts = productList.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+    );
+
+    const totalPages = Math.ceil(productList.length / itemsPerPage);
 
     return (
       <div className="container">
@@ -518,7 +566,7 @@ class SearchItem extends Component {
                       </select>
                     </div>
 
-                    <div className="show">
+                    {/* <div className="show">
                       <h5>
                         <b>Show: </b>
                       </h5>
@@ -533,7 +581,7 @@ class SearchItem extends Component {
                         <option value="75">75</option>
                         <option value="100">100</option>
                       </select>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div
@@ -542,6 +590,30 @@ class SearchItem extends Component {
                     }`}
                   >
                     {this.renderProducts()}
+                  </div>
+
+                  <div className="pagination">
+                    <button
+                      onClick={() => this.handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                    >
+                      Previous
+                    </button>
+                    {Array.from({ length: totalPages }, (_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => this.handlePageChange(index + 1)}
+                        className={currentPage === index + 1 ? "active" : ""}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                    <button
+                      onClick={() => this.handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                    >
+                      Next
+                    </button>
                   </div>
                 </div>
               </section>

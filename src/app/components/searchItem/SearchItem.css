@@ -39,3 +39,61 @@
 .search-content .card-container {
   flex-wrap: nowrap;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pagination button {
+  border: none;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin: 0 2px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pagination button.active {
+  background-color: #750000;
+  color: white;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+.page-item {
+  display: flex;
+}
+
+.page-link {
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.page-link.active,
+.page-link:hover {
+  background-color: #750000;
+  border: 1px solid black;
+  color: #fff;
+}
+
+.page-link.disabled {
+  cursor: not-allowed;
+}
