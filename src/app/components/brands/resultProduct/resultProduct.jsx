@@ -526,7 +526,7 @@ class resultProduct extends Component {
                       </select>
                     </div>
 
-                    <div className="show">
+                    {/* <div className="show">
                       <h5>
                         <b>Show: </b>
                       </h5>
@@ -541,7 +541,7 @@ class resultProduct extends Component {
                         <option value="75">75</option>
                         <option value="100">100</option>
                       </select>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div

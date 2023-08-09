@@ -25,6 +25,8 @@ class CategoryList extends Component {
       comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
         ? JSON.parse(localStorage.getItem("comparisonItems"))
         : [],
+      currentPage: 1,
+      itemsPerPage: 10,
     };
   }
 
@@ -32,10 +34,43 @@ class CategoryList extends Component {
     let cookies = await GetUserLogin.isAuthenticate();
     this.setState({ token: cookies });
     await this.getDetails();
-    const comarisionItems = JSON.parse(localStorage.getItem("comparisonItems"));
-    if (comarisionItems) {
-      this.setState({ comarisionItems });
+    const comparisonItems = JSON.parse(localStorage.getItem("comparisonItems"));
+    if (comparisonItems) {
+      this.setState({ comparisonItems });
     }
+  }
+  handleNextPage = () => {
+    const { currentPage } = this.state;
+    const { itemsPerPage } = this.state;
+    const lastPage = Math.ceil(this.state.products.length / itemsPerPage);
+    if (currentPage < lastPage) {
+      this.setState({ currentPage: currentPage + 1 }, () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+  };
+
+  handlePrevPage = () => {
+    const { currentPage } = this.state;
+    if (currentPage > 1) {
+      this.setState({ currentPage: currentPage - 1 }, () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+  };
+
+  async componentDidUpdate(prevProps) {
+    const { catId, subId } = this.props.match.params;
+    const prevCatId = prevProps.match.params.catId;
+    const prevSubId = prevProps.match.params.subId;
+
+    if (catId !== prevCatId || subId !== prevSubId) {
+      await this.getDetails();
+    }
+    localStorage.setItem(
+      "comparisonItems",
+      JSON.stringify(this.state.comparisonItems)
+    );
   }
   addToComparison = (product) => {
     NotificationManager.success(
@@ -92,9 +127,22 @@ class CategoryList extends Component {
       return false;
     }
   };
+  paginate = (pageNumber) => {
+    this.setState({ currentPage: pageNumber }, () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  };
 
   renderProducts = () => {
-    const { products, sortBy, showBy, display, token } = this.state;
+    const {
+      products,
+      sortBy,
+      showBy,
+      display,
+      token,
+      currentPage,
+      itemsPerPage,
+    } = this.state;
 
     let filteredProducts = [...products];
     if (sortBy === "special") {
@@ -102,6 +150,15 @@ class CategoryList extends Component {
         (product) => product.special === true
       );
     }
+
+    // ... filtering logic ...
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredProducts.slice(
+      indexOfFirstItem,
+      indexOfLastItem
+    );
 
     // Apply sorting based on sortBy value
     let sortedProducts = [...filteredProducts];
@@ -121,7 +178,7 @@ class CategoryList extends Component {
     if (display === "list") {
       return (
         <div className="featured-product-list">
-          {limitedProducts.map((product, index) => {
+          {currentItems.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
 
@@ -268,7 +325,7 @@ class CategoryList extends Component {
     } else {
       return (
         <div className="featured-product-list row">
-          {limitedProducts.map((product, index) => {
+          {currentItems.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
 
@@ -440,7 +497,21 @@ class CategoryList extends Component {
   };
 
   render() {
-    const { products, sortBy, showBy, display } = this.state;
+    const { products, sortBy, showBy, display, currentPage, itemsPerPage } =
+      this.state;
+
+    let filteredProducts = [...products];
+
+    // ... filtering logic ...
+
+    const pageNumbers = [];
+    for (
+      let i = 1;
+      i <= Math.ceil(filteredProducts.length / itemsPerPage);
+      i++
+    ) {
+      pageNumbers.push(i);
+    }
 
     return (
       <div className="container">
@@ -513,7 +584,7 @@ class CategoryList extends Component {
                       </select>
                     </div>
 
-                    <div className="show">
+                    {/* <div className="show">
                       <h5>
                         <b>Show: </b>
                       </h5>
@@ -528,7 +599,7 @@ class CategoryList extends Component {
                         <option value="75">75</option>
                         <option value="100">100</option>
                       </select>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div
@@ -537,6 +608,40 @@ class CategoryList extends Component {
                     }`}
                   >
                     {this.renderProducts()}
+                  </div>
+                  <div className="pagination-container">
+                    <ul className="pagination">
+                      <li className="page-item">
+                        <button
+                          onClick={this.handlePrevPage}
+                          className="page-link"
+                          disabled={currentPage === 1}
+                        >
+                          Previous
+                        </button>
+                      </li>
+                      {pageNumbers.map((number) => (
+                        <li key={number} className="page-item">
+                          <button
+                            onClick={() => this.paginate(number)}
+                            className={`page-link ${
+                              currentPage === number ? "active" : ""
+                            }`}
+                          >
+                            {number}
+                          </button>
+                        </li>
+                      ))}
+                      <li className="page-item">
+                        <button
+                          onClick={this.handleNextPage}
+                          className="page-link"
+                          disabled={currentPage === pageNumbers.length}
+                        >
+                          Next
+                        </button>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </section>
