@@ -12,6 +12,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import offerImage from "../../../../../images/special-offer.png";
 import Login from "../../../../auth/login";
+import noImage from "../../../../../assets/noImage.jpg";
 
 class CategoryList extends Component {
   constructor(props) {
@@ -182,6 +183,9 @@ class CategoryList extends Component {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
 
+            // Use a default image if the product has no photo
+            const productImage = product.photo || noImage;
+
             return (
               <div
                 className={`list-item ${
@@ -206,11 +210,7 @@ class CategoryList extends Component {
                     }}
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <img
-                      src={product.photo}
-                      alt="Product"
-                      style={{ width: "120px", objectFit: "contain" }}
-                    />
+                    <img src={product.photo || noImage} alt="Product" />
                   </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -324,10 +324,12 @@ class CategoryList extends Component {
       );
     } else {
       return (
-        <div className="featured-product-list row">
+        <div className={`product-list grid-view row`}>
           {currentItems.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
+
+            const productImage = product.photo || noImage; // Use noImage as fallback
 
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
@@ -353,7 +355,7 @@ class CategoryList extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      <img src={product.photo} alt="Product" />
+                      <img src={productImage} alt="Product" />
                     </Link>
                   </div>
                   <div className="product-text">

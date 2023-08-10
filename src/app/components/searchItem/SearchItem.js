@@ -13,6 +13,7 @@ import { addToCart } from "../../store/actions/cartActions";
 import { addToWishlist } from "../../store/actions/wishlistActions";
 import offerImage from "../../../images/special-offer.png";
 import "./SearchItem.css";
+import noImage from "../../../assets/noImage.jpg";
 
 class SearchItem extends Component {
   state = {
@@ -145,6 +146,15 @@ class SearchItem extends Component {
         (product) => product.special === true
       );
     }
+    // ... filtering logic ...
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredProducts.slice(
+      indexOfFirstItem,
+      indexOfLastItem
+    );
+
     // Apply sorting based on sortBy value
     let sortedProducts = [...filteredProducts];
 
@@ -171,9 +181,13 @@ class SearchItem extends Component {
     if (display === "list") {
       return (
         <div className="featured-product-list">
-          {productsToDisplay.map((product, index) => {
+          {currentItems.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
+
+            // Use a default image if the product has no photo
+            const productImage = product.photo || noImage;
+
             return (
               <div
                 className={`list-item ${
@@ -194,12 +208,9 @@ class SearchItem extends Component {
                       pathname: `/p/${product.slug}/${product.id}`,
                       state: product,
                     }}
+                    style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <img
-                      src={product.photo}
-                      alt="Product"
-                      style={{ width: "120px", objectFit: "contain" }}
-                    />
+                    <img src={product.photo || noImage} alt="Product" />
                   </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -310,8 +321,8 @@ class SearchItem extends Component {
       );
     } else {
       return (
-        <div className="featured-product-list row">
-          {productsToDisplay.map((product, index) => {
+        <div className={`product-list grid-view row`}>
+          {currentItems.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
             return (
@@ -334,12 +345,9 @@ class SearchItem extends Component {
                         pathname: `/p/${product.slug}/${product.id}`,
                         state: product,
                       }}
+                      style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      <img
-                        src={product.photo}
-                        alt="Product"
-                        style={{ width: "100%", height: "auto" }}
-                      />
+                      <img src={noImage} alt="Product" />
                     </Link>
                   </div>
                   <div className="product-text">
