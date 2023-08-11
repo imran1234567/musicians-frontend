@@ -12,7 +12,7 @@ import offerImage from "../../../../images/special-offer.png";
 import { addToCart } from "../../../store/actions/cartActions";
 import { addToWishlist } from "../../../store/actions/wishlistActions";
 import noImage from "../../../../assets/noImage.jpg";
-
+import "./resultProduct.css";
 class resultProduct extends Component {
   state = {
     productList: [],
@@ -24,6 +24,8 @@ class resultProduct extends Component {
     comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
       ? JSON.parse(localStorage.getItem("comparisonItems"))
       : [],
+    currentPage: 1, // Current page number
+    productsPerPage: 10, // Number of products to display per page
   };
 
   componentDidMount() {
@@ -47,6 +49,13 @@ class resultProduct extends Component {
         window.location.href = "/compare";
       }
     );
+  };
+
+  scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // You can change this to "auto" for instant scrolling
+    });
   };
 
   componentDidUpdate(prevProps) {
@@ -75,9 +84,11 @@ class resultProduct extends Component {
 
       if (data && data.products) {
         const products = data.products;
+        const totalProducts = products.length; // Total number of products
         this.setState({
           productList: products,
           isLoaded: true,
+          totalProducts: totalProducts,
         });
       } else {
         window.location.href = "/noProduct";
@@ -90,6 +101,7 @@ class resultProduct extends Component {
       });
     }
   };
+
   // Sort By changes function
   handleSortByChange = (event) => {
     this.setState({ sortBy: event.target.value });
@@ -120,9 +132,70 @@ class resultProduct extends Component {
     }
   };
 
+  renderPagination = () => {
+    const { currentPage, productsPerPage, totalProducts } = this.state;
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+    return (
+      <ul className="pagination">
+        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+          <button
+            className="page-link"
+            onClick={() => this.handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+        </li>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <li
+            key={index}
+            className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
+          >
+            <button
+              className="page-link"
+              onClick={() => this.handlePageChange(index + 1)}
+            >
+              {index + 1}
+            </button>
+          </li>
+        ))}
+        <li
+          className={`page-item ${
+            currentPage === totalPages ? "disabled" : ""
+          }`}
+        >
+          <button
+            className="page-link"
+            onClick={() => this.handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </li>
+      </ul>
+    );
+  };
+
+  handlePageChange = (pageNumber) => {
+    this.setState({ currentPage: pageNumber }, () => {
+      this.scrollToTop(); // Scroll to the top after setting the page number
+    });
+  };
+
   renderProducts = () => {
-    const { productList, sortBy, showBy, display } = this.state;
+    const {
+      productList,
+      sortBy,
+      showBy,
+      display,
+      currentPage,
+      productsPerPage,
+    } = this.state;
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
     let filteredProducts = [...productList];
+
     if (sortBy === "special") {
       filteredProducts = filteredProducts.filter(
         (product) => product.special === true
@@ -143,7 +216,8 @@ class resultProduct extends Component {
 
     // Apply showBy limit
     const showByLimit = parseInt(showBy, 10);
-    const limitedProducts = sortedProducts.slice(0, showByLimit);
+    const limitedProducts = sortedProducts.slice(startIndex, endIndex);
+
     if (display === "list") {
       return (
         <div className="featured-product-list">
@@ -547,6 +621,9 @@ class resultProduct extends Component {
                     }`}
                   >
                     {this.renderProducts()}
+                  </div>
+                  <div className="pagination-container">
+                    {this.renderPagination()}
                   </div>
                 </div>
               </section>
