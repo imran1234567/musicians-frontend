@@ -15,6 +15,7 @@ import st from "./../../../../../images/st.png";
 import "./index.css";
 import Login from "../../../../auth/login";
 import Process from "../home/Process";
+import noImage from "../../../../../assets/noImage.jpg";
 
 const SingleProduct = ({ cartItems, addToCart }) => {
   const [product, setProduct] = useState(null);
@@ -64,12 +65,6 @@ const SingleProduct = ({ cartItems, addToCart }) => {
     customPaging: function (i) {
       return (
         <div className="item-thumb">
-          {/* <img
-            width="200"
-            height="200"
-            src={product.productphotos[i].imgUrl}
-            alt={`Thumbnail ${i}`}
-          /> */}
           <img
             width="200"
             height="200"
@@ -81,16 +76,14 @@ const SingleProduct = ({ cartItems, addToCart }) => {
     },
     appendDots: (dots) => <ul style={{ margin: "0px" }}> {dots} </ul>,
   };
-
   const handlePhotoClick = (index) => {
     setSelectedPhoto(index);
   };
 
   const imgArray = [
-    product.photo,
-    ...product.productphotos.map((photo) => photo.imgUrl),
+    product.photo || noImage,
+    ...product.productphotos.map((photo) => photo.imgUrl || noImage),
   ];
-
   return (
     <div>
       <section className="breadcrumbs py-4">
@@ -133,7 +126,7 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                   )} */}
                   {product.productphotos.length === 0 ? (
                     <div className="image-single" key={product.id}>
-                      <img src={product.photo} alt={product.alt} />
+                      <img src={product.photo || noImage} alt={product.alt} />
                     </div>
                   ) : (
                     <Slider {...settings}>

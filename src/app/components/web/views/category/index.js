@@ -132,11 +132,6 @@ class Category extends Component {
               </div>
             ))}
           </Slider>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={this.getTotalPages()}
-            onPageChange={this.handlePageChange}
-          />
         </div>
       </div>
     );
