@@ -11,6 +11,7 @@ import List from "../../web/views/catgoryItem";
 import offerImage from "../../../../images/special-offer.png";
 import { addToCart } from "../../../store/actions/cartActions";
 import { addToWishlist } from "../../../store/actions/wishlistActions";
+import noImage from "../../../../assets/noImage.jpg";
 
 class resultProduct extends Component {
   state = {
@@ -149,6 +150,10 @@ class resultProduct extends Component {
           {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
+
+            // Check if product has a photo, otherwise use the default image
+            const productImage = product.photo || noImage;
+
             return (
               <div
                 className={`list-item ${
@@ -172,11 +177,7 @@ class resultProduct extends Component {
                     }}
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <img
-                      src={product.photo}
-                      alt="Product"
-                      style={{ width: "120px", objectFit: "contain" }}
-                    />
+                    <img src={noImage} alt="Product" />
                   </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -314,11 +315,7 @@ class resultProduct extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      <img
-                        src={product.photo}
-                        alt="Product"
-                        style={{ width: "100%", height: "auto" }}
-                      />
+                      <img src={noImage} alt="Product" />
                     </Link>
                   </div>
                   <div className="product-text">

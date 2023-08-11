@@ -20,17 +20,16 @@ class BannersSlider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sliderImages: [], 
-      loading: true, 
-      error: null, 
+      sliderImages: [],
+      loading: true,
+      error: null,
     };
   }
-  componentDidMount(){
+  componentDidMount() {
     this.fetchSliderImages();
   }
   fetchSliderImages = () => {
-    Axios
-      .get(Apis.GetBannerImage)
+    Axios.get(Apis.GetBannerImage)
       .then((response) => {
         this.setState({
           sliderImages: response.data.cover,

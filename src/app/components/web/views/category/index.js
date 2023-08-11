@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./category.css";
 import Pagination from "./Pagination";
-
+import noImage from "../../../../../assets/noImage.jpg";
 class Category extends Component {
   constructor(props) {
     super(props);
@@ -105,7 +105,7 @@ class Category extends Component {
       <div style={{ background: "#fff" }}>
         <div className="container" id="header-category-bk">
           <Slider {...settings}>
-            {products.map((product) => (
+            {displayedProducts.map((product) => (
               <div className="item" key={product.id}>
                 <div className="category-item">
                   <Link
@@ -116,7 +116,7 @@ class Category extends Component {
                   >
                     <img
                       className="img-fluid"
-                      src={product.photo}
+                      src={product.photo || noImage} // Use noImage as fallback
                       alt={product.name}
                     />
                   </Link>
