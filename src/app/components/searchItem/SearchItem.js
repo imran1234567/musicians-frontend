@@ -705,6 +705,7 @@ import { addToWishlist } from "../../store/actions/wishlistActions";
 import offerImage from "../../../images/special-offer.png";
 import "./SearchItem.css";
 import noImage from "../../../assets/noImage.jpg";
+
 class SearchItem extends Component {
   state = {
     productList: [],
@@ -943,7 +944,7 @@ class SearchItem extends Component {
                     }}
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <img src={product.photo || noImage} alt="Product" />
+                    <img src={productImage} alt="Product" />
                   </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -1054,10 +1055,14 @@ class SearchItem extends Component {
       );
     } else {
       return (
-        <div className="featured-product-list row">
+        <div className={`product-list grid-view row`}>
           {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
+
+            // Use a default image if the product has no photo
+            const productImage = product.photo || noImage;
+
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
                 <div
@@ -1081,6 +1086,7 @@ class SearchItem extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
+
                       <img src={product.photo || noImage} alt="Product" />
                     </Link>
                   </div>
@@ -1314,8 +1320,34 @@ class SearchItem extends Component {
                   >
                     {this.renderProducts()}
                   </div>
-                  <div className="pagination-container">
-                    {this.renderPagination()}
+
+                  <div className="pagination">
+                    <button
+                      className="pagination-button"
+                      onClick={() => this.handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                    >
+                      Previous
+                    </button>
+                    {Array.from({ length: totalPages }, (_, index) => (
+                      <button
+                        key={index}
+                        className={`pagination-button ${
+                          currentPage === index + 1 ? "active" : ""
+                        }`}
+                        onClick={() => this.handlePageChange(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                    <button
+                      className="pagination-button"
+                      onClick={() => this.handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                    >
+                      Next
+                    </button>
+
                   </div>
                 </div>
               </section>

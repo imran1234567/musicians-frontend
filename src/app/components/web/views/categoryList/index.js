@@ -58,7 +58,7 @@ class CategoryList extends Component {
 
   addToComparison = (product) => {
     NotificationManager.success(
-      `${product.name} added successfuly for comparsion!`
+      `${product.name} added successfully for comparison!`
     );
     this.setState(
       (prevState) => ({
@@ -206,6 +206,14 @@ class CategoryList extends Component {
     } else if (sortBy === "highToLow") {
       sortedProducts.sort((a, b) => b.netPrice - a.netPrice);
     }
+    // ... filtering logic ...
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredProducts.slice(
+      indexOfFirstItem,
+      indexOfLastItem
+    );
 
     // Apply showBy limit
     const showByLimit = parseInt(showBy, 10);
@@ -356,7 +364,7 @@ class CategoryList extends Component {
       );
     } else {
       return (
-        <div className="featured-product-list row">
+        <div className={`product-list grid-view row`}>
           {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
