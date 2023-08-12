@@ -1214,7 +1214,7 @@ class SearchItem extends Component {
   };
 
   render() {
-    const { isLoaded, error, sortBy, showBy, display } = this.state;
+    const { isLoaded, error, sortBy, showBy, display, currentPage, totalPages } = this.state;
 
     if (!isLoaded) {
       return <CircularProgress color="secondary" />;
@@ -1320,34 +1320,8 @@ class SearchItem extends Component {
                   >
                     {this.renderProducts()}
                   </div>
-
-                  <div className="pagination">
-                    <button
-                      className="pagination-button"
-                      onClick={() => this.handlePageChange(currentPage - 1)}
-                      disabled={currentPage === 1}
-                    >
-                      Previous
-                    </button>
-                    {Array.from({ length: totalPages }, (_, index) => (
-                      <button
-                        key={index}
-                        className={`pagination-button ${
-                          currentPage === index + 1 ? "active" : ""
-                        }`}
-                        onClick={() => this.handlePageChange(index + 1)}
-                      >
-                        {index + 1}
-                      </button>
-                    ))}
-                    <button
-                      className="pagination-button"
-                      onClick={() => this.handlePageChange(currentPage + 1)}
-                      disabled={currentPage === totalPages}
-                    >
-                      Next
-                    </button>
-
+                  <div className="pagination-container">
+                    {this.renderPagination()}
                   </div>
                 </div>
               </section>
