@@ -14,6 +14,7 @@ import { addToWishlist } from "../../store/actions/wishlistActions";
 import offerImage from "../../../images/special-offer.png";
 import "./SearchItem.css";
 import noImage from "../../../assets/noImage.jpg";
+import "./SearchItem.css";
 
 class SearchItem extends Component {
   state = {
@@ -181,7 +182,7 @@ class SearchItem extends Component {
     if (display === "list") {
       return (
         <div className="featured-product-list">
-          {currentItems.map((product, index) => {
+          {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
 
@@ -210,7 +211,7 @@ class SearchItem extends Component {
                     }}
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <img src={product.photo || noImage} alt="Product" />
+                    <img src={productImage} alt="Product" />
                   </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -322,9 +323,13 @@ class SearchItem extends Component {
     } else {
       return (
         <div className={`product-list grid-view row`}>
-          {currentItems.map((product, index) => {
+          {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
+
+            // Use a default image if the product has no photo
+            const productImage = product.photo || noImage;
+
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
                 <div
@@ -347,7 +352,7 @@ class SearchItem extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      <img src={noImage} alt="Product" />
+                      <img src={productImage} alt="Product" />
                     </Link>
                   </div>
                   <div className="product-text">
@@ -602,6 +607,7 @@ class SearchItem extends Component {
 
                   <div className="pagination">
                     <button
+                      className="pagination-button"
                       onClick={() => this.handlePageChange(currentPage - 1)}
                       disabled={currentPage === 1}
                     >
@@ -610,13 +616,16 @@ class SearchItem extends Component {
                     {Array.from({ length: totalPages }, (_, index) => (
                       <button
                         key={index}
+                        className={`pagination-button ${
+                          currentPage === index + 1 ? "active" : ""
+                        }`}
                         onClick={() => this.handlePageChange(index + 1)}
-                        className={currentPage === index + 1 ? "active" : ""}
                       >
                         {index + 1}
                       </button>
                     ))}
                     <button
+                      className="pagination-button"
                       onClick={() => this.handlePageChange(currentPage + 1)}
                       disabled={currentPage === totalPages}
                     >

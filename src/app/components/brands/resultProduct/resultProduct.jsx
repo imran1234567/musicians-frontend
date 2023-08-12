@@ -251,7 +251,7 @@ class resultProduct extends Component {
                     }}
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <img src={noImage} alt="Product" />
+                    <img src={productImage} alt="Product" />
                   </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -366,6 +366,9 @@ class resultProduct extends Component {
           {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
+
+            // Check if product has a photo, otherwise use the default image
+            const productImage = product.photo || noImage;
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
                 <div
@@ -389,7 +392,7 @@ class resultProduct extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      <img src={noImage} alt="Product" />
+                      <img src={productImage} alt="Product" />
                     </Link>
                   </div>
                   <div className="product-text">
