@@ -3308,8 +3308,6 @@ ul.breadcrumbs-list li:not(a) {
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 0.875rem;
-  text-transform: uppercase;
-  color: #fff;
   background-color: var(--primary-color);
   padding: 13px 17px;
   display: inline-block;
