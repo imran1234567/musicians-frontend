@@ -226,7 +226,7 @@ class resultProduct extends Component {
             const isProductInWishlist = this.checkWishlist(product.id);
 
             // Check if product has a photo, otherwise use the default image
-            const productImage = product.photo || noImage;
+           
 
             return (
               <div
@@ -251,7 +251,7 @@ class resultProduct extends Component {
                     }}
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <img src={noImage} alt="Product" />
+                    <img src={product.photo || noImage} alt="Product" />
                   </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -389,7 +389,7 @@ class resultProduct extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      <img src={noImage} alt="Product" />
+                      <img src={product.photo || noImage} alt="Product" />
                     </Link>
                   </div>
                   <div className="product-text">
