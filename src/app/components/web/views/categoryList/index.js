@@ -23,56 +23,39 @@ class CategoryList extends Component {
       display: "list",
       products: [],
       token: "",
+      totalProducts: 0,
       comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
         ? JSON.parse(localStorage.getItem("comparisonItems"))
         : [],
       currentPage: 1,
-      itemsPerPage: 10,
+      productsPerPage: 10,
     };
   }
 
   async componentDidMount() {
-    let cookies = await GetUserLogin.isAuthenticate();
-    this.setState({ token: cookies });
-    await this.getDetails();
-    const comparisonItems = JSON.parse(localStorage.getItem("comparisonItems"));
-    if (comparisonItems) {
-      this.setState({ comparisonItems });
-    }
-  }
-  handleNextPage = () => {
-    const { currentPage } = this.state;
-    const { itemsPerPage } = this.state;
-    const lastPage = Math.ceil(this.state.products.length / itemsPerPage);
-    if (currentPage < lastPage) {
-      this.setState({ currentPage: currentPage + 1 }, () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    }
-  };
-
-  handlePrevPage = () => {
-    const { currentPage } = this.state;
-    if (currentPage > 1) {
-      this.setState({ currentPage: currentPage - 1 }, () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    }
-  };
-
-  async componentDidUpdate(prevProps) {
-    const { catId, subId } = this.props.match.params;
-    const prevCatId = prevProps.match.params.catId;
-    const prevSubId = prevProps.match.params.subId;
-
-    if (catId !== prevCatId || subId !== prevSubId) {
+    try {
+      const cookies = await GetUserLogin.isAuthenticate();
+      this.setState({ token: cookies });
       await this.getDetails();
+  
+      const comparisonItems = JSON.parse(localStorage.getItem("comparisonItems"));
+      this.setState({ comparisonItems });
+  
+      // Set the initial totalProducts value based on fetched products
+      this.setState({ totalProducts: this.state.products.length });
+    } catch (error) {
+      console.error(error);
     }
-    localStorage.setItem(
-      "comparisonItems",
-      JSON.stringify(this.state.comparisonItems)
-    );
   }
+
+  scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // You can change this to "auto" for instant scrolling
+    });
+  };
+
+
   addToComparison = (product) => {
     NotificationManager.success(
       `${product.name} added successfuly for comparsion!`
@@ -91,15 +74,20 @@ class CategoryList extends Component {
     const { catId, subId } = this.props.match.params;
     const prevCatId = prevProps.match.params.catId;
     const prevSubId = prevProps.match.params.subId;
-
+  
     if (catId !== prevCatId || subId !== prevSubId) {
       await this.getDetails();
+  
+      // After fetching details, update totalProducts and localStorage
+      this.setState({ totalProducts: this.state.products.length }, () => {
+        localStorage.setItem(
+          "comparisonItems",
+          JSON.stringify(this.state.comparisonItems)
+        );
+      });
     }
-    localStorage.setItem(
-      "comparisonItems",
-      JSON.stringify(this.state.comparisonItems)
-    );
   }
+  
   // Sort By changes function
   handleSortByChange = (event) => {
     this.setState({ sortBy: event.target.value });
@@ -128,9 +116,58 @@ class CategoryList extends Component {
       return false;
     }
   };
-  paginate = (pageNumber) => {
+  // paginate = (pageNumber) => {
+  //   this.setState({ currentPage: pageNumber }, () => {
+  //     window.scrollTo({ top: 0, behavior: "smooth" });
+  //   });
+  // };
+  
+  renderPagination = () => {
+    const { currentPage, productsPerPage, totalProducts } = this.state;
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+    return (
+      <ul className="pagination">
+        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+          <button
+            className="page-link"
+            onClick={() => this.handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+        </li>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <li
+            key={index}
+            className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
+          >
+            <button
+              className="page-link"
+              onClick={() => this.handlePageChange(index + 1)}
+            >
+              {index + 1}
+            </button>
+          </li>
+        ))}
+        <li
+          className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
+        >
+          <button
+            className="page-link"
+            onClick={() => this.handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </li>
+      </ul>
+    );
+  };
+
+  handlePageChange = (pageNumber) => {
     this.setState({ currentPage: pageNumber }, () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      this.scrollToTop();// Scroll to the top after setting the page number
     });
   };
 
@@ -142,24 +179,21 @@ class CategoryList extends Component {
       display,
       token,
       currentPage,
-      itemsPerPage,
+      productsPerPage,
     } = this.state;
 
+
+    // ... filtering logic ...
+
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
     let filteredProducts = [...products];
+
     if (sortBy === "special") {
       filteredProducts = filteredProducts.filter(
         (product) => product.special === true
       );
     }
-
-    // ... filtering logic ...
-
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredProducts.slice(
-      indexOfFirstItem,
-      indexOfLastItem
-    );
 
     // Apply sorting based on sortBy value
     let sortedProducts = [...filteredProducts];
@@ -175,15 +209,16 @@ class CategoryList extends Component {
 
     // Apply showBy limit
     const showByLimit = parseInt(showBy, 10);
-    const limitedProducts = sortedProducts.slice(0, showByLimit);
+    const limitedProducts = sortedProducts.slice(startIndex, endIndex);
+
     if (display === "list") {
       return (
         <div className="featured-product-list">
-          {currentItems.map((product, index) => {
+          {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
 
-            // Use a default image if the product has no photo
+            // Check if product has a photo, otherwise use the default image
             const productImage = product.photo || noImage;
 
             return (
@@ -201,7 +236,6 @@ class CategoryList extends Component {
                     className="special-offer-image"
                   />
                 )}
-
                 <div className="product-image">
                   <Link
                     to={{
@@ -252,15 +286,7 @@ class CategoryList extends Component {
                   </div>
                   {/* <h5>{this.formatPrice(product.price)}</h5> */}
                   <div className="add-cart">
-                    {!token ? (
-                      <a
-                        data-target="#bd-example-modal"
-                        data-toggle="modal"
-                        className="fill-cart-btn"
-                      >
-                        Add To Cart
-                      </a>
-                    ) : isProductInCart ? (
+                    {isProductInCart ? (
                       <Link to="/cart" className="fill-cart-btn">
                         Go To Cart
                       </Link>
@@ -278,8 +304,14 @@ class CategoryList extends Component {
                         Add To Cart
                       </a>
                     )}
-
                     <div className="com">
+                      {/* <a href="/compare">
+                        <FontAwesomeIcon
+                          icon={faCodeCompare}
+                          className="compare-icon"
+                        />
+                      </a> */}
+
                       <a
                         href="javascript:void(0)"
                         onClick={() => {
@@ -324,13 +356,10 @@ class CategoryList extends Component {
       );
     } else {
       return (
-        <div className={`product-list grid-view row`}>
-          {currentItems.map((product, index) => {
+        <div className="featured-product-list row">
+          {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
-
-            const productImage = product.photo || noImage; // Use noImage as fallback
-
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
                 <div
@@ -346,7 +375,6 @@ class CategoryList extends Component {
                       className="special-offer-image"
                     />
                   )}
-
                   <div className="product-image">
                     <Link
                       to={{
@@ -355,7 +383,7 @@ class CategoryList extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      <img src={productImage} alt="Product" />
+                      <img src={product.photo || noImage} alt="Product" />
                     </Link>
                   </div>
                   <div className="product-text">
@@ -398,15 +426,7 @@ class CategoryList extends Component {
                     </div>
                     {/* <h5>${product.price}</h5> */}
                     <div className="add-cart">
-                      {!token ? (
-                        <a
-                          data-target="#bd-example-modal"
-                          data-toggle="modal"
-                          className="fill-cart-btn"
-                        >
-                          Add To Cart
-                        </a>
-                      ) : isProductInCart ? (
+                      {isProductInCart ? (
                         <Link to="/cart" className="fill-cart-btn">
                           Go To Cart
                         </Link>
@@ -426,6 +446,12 @@ class CategoryList extends Component {
                         </a>
                       )}
                       <div className="com">
+                        {/* <a href="/compare">
+                          <FontAwesomeIcon
+                            icon={faCodeCompare}
+                            className="compare-icon"
+                          />
+                        </a> */}
                         <a
                           href="javascript:void(0)"
                           onClick={() => {
@@ -476,11 +502,11 @@ class CategoryList extends Component {
     const { catId, SubId } = this.props.match.params;
 
     try {
-      const productList = await GetCategoryDetails.getProductListByCategory(
+      const products = await GetCategoryDetails.getProductListByCategory(
         catId,
         SubId
       );
-      this.setState({ products: productList.data });
+      this.setState({ products: products.data });
     } catch (error) {
       console.error("Error getting product list:", error);
     }
@@ -586,24 +612,9 @@ class CategoryList extends Component {
                       </select>
                     </div>
 
-                    {/* <div className="show">
-                      <h5>
-                        <b>Show: </b>
-                      </h5>
-                      <select
-                        id="showBy"
-                        value={showBy}
-                        onChange={this.handleShowByChange}
-                      >
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="75">75</option>
-                        <option value="100">100</option>
-                      </select>
-                    </div> */}
                   </div>
 
+                  
                   <div
                     className={`product-list ${
                       display === "grid" ? "grid-view" : ""
@@ -612,38 +623,7 @@ class CategoryList extends Component {
                     {this.renderProducts()}
                   </div>
                   <div className="pagination-container">
-                    <ul className="pagination">
-                      <li className="page-item">
-                        <button
-                          onClick={this.handlePrevPage}
-                          className="page-link"
-                          disabled={currentPage === 1}
-                        >
-                          Previous
-                        </button>
-                      </li>
-                      {pageNumbers.map((number) => (
-                        <li key={number} className="page-item">
-                          <button
-                            onClick={() => this.paginate(number)}
-                            className={`page-link ${
-                              currentPage === number ? "active" : ""
-                            }`}
-                          >
-                            {number}
-                          </button>
-                        </li>
-                      ))}
-                      <li className="page-item">
-                        <button
-                          onClick={this.handleNextPage}
-                          className="page-link"
-                          disabled={currentPage === pageNumbers.length}
-                        >
-                          Next
-                        </button>
-                      </li>
-                    </ul>
+                    {this.renderPagination()}
                   </div>
                 </div>
               </section>
