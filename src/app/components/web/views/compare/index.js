@@ -74,7 +74,7 @@ class compare extends Component {
                           <td key={product.id}>
                             <img
                               src={product.photo}
-                              style={{ height: "200px", width: "200px" }}
+                              style={{ width: "200px" }}
                             ></img>
                           </td>
                         );
