@@ -15,6 +15,7 @@ import cat4 from "../../../../../assets/categories-image-4.jpg";
 import pay1 from "../../../../../assets/pay-img-1.png";
 import pay2 from "../../../../../assets/pay-img-2.png";
 import pay3 from "../../../../../assets/pay-img-3.png";
+import ReactHtmlParser  from 'react-html-parser';
 
 class BannersSlider extends Component {
   constructor(props) {
@@ -25,8 +26,30 @@ class BannersSlider extends Component {
       error: null,
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     this.fetchSliderImages();
+    try {
+      const response = await Axios.get(Apis.GetAllPagesContent);
+      if (
+        response.data.success &&
+        response.data.Content &&
+        (response.data.Content.paypal ||
+          response.data.Content.zip ||
+          response.data.Content.studio)
+      ) {
+        this.setState({
+          paypal: response.data.Content.paypal || "",
+          zip: response.data.Content.zip || "",
+          studio: response.data.Content.studio || "",
+        });
+
+        console.log("PayPal:", response.data.Content.paypal);
+        console.log("Zip:", response.data.Content.zip);
+        console.log("Studio:", response.data.Content.studio);
+      }
+    } catch (error) {
+      console.error("Error fetching content:", error);
+    }
   }
   fetchSliderImages = () => {
     Axios.get(Apis.GetBannerImage)
@@ -45,7 +68,7 @@ class BannersSlider extends Component {
   };
 
   render() {
-    const { sliderImages, loading, error } = this.state;
+    const { sliderImages, loading, error , paypal, zip, studio } = this.state;
     var settings = {
       dots: false,
       infinite: true,
@@ -120,10 +143,7 @@ class BannersSlider extends Component {
                   </div>
                   <div class="offer-text">
                     <h5>Play Your Way With PayPal Pay In 4</h5>
-                    <p>
-                      Divide your purchase into four interest-free instalments
-                      with no late fees and just 25% down.
-                    </p>
+                    <p>{paypal && ReactHtmlParser(paypal)}</p>
                   </div>
                 </div>
               </div>
@@ -135,10 +155,7 @@ class BannersSlider extends Component {
                   </div>
                   <div class="offer-text">
                     <h5>Own It Now, up to 6 Months Interest Free*</h5>
-                    <p>
-                      Purchase your new gear with Zip Money and get up to 6
-                      months to pay with zero interest.
-                    </p>
+                    <p>{zip && ReactHtmlParser(zip)}</p>
                   </div>
                 </div>
               </div>
@@ -150,10 +167,7 @@ class BannersSlider extends Component {
                   </div>
                   <div class="offer-text">
                     <h5>Start Playing Today With Easy Rental</h5>
-                    <p>
-                      Simple application process & great terms. Return/upgrade
-                      after six months or buy at any time.
-                    </p>
+                    <p>{studio && ReactHtmlParser(studio)}</p>
                   </div>
                 </div>
               </div>

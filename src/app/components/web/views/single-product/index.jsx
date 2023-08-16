@@ -16,12 +16,18 @@ import "./index.css";
 import Login from "../../../../auth/login";
 import Process from "../home/Process";
 import noImage from "../../../../../assets/noImage.jpg";
+import Axios from "axios";
+import { Apis } from "../../../../../config";
+import ReactHtmlParser from "react-html-parser";
 
 const SingleProduct = ({ cartItems, addToCart }) => {
   const [product, setProduct] = useState(null);
   const [token, setToken] = useState("");
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [activeTab, setActiveTab] = useState("home-tab-pane");
+  const [paypal, setPaypal] = useState("");
+  const [zip, setZip] = useState("");
+  const [studio, setStudio] = useState("");
 
   const checkCart = (productId) => {
     const productExistsInCart = cartItems.some(
@@ -43,11 +49,32 @@ const SingleProduct = ({ cartItems, addToCart }) => {
       let cookies = await GetUserLogin.isAuthenticate();
       setToken(cookies);
       setProduct(list.data);
+  
+      try {
+        const response = await Axios.get(Apis.GetAllPagesContent);
+        if (
+          response.data.success &&
+          response.data.Content &&
+          (response.data.Content.paypal ||
+            response.data.Content.zip ||
+            response.data.Content.studio)
+        ) {
+          setPaypal(response.data.Content.paypal || "");
+          setZip(response.data.Content.zip || "");
+          setStudio(response.data.Content.studio || "");
+          
+          console.log("PayPal:", response.data.Content.paypal);
+          console.log("Zip:", response.data.Content.zip);
+          console.log("Studio:", response.data.Content.studio);
+        }
+      } catch (error) {
+        console.error("Error fetching content:", error);
+      }
     };
-
+  
     fetchData();
   }, []);
-
+  
   if (!product) {
     return "Loading";
   }
@@ -271,10 +298,7 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                 </div>
                 <div className="offer-text">
                   <h5>Play Your Way With PayPal Pay In 4</h5>
-                  <p>
-                    Divide your purchase into four interest-free installments
-                    with no late fees and just 25% down.
-                  </p>
+                  <p>{ReactHtmlParser(paypal)}</p>
                 </div>
               </div>
             </div>
@@ -285,10 +309,11 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                 </div>
                 <div className="offer-text">
                   <h5>Own It Now, up to 6 Months Interest Free*</h5>
-                  <p>
+                  {/* <p>
                     Purchase your new gear with Zip Money and get up to 6 months
                     to pay with zero interest.
-                  </p>
+                  </p> */}
+                   <p>{ReactHtmlParser(zip)}</p>
                 </div>
               </div>
             </div>
@@ -299,10 +324,11 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                 </div>
                 <div className="offer-text">
                   <h5>Start Playing Today With Easy Rental</h5>
-                  <p>
+                  {/* <p>
                     Simple application process & great terms. Return/upgrade
                     after six months or buy at any time.
-                  </p>
+                  </p> */}
+                  <p>{ReactHtmlParser(studio)}</p>
                 </div>
               </div>
             </div>

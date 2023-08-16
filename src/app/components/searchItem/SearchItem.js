@@ -1050,6 +1050,7 @@ class SearchItem extends Component {
               </div>
             );
           })}
+          <Login/>
         </div>
       );
     } else {
@@ -1190,6 +1191,7 @@ class SearchItem extends Component {
               </div>
             );
           })}
+          <Login/>
         </div>
       );
     }
