@@ -14,11 +14,14 @@ export default class Deliverydetails extends Component {
       area: "",
       states: "",
       address: "",
+      errors: {},
     };
   }
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
   async componentDidMount() {
     let location = await GetLocationDetails.getLocationListDetails();
     if (location) {
@@ -27,27 +30,72 @@ export default class Deliverydetails extends Component {
       NotificationManager.error("Data is empty", "Data");
     }
   }
+
+  validateForm = () => {
+    const { name, phone, district, city, area, states, address } = this.state;
+    const errors = {};
+
+    if (!name) {
+      errors.name = "Full name is required";
+    }
+    if (!phone) {
+      errors.phone = "Phone number is required";
+    }
+    if (!states) {
+      errors.states = "State is required";
+    }
+    if (!district) {
+      errors.district = "District is required";
+    }
+    if (!city) {
+      errors.city = "City is required";
+    }
+    if (!area) {
+      errors.area = "Area is required";
+    }
+    if (!address) {
+      errors.address = "Shipping address is required";
+    }
+
+    this.setState({ errors });
+    return Object.keys(errors).length === 0;
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    const { name, phone, district, city, area, states, address } = this.state;
-    let delivery = {
-      name: name,
-      phone: phone,
-      district: district,
-      city: city,
-      area: area,
-      states: states,
-      address: address,
-    };
-    this.props.onSelectDeliveryAddress(delivery);
+    if (this.validateForm()) {
+      const { name, phone, district, city, area, states, address } = this.state;
+      let delivery = {
+        name: name,
+        phone: phone,
+        district: district,
+        city: city,
+        area: area,
+        states: states,
+        address: address,
+      };
+      this.props.onSelectDeliveryAddress(delivery);
+    }
   };
-  render() {
-    const { name, phone, district, city, area, states, address, locationList } =
-      this.state;
-    let option = locationList.map((data, i) => (
-      <option value={data.id}>{data.name}</option>
-    ));
 
+  render() {
+    const {
+      name,
+      phone,
+      district,
+      city,
+      area,
+      states,
+      address,
+      locationList,
+      errors,
+    } = this.state;
+
+    let option = locationList.map((data, i) => (
+      <option value={data.id} key={data.id}>
+        {data.name}
+      </option>
+    ));
     return (
       <div className="card-body">
         <form>
@@ -148,14 +196,16 @@ export default class Deliverydetails extends Component {
                   Shipping Address <span className="required">*</span>
                 </label>
                 <textarea
-                  className="form-control border-form-control"
+                  className={`form-control border-form-control ${
+                    errors.address ? "is-invalid" : ""
+                  }`}
                   name="address"
                   value={address}
                   onChange={this.handleChange}
                 />
-                <small className="text-danger">
-                  Please provide the number and street.
-                </small>
+                {errors.address && (
+                  <div className="invalid-feedback">{errors.address}</div>
+                )}
               </div>
             </div>
             <div className="col-sm-12">
@@ -167,6 +217,7 @@ export default class Deliverydetails extends Component {
                 aria-controls="collapseThree"
                 className="btn btn-secondary mb-2 btn-lg"
                 onClick={this.handleSubmit}
+                disabled={Object.keys(errors).length > 0}
               >
                 NEXT
               </button>

@@ -34,6 +34,8 @@ class checkout extends Component {
       customer: "",
       paymentmethod: "",
       deliveryAddress: "",
+      addresses: [],
+      isNewAddressFormFilled: false,
     };
   }
   // handleOptionChange = (e) => {
@@ -54,6 +56,20 @@ class checkout extends Component {
       let user = await GetUserLogin.getCustomerDetail(email);
       if (user) {
         this.setState({ customer: user.data, email: email });
+
+        // Fetch user addresses from the API based on the logged-in user's email
+        try {
+          const response = await fetch(
+            `http://13.233.106.34:4000/api/customer/getUserByEmailId?email=${email}`
+          );
+          const data = await response.json();
+
+          if (data.success && data.data.Addresses) {
+            this.setState({ addresses: data.data.Addresses });
+          }
+        } catch (error) {
+          console.error("Error fetching user addresses:", error);
+        }
       }
     }
     let cart = this.props.cartItems;
@@ -70,38 +86,53 @@ class checkout extends Component {
   }
   handlePlaceOrder = async (event) => {
     event.preventDefault();
-    const { customer, grandTotal, deliveryAddress, paymentmethod } = this.state;
+    const {
+      customer,
+      grandTotal,
+      addresses,
+      useExistingAddress,
+      paymentmethod,
+    } = this.state;
     const { totalAmount } = this.props.location.state;
     let orderId = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
     );
     let { cartItems } = this.props;
-    let data = {
-      customerId: customer.id,
-      paymentmethod: paymentmethod,
-      orderId: orderId,
-      deliveryAddress: deliveryAddress,
-      product: cartItems,
-      grandTotal: totalAmount,
-    };
-    if (data) {
-      let order = await GetOrderDetails.getOrderCreateByUser(
-        JSON.stringify(data)
-      );
-      if (order) {
-        NotificationManager.success("Successfully Ordered", "Order");
-        setTimeout(async function () {
-          CartHelper.emptyCart();
-        }, 1000);
-      } else {
-        NotificationManager.error("Order is declined", "Order");
-        setTimeout(async function () {
-          window.location.href = "/orderFailure";
-        }, 1000);
+
+    let selectedAddress = useExistingAddress
+      ? addresses[0]
+      : this.state.deliveryAddress;
+
+    if (selectedAddress) {
+      let data = {
+        customerId: customer.id,
+        paymentmethod: paymentmethod,
+        orderId: orderId,
+        deliveryAddress: selectedAddress,
+        product: cartItems,
+        grandTotal: totalAmount,
+      };
+
+      if (data) {
+        let order = await GetOrderDetails.getOrderCreateByUser(
+          JSON.stringify(data)
+        );
+        if (order) {
+          NotificationManager.success("Successfully Ordered", "Order");
+          setTimeout(async function () {
+            CartHelper.emptyCart();
+          }, 1000);
+        } else {
+          NotificationManager.error("Order is declined", "Order");
+          setTimeout(async function () {
+            window.location.href = "/orderFailure";
+          }, 1000);
+        }
       }
+    } else {
+      NotificationManager.error("Please select a delivery address", "Order");
     }
   };
-
   loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -263,11 +294,23 @@ class checkout extends Component {
     });
   };
 
+  handleDeliveryAddress = (address) => {
+    this.setState({
+      deliveryAddress: address,
+      useExistingAddress: false,
+      isNewAddressFormFilled: true,
+    });
+  };
+
   handleRadioChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
+    let firstAddress = null;
+    if (this.state.addresses.length > 0) {
+      firstAddress = this.state.addresses[0];
+    }
     const { totalAmount } = this.props.location.state;
     const { deliveryAddress, useExistingAddress } = this.state;
     const { cartItems } = this.props;
@@ -367,19 +410,23 @@ class checkout extends Component {
                             </label>
                           </div>
 
-                          {useExistingAddress && (
+                          {firstAddress && (
                             <div className="existing-address">
-                              <h6>Existing Address:</h6>
-                              <textarea
-                                className="form-control"
-                                rows="4"
-                                value={deliveryAddress}
-                                readOnly
-                              ></textarea>
-                              {/* Replace the above textarea with the actual existing address input */}
+                              <ul>
+                                <li>
+                                  <h6>
+                                    <b>{firstAddress.fullname}</b>{" "}
+                                    {firstAddress.phone}
+                                  </h6>
+                                  <h6>
+                                    {firstAddress.shipping}, {firstAddress.city}
+                                    , {firstAddress.states}
+                                  </h6>
+                                </li>
+                              </ul>
                             </div>
                           )}
-
+                          <br></br>
                           <div className="form-check">
                             <input
                               className="form-check-input"
