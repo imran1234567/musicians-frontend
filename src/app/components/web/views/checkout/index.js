@@ -550,12 +550,12 @@ class checkout extends Component {
                           </span>
                         </div>
                         <h5>{row.name}</h5>
-                        <h6>
+                        {/* <h6>
                           <strong>
                             <span className="mdi mdi-approval" /> Available in
                           </strong>{" "}
                           - {row.unitSize} gm
-                        </h6>
+                        </h6> */}
 
                         <p className="offer-price mb-0">
                           <span className="regular-price">

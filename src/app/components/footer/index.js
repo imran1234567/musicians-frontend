@@ -123,7 +123,7 @@ class Footer extends Component {
                         <Link to="/cat/5/21">Effects Pedal</Link>
                       </li>
                       <li>
-                        <Link to="/cat/10/58">Ukuleles</Link>
+                        <Link to="/cat/6/24">Ukuleles</Link>
                       </li>
                       <li>
                         <Link to="/cat/7/25">Artwood</Link>

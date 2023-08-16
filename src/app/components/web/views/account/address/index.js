@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { GetUserLogin } from "../../../../services";
 import "../css/index.css";
 import profile from "../../../../../../images/profile.jpg";
-
+import address from "./address.css";
 export default class Address extends Component {
   constructor(props) {
     super(props);
@@ -131,7 +131,6 @@ export default class Address extends Component {
                                 <div className="address-dt-all">
                                   {/* <h4>Home</h4> */}
                                   <p>
-                                    #
                                     {row.shipping +
                                       " , " +
                                       row.area +

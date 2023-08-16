@@ -125,7 +125,9 @@ export default class List extends Component {
                     <div className="col-lg-12 col-md-12">
                       <div className="pdpt-bg">
                         <div className="pdpt-title">
-                          <h6>Order List</h6>
+                          <h6>
+                            <b>Order List</b>
+                          </h6>
                         </div>
                         <div className="order-body10">
                           <div
@@ -133,15 +135,15 @@ export default class List extends Component {
                             style={{ width: "100%" }}
                           >
                             <div class="widget">
-                              <div class="order-list-tabel-main table-responsive">
+                              <div class="order-list-table-main table-responsive">
                                 <table
-                                  class="datatabel table table-striped table-bordered order-list-tabel"
+                                  class="datatable table table-striped table-bordered order-list-table"
                                   width="100%"
                                   cellspacing="0"
                                 >
                                   <thead>
                                     <tr>
-                                      <th>Order #</th>
+                                      <th>Order ID</th>
                                       <th>Date Purchased</th>
                                       <th>Delivery Date</th>
                                       <th>Status</th>
@@ -152,7 +154,7 @@ export default class List extends Component {
                                     {orderList ? (
                                       orderList.map((row, index) => (
                                         <tr key={index}>
-                                          <td>#{row.number}</td>
+                                          <td>{row.number}</td>
                                           <td>
                                             <Moment format="MMMM Do YYYY">
                                               {row.createdAt}
@@ -180,7 +182,7 @@ export default class List extends Component {
                                               <span className="badge btn-primary">
                                                 shipping
                                               </span>
-                                            ) : row.status === "delieverd" ? (
+                                            ) : row.status === "delivered" ? (
                                               <span className="badge badge-success">
                                                 Delivered
                                               </span>
