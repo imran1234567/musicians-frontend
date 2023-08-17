@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./category.css";
-import Pagination from "./Pagination";
 import noImage from "../../../../../assets/noImage.jpg";
 class Category extends Component {
   constructor(props) {

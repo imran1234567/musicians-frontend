@@ -177,7 +177,7 @@ class Navigation extends Component {
   };
 
   handleCategoryClick = () => {
-    window.location.reload(); // Reload the page after clicking a category or subcategory
+    window.location.reload();
   };
 
   render() {

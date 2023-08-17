@@ -28,7 +28,7 @@ class CategoryList extends Component {
         ? JSON.parse(localStorage.getItem("comparisonItems"))
         : [],
       currentPage: 1,
-      productsPerPage: 10,
+      productsPerPage: 12,
     };
   }
 

@@ -1,0 +1,47 @@
+/* Address.css */
+
+/* Address Item */
+.address-item {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Address Icon */
+.address-icon1 {
+  margin-right: 15px;
+  font-size: 24px;
+  color: #1e88e5;
+}
+
+/* Address Details */
+.address-dt-all {
+  flex: 1;
+}
+
+/* Action Buttons */
+.action-btns {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.action-btns li {
+  margin-right: 10px;
+}
+
+.action-btn {
+  font-size: 18px;
+  color: #757575;
+  transition: color 0.2s ease-in-out;
+}
+
+.action-btn:hover {
+  color: #1e88e5;
+}

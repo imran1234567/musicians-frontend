@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { GetUserLogin } from "../../../../services";
 import "../css/index.css";
 import profile from "../../../../../../images/profile.jpg";
-
+import address from "./address.css";
 export default class Address extends Component {
   constructor(props) {
     super(props);
@@ -119,7 +119,7 @@ export default class Address extends Component {
                     <div className="col-lg-12 col-md-12">
                       <div className="pdpt-bg">
                         <div className="pdpt-title">
-                          <h4>My Address</h4>
+                          <h4>Shipping Address</h4>
                         </div>
                         <div className="address-body">
                           {user ? (
@@ -131,7 +131,6 @@ export default class Address extends Component {
                                 <div className="address-dt-all">
                                   {/* <h4>Home</h4> */}
                                   <p>
-                                    #
                                     {row.shipping +
                                       " , " +
                                       row.area +

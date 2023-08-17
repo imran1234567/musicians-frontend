@@ -26,7 +26,7 @@ class resultProduct extends Component {
       ? JSON.parse(localStorage.getItem("comparisonItems"))
       : [],
     currentPage: 1, // Current page number
-    productsPerPage: 10, // Number of products to display per page
+    productsPerPage: 12, // Number of products to display per page
   };
 
   componentDidMount() {
@@ -227,7 +227,6 @@ class resultProduct extends Component {
             const isProductInWishlist = this.checkWishlist(product.id);
 
             // Check if product has a photo, otherwise use the default image
-           
 
             return (
               <div
@@ -394,7 +393,6 @@ class resultProduct extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-
                       <img src={product.photo || noImage} alt="Product" />
                     </Link>
                   </div>
