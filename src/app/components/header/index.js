@@ -27,7 +27,6 @@ class Navigation extends Component {
       token: "",
       userName: "",
       searchtxt: "",
-      headerData: [],
       headerItems: [],
       expanded: false,
       isSearchButtonDisables: true,
@@ -45,7 +44,7 @@ class Navigation extends Component {
     const searchtxt = e.target.value;
     this.setState({
       searchtxt,
-      isSearchButtonDisables: searchtxt.trim() === "",
+      isSearchButtonDisabled: searchtxt.trim() === "",
     });
   };
 
@@ -55,12 +54,11 @@ class Navigation extends Component {
       this.handleClickSearch();
     }
   };
-
   handleClickSearch = () => {
-    const { searchtxt, isSearchButtonDisables } = this.state;
-    if (!isSearchButtonDisables) {
+    const { searchtxt, isSearchButtonDisabled } = this.state;
+    if (!isSearchButtonDisabled) {
       this.props.history.push({
-        pathname: "/SearchItem",
+        pathname: isSearchButtonDisabled ? "/" : "/SearchItem",
         state: { value: searchtxt },
       });
     }
@@ -68,65 +66,91 @@ class Navigation extends Component {
 
   handleMouseEnter = (categoryId) => {
     this.setState((prevState) => ({
-      headerItems: prevState.headerItems.map((item) => {
-        if (item.categoryId === categoryId) {
-          return {
-            ...item,
-            showSubmenu: true,
-          };
-        }
-        return item;
-      }),
+      headerItems: prevState.headerItems.map((item) =>
+        item.categoryId === categoryId ? { ...item, showSubmenu: true } : item
+      ),
     }));
   };
 
   handleMouseLeave = (categoryId) => {
     this.setState((prevState) => ({
-      headerItems: prevState.headerItems.map((item) => {
-        if (item.categoryId === categoryId) {
-          return {
-            ...item,
-            showSubmenu: false,
-          };
-        }
-        return item;
-      }),
+      headerItems: prevState.headerItems.map((item) =>
+        item.categoryId === categoryId ? { ...item, showSubmenu: false } : item
+      ),
     }));
   };
 
-  async componentDidMount() {
-    let cookies = await GetUserLogin.isAuthenticate();
-    let navCatgory = await GetCategoryDetails.getCategoryList();
-    this.setState({ token: cookies, headerData: navCatgory.data }, () => {
-      this.setState({
-        headerItems: Object.values(
-          this.state.headerData.reduce((result, item) => {
-            const existingCategory = result[item.categoryId];
-            if (existingCategory) {
-              existingCategory.subCategory.push({
+  async componentDidUpdate(prevProps) {
+    if (
+      this.props.match.params.catId !== prevProps.match.params.catId ||
+      this.props.match.params.SubId !== prevProps.match.params.SubId
+    ) {
+      // Fetch data or perform necessary actions based on the new route parameters
+      const navCategory = await GetCategoryDetails.getCategoryList();
+      const headerData = navCategory.data;
+
+      const headerItems = headerData.reduce((result, item) => {
+        const existingCategory = result.find(
+          (cat) => cat.categoryId === item.categoryId
+        );
+        if (existingCategory) {
+          existingCategory.subCategory.push({
+            id: item.id,
+            sub_name: item.sub_name,
+          });
+        } else {
+          result.push({
+            name: item.category.name,
+            categoryId: item.categoryId,
+            subCategory: [
+              {
                 id: item.id,
                 sub_name: item.sub_name,
-              });
-            } else {
-              result[item.categoryId] = {
-                name: item.category.name,
-                categoryId: item.categoryId,
-                subCategory: [
-                  {
-                    id: item.id,
-                    sub_name: item.sub_name,
-                  },
-                ],
-              };
-            }
-            return result;
-          }, {})
-        ),
-      });
-    });
-    let email = sessionStorage.getItem("email");
+              },
+            ],
+          });
+        }
+        return result;
+      }, []);
+
+      this.setState({ headerItems });
+    }
+  }
+
+  async componentDidMount() {
+    const cookies = await GetUserLogin.isAuthenticate();
+    const navCategory = await GetCategoryDetails.getCategoryList();
+    const headerData = navCategory.data;
+
+    const headerItems = headerData.reduce((result, item) => {
+      const existingCategory = result.find(
+        (cat) => cat.categoryId === item.categoryId
+      );
+      if (existingCategory) {
+        existingCategory.subCategory.push({
+          id: item.id,
+          sub_name: item.sub_name,
+        });
+      } else {
+        result.push({
+          name: item.category.name,
+          categoryId: item.categoryId,
+          subCategory: [
+            {
+              id: item.id,
+              sub_name: item.sub_name,
+            },
+          ],
+        });
+      }
+      return result;
+    }, []);
+
+    this.setState({ token: cookies, headerItems });
+
+    const email = sessionStorage.getItem("email");
     if (email) {
-      let user = await GetUserLogin.getCustomerDetail(email);
+      const user = await GetUserLogin.getCustomerDetail(email);
       if (user) {
         this.setState({ userName: user.data.firstName });
       }
@@ -150,6 +174,10 @@ class Navigation extends Component {
   handleLogout = async (event) => {
     event.preventDefault();
     await GetUserLogin.logout();
+  };
+
+  handleCategoryClick = () => {
+    window.location.reload(); // Reload the page after clicking a category or subcategory
   };
 
   render() {
@@ -245,7 +273,7 @@ class Navigation extends Component {
                         />
                         <Link
                           to={{
-                            pathname: isSearchButtonDisables
+                            pathname: isSearchButtonDisabled
                               ? "/"
                               : "/SearchItem",
                             state: { value: searchtxt },
@@ -261,7 +289,7 @@ class Navigation extends Component {
                             height: "100%",
                           }}
                           onClick={(e) => {
-                            if (isSearchButtonDisables) {
+                            if (isSearchButtonDisabled) {
                               e.preventDefault(); // Prevent link navigation when search is disabled
                             } else if (searchtxt.trim() === "") {
                               e.preventDefault(); // Prevent link navigation when search text is empty
@@ -341,7 +369,7 @@ class Navigation extends Component {
                         <div className="navbar-cat">
                           <NavDropdown
                             title={item.name.toUpperCase()}
-                            id="guitar-bass-dropdown"
+                            id={`guitar-bass-dropdown-${item.categoryId}`}
                             className="nav-dropdown-title"
                             style={{ color: "white", left: 0 }}
                             onMouseEnter={() =>
@@ -351,28 +379,27 @@ class Navigation extends Component {
                               this.handleMouseLeave(item.categoryId)
                             }
                             show={item.showSubmenu}
+                            onClick={this.handleCategoryClick}
                           >
                             <div className="nav-image">
                               <img src={b6} alt="product" />
                             </div>
                             <div className="submenu-class">
-                              {item.subCategory.map((data) => {
-                                return (
-                                  <div className="submenu" key={data.id}>
-                                    <NavDropdown.Item
-                                      as={Link}
-                                      to={`/cat/${item.categoryId}/${data.id}`}
-                                      activeClassName="active"
-                                      style={{ textTransform: "uppercase" }}
-                                    >
-                                      {data.sub_name.toUpperCase()} <br></br>
-                                      <small style={{ color: "blue" }}>
-                                        View All
-                                      </small>
-                                    </NavDropdown.Item>
-                                  </div>
-                                );
-                              })}
+                              {item.subCategory.map((data) => (
+                                <div className="submenu" key={data.id}>
+                                  <NavDropdown.Item
+                                    as={Link}
+                                    to={`/cat/${item.categoryId}/${data.id}`}
+                                    activeClassName="active"
+                                    style={{ textTransform: "uppercase" }}
+                                  >
+                                    {data.sub_name.toUpperCase()} <br />
+                                    <small style={{ color: "blue" }}>
+                                      View All
+                                    </small>
+                                  </NavDropdown.Item>
+                                </div>
+                              ))}
                             </div>
                           </NavDropdown>
                         </div>

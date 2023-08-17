@@ -705,6 +705,7 @@ import { addToWishlist } from "../../store/actions/wishlistActions";
 import offerImage from "../../../images/special-offer.png";
 import "./SearchItem.css";
 import noImage from "../../../assets/noImage.jpg";
+
 class SearchItem extends Component {
   state = {
     productList: [],
@@ -943,7 +944,7 @@ class SearchItem extends Component {
                     }}
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <img src={product.photo || noImage} alt="Product" />
+                    <img src={productImage} alt="Product" />
                   </Link>
                 </div>
                 <div className="product-details" style={{ flex: 1 }}>
@@ -1055,10 +1056,14 @@ class SearchItem extends Component {
       );
     } else {
       return (
-        <div className="featured-product-list row">
+        <div className={`product-list grid-view row`}>
           {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
+
+            // Use a default image if the product has no photo
+            const productImage = product.photo || noImage;
+
             return (
               <div className="col-lg-4 col-md-4 col-6" key={index}>
                 <div
@@ -1082,6 +1087,7 @@ class SearchItem extends Component {
                       }}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
+
                       <img src={product.photo || noImage} alt="Product" />
                     </Link>
                   </div>
@@ -1210,7 +1216,7 @@ class SearchItem extends Component {
   };
 
   render() {
-    const { isLoaded, error, sortBy, showBy, display } = this.state;
+    const { isLoaded, error, sortBy, showBy, display, currentPage, totalPages } = this.state;
 
     if (!isLoaded) {
       return <CircularProgress color="secondary" />;

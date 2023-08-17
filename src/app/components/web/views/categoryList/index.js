@@ -37,10 +37,12 @@ class CategoryList extends Component {
       const cookies = await GetUserLogin.isAuthenticate();
       this.setState({ token: cookies });
       await this.getDetails();
-  
-      const comparisonItems = JSON.parse(localStorage.getItem("comparisonItems"));
+
+      const comparisonItems = JSON.parse(
+        localStorage.getItem("comparisonItems")
+      );
       this.setState({ comparisonItems });
-  
+
       // Set the initial totalProducts value based on fetched products
       this.setState({ totalProducts: this.state.products.length });
     } catch (error) {
@@ -55,10 +57,9 @@ class CategoryList extends Component {
     });
   };
 
-
   addToComparison = (product) => {
     NotificationManager.success(
-      `${product.name} added successfuly for comparsion!`
+      `${product.name} added successfully for comparison!`
     );
     this.setState(
       (prevState) => ({
@@ -74,10 +75,10 @@ class CategoryList extends Component {
     const { catId, subId } = this.props.match.params;
     const prevCatId = prevProps.match.params.catId;
     const prevSubId = prevProps.match.params.subId;
-  
+
     if (catId !== prevCatId || subId !== prevSubId) {
       await this.getDetails();
-  
+
       // After fetching details, update totalProducts and localStorage
       this.setState({ totalProducts: this.state.products.length }, () => {
         localStorage.setItem(
@@ -87,7 +88,7 @@ class CategoryList extends Component {
       });
     }
   }
-  
+
   // Sort By changes function
   handleSortByChange = (event) => {
     this.setState({ sortBy: event.target.value });
@@ -121,7 +122,7 @@ class CategoryList extends Component {
   //     window.scrollTo({ top: 0, behavior: "smooth" });
   //   });
   // };
-  
+
   renderPagination = () => {
     const { currentPage, productsPerPage, totalProducts } = this.state;
     const totalPages = Math.ceil(totalProducts / productsPerPage);
@@ -151,7 +152,9 @@ class CategoryList extends Component {
           </li>
         ))}
         <li
-          className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
+          className={`page-item ${
+            currentPage === totalPages ? "disabled" : ""
+          }`}
         >
           <button
             className="page-link"
@@ -167,7 +170,7 @@ class CategoryList extends Component {
 
   handlePageChange = (pageNumber) => {
     this.setState({ currentPage: pageNumber }, () => {
-      this.scrollToTop();// Scroll to the top after setting the page number
+      this.scrollToTop(); // Scroll to the top after setting the page number
     });
   };
 
@@ -181,7 +184,6 @@ class CategoryList extends Component {
       currentPage,
       productsPerPage,
     } = this.state;
-
 
     // ... filtering logic ...
 
@@ -206,6 +208,7 @@ class CategoryList extends Component {
     } else if (sortBy === "highToLow") {
       sortedProducts.sort((a, b) => b.netPrice - a.netPrice);
     }
+    // ... filtering logic ...
 
     // Apply showBy limit
     const showByLimit = parseInt(showBy, 10);
@@ -356,7 +359,7 @@ class CategoryList extends Component {
       );
     } else {
       return (
-        <div className="featured-product-list row">
+        <div className={`product-list grid-view row`}>
           {limitedProducts.map((product, index) => {
             const isProductInCart = this.checkCart(product.id);
             const isProductInWishlist = this.checkWishlist(product.id);
@@ -611,10 +614,8 @@ class CategoryList extends Component {
                         <option value="special">Special Offer</option>
                       </select>
                     </div>
-
                   </div>
 
-                  
                   <div
                     className={`product-list ${
                       display === "grid" ? "grid-view" : ""
