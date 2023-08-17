@@ -119,7 +119,7 @@ export default class Address extends Component {
                     <div className="col-lg-12 col-md-12">
                       <div className="pdpt-bg">
                         <div className="pdpt-title">
-                          <h4>My Address</h4>
+                          <h4>Shipping Address</h4>
                         </div>
                         <div className="address-body">
                           {user ? (

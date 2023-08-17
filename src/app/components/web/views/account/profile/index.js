@@ -26,7 +26,7 @@ export default class Profile extends Component {
 
     reader.onloadend = () => {
       this.setState({
-        profilePhoto: reader.result, //updating the profile photo here
+        profilePhoto: reader.result,
       });
     };
     if (file) {

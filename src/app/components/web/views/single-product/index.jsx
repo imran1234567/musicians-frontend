@@ -188,10 +188,12 @@ const SingleProduct = ({ cartItems, addToCart }) => {
                 </div>
                 <div className="cart-form">
                   <input
-                    type="text"
+                    type="number"
                     className="form-control"
                     placeholder="1"
-                    style={{ width: "80px" }}
+                    style={{ width: "60px" }}
+                    min="1"
+                    pattern="[1-9]\d*"
                   />
                   {!token ? (
                     <a

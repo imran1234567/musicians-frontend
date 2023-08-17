@@ -121,7 +121,7 @@ class BannersSlider extends Component {
                   <div class="offer-text">
                     <h5>Play Your Way With PayPal Pay In 4</h5>
                     <p>
-                      Divide your purchase into four interest-free instalments
+                      Divide your purchase into four interest-free installments
                       with no late fees and just 25% down.
                     </p>
                   </div>
