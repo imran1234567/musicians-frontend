@@ -9,11 +9,14 @@ import { Link } from "react-router-dom";
 import { GetUserLogin } from "../../../services";
 import Login from "../../../../auth/login";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faEarth, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faCodeCompare } from "@fortawesome/free-solid-svg-icons";
 import "./feature.css";
 import offerImage from "../../../../../images/special-offer.png";
 import { NotificationManager } from "react-notifications";
+import { Apis } from "../../../../../config";
+import Axios from "axios";
+import ReactHtmlParser  from 'react-html-parser';
 
 class Featured extends Component {
   constructor(props) {
@@ -25,10 +28,22 @@ class Featured extends Component {
       comparisonItems: JSON.parse(localStorage.getItem("comparisonItems"))
         ? JSON.parse(localStorage.getItem("comparisonItems"))
         : [],
+      featuredContent:"",
     };
   }
 
   async componentDidMount() {
+    try {
+      // Fetch article content
+      const response = await Axios.get(Apis.GetAllPagesContent);
+      if (response.data.success && response.data.Content && response.data.Content.featuredContent) {
+        this.setState({ featuredContent: response.data.Content.featuredContent });
+      }
+    } catch (error) {
+      console.error("Error fetching content:", error);
+    }
+
+
     let list = await GroceryStampleDetails.getAllGroceryStaple();
     let cookies = await GetUserLogin.isAuthenticate();
     this.setState({
@@ -93,13 +108,13 @@ class Featured extends Component {
 
   render() {
     const { token } = this.state;
-    const { productList } = this.state;
+    const { productList, featuredContent } = this.state;
     const displayedProducts = productList?.product?.slice(0, 8);
 
     return (
       <section class="featured-product">
         <div class="container-fluid">
-          <h2 class="sec-title">Featured Products</h2>
+          <h2 class="sec-title">{featuredContent && ReactHtmlParser(featuredContent)}</h2>
           <div class="featured-product-list row">
             {!this.state.isLoaded ? (
               <div className="progress-bar-bk">

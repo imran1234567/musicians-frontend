@@ -13,6 +13,7 @@ import { addToCart } from "../../../store/actions/cartActions";
 import { addToWishlist } from "../../../store/actions/wishlistActions";
 import noImage from "../../../../assets/noImage.jpg";
 import "./resultProduct.css";
+import Login from "../../../auth/login";
 class resultProduct extends Component {
   state = {
     productList: [],
@@ -357,6 +358,7 @@ class resultProduct extends Component {
               </div>
             );
           })}
+          <Login/>
         </div>
       );
     } else {
@@ -500,6 +502,7 @@ class resultProduct extends Component {
               </div>
             );
           })}
+          <Login/>
         </div>
       );
     }
