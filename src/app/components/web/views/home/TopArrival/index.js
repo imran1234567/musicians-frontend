@@ -175,6 +175,10 @@ import b2 from "./../../../../../../images/b2.jpg";
 import b1 from "./../../../../../../images/b1.jpg";
 import a10 from "./../../../../../../images/a10.jpg";
 import a9 from "./../../../../../../images/a9.jpg";
+import Axios from "axios";
+import { Apis } from "../../../../../../config";
+import ReactHtmlParser  from 'react-html-parser';
+import Orange from "../Orange";
 
 export default class TopArrival extends Component {
   constructor(props) {
@@ -182,11 +186,35 @@ export default class TopArrival extends Component {
     this.state = {
       products: [],
       error: null,
+      dealsContent:"",
+      staticImage1: "",
+      staticImage2: "",
     };
   }
 
-  componentDidMount() {
-    axios
+  async componentDidMount() {
+
+    try {
+      // Fetch article content and static images
+      const response = await Axios.get(Apis.GetAllPagesContent);
+      if (
+        response.data.success &&
+        response.data.Content &&
+        response.data.Content.dealsContent &&
+        response.data.Content.staticImage1 &&
+        response.data.Content.staticImage2
+      ) {
+        this.setState({
+          dealsContent: response.data.Content.dealsContent,
+          staticImage1: response.data.Content.staticImage1,
+          staticImage2: response.data.Content.staticImage2,
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching content:", error);
+    }
+
+    await axios
       .get("http://13.233.106.34:4000/api/product/getAllproductList")
       .then((response) => {
         const products = response.data.product.filter(
@@ -200,8 +228,9 @@ export default class TopArrival extends Component {
   }
 
   render() {
-    const { products, error } = this.state;
-    const images = [a9, a10, b1, b2];
+    const { products, error, dealsContent, staticImage1, staticImage2  } = this.state;
+    const images = [staticImage1, staticImage2, staticImage2,staticImage1];
+    console.log(products);
 
     if (error) {
       return <div>Error: {error}</div>;
@@ -211,7 +240,7 @@ export default class TopArrival extends Component {
       <div>
         <section className="new-arrival">
           <div className="container-fluid">
-            <h2 className="sec-title">Top Deals & New Arrivals</h2>
+            <h2 className="sec-title">{dealsContent && ReactHtmlParser(dealsContent)}</h2>
             <div className="new-arrival-list">
               {" "}
               {products.map((product, index) => {
@@ -294,7 +323,7 @@ export default class TopArrival extends Component {
             </div>
           </div>
         </section>
-      </div>
+     </div>
     );
   }
 }

@@ -528,7 +528,7 @@ class CategoryList extends Component {
   };
 
   render() {
-    const { products, sortBy, showBy, display, currentPage, itemsPerPage } =
+    const { products, sortBy, showBy, display, currentPage, productsPerPage} =
       this.state;
 
     let filteredProducts = [...products];
@@ -538,7 +538,7 @@ class CategoryList extends Component {
     const pageNumbers = [];
     for (
       let i = 1;
-      i <= Math.ceil(filteredProducts.length / itemsPerPage);
+      i <= Math.ceil(filteredProducts.length / productsPerPage);
       i++
     ) {
       pageNumbers.push(i);

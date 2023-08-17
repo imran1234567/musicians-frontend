@@ -1,9 +1,42 @@
-import React from "react";
-
+import React, { Component } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import ReactHtmlParser from "react-html-parser";
+import Axios from "axios";
+import { Apis } from "../../../../../config";
 
-class ContactForm extends React.Component {
+class ContactForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      contactAddress: "",
+      contactPhone: "",
+      contactEmail: "",
+    };
+  }
+
+  async componentDidMount() {
+    try {
+      const response = await Axios.get(Apis.GetAllPagesContent);
+      if (
+        response.data.success &&
+        response.data.Content &&
+        response.data.Content.contactAddress &&
+        response.data.Content.contactPhone &&
+        response.data.Content.contactEmail
+      ) {
+        this.setState({
+          contactAddress: response.data.Content.contactAddress,
+          contactPhone: response.data.Content.contactPhone,
+          contactEmail: response.data.Content.contactEmail,
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching content:", error);
+    }
+  }
+
+
   handleFormSubmit = (values) => {
     const { firstName, lastName, phone, email, enquiry } = values;
 
@@ -17,6 +50,7 @@ class ContactForm extends React.Component {
     window.location.href = mailtoLink;
   };
   render() {
+    const { contactAddress, contactEmail, contactPhone } = this.state;
     return (
       <div>
         <section class="breadcrumbs py-4">
@@ -40,20 +74,22 @@ class ContactForm extends React.Component {
                 <ul>
                   <li>
                     <h4>Address</h4>
-                    <p>Musicians Avenue 63 Ware st, Fairfield NSW 2165</p>
+                    <p>{contactAddress && ReactHtmlParser(contactAddress)}</p>
                   </li>
                   <li className="mail">
                     <h4>By Email</h4>
                     <p>
                       Please email us and we’ll get back to you within 24 hours
                     </p>
-                    <a href="mailto:musiciansavenue@bigpond.com">
-                      musiciansavenue@bigpond.com
-                    </a>
+                    <a href={`mailto:${contactEmail}`}>
+                {ReactHtmlParser(contactEmail)}
+              </a>
                   </li>
                   <li className="phone">
                     <h4>By Phone</h4>
-                    <a href="tel:(02) 9755 9999">(02) 9755 9999</a>
+                    <a href={`tel:${contactPhone}`}>
+                {ReactHtmlParser(contactPhone)}
+              </a>
                   </li>
                 </ul>
               </div>
