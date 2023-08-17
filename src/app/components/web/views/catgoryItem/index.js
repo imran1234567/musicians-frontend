@@ -64,12 +64,9 @@ class List extends Component {
                   {item.subCategory.map((data) => {
                     return (
                       <React.Fragment key={data.id}>
-                        <Link
-                          to={"/cat/" + item.categoryId + "/" + data.id}
-                          onClick={this.handleCategoryClick}
-                        >
+                        <a href={"/cat/" + item.categoryId + "/" + data.id}>
                           {data.sub_name}
-                        </Link>
+                        </a>
                         <hr></hr>
                       </React.Fragment>
                     );
