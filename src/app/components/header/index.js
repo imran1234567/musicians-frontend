@@ -18,7 +18,7 @@ import b6 from "../../../images/b6.jpg";
 import { orange } from "@material-ui/core/colors";
 import Axios from "axios";
 import { Apis } from "../../../config";
-import ReactHtmlParser  from 'react-html-parser';
+import ReactHtmlParser from "react-html-parser";
 
 class Navigation extends Component {
   constructor(props) {
@@ -31,6 +31,7 @@ class Navigation extends Component {
       headerItems: [],
       expanded: false,
       isSearchButtonDisables: true,
+      contactPhone: "",
     };
   }
 
@@ -131,9 +132,15 @@ class Navigation extends Component {
       }
     }
     try {
-      const response = await Axios.get(Apis.GetAllPagesContent); 
-      if (response.data.success && response.data.Content && response.data.Content.topContent) {
-        this.setState({ topContent: response.data.Content.topContent });
+      const response = await Axios.get(Apis.GetAllPagesContent);
+      if (
+        response.data.success &&
+        response.data.Content &&
+        response.data.Content.topContent &&  response.data.Content.contactPhone
+      ) {
+        this.setState({ topContent: response.data.Content.topContent,
+          contactPhone: response.data.Content.contactPhone,
+         });
       }
     } catch (error) {
       console.error("Error fetching content:", error);
@@ -154,6 +161,7 @@ class Navigation extends Component {
       headerItems,
       expanded,
       searchResults,
+      contactPhone
     } = this.state;
     const { cartItems, wishItems, isSearchButtonDisables } = this.props;
     return (
@@ -184,15 +192,23 @@ class Navigation extends Component {
                     </Link>
                   </li>
                 </ul>
-                {ReactHtmlParser(this.state.topContent) && <h5>{ReactHtmlParser(this.state.topContent)}</h5>}
+                {ReactHtmlParser(this.state.topContent) && (
+                  <h5>{ReactHtmlParser(this.state.topContent)}</h5>
+                )}
                 {/* <h5>
                   FREE AUSTRALIA WIDE SHIPPING ON ORDERS ABOVE <span>$49!</span>
                 </h5> */}
                 <div class="call-us">
-                  <h5>
+                {/* <h5>
                     We’re here to help! Call Us Now:{" "}
-                    <a href="tel:(02) 9755 9999">(02) 9755 9999</a>
-                  </h5>
+                    <a href="tel:(02) 9755 9999">{ReactHtmlParser(contactPhone)}</a>
+                </h5> */}
+                <h5>
+                  We’re here to help! Call Us Now:{" "}
+                  <a href={`tel:${contactPhone}`} style={{ display: "inline" }}>
+                    {ReactHtmlParser(contactPhone)}
+                  </a>
+                </h5>
                 </div>
               </div>
             </div>
