@@ -1,36 +1,49 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Apis } from "../../../../../../config";
+import ReactHtmlParser  from 'react-html-parser';
 
 export default class Artical extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blogs: [], // To store the fetched blogs
+      blogs: [],
+      articleContent: "",
     };
   }
 
-  componentDidMount() {
-    // Fetch the blogs from the API using Axios
-    axios
-      .get("http://13.233.106.34:4000/api/blog/getAllBlog")
-      .then((response) => {
-        const { data } = response;
-        if (data.success) {
-          this.setState({ blogs: data.blogs });
-        }
-      })
-      .catch((error) => console.log(error));
+  async componentDidMount() {
+    try {
+      // Fetch article content
+      const response = await axios.get(Apis.GetAllPagesContent);
+      if (response.data.success && response.data.Content && response.data.Content.articleContent) {
+        this.setState({ articleContent: response.data.Content.articleContent });
+      }
+    } catch (error) {
+      console.error("Error fetching content:", error);
+    }
+
+    try {
+      // Fetch blogs
+      const response = await axios.get("http://13.233.106.34:4000/api/blog/getAllBlog");
+      const { data } = response;
+      if (data.success) {
+        this.setState({ blogs: data.blogs });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
-    const { blogs } = this.state;
+    const { blogs, articleContent } = this.state;
 
     return (
       <div>
         <section className="articals">
           <div className="container-fluid">
-            <h2 className="sec-title">Articles &amp; Resources</h2>
+            <h2 className="sec-title">{articleContent && ReactHtmlParser(articleContent)}</h2>
 
             <div className="articals-list row">
               {blogs.map((blog) => (

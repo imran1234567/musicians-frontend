@@ -37,11 +37,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Login from "../../auth/login";
 import { GetUserLogin } from "../services";
+import ReactHtmlParser  from 'react-html-parser';
+import Axios from "axios";
+import { Apis } from "../../../config";
+
 
 class Footer extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state={
+      footerText:"",
+    }
   }
 
   state = {
@@ -71,12 +78,27 @@ class Footer extends Component {
   };
 
   async componentDidMount() {
-    let cookies = await GetUserLogin.isAuthenticate();
+    let cookies =  GetUserLogin.isAuthenticate();
     this.setState({ token: cookies });
+    try {
+      const response = await Axios.get(Apis.GetAllPagesContent);
+      if (
+        response.data.success &&
+        response.data.Content &&
+        response.data.Content.footerText 
+      ) {
+        this.setState({
+        footerText: response.data.Content.footerText
+          
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching content:", error);
+    }
   }
 
   render() {
-    const { isOpen, name, email, token } = this.state;
+    const { isOpen, name, email, token, footerText } = this.state;
     return (
       <>
         <footer className="footer-section">
@@ -89,12 +111,7 @@ class Footer extends Component {
                       <img src={logo} alt="logo" />
                     </div>
                     <p>
-                      Musicians Avenue! Established in 1996, has evolved to
-                      cater for all aspects of the music industry ranging from
-                      P.A Systems, Studio Products and DJ Gear to Guitars,
-                      Keyboards, Amplifiers, Drums and Percussion. Musicians
-                      Avenue remains a family owned store and continues to
-                      provide good old fashioned customer service.
+                     {footerText && ReactHtmlParser(footerText)}
                     </p>
                     <h5>
                       We also do repairs and maintenance on all musical
