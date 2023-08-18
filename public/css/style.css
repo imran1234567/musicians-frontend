@@ -3277,6 +3277,7 @@ ul.breadcrumbs-list li:not(a) {
 .user-dt h1 {
   color: var(--primary-color);
   font-size: 30px;
+  text-transform: capitalize;
 }
 .user-dt p {
   color: #fff;
@@ -3307,8 +3308,6 @@ ul.breadcrumbs-list li:not(a) {
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 0.875rem;
-  text-transform: uppercase;
-  color: #fff;
   background-color: var(--primary-color);
   padding: 13px 17px;
   display: inline-block;
@@ -3364,7 +3363,7 @@ ul.breadcrumbs-list li:not(a) {
   background-color: #fff;
   border-radius: 10px;
   position: relative;
-  gap: 20px;
+  gap: 30px;
 }
 .product-list .product-details {
   border: none;
@@ -3484,6 +3483,13 @@ ul.breadcrumbs-list li:not(a) {
   color: #fff;
   font-weight: 600;
 }
+.comparison-table tbody tr:first-child td {
+  width: 200px;
+  height: 200px;
+}
+.comparison-table tbody tr:first-child td img {
+}
+
 .s-search input {
   border: 1px solid #fff;
   padding: 8px;
@@ -3939,6 +3945,11 @@ input[type="email"] {
 }
 .product-list .list-item .product-image {
   height: 140px;
+  width: 140px;
+  text-align: center;
+}
+.product-list .list-item .product-image img {
+  object-fit: cover;
 }
 .img-wish {
   width: 100px;
@@ -3958,6 +3969,13 @@ input[type="email"] {
   font-size: 16px;
   color: grey;
   margin-right: 10px;
+}
+.blog-image {
+  text-align: center;
+}
+.blog-image img {
+  height: 400px;
+  object-fit: cover;
 }
 /* 23/06 */
 
