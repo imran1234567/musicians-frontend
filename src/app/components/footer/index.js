@@ -195,10 +195,10 @@ class Footer extends Component {
                         {footerText && ReactHtmlParser(contactAddress)}
                       </li>
                       <li class="phone">
-                        <Link to="/phone">
+                        <a href={`tel:${contactPhone}`}>
                           <FontAwesomeIcon icon={faPhone} size="xs" />
-                        </Link>
-                        <Link to={`tel:${contactPhone}`}>{ReactHtmlParser(contactPhone)}</Link>
+                        </a>
+                        <a href={`tel:${contactPhone}`}>{ReactHtmlParser(contactPhone)}</a>
                       </li>
                       <li>
                         <div class="icon">
