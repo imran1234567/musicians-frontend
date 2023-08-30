@@ -54,13 +54,13 @@ export default class Orange extends Component {
         >
           <div class="container">
             <div class="orange-text">
-              <h3>{products ? products[0].name : ""} </h3>
+              <h3>{products ? products[0]?.name : ""} </h3>
               <ul>
-                <li>Brand: {products ? products[0].brand : ""} </li>
-                <li>Product Code: {products ? products[0].slug : ""} </li>
+                <li>Brand: {products ? products[0]?.brand : ""} </li>
+                <li>Product Code: {products ? products[0]?.slug : ""} </li>
                 <li>Availability: In Stock</li>
               </ul>
-              <h4>${products ? products[0].price : ""}</h4>
+              <h4>${products ? products[0]?.price : ""}</h4>
             </div>
           </div>
         </section>
