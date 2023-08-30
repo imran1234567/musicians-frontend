@@ -74,7 +74,7 @@ class resultProduct extends Component {
   fetchProducts = async (searchKeyword) => {
     try {
       const response = await axios.get(
-        "http://13.233.106.34:4000/api/product/gcatalogsearch/result",
+        "http://3.25.175.163:4000/api/product/gcatalogsearch/result",
         {
           params: {
             search: searchKeyword,

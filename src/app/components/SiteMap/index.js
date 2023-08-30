@@ -7,7 +7,7 @@ export default function SiteMap() {
     async function fetchCategories() {
       try {
         const response = await fetch(
-          "http://13.233.106.34:4000/api/category/sub-list"
+          "http://3.25.175.163:4000/api/category/sub-list"
         );
         const data = await response.json();
         setCategories(data.data);

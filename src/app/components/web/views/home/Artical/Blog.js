@@ -15,7 +15,7 @@ export default class Blog extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://13.233.106.34:4000/api/blog/blog/${id}`)
+      .get(`http://3.25.175.163:4000/api/blog/blog/${id}`)
       .then((response) => {
         const { data } = response;
         if (data.success) {

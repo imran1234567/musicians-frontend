@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Apis } from "../../../../../../config";
-import ReactHtmlParser  from 'react-html-parser';
+import ReactHtmlParser from "react-html-parser";
 
 export default class Artical extends Component {
   constructor(props) {
@@ -17,7 +17,11 @@ export default class Artical extends Component {
     try {
       // Fetch article content
       const response = await axios.get(Apis.GetAllPagesContent);
-      if (response.data.success && response.data.Content && response.data.Content.articleContent) {
+      if (
+        response.data.success &&
+        response.data.Content &&
+        response.data.Content.articleContent
+      ) {
         this.setState({ articleContent: response.data.Content.articleContent });
       }
     } catch (error) {
@@ -26,7 +30,9 @@ export default class Artical extends Component {
 
     try {
       // Fetch blogs
-      const response = await axios.get("http://13.233.106.34:4000/api/blog/getAllBlog");
+      const response = await axios.get(
+        "http://3.25.175.163:4000/api/blog/getAllBlog"
+      );
       const { data } = response;
       if (data.success) {
         this.setState({ blogs: data.blogs });
@@ -43,7 +49,9 @@ export default class Artical extends Component {
       <div>
         <section className="articals">
           <div className="container-fluid">
-            <h2 className="sec-title">{articleContent && ReactHtmlParser(articleContent)}</h2>
+            <h2 className="sec-title">
+              {articleContent && ReactHtmlParser(articleContent)}
+            </h2>
 
             <div className="articals-list row">
               {blogs.map((blog) => (

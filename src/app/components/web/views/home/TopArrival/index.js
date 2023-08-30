@@ -177,7 +177,7 @@ import a10 from "./../../../../../../images/a10.jpg";
 import a9 from "./../../../../../../images/a9.jpg";
 import Axios from "axios";
 import { Apis } from "../../../../../../config";
-import ReactHtmlParser  from 'react-html-parser';
+import ReactHtmlParser from "react-html-parser";
 import Orange from "../Orange";
 
 export default class TopArrival extends Component {
@@ -186,14 +186,13 @@ export default class TopArrival extends Component {
     this.state = {
       products: [],
       error: null,
-      dealsContent:"",
+      dealsContent: "",
       staticImage1: "",
       staticImage2: "",
     };
   }
 
   async componentDidMount() {
-
     try {
       // Fetch article content and static images
       const response = await Axios.get(Apis.GetAllPagesContent);
@@ -215,7 +214,7 @@ export default class TopArrival extends Component {
     }
 
     await axios
-      .get("http://13.233.106.34:4000/api/product/getAllproductList")
+      .get("http://3.25.175.163:4000/api/product/getAllproductList")
       .then((response) => {
         const products = response.data.product.filter(
           (product) => product.featured === true
@@ -228,8 +227,9 @@ export default class TopArrival extends Component {
   }
 
   render() {
-    const { products, error, dealsContent, staticImage1, staticImage2  } = this.state;
-    const images = [staticImage1, staticImage2, staticImage2,staticImage1];
+    const { products, error, dealsContent, staticImage1, staticImage2 } =
+      this.state;
+    const images = [staticImage1, staticImage2, staticImage2, staticImage1];
     console.log(products);
 
     if (error) {
@@ -240,7 +240,9 @@ export default class TopArrival extends Component {
       <div>
         <section className="new-arrival">
           <div className="container-fluid">
-            <h2 className="sec-title">{dealsContent && ReactHtmlParser(dealsContent)}</h2>
+            <h2 className="sec-title">
+              {dealsContent && ReactHtmlParser(dealsContent)}
+            </h2>
             <div className="new-arrival-list">
               {" "}
               {products.map((product, index) => {
@@ -323,7 +325,7 @@ export default class TopArrival extends Component {
             </div>
           </div>
         </section>
-     </div>
+      </div>
     );
   }
 }

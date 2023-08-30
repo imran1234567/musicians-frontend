@@ -28,7 +28,7 @@ class Cart extends Component {
 
       if (appliedCoupon && couponCode) {
         axios
-          .get(`http://13.233.106.34:4000/api/coupon/get/?code=${couponCode}`)
+          .get(`http://3.25.175.163:4000/api/coupon/get/?code=${couponCode}`)
           .then((response) => {
             const { data } = response;
             if (data.success && data.coupon.code === couponCode) {
@@ -47,7 +47,9 @@ class Cart extends Component {
                 couponDiscount: 0,
                 couponPercentage: 0,
               });
-              NotificationManager.error("Invalid coupon code. Please try again.");
+              NotificationManager.error(
+                "Invalid coupon code. Please try again."
+              );
             }
           })
           .catch((error) => {
@@ -69,7 +71,7 @@ class Cart extends Component {
     const { cartItems } = this.props;
     try {
       const response = await axios.get(
-        `http://13.233.106.34:4000/api/coupon/get/?code=${couponCode}`
+        `http://3.25.175.163:4000/api/coupon/get/?code=${couponCode}`
       );
       const { data } = response;
 
@@ -259,7 +261,8 @@ class Cart extends Component {
                     >
                       Coupon Discount{" "}
                       <strong className="float-right text-success">
-                      ({couponPercentage}% OFF) &nbsp; - &#x24;{couponDiscount}
+                        ({couponPercentage}% OFF) &nbsp; - &#x24;
+                        {couponDiscount}
                       </strong>
                     </p>
                   ) : (

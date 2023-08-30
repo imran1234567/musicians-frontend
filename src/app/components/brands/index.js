@@ -19,7 +19,7 @@ class BrandsList extends Component {
   fetchData = async () => {
     try {
       const response = await fetch(
-        "http://13.233.106.34:4000/api/product/brands"
+        "http://3.25.175.163:4000/api/product/brands"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch brands");

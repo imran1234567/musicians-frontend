@@ -94,9 +94,7 @@ h6 {
 }
 
 .regular-price {
-  
   margin-left: 5px;
-  
 }
 
 .total-checkout-group {
@@ -140,7 +138,7 @@ h6 {
 .main-total-cart span {
   font-size: 24px;
   font-weight: bold;
-  color: #28a745;
+  color: var(--primary-color);
 }
 .checkout-step-body {
   display: flex;
@@ -154,7 +152,6 @@ h6 {
 
 .row {
   display: flex;
-  justify-content: center;
 }
 
 .rpt100 {
@@ -219,3 +216,40 @@ h6 {
   margin-right: 10px;
 }
 
+/* Add this CSS to your existing checkout.css or create a new CSS file */
+.existing-address {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.existing-address h6 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.existing-address ul {
+  list-style: none;
+  padding: 0;
+}
+
+.existing-address li {
+  padding: 10px 0;
+}
+
+/* .existing-address b {
+  font-weight: bold;
+} */
+
+/* .existing-address h6 {
+  display: block;
+} */
+
+/* .existing-address h6 span {
+  display: block;
+  font-weight: normal;
+} */

@@ -273,7 +273,7 @@ class Navigation extends Component {
                         />
                         <Link
                           to={{
-                            pathname: isSearchButtonDisabled
+                            pathname: isSearchButtonDisables
                               ? "/"
                               : "/SearchItem",
                             state: { value: searchtxt },
@@ -289,7 +289,7 @@ class Navigation extends Component {
                             height: "100%",
                           }}
                           onClick={(e) => {
-                            if (isSearchButtonDisabled) {
+                            if (isSearchButtonDisables) {
                               e.preventDefault(); // Prevent link navigation when search is disabled
                             } else if (searchtxt.trim() === "") {
                               e.preventDefault(); // Prevent link navigation when search text is empty

@@ -40,7 +40,7 @@ export default class Gift extends React.Component {
       await this.validationSchema.validate(data, { abortEarly: false });
       // Send the form data to the API
       const response = await axios.post(
-        "http://13.233.106.34:4000/api/gift/add",
+        "http://3.25.175.163:4000/api/gift/add",
         data
       );
 

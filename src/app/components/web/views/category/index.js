@@ -25,7 +25,7 @@ class Category extends Component {
   fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "http://13.233.106.34:4000/api/product/getAllproductList"
+        "http://3.25.175.163:4000/api/product/getAllproductList"
       );
       const data = response.data.product;
 
