@@ -65,9 +65,7 @@ class Footer extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // Reset form fields
     this.setState({ name: "", email: "" });
-    // Close the popup modal
     this.setState({ isOpen: false });
   };
 
@@ -85,11 +83,16 @@ class Footer extends Component {
       if (
         response.data.success &&
         response.data.Content &&
-        response.data.Content.footerText 
+        response.data.Content.footerText &&
+        response.data.Content.contactAddress &&
+        response.data.Content.contactPhone &&
+        response.data.Content.contactEmail
       ) {
         this.setState({
-        footerText: response.data.Content.footerText
-          
+        footerText: response.data.Content.footerText,
+        contactAddress:response.data.Content.contactAddress,
+        contactPhone:response.data.Content.contactPhone,
+        contactEmail:response.data.Content.contactEmail,
         });
       }
     } catch (error) {
@@ -98,7 +101,7 @@ class Footer extends Component {
   }
 
   render() {
-    const { isOpen, name, email, token, footerText } = this.state;
+    const { isOpen, name, email, token, footerText,contactAddress, contactPhone, contactEmail } = this.state;
     return (
       <>
         <footer className="footer-section">
@@ -189,20 +192,20 @@ class Footer extends Component {
                         <Link to="/map">
                           <FontAwesomeIcon icon={thinLocationDot} />
                         </Link>
-                        63 Ware St, Fairfield NSW 2165
+                        {footerText && ReactHtmlParser(contactAddress)}
                       </li>
                       <li class="phone">
-                        <Link to="/phone">
+                        <a href={`tel:${contactPhone}`}>
                           <FontAwesomeIcon icon={faPhone} size="xs" />
-                        </Link>
-                        <Link to="tel:(02) 9755 9999">(02) 9755 9999</Link>
+                        </a>
+                        <a href={`tel:${contactPhone}`}>{ReactHtmlParser(contactPhone)}</a>
                       </li>
                       <li>
                         <div class="icon">
                           <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
                         </div>
-                        <a href="mailto:musiciansavenue@bigpond.com">
-                          musiciansavenue@bigpond.com
+                        <a href={`mailto:${contactEmail}`}>
+                        {ReactHtmlParser(contactEmail)}
                         </a>
                       </li>
                     </ul>
