@@ -33,7 +33,7 @@ a:hover {
   width: 600px;
 }
 .image-logo {
-  width: 200px;
+  width: 240px;
   position: relative;
 }
 .option-zip {
@@ -184,7 +184,8 @@ header {
 }
 
 header .navigation-bar {
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color); */
+  background-color: #6a0d12;
 }
 header .navbar .navbar-collapse {
   justify-content: center;
@@ -4301,4 +4302,11 @@ input[type="email"] {
 /* 16/06 */
 .slick-slide img {
   width: 100%;
+}
+
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show > .nav-link {
+  color: #fff;
 }
