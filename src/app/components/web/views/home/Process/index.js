@@ -17,13 +17,13 @@ export default class Process extends Component {
                     <img src={pr1} alt="pr1" />
                   </div>
                   <div class="process-text">
-                    <h4>Worldwide Shipping</h4>
+                    <h4>AUSTRALIA WIDE SHIPPING</h4>
                     <p>Enjoy free delivery on every order.</p>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-3 col-md-3 col-6">
+              {/* <div class="col-lg-3 col-md-3 col-6">
                 <div class="process-box">
                   <div class="process-image">
                     <img src={pr2} alt="pr2" />
@@ -33,7 +33,7 @@ export default class Process extends Component {
                     <p>We offer a 30-day money back guarantee.</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div class="col-lg-3 col-md-3 col-6">
                 <div class="process-box">
@@ -43,7 +43,8 @@ export default class Process extends Component {
                   <div class="process-text">
                     <h4>HASSLE-FREE WARRANTY</h4>
                     <p>
-                      If it isn’t love at first listen, returns are hassle-free.
+                      If the item is faulty simply call us and we will sought
+                      out the rest
                     </p>
                   </div>
                 </div>
